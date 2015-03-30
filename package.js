@@ -8,7 +8,9 @@ Package.describe({
 Package.onUse(function(api) {
 
   api.use([
-    'stylus'
+    'stylus',
+    'underscore',
+    'aldeed:simple-schema'
   ]);
 
   // begin styles
@@ -53,5 +55,8 @@ Package.onUse(function(api) {
   api.addFiles('client/css/pages/sign-in.import.styl', 'client');
   api.addFiles('client/css/pages/bot.import.styl', 'client');
   // end styles
-
+  
+  api.addFiles('lib/_fields.js', ['client', 'server']);
+  
+  api.export(['fields']);
 });
