@@ -57,6 +57,7 @@ Package.onUse(function(api) {
   // end styles
   
   api.addFiles('lib/_fields.js', ['client', 'server']);
+  api.addFiles('lib/helpers.js', ['client', 'server']);
   
-  api.export(['fields']);
+  api.export(['fields', 'slugify']);
 });
