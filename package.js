@@ -59,5 +59,5 @@ Package.onUse(function(api) {
   api.addFiles('lib/_fields.js', ['client', 'server']);
   api.addFiles('lib/helpers.js', ['client', 'server']);
   
-  api.export(['fields', 'slugify']);
+  api.export(['fields', 'slugify', 'dotGet', 'dotSet', 'dotClear', 'quoteRe', 'yesOrNo']);
 });
