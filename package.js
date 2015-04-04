@@ -8,7 +8,11 @@ Package.describe({
 Package.onUse(function(api) {
 
   api.use([
+    // style
     'stylus',
+    'templating',
+
+    // utility
     'underscore',
     'aldeed:simple-schema'
   ]);
@@ -58,6 +62,14 @@ Package.onUse(function(api) {
   
   api.addFiles('lib/_fields.js', ['client', 'server']);
   api.addFiles('lib/helpers.js', ['client', 'server']);
+  api.addFiles('lib/ui.js', ['client']);
   
-  api.export(['fields', 'slugify', 'dotGet', 'dotSet', 'dotClear', 'quoteRe', 'yesOrNo']);
+  api.export([
+    'fields',
+    'slugify',
+    'dotGet', 'dotSet', 'dotClear', 'dotFlatten',
+    'mongoReplacementModifier',
+    'quoteRe',
+    'yesOrNo'
+  ]);
 });
