@@ -1,7 +1,7 @@
 Package.describe({
   name: "admithub:admithub-common",
   summary: "Common styles, templates, and libraries for AdmitHub sites",
-  version: "0.0.1",
+  version: "0.0.2",
   git: "https://github.com/AdmitHub/admithub-common.git"
 });
 
