@@ -1,20 +1,20 @@
 Package.describe({
   name: "admithub:admithub-common",
   summary: "Common styles, templates, and libraries for AdmitHub sites",
-  version: "0.0.4",
+  version: "0.0.5",
   git: "https://github.com/AdmitHub/admithub-common.git"
 });
 
 Package.onUse(function(api) {
 
   api.use([
-    // style
+    'accounts-base',
     'stylus',
     'templating',
-
-    // utility
     'underscore',
-    'aldeed:simple-schema'
+
+    'aldeed:simple-schema',
+    'aldeed:collection2'
   ]);
 
   // begin styles
@@ -63,6 +63,7 @@ Package.onUse(function(api) {
   api.addFiles('lib/_fields.js', ['client', 'server']);
   api.addFiles('lib/helpers.js', ['client', 'server']);
   api.addFiles('lib/ui.js', ['client']);
+  api.addFiles('collections/users.js');
   
   api.export([
     'fields',
@@ -70,6 +71,8 @@ Package.onUse(function(api) {
     'dotGet', 'dotSet', 'dotClear', 'dotFlatten',
     'mongoReplacementModifier',
     'quoteRe',
-    'yesOrNo'
+    'yesOrNo',
+
+    'UserSchema'
   ]);
 });
