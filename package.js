@@ -1,7 +1,7 @@
 Package.describe({
   name: "admithub:admithub-common",
   summary: "Common styles, templates, and libraries for AdmitHub sites",
-  version: "0.0.3",
+  version: "0.0.4",
   git: "https://github.com/AdmitHub/admithub-common.git"
 });
 
@@ -66,7 +66,7 @@ Package.onUse(function(api) {
   
   api.export([
     'fields',
-    'slugify',
+    'slugify', 'unslugify',
     'dotGet', 'dotSet', 'dotClear', 'dotFlatten',
     'mongoReplacementModifier',
     'quoteRe',
