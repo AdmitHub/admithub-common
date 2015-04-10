@@ -51,6 +51,7 @@ Package.onUse(function(api) {
   api.addFiles('client/css/modules/markdown.import.styl', 'client');
   api.addFiles('client/css/modules/alerts.import.styl', 'client');
   api.addFiles('client/css/modules/progress-bar.import.styl', 'client');
+  api.addFiles('client/css/modules/common.import.styl', 'client');
 
   api.addFiles('client/css/global/header.import.styl', 'client');
   api.addFiles('client/css/global/footer.import.styl', 'client');
@@ -64,6 +65,11 @@ Package.onUse(function(api) {
   api.addFiles('lib/helpers.js', ['client', 'server']);
   api.addFiles('lib/ui.js', ['client']);
   api.addFiles('collections/users.js');
+
+  api.addFiles('public/icons/fonts/icons.eot');
+  api.addFiles('public/icons/fonts/icons.svg');
+  api.addFiles('public/icons/fonts/icons.ttf');
+  api.addFiles('public/icons/fonts/icons.woff');
   
   api.export([
     'fields',

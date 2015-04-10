@@ -11,11 +11,10 @@
   border 0
   cursor pointer
   padding 0 ui-padding
-  border-radius 0.2rem
   ui-btn-color color-green, color-white
   padding 0 ui-padding
   inline-block()
-  ui-border-radius()
+  border-radius ui-border-radius
   type-ui()
   ui-height ui-height-default
 
@@ -43,9 +42,8 @@
     color color-green
 
 .ui-btn-secondary
-a.ui-btn-secondary
   @extend .ui-btn
-  ui-btn-color color-grey-light color-white
+  ui-btn-color color-white color-grey-dark
 
 .ui-btn-circle
   padding 0
@@ -63,13 +61,8 @@ a.ui-btn-secondary
     type-size 12
 
 .ui-large
-a.ui-large
-  @media mq-med
-    type-large()
-    ui-height 5.5rem
-
-  > *
-    line-height 5.5rem
+  type-medium()
+  ui-height 5rem
 
   .icon-carat-right
     type-size 20
@@ -85,10 +78,6 @@ a.ui-xsmall
 .ui-btn-icon-right
   margin-left 1em
 
-.ui-stretch
-  width 100%
-  display block
-
 .ui-btn-with-rank
   padding-right 0
 
@@ -102,6 +91,12 @@ a.ui-xsmall
 .ui-btn-set-middle
   > * 
     margin 0 1rem
+
+.ui-btn-set-left
+  > *
+    margin-right: 2rem
+    margin-bottom: 2rem
+  
 
 .ui-btn-facebook
 .ui-btn-twitter

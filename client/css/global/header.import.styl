@@ -1,13 +1,11 @@
 .g-header-wrap
-  width 100%
-  top 0
-  left 0
   background-color color-purple
 
 .g-header
   height g-header-height
   type-serif()
   text-align right
+  color color-white
 
   @media mq-med
     position relative
@@ -21,14 +19,9 @@
       display none
 
 .g-header-logo
-  float left
   line-height g-header-height
-
-  img
-    height 1.5em
-    width 1.5em
-    margin-top 1em  
-    margin-right 0.2em
+  font-size: 2.75rem
+  color color-white
 
 .g-header-search
   position relative
@@ -208,11 +201,11 @@ input.g-header-search-input
   box-shadow 0 0.1rem 0.5rem rgba(color-black, 0.15)
   type-ui()
 
+  a
+    color color-white
+
   li
     margin-bottom space
-
-    @media mq-med
-      margin-bottom 0
 
   .user-name
     ellipsis()
@@ -221,17 +214,24 @@ input.g-header-search-input
       max-width 13rem
 
   @media mq-med
-    inline-block(true)
+    float right
+    display block
     position relative
     text-align inherit
     background none
     padding 0
     width auto
     box-shadow 0 0 0 0
+    line-height g-header-height
 
     > *
       inline-block()
       margin-left g-header-nav-space
+
+    li
+      float left
+      margin-left 1rem
+      margin-bottom 0
 
   .btn
     background-color color-purple
