@@ -43,7 +43,9 @@
 
 .ui-btn-secondary
   @extend .ui-btn
+  border border
   ui-btn-color color-white color-grey-dark
+  box-shadow 0 0.1rem 0.15rem rgba(color-black, 0.2)
 
 .ui-btn-circle
   padding 0
@@ -62,7 +64,7 @@
 
 .ui-large
   type-medium()
-  ui-height 5rem
+  ui-height ui-large-height
 
   .icon-carat-right
     type-size 20
@@ -95,6 +97,11 @@ a.ui-xsmall
 .ui-btn-set-left
   > *
     margin-right: 2rem
+    margin-bottom: 2rem
+
+.ui-btn-set-right
+  > *
+    margin-left: 2rem
     margin-bottom: 2rem
   
 
