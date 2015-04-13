@@ -122,3 +122,9 @@ row(mult = 1, nested = false)
 
 stretch()
   width 100%
+
+iconify(name)
+  @extend .icon
+
+  &:before
+    @extend .icon-{name}:before
