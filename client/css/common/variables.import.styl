@@ -27,7 +27,7 @@ color-white = #fff
 color-black = #000
 color-grey-xxlight = #f7f3f6
 color-grey-xlight = #ebe6ea
-color-grey-light = #baadb7
+color-grey-light = #d5d5d5
 color-grey-med = #aaa
 color-grey-dark = #736D72
 color-grey-xdark = #222
@@ -64,17 +64,16 @@ color-link = color-purple
 
 // BORDERS
 
-border = 0.1rem solid color-border
-border-light= 0.1rem solid lighten(color-border, 3)
-border-focus = 0.1rem solid darken(color-border, 10)
-
-border-secondary-on-dark = border-style rgba(color-white, 0.25)
+border-style = 0.1rem solid
+border = border-style color-border
+border-light= border-style lighten(color-border, 3)
 
 
 // UI
 
 ui-padding = 1.5em
 ui-border-radius = 0.4rem
+ui-input-border = border-style color-grey-light
 
 ui-form-checkbox-size = 2rem
 
