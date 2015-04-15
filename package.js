@@ -29,7 +29,6 @@ Package.onUse(function(api) {
   api.addFiles('client/css/common/variables.import.styl', 'client');
   api.addFiles('client/css/common/override.import.styl', 'client');
 
-  api.addFiles('client/css/common/sticky-footer.import.styl', 'client');
   api.addFiles('client/css/common/type.import.styl', 'client');
   api.addFiles('client/css/common/position.import.styl', 'client');
   api.addFiles('client/css/common/grid.import.styl', 'client');
