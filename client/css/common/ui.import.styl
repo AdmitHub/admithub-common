@@ -42,9 +42,15 @@
   .icon-check
     color color-green
 
+.ui-btn-next-prev
+  width 12rem
+
+  @media mq-sm
+    width 18rem
+
 .ui-btn-secondary
   @extend .ui-btn
-  border border
+  border ui-btn-secondary-border
   ui-btn-color color-white color-grey-dark
   box-shadow 0 0.3rem 0 rgba(color-black, 0.2)
 
@@ -99,6 +105,9 @@ a.ui-xsmall
   > *
     margin-right: 1.5rem
     margin-bottom: 1.5rem
+
+    &:last-child
+      margin-right 0
 
 .ui-btn-set-right
   > *

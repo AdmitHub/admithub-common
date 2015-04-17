@@ -30,6 +30,7 @@ Package.onUse(function(api) {
   api.addFiles('client/css/common/override.import.styl', 'client');
 
   api.addFiles('client/css/common/type.import.styl', 'client');
+  api.addFiles('client/css/common/layout.import.styl', 'client');
   api.addFiles('client/css/common/position.import.styl', 'client');
   api.addFiles('client/css/common/grid.import.styl', 'client');
   api.addFiles('client/css/common/zindex.import.styl', 'client');
