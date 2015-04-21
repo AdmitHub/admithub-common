@@ -1,12 +1,22 @@
+
+// GLOBAL
+
 font-family = ''
 base-font-size = 10px
 img-path = '/packages/admithub_admithub-telescope-theme/public/img/' 
-space = 1.6rem
+space = 0.5rem
 row-space = (space*2)
 
 layout-space = 1.4rem
+l-gutter = space*6
 
-g-header-height = 5.5rem
+grid-gutter = layout-space*2
+grid-width = 105rem
+grid-page-gutter = 4.5rem
+grid-page-gutter-mobile = grid-page-gutter/2
+
+
+g-header-height = 5.75rem
 g-header-row-height = g-header-height*0.65
 g-header-search-height = 3.5rem
 g-header-search-mobile-height = 5rem
@@ -14,28 +24,40 @@ g-header-search-input-padding = 2rem
 g-header-nav-space = 0.75rem
 g-header-touts-sponsor-height = 3rem
 
-mod-section-header-divide-width = 7.5rem
-mod-section-header-divide-height =  0.1rem
-mod-section-header-divide-space = grid-gutter
-mod-dropdown-width = 17.5rem
-
 comment-avatar-width = 4.5rem
 comment-width = 75rem
+
+
+// COLORS
 
 color-white = #fff
 color-black = #000
 color-grey-xxlight = #f7f3f6
 color-grey-xlight = #ebe6ea
-color-grey-light = #baadb7
+color-grey-light = #d5d5d5
 color-grey-med = #aaa
 color-grey-dark = #736D72
 color-grey-xdark = #222
-color-green = #2fc253
-color-purple = #99226f
+
+color-bg-mod-secondary = #f0ebe9
+
+color-green = #40c260
+color-green-light = #5ccc78
+color-green-light-transparent = rgba(color-green-light, 0.2)
+
+color-blue-light = #63b2d6
+color-blue-light-transparent = rgba(color-blue-light, 0.2)
+
+color-purple = #992c73
+color-purple-light = #a94f89
+color-purple-light-transparent = rgba(color-purple-light, 0.2)
+
 color-purple-dark = #87125e
-color-red = #CC3B19
+
+color-red = #cd5e48
+
 color-maroon = #7f296b
-color-type = color-grey-xdark
+color-type = #253a40
 color-type-secondary = #80777d
 color-twitter = #00aced
 color-facebook = #3b5998 
@@ -44,27 +66,48 @@ color-github = #222
 color-google-plus = #C63D2D
 color-border = #ebe1e9
 
+color-bg = #f5f2f0
+
+color-ui-form-input = #f5f5f5
+
 color-link = color-purple
 
-border = 0.1rem solid color-border
-border-focus = 0.1rem solid darken(color-border, 10)
 
-border-secondary-on-dark = border-style rgba(color-white, 0.25)
+// BORDERS
 
-ui-padding = 1em
-ui-border-radius = 0.2rem
+border-style = 0.1rem solid
+border = border-style color-border
+border-light= border-style lighten(color-border, 3)
 
-ui-height-default = 3rem
+
+// UI
+
+ui-padding = 1.5em
+ui-border-radius = 0.4rem
+ui-input-border = border-style color-grey-light
+
+ui-form-checkbox-size = 2rem
+
+ui-height-default = 4.5rem
 ui-small-height = 3rem
 ui-xsmall-height = 2.25rem
 ui-large-height = 6rem
+ui-btn-secondary-border = border-style #e5e5e5
+
+
+// MODULES
+
+mod-section-header-divide-width = 7.5rem
+mod-section-header-divide-height =  0.1rem
+mod-section-header-divide-space = grid-gutter
+mod-dropdown-width = 17.5rem
+
+mod-padding-desktop = 4rem
+
+
+mod-border-radius = ui-border-radius * 0
 
 class-list-inputs = '.ui-f-input, input[type=text], input[type=password], input[type=email]'
-
-grid-gutter = layout-space*2
-grid-width = 115rem
-grid-page-gutter = 4.5rem
-grid-page-gutter-mobile = grid-page-gutter/2
 
 pg-home-bullets-icon-size = 7.5rem
 pg-home-team-member-avatar-width = 30%
@@ -78,6 +121,9 @@ pg-products-padding = 3rem
 
 pg-partners-img-width = 12.5rem
 pg-partners-contrib-avatar-width = 8.5rem
+
+pg-college-cover-height = 17rem
+pg-college-slider-height = 1.3rem
 
 mq-sm-width  = 600px
 mq-med-width = 800px

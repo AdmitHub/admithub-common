@@ -11,7 +11,7 @@ button
 
 body,
 input
-  type-serif()
+  type-sans()
 
 // Placeholder styles can't be stacked with any other selector, or browsers
 // ignore them.
@@ -20,13 +20,11 @@ input
     // Careful setting sizes without checking line-heights in firefox and chrome
     type-secondary()
 
-h1, h2, h3, h4, h5, h6
-  color color-type
-
 a
   color color-link
 
 h1, h2, h3, h4, h5, h6
+  type-serif()
   font-weight bold
 
 .mod-section-dark
@@ -43,8 +41,12 @@ h2
   type-xlarge()
 h3
   type-large()
+  margin-bottom space*2
+
 h4
   type-medium()
+  margin-bottom space*2
+
 h5
   type-small()
 h6
@@ -77,16 +79,13 @@ a
   type-serif-bold()
 
 .type-sans-bold
-  type-sans-bold
+  type-sans-bold()
 
 .type-sans-uppercase
   type-sans-uppercase()
 
 .type-small
   type-small()
-
-.type-medium
-  type-medium()
 
 .type-medium
   type-medium()
@@ -102,6 +101,9 @@ a
 
 .type-xhuge
   type-xhuge()
+
+.type-weight-normal
+  font-weight normal !important
 
 .type-left
   text-align left

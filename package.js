@@ -1,20 +1,20 @@
 Package.describe({
   name: "admithub:admithub-common",
   summary: "Common styles, templates, and libraries for AdmitHub sites",
-  version: "0.0.1",
+  version: "0.0.5",
   git: "https://github.com/AdmitHub/admithub-common.git"
 });
 
 Package.onUse(function(api) {
 
   api.use([
-    // style
+    'accounts-base',
     'stylus',
     'templating',
-
-    // utility
     'underscore',
-    'aldeed:simple-schema'
+
+    'aldeed:simple-schema',
+    'aldeed:collection2'
   ]);
 
   // begin styles
@@ -29,8 +29,8 @@ Package.onUse(function(api) {
   api.addFiles('client/css/common/variables.import.styl', 'client');
   api.addFiles('client/css/common/override.import.styl', 'client');
 
-  api.addFiles('client/css/common/sticky-footer.import.styl', 'client');
   api.addFiles('client/css/common/type.import.styl', 'client');
+  api.addFiles('client/css/common/layout.import.styl', 'client');
   api.addFiles('client/css/common/position.import.styl', 'client');
   api.addFiles('client/css/common/grid.import.styl', 'client');
   api.addFiles('client/css/common/zindex.import.styl', 'client');
@@ -51,6 +51,7 @@ Package.onUse(function(api) {
   api.addFiles('client/css/modules/markdown.import.styl', 'client');
   api.addFiles('client/css/modules/alerts.import.styl', 'client');
   api.addFiles('client/css/modules/progress-bar.import.styl', 'client');
+  api.addFiles('client/css/modules/common.import.styl', 'client');
 
   api.addFiles('client/css/global/header.import.styl', 'client');
   api.addFiles('client/css/global/footer.import.styl', 'client');
@@ -63,13 +64,21 @@ Package.onUse(function(api) {
   api.addFiles('lib/_fields.js', ['client', 'server']);
   api.addFiles('lib/helpers.js', ['client', 'server']);
   api.addFiles('lib/ui.js', ['client']);
+  api.addFiles('collections/users.js');
+
+  api.addFiles('public/icons/fonts/icons.eot');
+  api.addFiles('public/icons/fonts/icons.svg');
+  api.addFiles('public/icons/fonts/icons.ttf');
+  api.addFiles('public/icons/fonts/icons.woff');
   
   api.export([
     'fields',
-    'slugify',
+    'slugify', 'unslugify',
     'dotGet', 'dotSet', 'dotClear', 'dotFlatten',
     'mongoReplacementModifier',
     'quoteRe',
-    'yesOrNo'
+    'yesOrNo',
+
+    'UserSchema'
   ]);
 });

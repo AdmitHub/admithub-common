@@ -6,6 +6,15 @@ flex-container(dir = row)
 flex(val)
   order val
 
+clearfix()
+  &:after
+    content " "
+    visibility hidden
+    display block
+    font-size 0
+    clear both
+    height 0
+
 ul-reset()
   list-style none
   margin 0
@@ -122,3 +131,18 @@ row(mult = 1, nested = false)
 
 stretch()
   width 100%
+
+iconify(name)
+  @extend .icon
+
+  &:before
+    @extend .icon-{name}:before
+
+arrow-top(color, size)
+	width 0 
+	height 0
+	border-left size solid transparent
+	border-right size solid transparent
+	
+	border-bottom size solid color
+
