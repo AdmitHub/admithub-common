@@ -46,6 +46,8 @@ Package.onUse(function(api) {
   api.addFiles('client/css/common/responsive.import.styl', 'client');
 
   api.addFiles('client/css/modules/section.import.styl', 'client');
+  api.addFiles('client/css/modules/page.import.styl', 'client');
+  api.addFiles('client/css/modules/tables.import.styl', 'client');
   api.addFiles('client/css/modules/hero.import.styl', 'client');
   api.addFiles('client/css/modules/dropdown.import.styl', 'client');
   api.addFiles('client/css/modules/markdown.import.styl', 'client');
