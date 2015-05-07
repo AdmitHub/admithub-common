@@ -1,7 +1,7 @@
 Package.describe({
   name: "admithub:admithub-common",
   summary: "Common styles, templates, and libraries for AdmitHub sites",
-  version: "0.0.5",
+  version: "0.0.6",
   git: "https://github.com/AdmitHub/admithub-common.git"
 });
 
@@ -78,6 +78,7 @@ Package.onUse(function(api) {
     'mongoReplacementModifier',
     'quoteRe',
     'yesOrNo',
+    'formatPhone',
 
     'UserSchema'
   ]);

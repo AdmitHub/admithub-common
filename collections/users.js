@@ -44,6 +44,10 @@ UserSchema = new SimpleSchema({
     },
     optional: true
   },
+  "profile.canText": {
+    type: Boolean,
+    optional: true
+  },
 
   "services": {type: Object, blackbox: true, optional: true},
   "roles": {type: [String], optional: true},
