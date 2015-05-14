@@ -44,7 +44,7 @@ form
 
   strong
     position relative
-    background-color color-white
+    background-color color-bg
     padding 0 (grid-gutter/2)
 
 button#at-facebook
@@ -54,9 +54,7 @@ button#at-facebook
   margin-right 2.5%
 
   .fa-facebook
-    icon()
-    &:before
-      @extend .icon-facebook:before
+    iconify(facebook)
 
 button#at-twitter
   @extend .ui-btn
@@ -65,9 +63,7 @@ button#at-twitter
   margin-left 2.5%
 
   .fa-twitter
-    icon()
-    &:before
-      @extend .icon-twitter-bird:before
+    iconify(twitter-bird)
 
 .at-pwd-form
   clearfix()

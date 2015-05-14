@@ -21,30 +21,9 @@
     padding 0 grid-page-gutter
     margin-left: -(grid-gutter);
 
-.grid-inner-row
-  position relative
-  @media mq-med
-    margin-left: -(grid-gutter)
-
-  .grid-2
-  .grid-3
-    margin-bottom (grid-gutter/2)
-
-.grid-el
-  padding 0 1.5rem
-
-.grid-space
-  position relative
-  @media mq-med
-    margin-left grid-gutter
-
-
 for i in 1 2 3 4
   .grid-{i}
     grid-col i
-
-.g-tile-2-3
-  grid-col (3/2)
 
 .grid-inline-block
   float none

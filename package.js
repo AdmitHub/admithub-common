@@ -44,6 +44,7 @@ Package.onUse(function(api) {
   api.addFiles('client/css/common/no.import.styl', 'client');
   api.addFiles('client/css/common/sidebar.import.styl', 'client');
   api.addFiles('client/css/common/responsive.import.styl', 'client');
+  api.addFiles('client/css/common/color.import.styl', 'client');
 
   api.addFiles('client/css/modules/section.import.styl', 'client');
   api.addFiles('client/css/modules/page.import.styl', 'client');

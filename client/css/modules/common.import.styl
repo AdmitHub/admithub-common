@@ -1,3 +1,20 @@
 .mod
   background-color color-white
-  box-shadow(0 0 0 rgba(color-black, 0.5))
+  // box-shadow(0 0.1rem 0.2rem rgba(color-black, 0.1))
+  padding mod-padding-desktop
+  margin-bottom 1.5rem
+  border-radius mod-border-radius
+  display block
+
+.mod-secondary
+  @extend .mod
+  background-color color-bg-mod-secondary
+
+.mod-sm
+  @extend .mod
+  padding 2rem
+
+.mod-internal
+  @extend .mod
+  margin-bottom 0
+  border-bottom border-light
