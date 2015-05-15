@@ -5,19 +5,18 @@
   ui-unbtn()
 
 .ui-btn
-.button, .btn.btn-primary
+.button
+.btn.btn-primary
   transition background-color 0.15s
   text-align center
   border 0
   cursor pointer
-  padding 0 ui-padding
   ui-btn-color color-green, color-white
   padding 0 ui-padding
   inline-block()
   border-radius ui-border-radius
   type-ui()
   ui-height ui-height-default
-  box-shadow 0 0.3rem 0 darken(color-green, 10)
 
   > *
     inline-block()
@@ -31,6 +30,11 @@
 
   .icon-carat-right
     type-size 15
+
+.ui-sm
+  type-small()
+  ui-height ui-small-height
+  padding 0 ui-padding/2
 
 .ui-pill-checked
   @extend .ui-btn
@@ -52,7 +56,6 @@
   @extend .ui-btn
   border ui-btn-secondary-border
   ui-btn-color color-white color-grey-dark
-  box-shadow 0 0.3rem 0 rgba(color-black, 0.2)
 
 .ui-btn-circle
   padding 0
@@ -145,3 +148,27 @@ a.ui-xsmall
   background-color #f2e9ee
   border-radius 10rem
   padding 0.2rem 0.75rem
+
+.ui-btn-x
+  font-size 2.5rem
+  color color-red
+  background-color rgba(color-red, 0.15)
+  border 0
+
+  &:hover
+    color color-red
+    background-color rgba(color-red, 0.25)
+
+.ui-btn-heart
+  font-size 3rem
+  background-color rgba(color-green, 0.15)
+  color color-green
+
+  &:hover
+    color color-green
+    background-color rgba(color-green, 0.25)
+
+.ui-btn-x
+.ui-btn-heart
+  padding 0
+  width 6.5rem
