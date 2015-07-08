@@ -2,6 +2,17 @@ UserSchema = new SimpleSchema({
   "_id": fields.id({optional: true}),
   // Accounts username
   "username": {type: String, regEx: /^[a-z0-9A-Z_]{3,15}$/, optional: true},
+  "slug": {
+    type: String,
+    unique: true,
+    optional: true,
+    autoValue: function() {
+      if (this.field('username').isSet) {
+        return slugify(this.field('username').value);
+      }
+      this.unset();
+    }
+  },
   "emails": {
     type: [Object],
     autoValue: fields.callableDefaultValue(function() {
