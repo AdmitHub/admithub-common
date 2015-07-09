@@ -14,7 +14,9 @@ Package.onUse(function(api) {
     'underscore',
 
     'aldeed:simple-schema',
-    'aldeed:collection2'
+    'aldeed:collection2',
+    'aldeed:autoform',
+    'matb33:collection-hooks'
   ]);
 
   // begin styles
@@ -67,7 +69,13 @@ Package.onUse(function(api) {
   api.addFiles('lib/_fields.js', ['client', 'server']);
   api.addFiles('lib/helpers.js', ['client', 'server']);
   api.addFiles('lib/ui.js', ['client']);
+  api.addFiles('lib/simpleSchema.js');
   api.addFiles('collections/users.js');
+  api.addFiles('collections/collegeOfficers.js');
+  api.addFiles('collections/colleges.js');
+  api.addFiles('collections/highschools.js');
+  api.addFiles('collections/matches.js');
+  api.addFiles('collections/profile.js');
 
   api.addFiles('public/icons/fonts/icons.eot');
   api.addFiles('public/icons/fonts/icons.svg');
@@ -83,6 +91,11 @@ Package.onUse(function(api) {
     'yesOrNo',
     'formatPhone',
 
-    'UserSchema'
+    'UserSchema',
+    'CollegeOfficers',
+    'Colleges',
+    'Highschools',
+    'Matches',
+    'CollegeProfiles'
   ]);
 });
