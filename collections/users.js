@@ -4,7 +4,7 @@ UserSchema = new SimpleSchema({
   "username": {type: String, regEx: /^[a-z0-9A-Z_]{3,15}$/, optional: true},
   "slug": {
     type: String,
-    unique: true,
+    unique: false,
     optional: true,
     autoValue: function() {
       if (this.field('username').isSet) {
