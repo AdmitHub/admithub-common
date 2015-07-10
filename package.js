@@ -77,6 +77,7 @@ Package.onUse(function(api) {
   api.addFiles('collections/matches.js');
   api.addFiles('collections/profile.js');
   api.addFiles('collections/smslogs.js');
+  api.addFiles('collections/smsvalidations.js');
 
   api.addFiles('public/icons/fonts/icons.eot');
   api.addFiles('public/icons/fonts/icons.svg');
@@ -98,6 +99,7 @@ Package.onUse(function(api) {
     'Highschools',
     'Matches',
     'CollegeProfiles',
-    'SmsLogs'
+    'SmsLogs',
+    'SmsValidations'
   ]);
 });
