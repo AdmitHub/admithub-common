@@ -10,7 +10,6 @@ UserSchema = new SimpleSchema({
       if (this.field('username').isSet) {
         return slugify(this.field('username').value);
       }
-      this.unset();
     }
   },
   "emails": {
