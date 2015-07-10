@@ -5,14 +5,7 @@ Matches.attachSchema({
   "created": fields.created_date(),
   // Should only be set if messages is empty.
   "dismissed": {type: Boolean, defaultValue: false},
-  "archived": {
-    type: Date,
-    optional: true,
-    autoform: {
-      afFieldInput: {
-        type: "datetime-local"
-      }
-    }},
+  "archived": {type: Date, optional: true},
   "messages": {type: [Object], optional: true},
   "messages.$.created": {
     type: Date,

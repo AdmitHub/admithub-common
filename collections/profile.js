@@ -274,19 +274,7 @@ var _metaFields = new SimpleSchema({
 
 CollegeProfileSchema = new SimpleSchema({
   // the only non-optional field
-  "userId": {
-    type: String,
-    regEx: SimpleSchema.RegEx.Id,
-    autoValue: function() {
-        if (this.isInsert) {
-            return this.userId;
-        }
-        else {
-            return this.unset();
-        }
-    }
-  },
-
+  "userId": {type: String, regEx: SimpleSchema.RegEx.Id},
   "name": fields.name_part({
     optional: true,
     autoValue: function() {
