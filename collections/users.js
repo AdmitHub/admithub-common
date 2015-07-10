@@ -1,7 +1,7 @@
 UserSchema = new SimpleSchema({
   "_id": fields.id({optional: true}),
   // Accounts username
-  "username": {type: String, regEx: /^[a-z0-9A-Z_]{3,15}$/, optional: true},
+  "username": fields.username({optional: true}),
   "slug": {
     type: String,
     unique: false,
