@@ -13,7 +13,6 @@ Highschools.attachSchema({
   students: {
     type: [String],
     regEx: SimpleSchema.RegEx.Id,
-    optional: true,
-    autoform: {omit: true}
+    optional: true
   }
 });
