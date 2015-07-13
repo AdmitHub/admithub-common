@@ -100,6 +100,9 @@ Package.onUse(function(api) {
     'Matches',
     'CollegeProfiles',
     'SmsLogs',
-    'SmsValidations'
+    'SmsValidations',
+    'CollegesInMemory',
+    'collegeProfileCountAnsweredQuestions',
+    'UserSchema'
   ]);
 });

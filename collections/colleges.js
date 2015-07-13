@@ -258,10 +258,10 @@ CollegeSchema = new SimpleSchema({
 });
 
 Colleges = new Mongo.Collection("colleges");
+CollegesInMemory = {};
 Colleges.attachSchema(CollegeSchema);
 if (Meteor.isServer) {
   Meteor.startup(function() {
-    CollegesInMemory = {};
     Colleges.find({}).forEach(function(college) {
       CollegesInMemory[college._id] = college;
     });
