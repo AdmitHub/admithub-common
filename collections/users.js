@@ -61,7 +61,7 @@ UserSchema = new SimpleSchema({
   },
 
   "services": {type: Object, blackbox: true, optional: true},
-  "roles": {type: [String], optional: true},
+  "roles": {type: Object, blackbox: true, optional: true},
   "referralCode": {
     type: String, 
     autoValue: fields.insertOnlyValue(function() {
