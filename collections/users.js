@@ -59,6 +59,10 @@ UserSchema = new SimpleSchema({
     type: Boolean,
     optional: true
   },
+  "profile.tags": {
+    type: [String],
+    optional: true
+  },
   "smsHardStopped": {
     type: Boolean,
     optional: true
