@@ -16,19 +16,19 @@ SmsValidations.UNVERIFIED_EXPIRATION = 1000*60*10; // 10 minutes
 // Number of attempts one can make to send a code back.
 SmsValidations.MAX_VERIFICATION_TRIES = 5;
 SmsValidations.INITIAL_PROMPT = _.template(
-  "Welcome to AdmitHub. Before getting started, we need you to agree to our terms of service - " + Meteor.absoluteUrl('terms') + " - " +
-  "and validate your cell phone number.  You can do both by simply replying with this confirmation code: <%= code %>"
+  "Hi, I’m Oli, a free robot coach to help you get into college." +
+  "To get started, reply with this code: <%= code %>.  (Standard messaging rates may apply.)"
 );
 SmsValidations.REPROMPT = _.template(
   "Sorry, that wasn't quite right. Please text back this code: <%= code %>"
 );
 SmsValidations.EXPIRED_PROMPT = _.template(
-  "Sorry, your session expired. We need to re-verify that we've got the right person. " +
+  "Sorry, your session expired. I need to re-verify that we've got the right person. " +
   "Please text back this code: <%= code %>"
 );
 SmsValidations.VERIFIED_PROMPT = _.template("Verified! Thanks.");
 SmsValidations.EXPLANATION_PROMPT = _.template(
-  "Welcome to AdmitHub's question bot. Here's how this works: We'll ask you a question. Answer simply by texting back.\n\nYou can send #skip to skip a question. Send STOP and we will stop texting you at all.\n\n"
+  "Hi I'm Oli. I'll ask you a questions and you answer.\n\nYou can send #skip to skip a question. Send #stop and I'll go away forever.\n\n"
 )
 SmsValidations.methods = {
   cleanPhone: function(phone) {
