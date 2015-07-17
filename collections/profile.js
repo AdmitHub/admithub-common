@@ -97,7 +97,8 @@ var _parentSchema = new SimpleSchema({
     "occupation": fields.string(o),
     "company": fields.string(o),
     "colleges": {type: [String], optional: true},
-    "degree": fields.string(o)
+    "degree": fields.string(o),
+    "canContact": fields.bool(o)
   })]}
 });
 
