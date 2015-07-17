@@ -11,7 +11,7 @@ SmsLogs.attachSchema(new SimpleSchema({
   body: {type: String},
   mediaFiles: {type: [Object], optional: true},
   "mediaFiles.$.url": {type: String},
-  "mediaFiles.$.contentType": {type: String},
+  "mediaFiles.$.contentType": {type: String, optional: true},
   "mediaFiles.$.deleted": {type: Boolean, defaultValue: false},
   userId: {type: String, optional: true},
   workflow: {type: String, optional: true},
