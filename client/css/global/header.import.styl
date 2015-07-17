@@ -1,5 +1,9 @@
 .g-header-wrap
   background-color color-purple
+  background-size cover
+
+.g-header-nav-bar
+  border-bottom 1px solid rgba(255,255,255,0.25)
 
 .g-header
   height g-header-height
@@ -9,6 +13,9 @@
 
   @media mq-med
     position relative
+    
+  @media mq-med-desk
+    padding 0 2rem
 
   .mod-dropdown
     display block
@@ -73,7 +80,6 @@ input.g-header-search-input
 
 .g-header-hamburger
   display block
-  float right
   background none
   border 0
   height g-header-height
@@ -478,9 +484,32 @@ input.g-header-search-input
   margin-left: (space/2)
 
 .g-header-hamburger
-  float right
   line-height g-header-height !important
   font-size 2.5rem
 
   @media mq-med
     display none
+
+@media mq-med-desk
+  // Hack to truncate logo
+  .g-header
+    .icon-logo
+      max-width: 1.1em;
+      overflow-x: hidden;
+
+  .g-header
+    display: flex;
+    .g-header-center
+      flex-grow: 1;
+      text-align: center;
+      type-sans();
+      .title
+        font-weight: bold;
+      .g-header-logo
+        float: none;
+        .icon-logo
+          margin-right: 0;
+
+@media mq-med
+  .g-header-center .title
+    display: none;
