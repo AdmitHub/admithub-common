@@ -16,7 +16,7 @@ SmsValidations.UNVERIFIED_EXPIRATION = 1000*60*10; // 10 minutes
 // Number of attempts one can make to send a code back.
 SmsValidations.MAX_VERIFICATION_TRIES = 5;
 SmsValidations.INITIAL_PROMPT = _.template(
-  "Hi, I’m Oli, a free robot coach to help you get into college. " +
+  "Hi, I'm Oli, a free robot coach to help you get into college. " +
   "To get started, reply with this code: <%= code %>.  (Standard messaging rates may apply.)"
 );
 SmsValidations.REPROMPT = _.template(
