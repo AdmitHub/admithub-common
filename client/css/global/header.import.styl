@@ -515,22 +515,24 @@ input.g-header-search-input
   // Hack to truncate logo
   .g-header
     .icon-logo
-      max-width: 1.1em;
-      overflow-x: hidden;
+      max-width 1.1em
+      overflow-x hidden
 
   .g-header
-    display: flex;
+    display flex
     .g-header-center
-      flex-grow: 1;
-      text-align: center;
-      type-sans();
+      flex-grow 1
+      text-align center
+      type-sans()
       .title
-        font-weight: bold;
+        position relative
+        font-weight bold
+        z-index 10
       .g-header-logo
-        float: none;
+        float none
         .icon-logo
-          margin-right: 0;
+          margin-right 0
 
 @media mq-med
   .g-header-center .title
-    display: none;
+    display none
