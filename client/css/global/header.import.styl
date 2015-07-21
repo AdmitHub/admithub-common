@@ -33,6 +33,7 @@
   .mod-dropdown
     display block
     position static
+    z-index 10
 
     @media mq-med
       position absolute
@@ -512,12 +513,6 @@ input.g-header-search-input
     display none
 
 @media mq-med-desk
-  // Hack to truncate logo
-  .g-header
-    .icon-logo
-      max-width 1.1em
-      overflow-x hidden
-
   .g-header
     display flex
     .g-header-center
