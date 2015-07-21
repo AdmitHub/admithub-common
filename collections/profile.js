@@ -148,6 +148,8 @@ var _honorSchema = new SimpleSchema({
   }), optional: true},
   "detailedHonors": {type: [new SimpleSchema({
     "honor": fields.string(o),
+    "awarder": fields.string(o),
+    "date": fields.date(o),
     "grade": fields.high_school_year(o),
     "levelOfRecognition": fields.honor_level_of_recognition(o),
     "description": fields.string({max: 160, optional: true})
@@ -169,6 +171,9 @@ var _activitySchema = new SimpleSchema({
   }), optional: true},
   "detailedActivities": {type: [new SimpleSchema({
     "activity": fields.string({max: 160, optional: true}),
+    "role": fields.string({max: 160, optional: true}),
+    "startDate": fields.date(o),
+    "endDate": fields.date(o),
     "years": fields.high_school_years({optional: true}),
     "hoursPerWeek": fields.number({max: 168, optional: true}),
     "weeksPerYear": fields.number({max: 52, optional: true}),
@@ -177,6 +182,27 @@ var _activitySchema = new SimpleSchema({
     "achievement": fields.string({max: 160, optional: true}),
     "type": fields.activity_type({optional: true}),
   })], optional: true}
+});
+
+var _volunteerSchema = new SimpleSchema({
+  "detailedVolunteer": {type: [new SimpleSchema({
+    "organization": fields.string({max: 160, optional: true}),
+    "position": fields.string({max: 160, optional: true}),
+    "startDate": fields.date(o),
+    "endDate": fields.date(o),
+    "summary": fields.string({max: 160, optional: true}),
+    "highlights": {type: [fields.string({max: 160})], optional: true}
+  })]}
+});
+
+var _skillSchema = new SimpleSchema({
+  "name": fields.string({max: 160, optional: true}),
+  "level": fields.skill_level(o)
+});
+
+var _languageSchema = new SimpleSchema({
+  "language": fields.string({max: 30, optional: true}),
+  "level": fields.language_level(o)
 });
 
 var _essaySchema = new SimpleSchema({
@@ -188,6 +214,7 @@ var _recommendationSchema = new SimpleSchema({
   "friendsAdjectives": fields.string({max: 140, optional: true}),
   "recommenders": {type: [new SimpleSchema({
     "name": fields.name_part(o),
+    "role": fields.recommender_role(o),
     "subjects": fields.string(o),
     "grades": fields.high_school_years(o),
     "favoriteAcademicLesson": fields.string(o),
@@ -297,6 +324,9 @@ CollegeProfileSchema = new SimpleSchema({
   "tests": {type: _standardizedTestSchema, optional: true},
   "honors": {type: _honorSchema, optional: true},
   "activities": {type: _activitySchema, optional: true},
+  "skillsOrInterests": {type: [_skillSchema], optional: true},
+  "languages": {type: [_languageSchema], optional: true},
+  "volunteer": {type: _volunteerSchema, optional: true},
   "essays": {type: _essaySchema, optional: true},
 
   "intentions": {type: _intentionSchema, optional: true},
