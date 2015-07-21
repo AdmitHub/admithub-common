@@ -315,6 +315,7 @@ CollegeProfileSchema = new SimpleSchema({
       }
     }
   }),
+  "headline": {type: String, max: 160, optional: true},
   "location": {type: _locationSchema, optional: true},
   "demographics": {type: _demographicsSchema, optional: true},
   "parents": {type: _parentSchema, optional: true},
