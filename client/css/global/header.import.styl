@@ -1,9 +1,25 @@
 .g-header-wrap
   background-color color-purple
   background-size cover
+  position relative
+  
+.g-header-overlay
+  position absolute
+  top 0
+  bottom 0
+  left 0
+  right 0
+  background-color hero-mask
+  z-index 1
+
+.g-header-nav-bar, .g-header-region
+  position relative
+  z-index 2
 
 .g-header-nav-bar
   border-bottom 1px solid rgba(255,255,255,0.25)
+
+
 
 .g-header
   height g-header-height
