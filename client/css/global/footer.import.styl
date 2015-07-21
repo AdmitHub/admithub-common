@@ -4,17 +4,30 @@
   clear both
 
 .g-footer
-  padding grid-gutter 0
+  padding 0
   type-small()
   clearfix()
 
-  @media mq-med-desk
-    padding 0 2rem
+  
 
 .g-footer-links
-  li
-    margin-bottom 1rem
+  padding grid-gutter 0
+  display flex
+  flex-wrap wrap
+  justify-content space-between
+  @media mq-med-desk
+    justify-content center
+  .g-footer-link
+    display inline-block
+    padding 1rem 0
+    color color-purple
+    text-transform uppercase
+    @media mq-med-desk
+      padding 1rem 2rem
 
-    @media mq-sm
-      float left
-      width 20%
+.g-footer-copyright
+  background-color color-purple-dark
+  color white
+  p
+    margin-bottom 0
+    line-height grid-page-gutter
