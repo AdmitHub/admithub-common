@@ -38,10 +38,21 @@ order(order)
   order: order;
   
 align-items(arg)
-  -webkit-box-align: arg;
-  -webkit-align-items: arg;
-  -ms-flex-align: arg;
-  align-items: arg;
+  if arg == flex-end
+    -webkit-box-align: end;
+    -webkit-align-items: flex-end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+  else if arg == flex-start
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+  else
+    -webkit-box-align: arg;
+    -webkit-align-items: arg;
+    -ms-flex-align: arg;
+    align-items: arg;
   
 align-self(arg)
   -webkit-align-self: arg;
