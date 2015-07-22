@@ -1,23 +1,46 @@
 flex-direction(dir)
-  -webkit-flex-direction dir
-  flex-direction: dir;
+  if dir == row
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row
+  else
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column
 
 flex-container(dir = row)
-  display -webkit-flex
-  display flex
-  flex-direction dir
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction(dir)
   
-flex-shorthand(args = 1)
-  -webkit-flex args
-  flex args
+flex(args)
+  -webkit-box-flex: args;
+  -webkit-flex: args;
+  -ms-flex: args;
+  flex: args;
   
-flex-grow(arg)
-  -webkit-flex-grow arg
-  flex-grow: arg;
+flex-grow(args)
+  -webkit-box-flex: args;
+  -webkit-flex-grow: args;
+  -ms-flex-positive: args;
+  flex-grow: args;
   
 align-items(arg)
-  -webkit-align-items arg
+  -webkit-box-align: arg;
+  -webkit-align-items: arg;
+  -ms-flex-align: arg;
   align-items: arg;
+  
+align-self(arg)
+  -webkit-align-self: arg;
+  -ms-flex-item-align: arg;
+  align-self: arg;
 
 clearfix()
   &:after
