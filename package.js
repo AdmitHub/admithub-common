@@ -79,6 +79,7 @@ Package.onUse(function(api) {
   api.addFiles('collections/smslogs.js');
   api.addFiles('collections/smsvalidations.js');
   api.addFiles('collections/sponsors.js');
+  api.addFiles('collections/testimonials.js');
 
   api.addFiles('public/icons/fonts/icons.eot');
   api.addFiles('public/icons/fonts/icons.svg');
@@ -105,6 +106,7 @@ Package.onUse(function(api) {
     'CollegesInMemory',
     'collegeProfileCountAnsweredQuestions',
     'UserSchema',
-    'Sponsors'
+    'Sponsors',
+    'Testimonials'
   ]);
 });
