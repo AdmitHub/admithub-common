@@ -16,6 +16,9 @@
   text-align left
   border border
   z-index 1
+  border 0
+  border-bottom-left-radius 2px
+  border-bottom-right-radius 2px
 
   a
     color color-link 
@@ -27,6 +30,9 @@
   li:last-child
     {class-list-header-links}
       border-bottom 0
+    a
+      border-bottom-left-radius 2px
+      border-bottom-right-radius 2px
 
 .mod-dropdown-center
   @extend .mod-dropdown
@@ -43,4 +49,4 @@
     transition-property none
 
     &:hover
-      background-color color-grey-xlight
+      background-color color-border
