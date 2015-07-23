@@ -24,8 +24,11 @@ Sponsors.attachSchema(new SimpleSchema({
     type: [String],
     label: 'Visible on',
     autoform: {
-      multiple: true,
-      options: ['www.admithub.com', 'college.admithub.com']
+      options: [
+        {label: 'www.admithub.com', value: 'www.admithub.com'},
+        {label: 'college.admithub.com', value: 'college.admithub.com'}
+      ],
+      allowedValues: ['www.admithub.com', 'college.admithub.com']
     }
   }
 }));
