@@ -297,6 +297,9 @@ var _metaFields = new SimpleSchema({
     "evaluation": fields.string({allowedValues: ["Awesome", "Pretty good", "meh", "lame"], optional: true}),
     "evaluationRecommend": fields.string({max: 140, optional: true}),
     "podcastGuest": fields.bool(o)
+  }), optional: true},
+  "match": {type: new SimpleSchema({
+    "finished": fields.bool(o)
   }), optional: true}
 });
 
