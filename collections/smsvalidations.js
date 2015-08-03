@@ -4,7 +4,8 @@ var smsValidationSchema = new SimpleSchema({
   explained: {type: Boolean, defaultValue: false},
   verified: {type: Boolean},
   date: {type: Date},
-  tries: {type: Number, min: 0}
+  tries: {type: Number, min: 0},
+  triggerMessage: {type: String, optional: true}
 });
 SmsValidations = new Mongo.Collection("smsvalidations");
 SmsValidations.attachSchema(smsValidationSchema);
@@ -49,13 +50,14 @@ SmsValidations.methods = {
     }
     return null;
   },
-  newValidation: function(phone, verified) {
+  newValidation: function(phone, triggerMessage) {
     var insert = {
       phone: SmsValidations.methods.cleanPhone(phone),
       code: SmsValidations.methods.randomCode(),
-      verified: !!verified,
+      verified: false,
       date: new Date(),
-      tries: 0
+      tries: 0,
+      triggerMessage: triggerMessage
     };
     insert._id = SmsValidations.insert(insert);
     return insert;
