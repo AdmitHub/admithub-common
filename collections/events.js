@@ -1,22 +1,23 @@
 Events = new Mongo.Collection("events");
 
 ParticipantSchema = new SimpleSchema({
-  phone: {
+  collegeId: {
     type: String
   },
-  message: {
-    type: String,
-    optional: true
+  userId: {
+    type: String
   },
-  recommendationLikelihood: {
-    type: Number,
-    optional: true
+  hashtag: {
+    type: String
   }
 });
 
 Events.attachSchema(new SimpleSchema({
   // collegeID reference
   name: {
+    type: String
+  },
+  location: {
     type: String
   },
   start: {
