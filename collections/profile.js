@@ -300,6 +300,7 @@ var _metaFields = new SimpleSchema({
     "utm_medium": fields.string(o)
   }), optional: true},
   "match": {type: new SimpleSchema({
+    "skip": fields.bool(o),
     "finished": fields.bool(o)
   }), optional: true}
 });
