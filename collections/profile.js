@@ -1,7 +1,10 @@
 // On user profile:
 //  - phone number
 //  - email
-
+var zipcodes = {};
+Meteor.startup(function() {
+  zipcodes = Meteor.npmRequire("zipcodes");
+});
 var o = {optional: true};
 
 var _demographicsSchema = new SimpleSchema({
@@ -18,7 +21,22 @@ var _locationSchema = new SimpleSchema({
   "address": fields.address(o),
   "city": fields.string(o),
   "state": fields.state(o),
-  "zip": fields.zip_code(o)
+  "zip": fields.zip_code(_.extend(o, {
+    autoValue: function(mod){
+      if(this.siblingField("zip").isSet){
+        zipcodeLookup = zipcodes.lookup(this.siblingField("zip").value);
+
+        if(zipcodeLookup !== undefined && zipcodeLookup.state !== undefined){
+          if(mod.$set === undefined){
+            mod.$set = {};
+          }
+
+          mod.$set.location.state = zipcodeLookup.state;
+          mod.$set.location.city = zipcodeLookup.city;
+        }
+      }
+    }
+  }))
 });
 
 var _gpa = new SimpleSchema({
@@ -398,5 +416,3 @@ collegeProfileCountAnsweredQuestions = function(collegeProfile) {
   countAnswers(clone);
   return total;
 }
-
-
