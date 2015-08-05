@@ -23,7 +23,7 @@ Events.attachSchema(new SimpleSchema({
   start: {
     type: Date
   },
-  end: {
+  stop: {
     type: Date
   },
   participants: {
