@@ -322,7 +322,6 @@ var _metaFields = new SimpleSchema({
     "finished": fields.bool(o)
   }), optional: true}
 });
-console.log("-----1");
 CollegeProfileSchema = new SimpleSchema({
   // the only non-optional field
   "userId": {type: String, regEx: SimpleSchema.RegEx.Id},
