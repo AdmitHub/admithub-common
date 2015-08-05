@@ -21,24 +21,25 @@ var _demographicsSchema = new SimpleSchema({
 
 var _locationSchema = new SimpleSchema({
   "address": fields.address(o),
-  "city": fields.string(o),
-  "state": fields.state(o),
-  "zip": fields.zip_code(_.extend(o, {
-    autoValue: function(mod){
-      if(Meteor.isServer && this.siblingField("zip").isSet){
+  "city": fields.string(_.extend(o, {
+    autoValue: function(mod) {
+      if(mod.$set && mod.$set.zip && this.siblingField("zip").isSet) {
         zipcodeLookup = zipcodes.lookup(this.siblingField("zip").value);
 
-        if(zipcodeLookup !== undefined && zipcodeLookup.state !== undefined){
-          if(mod.$set === undefined){
-            mod.$set = {};
-          }
-
-          mod.$set.location.state = zipcodeLookup.state;
-          mod.$set.location.city = zipcodeLookup.city;
-        }
+        return zipcodeLookup.city;
       }
     }
-  }))
+  })),
+  "state": fields.state(_.extend(o, {
+    autoValue: function(mod) {
+      if(mod.$set && mod.$set.zip && this.siblingField("zip").isSet) {
+        zipcodeLookup = zipcodes.lookup(this.siblingField("zip").value);
+
+        return zipcodeLookup.state;
+      }
+    }
+  })),
+  "zip": fields.zip_code(o)
 });
 
 var _gpa = new SimpleSchema({

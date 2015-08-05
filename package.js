@@ -65,7 +65,7 @@ Package.onUse(function(api) {
   api.addFiles('client/css/pages/sign-in.import.styl', 'client');
   api.addFiles('client/css/pages/bot.import.styl', 'client');
   // end styles
-  
+
   api.addFiles('lib/_fields.js', ['client', 'server']);
   api.addFiles('lib/helpers.js', ['client', 'server']);
   api.addFiles('lib/ui.js', ['client']);
@@ -85,7 +85,7 @@ Package.onUse(function(api) {
   api.addFiles('public/icons/fonts/icons.svg');
   api.addFiles('public/icons/fonts/icons.ttf');
   api.addFiles('public/icons/fonts/icons.woff');
-  
+
   api.export([
     'fields',
     'slugify', 'unslugify',
@@ -96,6 +96,7 @@ Package.onUse(function(api) {
     'formatPhone',
 
     'UserSchema',
+    'CollegeProfileSchema',
     'CollegeOfficers',
     'Colleges',
     'Highschools',
@@ -105,7 +106,6 @@ Package.onUse(function(api) {
     'SmsValidations',
     'CollegesInMemory',
     'collegeProfileCountAnsweredQuestions',
-    'UserSchema',
     'Sponsors',
     'Testimonials'
   ]);
