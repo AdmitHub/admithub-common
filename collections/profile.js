@@ -3,7 +3,9 @@
 //  - email
 var zipcodes = {};
 Meteor.startup(function() {
-  zipcodes = Meteor.npmRequire("zipcodes");
+  if(Meteor.isServer) {
+    zipcodes = Meteor.npmRequire("zipcodes");
+  }
 });
 var o = {optional: true};
 
@@ -23,7 +25,7 @@ var _locationSchema = new SimpleSchema({
   "state": fields.state(o),
   "zip": fields.zip_code(_.extend(o, {
     autoValue: function(mod){
-      if(this.siblingField("zip").isSet){
+      if(Meteor.isServer && this.siblingField("zip").isSet){
         zipcodeLookup = zipcodes.lookup(this.siblingField("zip").value);
 
         if(zipcodeLookup !== undefined && zipcodeLookup.state !== undefined){
@@ -320,7 +322,7 @@ var _metaFields = new SimpleSchema({
     "finished": fields.bool(o)
   }), optional: true}
 });
-
+console.log("-----1");
 CollegeProfileSchema = new SimpleSchema({
   // the only non-optional field
   "userId": {type: String, regEx: SimpleSchema.RegEx.Id},

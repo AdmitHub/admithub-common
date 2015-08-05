@@ -71,14 +71,14 @@ UserSchema = new SimpleSchema({
   "services": {type: Object, blackbox: true, optional: true},
   "roles": {type: Object, blackbox: true, optional: true},
   "referralCode": {
-    type: String, 
+    type: String,
     autoValue: fields.insertOnlyValue(function() {
       return Meteor.uuid();
     })
   },
   "referralCredits": {type: [Object], optional: true},
   "referralCredits.$.sentTo": fields.id({optional: true}),
-  "referralCredits.$.referredBy": fields.id({optional: true}), 
+  "referralCredits.$.referredBy": fields.id({optional: true}),
   "referralCredits.$.value": {type: Number, optional: true},
   "referralCredits.$.spent": fields.id({optional: true}), // transaction ID
 
