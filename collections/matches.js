@@ -5,7 +5,7 @@ Matches.attachSchema({
   "created": fields.created_date(),
   // Should only be set if messages is empty.
   "dismissed": {type: Boolean, defaultValue: false},
-  "eventbot": {type: Boolean, defaultValue: false},
+  "bot": {type: Boolean, defaultValue: false},
   "archived": {type: Date, optional: true},
   "messages": {type: [Object], optional: true},
   "messages.$.created": {
