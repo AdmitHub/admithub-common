@@ -5,6 +5,10 @@ Package.describe({
   git: "https://github.com/AdmitHub/admithub-common.git"
 });
 
+Npm.depends({
+  'zipcodes': '1.1.1'
+});
+
 Package.onUse(function(api) {
 
   api.use([
