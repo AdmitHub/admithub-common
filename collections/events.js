@@ -1,10 +1,7 @@
 Events = new Mongo.Collection("events");
 
 ParticipantSchema = new SimpleSchema({
-  collegeId: {
-    type: String
-  },
-  userId: {
+  collegeOfficerId: {
     type: String
   },
   hashtag: {
