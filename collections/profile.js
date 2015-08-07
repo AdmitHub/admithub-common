@@ -305,6 +305,9 @@ var _metaFields = new SimpleSchema({
   }), optional: true},
   "resumeBot": {type: new SimpleSchema({
     "finished": fields.bool(o)
+  }), optional: true},
+  "questionBot": {type: new SimpleSchema({
+    "finished": fields.bool(o)
   }), optional: true}
 });
 
