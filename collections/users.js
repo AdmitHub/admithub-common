@@ -44,6 +44,8 @@ UserSchema = new SimpleSchema({
   },
   "profile.phone": {
     type: String,
+    min: 10,
+    max: 10,
     autoValue: function() {
       if (this.isSet) {
         // Cleaning for phone values. This only gets called for
