@@ -4,7 +4,7 @@
 var zipcodes = {};
 Meteor.startup(function() {
   if(Meteor.isServer) {
-    zipcodes = Meteor.npmRequire("zipcodes");
+    zipcodes = Npm.require("zipcodes");
   }
 });
 var o = {optional: true};
