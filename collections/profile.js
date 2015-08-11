@@ -319,9 +319,17 @@ var _metaFields = new SimpleSchema({
     "finished": fields.bool(o),
     "evaluation": fields.string({allowedValues: ["Awesome", "Pretty good", "meh", "lame"], optional: true}),
     "evaluationRecommend": fields.string({max: 140, optional: true}),
-    "podcastGuest": fields.bool(o)
+    "podcastGuest": fields.bool(o),
+    "utm_medium": fields.string(o)
   }), optional: true},
   "match": {type: new SimpleSchema({
+    "skip": fields.bool(o),
+    "finished": fields.bool(o)
+  }), optional: true},
+  "resumeBot": {type: new SimpleSchema({
+    "finished": fields.bool(o)
+  }), optional: true},
+  "questionBot": {type: new SimpleSchema({
     "finished": fields.bool(o)
   }), optional: true}
 });
