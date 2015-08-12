@@ -56,6 +56,7 @@ CollegeSchema = new SimpleSchema({
   "gender": {type: String, allowedValues: ["Men", "Women", "coed"], optional: true},
   "population": {type: Number, decimal: true, optional: true},
   "linkedinLink": fields.url({optional: true}),
+  "hashtag": {type: String},
 
   "women": {type: _totalPercentSplit},
   "men": {type: _totalPercentSplit},
