@@ -14,5 +14,8 @@ Highschools.attachSchema({
     type: [String],
     regEx: SimpleSchema.RegEx.Id,
     optional: true
+  },
+  hashtag: {
+    type: String
   }
 });
