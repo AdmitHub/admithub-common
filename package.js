@@ -68,7 +68,13 @@ Package.onUse(function(api) {
 
   api.addFiles('client/css/pages/sign-in.import.styl', 'client');
   api.addFiles('client/css/pages/bot.import.styl', 'client');
+  api.addFiles('client/css/pages/collegeChat.import.styl', 'client');
   // end styles
+
+  // begin templates
+  api.addFiles("client/views/collegeChat.html", "client");
+  api.addFiles("client/views/collegeChat.js", "client");
+  // end templates
 
   api.addFiles('lib/_fields.js', ['client', 'server']);
   api.addFiles('lib/helpers.js', ['client', 'server']);
