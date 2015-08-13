@@ -372,7 +372,8 @@ CollegeProfileSchema = new SimpleSchema({
 
   "modified": {type: Date, autoValue: function() { return new Date(); }},
   "created": fields.date(),
-  "contactable": fields.bool({optional: true})
+  "contactable": fields.bool({optional: true}),
+  "referralSource": fields.referral_source({optional: true})
 });
 
 CollegeProfiles = new Mongo.Collection("collegeprofiles");
