@@ -15,6 +15,11 @@ Highschools.attachSchema({
     regEx: SimpleSchema.RegEx.Id,
     optional: true
   },
+  pendingStudents: {
+    type: [String],
+    regEx: SimpleSchema.RegEx.Id,
+    optional: true
+  },
   hashtag: {
     type: String
   }
