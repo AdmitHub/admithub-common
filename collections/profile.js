@@ -327,9 +327,11 @@ var _metaFields = new SimpleSchema({
     "finished": fields.bool(o)
   }), optional: true},
   "resumeBot": {type: new SimpleSchema({
+    "skip": fields.bool(o),
     "finished": fields.bool(o)
   }), optional: true},
   "questionBot": {type: new SimpleSchema({
+    "skip": fields.bool(o),
     "finished": fields.bool(o)
   }), optional: true}
 });
