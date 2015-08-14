@@ -271,6 +271,26 @@ var _preferenceSchema = new SimpleSchema({
     "any": fields.bool(o)
   }), optional: true},
 
+  "food": {type: new SimpleSchema({
+    "shitty": fields.bool(o),
+    "good": fields.bool(o),
+    "gourmet": fields.bool(o)
+  }), optional: true},
+
+  "fraternities": {type: new SimpleSchema({
+    "hate": fields.bool(o),
+    "whatever": fields.bool(o),
+    "love": fields.bool(o)
+  }), optional: true},
+
+  "nightLife": {type: new SimpleSchema({
+    "dorm": fields.bool(o),
+    "bigGame": fields.bool(o),
+    "party": fields.bool(o),
+    "show": fields.bool(o)
+  }), optional: true},
+
+  "car": fields.bool(o),
   "closeToHome": fields.yes_no_whatever(o), // within 50 miles
   "sameState": fields.yes_no_whatever(o),
 
@@ -307,16 +327,30 @@ var _metaFields = new SimpleSchema({
 CollegeProfileSchema = new SimpleSchema({
   // the only non-optional field
   "userId": {type: String, regEx: SimpleSchema.RegEx.Id},
+  "firstName": fields.name_part({
+    optional: true
+  }),
+  "lastName": fields.name_part({
+    optional: true
+  }),
   "name": fields.name_part({
     optional: true,
     autoValue: function() {
-      if (this.isSet) {
-        Meteor.users.update(this.userId, {
-          $set: {
-            "profile.name": this.value
-          }
-        });
+      var first = this.field('firstName').value || "";
+      var last = this.field('lastName').value || "";
+      var fullName = first + (first.length > 0 && last.length > 0 ? " " : "") + last;
+
+      if (fullName.length === 0) {
+        fullName = "Anonymous";
       }
+
+      Meteor.users.update(this.userId, {
+        $set: {
+          "profile.name": fullName
+        }
+      });
+
+      return fullName;
     }
   }),
   "headline": {type: String, max: 160, optional: true},
