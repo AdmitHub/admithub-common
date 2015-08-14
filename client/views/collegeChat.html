@@ -11,14 +11,14 @@
       <div id="pg-college-chat-bar-area">
         <div id="pg-college-chat-bar-header">
           <div id="pg-college-chat-bar-current-college">
-            Current College
+            {{currentCollegeName}}
           </div>
           <i class="icon icon-x"></i>
         </div>
 
         <div id="pg-college-chat-bar-colleges">
           {{#each matches}}
-            <div class="pg-college-chat-bar-item">
+            <div class="pg-college-chat-bar-item" data-college-id="{{collegeId}}">
               <img src="{{collegeLogo collegeId}}">
               {{#if collegeUnreads collegeId}}
                 <div id="pg-college-chat-bar-item-unread-count">{{collegeUnreads collegeId}}</div>
@@ -30,9 +30,16 @@
           {{/each}}
 
         <div id="pg-college-chat-messages">
+          {{> collegeChatMessages}}
         </div>
       </div>
       </div>
     </div>
   {{/if}}
+</template>
+
+<template name="collegeChatMessages">
+  {{#each messages}}
+    {{body}}<br>
+  {{/each}}
 </template>
