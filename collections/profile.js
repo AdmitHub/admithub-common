@@ -1,7 +1,12 @@
 // On user profile:
 //  - phone number
 //  - email
-
+var zipcodes = {};
+Meteor.startup(function() {
+  if(Meteor.isServer) {
+    zipcodes = Npm.require("zipcodes");
+  }
+});
 var o = {optional: true};
 
 var _demographicsSchema = new SimpleSchema({
@@ -18,7 +23,25 @@ var _locationSchema = new SimpleSchema({
   "address": fields.address(o),
   "city": fields.string(o),
   "state": fields.state(o),
-  "zip": fields.zip_code(o)
+  "zip": fields.zip_code(_.extend(o, {
+    autoValue: function(mod) {
+      if(mod.$set && mod.$set.location && mod.$set.location.zip && this.value !== mod.$set.location.zip) {
+        var zipcodeLookup = zipcodes.lookup(mod.$set.location.zip);
+
+        if(zipcodeLookup !== undefined) {
+          mod.$set.location = {
+            city: zipcodeLookup.city,
+            state: zipcodeLookup.state,
+            zip: zipcodeLookup.zip
+          };
+        } else {
+          mod.$set.location = {
+            zip: mod.$set.location.zip
+          };
+        }
+      }
+    }
+  }))
 });
 
 var _gpa = new SimpleSchema({
@@ -320,10 +343,16 @@ var _metaFields = new SimpleSchema({
     "utm_medium": fields.string(o)
   }), optional: true},
   "match": {type: new SimpleSchema({
+    "skip": fields.bool(o),
+    "finished": fields.bool(o)
+  }), optional: true},
+  "resumeBot": {type: new SimpleSchema({
+    "finished": fields.bool(o)
+  }), optional: true},
+  "questionBot": {type: new SimpleSchema({
     "finished": fields.bool(o)
   }), optional: true}
 });
-
 CollegeProfileSchema = new SimpleSchema({
   // the only non-optional field
   "userId": {type: String, regEx: SimpleSchema.RegEx.Id},
@@ -433,5 +462,3 @@ collegeProfileCountAnsweredQuestions = function(collegeProfile) {
   countAnswers(clone);
   return total;
 }
-
-

@@ -5,6 +5,10 @@ Package.describe({
   git: "https://github.com/AdmitHub/admithub-common.git"
 });
 
+Npm.depends({
+  'zipcodes': '1.1.1'
+});
+
 Package.onUse(function(api) {
 
   api.use([
@@ -65,7 +69,7 @@ Package.onUse(function(api) {
   api.addFiles('client/css/pages/sign-in.import.styl', 'client');
   api.addFiles('client/css/pages/bot.import.styl', 'client');
   // end styles
-  
+
   api.addFiles('lib/_fields.js', ['client', 'server']);
   api.addFiles('lib/helpers.js', ['client', 'server']);
   api.addFiles('lib/ui.js', ['client']);
@@ -80,12 +84,14 @@ Package.onUse(function(api) {
   api.addFiles('collections/smsvalidations.js');
   api.addFiles('collections/sponsors.js');
   api.addFiles('collections/testimonials.js');
+  api.addFiles('collections/events.js');
+  api.addFiles('collections/posts.js');
 
   api.addFiles('public/icons/fonts/icons.eot');
   api.addFiles('public/icons/fonts/icons.svg');
   api.addFiles('public/icons/fonts/icons.ttf');
   api.addFiles('public/icons/fonts/icons.woff');
-  
+
   api.export([
     'fields',
     'slugify', 'unslugify',
@@ -96,6 +102,7 @@ Package.onUse(function(api) {
     'formatPhone',
 
     'UserSchema',
+    'CollegeProfileSchema',
     'CollegeOfficers',
     'Colleges',
     'Highschools',
@@ -105,8 +112,9 @@ Package.onUse(function(api) {
     'SmsValidations',
     'CollegesInMemory',
     'collegeProfileCountAnsweredQuestions',
-    'UserSchema',
     'Sponsors',
-    'Testimonials'
+    'Testimonials',
+    'Events',
+    'Posts'
   ]);
 });
