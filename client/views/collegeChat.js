@@ -136,16 +136,25 @@ Template.collegeChat.events({
 
 Template.collegeChatMessages.helpers({
   messages: function() {
-    if(!currentCollegeId || currentCollegeId === -1) {
+    if(!currentCollegeId.get() || currentCollegeId.get() === -1) {
       return [];
     }
 
-    var match = Matches.findOne({collegeId: currentCollegeId});
+    var match = Matches.findOne({collegeId: currentCollegeId.get()});
 
     if(!match || !match.messages) {
       return [];
     }
 
     return match.messages;
+  },
+  collegeLogo: function(collegeId) {
+    var college = Colleges.findOne({_id: currentCollegeId.get()});
+
+    if(!college || !college.schoolLogo) {
+      return "";
+    }
+
+    return college.schoolLogo;
   }
 });

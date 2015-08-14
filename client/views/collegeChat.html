@@ -29,10 +29,10 @@
             </div>
           {{/each}}
 
-        <div id="pg-college-chat-messages">
-          {{> collegeChatMessages}}
+          <div id="pg-college-chat-messages">
+            {{> collegeChatMessages}}
+          </div>
         </div>
-      </div>
       </div>
     </div>
   {{/if}}
@@ -40,6 +40,16 @@
 
 <template name="collegeChatMessages">
   {{#each messages}}
-    {{body}}<br>
+    <div class="pg-college-chat-messsage-item" data-sender="{{sender}}">
+      <img class="pg-college-chat-message-item-icon" src="{{collegeLogo}}">
+      <div class="pg-college-chat-message-item-body">{{body}}</div>
+    </div>
   {{/each}}
+
+  {{#if messages}}
+    <div id="pg-college-chat-message-input">
+      <textarea></textarea>
+      <button class="ui-btn">Send</button>
+    </div>
+  {{/if}}
 </template>

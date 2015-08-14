@@ -46,7 +46,7 @@ pg-college-chat-bar-width = 400px
   z-index 999
   transition left 0.5s
 
-  pg-college-chat-bar-header-height = 57px
+  pg-college-chat-bar-header-height = 58px
   #pg-college-chat-bar-header
     width 100%
     height pg-college-chat-bar-header-height
@@ -81,7 +81,7 @@ pg-college-chat-bar-width = 400px
       cursor pointer
 
     .pg-college-chat-bar-item
-      margin-top -20px
+      margin-top 20px
       display inline-block
       cursor pointer
 
@@ -107,13 +107,48 @@ pg-college-chat-bar-width = 400px
         margin-top -40px
         color black
 
+    .pg-college-chat-bar-item:first-of-type
+      margin-top -20px
+
   #pg-college-chat-messages
     width pg-college-chat-bar-width - pg-college-char-bar-colleges-width
     height 100%
     top pg-college-chat-bar-header-height
     right 0
+    padding 5px
     position absolute
     background white
+    color black
 
 #pg-college-chat-bar-area[data-active="true"]
   left calc(100% - 400px)
+
+.pg-college-chat-messsage-item
+  margin-top 10px
+  text-align left
+
+  .pg-college-chat-message-item-icon
+    width 30px
+    height 30px
+    padding 3px
+    display inline-block
+    vertical-align middle
+    border-radius 30px
+    border 2px solid lightgray
+
+  .pg-college-chat-message-item-body
+    width calc(100% - 35px)
+    padding 4px
+    display inline-block
+    vertical-align bottom
+    border-radius 5px
+    background #71BFAC
+    color white
+
+#pg-college-chat-message-input
+  height 78px
+  top calc(100% - 140px)
+  position fixed
+
+  button
+    width calc(100% - 15px)
