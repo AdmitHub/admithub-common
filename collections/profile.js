@@ -17,6 +17,7 @@ var _demographicsSchema = new SimpleSchema({
   "yearsOutsideUs": fields.number(o),
   "religion": fields.string(o),
   "firstGen": fields.bool(o),
+  "freshmanApplicant": fields.bool(o)
 });
 
 var _locationSchema = new SimpleSchema({
