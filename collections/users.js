@@ -10,9 +10,6 @@ UserSchema = new SimpleSchema({
       if (this.field('username').isSet) {
         return slugify(this.field('username').value);
       }
-      else if (this.field('_id').isSet) {
-        return slugify(this.field('_id').value);
-      }
     }
   },
   "emails": {
@@ -107,6 +104,13 @@ UserSchema = new SimpleSchema({
   },
   // Debugging
   "test": {type: Boolean, defaultValue: false}
+});
+
+Meteor.users.before.insert(function(userId, doc) {
+  if (!doc.slug) {
+    doc.slug = slugify(doc._id);
+  }
+  return doc;
 });
 
 Meteor.users.attachSchema(UserSchema);
