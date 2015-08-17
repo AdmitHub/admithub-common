@@ -1,55 +1,65 @@
 <template name="collegeChat">
-  {{#if currentUser}}
-    <div id="pg-college-chat">
-      <div id="pg-college-chat-bubble-area">
-        <img id="pg-college-chat-bubble" src="https://s3-us-west-2.amazonaws.com/admithub-partner-logos/circle+oli.png">
-        {{#if hasUnreadMessages}}
-          <div id="pg-college-chat-bubble-message-count">{{unreadMessageCount}}</div>
-        {{/if}}
-      </div>
+  <div id="college-chat">
 
-      <div id="pg-college-chat-bar-area">
-        <div id="pg-college-chat-bar-header">
-          <div id="pg-college-chat-bar-current-college">
-            {{currentCollegeName}}
-          </div>
-          <i class="icon icon-x"></i>
+    <div class="cc-icon" id="cc-trigger">
+      <img class="cc-icon-src" src="https://s3-us-west-2.amazonaws.com/admithub-partner-logos/circle+oli.png">
+      {{#if notZero totalMatchMessagesUnreadCount}}
+        <div class="cc-icon-unread">
+          {{totalMatchMessagesUnreadCount}}
+        </div>
+      {{/if}}
+    </div>
+
+    <div id="cc-main">
+      <div id="cc-main-header">
+        <div id="cc-main-header-title">
+          {{currentCollegeName}}
         </div>
 
-        <div id="pg-college-chat-bar-colleges">
-          {{#each matches}}
-            <div class="pg-college-chat-bar-item" data-college-id="{{collegeId}}">
-              <img src="{{collegeLogo collegeId}}">
-              {{#if collegeUnreads collegeId}}
-                <div id="pg-college-chat-bar-item-unread-count">{{collegeUnreads collegeId}}</div>
-              {{else}}
-                <div id="pg-college-chat-bar-item-unread-count" style="opacity: 0;"></div>
+        <i class="icon icon-x"></i>
+      </div>
+
+      <div id="cc-main-bar">
+        {{#each matchesWithMessages}}
+          <div class="cc-icon" data-college-id="{{collegeId}}">
+            <img class="cc-icon-src can-fallback" src="{{collegeLogo collegeId}}">
+            {{#if notZero matchMessagesUnreadCount}}
+              <div class="cc-icon-unread">
+                {{matchMessagesUnreadCount this}}
+              </div>
+            {{/if}}
+          </div>
+          <div class="cc-main-bar-college-name">{{collegeName collegeId}}</div>
+        {{/each}}
+      </div>
+
+      <div id="cc-main-chat">
+        {{#if currentCollegeMessages}}
+          {{#each currentCollegeMessages}}
+            <div class="cc-main-chat-message" data-sender="{{sender}}">
+              {{#if equal sender "college"}}
+                <img class="cc-main-chat-message-logo can-fallback" src="{{currentCollegeLogo}}">
               {{/if}}
-              <div id="pg-college-chat-bar-item-name">{{collegeName collegeId}}</div>
+
+              {{#if equal sender "student"}}
+                {{>avatar userId=user._id size="small" class="cc-main-chat-message-logo" shape="circle" }}
+              {{/if}}
+
+              {{#if equal sender "admithub"}}
+                <img class="cc-main-chat-message-logo" src="https://s3-us-west-2.amazonaws.com/admithub-partner-logos/owl+bot.jpg">
+              {{/if}}
+              <div class="cc-main-chat-message-body">{{body}}</div>
             </div>
           {{/each}}
 
-          <div id="pg-college-chat-messages">
-            {{> collegeChatMessages}}
+          <div id="cc-main-chat-send">
+            <div id="cc-main-chat-send-error"></div>
+            <textarea></textarea>
+            <button class="ui-btn">Send</button>
           </div>
-        </div>
+        {{/if}}
       </div>
     </div>
-  {{/if}}
-</template>
 
-<template name="collegeChatMessages">
-  {{#each messages}}
-    <div class="pg-college-chat-messsage-item" data-sender="{{sender}}">
-      <img class="pg-college-chat-message-item-icon" src="{{collegeLogo}}">
-      <div class="pg-college-chat-message-item-body">{{body}}</div>
-    </div>
-  {{/each}}
-
-  {{#if messages}}
-    <div id="pg-college-chat-message-input">
-      <textarea></textarea>
-      <button class="ui-btn">Send</button>
-    </div>
-  {{/if}}
+  </div>
 </template>

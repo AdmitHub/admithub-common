@@ -1,154 +1,141 @@
-#pg-college-chat
-  width 100%
-  height 100%
-  z-index 999
+cc-icon-size = 50px
+cc-icon-unread-size = 30px
+.cc-icon
+  width cc-icon-size
+  height cc-icon-size
+  border-radius cc-icon-size
+  border 3px solid gray
+  cursor pointer
 
-  #pg-college-chat-bubble-area
-    width 50px
-    height 50px
-    top calc(100% - 60px)
-    left calc(100% - 60px)
-    position fixed
-    display block
-    z-index 999
-    cursor pointer
-
-  #pg-college-chat-bubble
+  .cc-icon-src
+    width cc-icon-size - 5px
+    height cc-icon-size - 5px
     padding 5px
-    border-radius 50px
-    border 3px solid lightgray
-    box-shadow 0px 0px 10px 1px lightgray
+    display inline-block
+    border-radius cc-icon-size
     background white
 
-  #pg-college-chat-bubble-message-count
-    width 30px
-    height 30px
-    line-height 30px
-    top -8px
-    left -8px
-    position absolute
-    border-radius 30px
+  .cc-icon-unread
+    width cc-icon-unread-size
+    height cc-icon-unread-size
+    line-height cc-icon-unread-size + 3px
+    top "calc(-100% - %s)" % (cc-icon-unread-size - 10px)
+    left -10px
+    border-radius cc-icon-unread-size
     background red
-    font-size 14px
+    position relative
     text-align center
-    font-weight bold
     color white
 
-pg-college-chat-bar-width = 400px
-
-#pg-college-chat-bar-area
-  width pg-college-chat-bar-width
-  height 100%
-  top 0
-  left 100%
+#cc-trigger
+  margin -10px
+  top "calc(100% - %s)" % cc-icon-size
+  left "calc(100% - %s)" % cc-icon-size
   position fixed
-  display block
   z-index 999
-  transition left 0.5s
+  box-shadow 0px 0px 10px 1px lightgray
 
-  pg-college-chat-bar-header-height = 58px
-  #pg-college-chat-bar-header
-    width 100%
-    height pg-college-chat-bar-header-height
-    line-height 70px
-    padding-right 20px
-    background gray
-    font-size 30px
-    text-align right
-    color white
+cc-main-width = 400px
+#cc-main
+  width cc-main-width
+  height calc(100% + 20px)
+  top 0
+  right -100%
+  transition right 1s
+  position fixed
+  z-index 1000
+  background white
 
-    i
-      cursor pointer
+  cc-main-bar-width = 80px
+  #cc-main-bar
+    width cc-main-bar-width
+    height 100%
+    padding-top 1px
+    background lightgray
 
-    #pg-college-chat-bar-current-college
-      width calc(100% - 30px)
-      height pg-college-chat-bar-header-height
-      line-height pg-college-chat-bar-header-height
-      display inline-block
-      float left
+    .cc-icon
+      margin auto
+      margin-top 20px
+
+    .cc-main-bar-college-name
       text-align center
 
-  pg-college-char-bar-colleges-width = 80px
-  #pg-college-chat-bar-colleges
-    width pg-college-char-bar-colleges-width
-    height 100%
-    padding-top 40px
-    background lightgray
-    text-align center
-    color white
+  cc-main-header-height = 58px
+  #cc-main-header
+    height cc-main-header-height
+    line-height cc-main-header-height
+    background gray
 
-    .pg-college-chat-bar-header .icon-x::before
-      cursor pointer
-
-    .pg-college-chat-bar-item
-      margin-top 20px
+    #cc-main-header-title
+      width calc(100% - 50px)
       display inline-block
+      text-align center
+      font-size 26px
+
+    .icon
+      height cc-main-header-height
+      line-height cc-main-header-height
+      padding-right 10px
+      font-size 30px
       cursor pointer
 
-      img
-        width 50px
-        height 50px
-        padding 5px
-        border-radius 30px
-        background white
-
-      #pg-college-chat-bar-item-unread-count
-        width 30px
-        height 30px
-        line-height 35px
-        position relative
-        top -70px
-        left 5px
-        border-radius 30px
-        background red
-        text-align center
-
-      #pg-college-chat-bar-item-name
-        margin-top -40px
-        color black
-
-    .pg-college-chat-bar-item:first-of-type
-      margin-top -20px
-
-  #pg-college-chat-messages
-    width pg-college-chat-bar-width - pg-college-char-bar-colleges-width
+  #cc-main-chat
+    width cc-main-width - cc-main-bar-width
     height 100%
-    top pg-college-chat-bar-header-height
+    padding 10px
+    top cc-main-header-height
     right 0
-    padding 5px
     position absolute
-    background white
-    color black
 
-#pg-college-chat-bar-area[data-active="true"]
-  left calc(100% - 400px)
+  .cc-main-chat-message
+    margin-top 10px
 
-.pg-college-chat-messsage-item
-  margin-top 10px
-  text-align left
+    cc-main-chat-message-logo-size = 30px
+    .cc-main-chat-message-logo
+      width cc-main-chat-message-logo-size
+      height cc-main-chat-message-logo-size
+      padding 1px
+      display inline-block
+      vertical-align top
+      border 2px solid gray
+      border-radius cc-main-chat-message-logo-size
 
-  .pg-college-chat-message-item-icon
-    width 30px
-    height 30px
-    padding 3px
-    display inline-block
-    vertical-align middle
-    border-radius 30px
-    border 2px solid lightgray
+    .cc-main-chat-message-body
+      width "calc(100% - %s)" % (cc-main-chat-message-logo-size + 10px)
+      padding 5px
+      display inline-block
+      border-radius 3px
+      border 2px solid #7FBAAC
+      background #99E0CF
 
-  .pg-college-chat-message-item-body
-    width calc(100% - 35px)
-    padding 4px
-    display inline-block
-    vertical-align bottom
-    border-radius 5px
-    background #71BFAC
-    color white
+  .cc-main-chat-message[data-sender="student"]
+    .cc-main-chat-message-logo
+      float right
 
-#pg-college-chat-message-input
-  height 78px
-  top calc(100% - 140px)
-  position fixed
+    .cc-main-chat-message-body
+      background #9fb2ec
+      border-color #8695C4
 
-  button
-    width calc(100% - 15px)
+  #cc-main-chat-send
+    width 100%
+    padding-right 10px
+    bottom 85px
+    position absolute
+
+    #cc-main-chat-send-error
+      margin-bottom 10px
+      padding 5px
+      border-radius 5px
+      background red
+      color white
+      opacity 0
+      transition opacity 0.2
+
+    textarea
+      width 100%
+
+    button
+      width 100%
+
+#cc-main[data-active="true"]
+  right 0

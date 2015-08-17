@@ -1,73 +1,64 @@
-var getMatchesWithUnreadMessages = function(extraQueryObj) {
-  var query = {
-    "userId": Meteor.userId(),
-    "messages": {
-      $elemMatch: {
-        "read": {$in: [false, undefined]},
-        "sender": {$in: ["college", "admithub"]}
+var helpers = {
+  notZero: function(value) {
+    return value !== 0;
+  },
+  equal: function(a, b) {
+    return a === b;
+  },
+  chatUser: function() {
+    if(Meteor.user()) {
+      return Meteor.user();
+    }
+
+    if(Session.get("user_id")) {
+      return Meteor.users().find(Session.get("user_id")).fetch();
+    }
+
+  },
+  matchesWithMessages: function() {
+    if(helpers.chatUser()) {
+      return Matches.find({userId: helpers.chatUser()._id}, {collegeId: 1, messages: 1}).fetch();
+    }
+
+    return [];
+  },
+  matchMessagesUnreadCount: function(match) {
+    if(!match && this.messages) {
+      match = this;
+    }
+
+    if(!match || !match.messages || match.messages.length === 0) {
+      return 0;
+    }
+
+    var count = 0;
+
+    for(var i in match.messages) {
+      var message = match.messages[i];
+
+      if(message.sender === "student") {
+        count = 0;
+      } else if(!message.read){
+        count++;
       }
     }
-  };
 
-  if(extraQueryObj) {
-    query = _.extend(extraQueryObj, query);
-  }
-
-  return Matches.find(query);
-};
-
-var getMatchUnreadMessagesCount = function(match) {
-  if(!match || !match.messages || match.messages.length === 0) {
-    return 0;
-  }
-
-  var count = 0;
-
-  for(var message in match.messages) {
-    count += !message.read ? 1 : 0;
-  }
-
-  return count;
-};
-
-var getMatchesUnreadMessagesCount = function() {
-  var matchesWithUnreadMessagesCursor = getMatchesWithUnreadMessages();
-
-  if(matchesWithUnreadMessagesCursor.count() === 0) {
-    return 0;
-  }
-
-  var matchesWithUnreadMessages = matchesWithUnreadMessagesCursor.fetch();
-
-  var count = 0;
-
-  for(var i = 0; i < matchesWithUnreadMessages.length; i++) {
-    var match = matchesWithUnreadMessages[i];
-    count += getMatchUnreadMessagesCount(match);
-  }
-
-  return count;
-};
-
-var currentCollegeId;
-Template.collegeChat.created = function() {
-  currentCollegeId = new ReactiveVar(-1);
-};
-
-Template.collegeChat.helpers({
-  hasUnreadMessages: function() {
-    return getMatchesUnreadMessagesCount() > 0;
+    return count;
   },
-  unreadMessageCount: function() {
-    var count = getMatchesUnreadMessagesCount();
+  totalMatchMessagesUnreadCount: function() {
+    var matches = helpers.matchesWithMessages();
 
-    return count > 99 ? "99+" : count;
-  },
-  matches: function() {
-    return  Matches.find({userId: Meteor.userId()}).fetch();
+    var count = 0;
+
+    for(var i in matches) {
+      var match = matches[i];
+      count += helpers.matchMessagesUnreadCount(match);
+    }
+
+    return count;
   },
   collegeLogo: function(collegeId) {
-    var college = Colleges.findOne({_id: collegeId});
+    var college = Colleges.findOne(collegeId);
 
     if(!college || !college.schoolLogo) {
       return "";
@@ -76,85 +67,83 @@ Template.collegeChat.helpers({
     return college.schoolLogo;
   },
   collegeName: function(collegeId) {
-    var college = Colleges.findOne({_id: collegeId});
-
-    if(!college || !college.name) {
-      return "Unknown";
+    if(!collegeId || collegeId === -1) {
+      return "Select a college chat";
     }
 
-    return college.name;
+    var college = Colleges.findOne(collegeId);
+
+    return !college || !college.name ? "Unknown college" : college.name;
   },
-  collegeUnreads: function(collegeId) {
-    var collegeMatchCursor = getMatchesWithUnreadMessages({
-      collegeId: collegeId
-    });
-
-    if(!collegeMatchCursor || collegeMatchCursor.count() === 0) {
-      return undefined;
-    }
-
-    var collegeMatch = collegeMatchCursor.fetch()[0];
-
-    if(!collegeMatch || !collegeMatch.messages || collegeMatch.messages.length === 0) {
-      return undefined;
-    }
-
-    var count = getMatchUnreadMessagesCount(collegeMatch);
-
-    if(count === 0) {
-      return undefined;
-    }
-
-    return count > 99 ? "99+" : count;
+  currentCollegeLogo: function() {
+    return helpers.collegeLogo(currentCollegeId.get());
   },
   currentCollegeName: function() {
-    if(!currentCollegeId || currentCollegeId.get() === -1) {
-      return "";
-    }
-
-    var college = Colleges.findOne({_id: currentCollegeId.get()});
-
-    if(!college || !college.name) {
-      return "Unknown college";
-    }
-
-    return college.name;
-  }
-});
-
-Template.collegeChat.events({
-  "click #pg-college-chat-bubble-area": function() {
-    document.querySelector("#pg-college-chat-bar-area").setAttribute("data-active", "true");
+    return helpers.collegeName(currentCollegeId.get());
   },
-  "click #pg-college-chat-bar-header .icon-x": function() {
-    document.querySelector("#pg-college-chat-bar-area").setAttribute("data-active", "false");
-  },
-  "click .pg-college-chat-bar-item": function(event) {
-    currentCollegeId.set($(event.currentTarget).attr("data-college-id"));
-  }
-});
-
-Template.collegeChatMessages.helpers({
-  messages: function() {
-    if(!currentCollegeId.get() || currentCollegeId.get() === -1) {
+  currentCollegeMessages: function() {
+    if(currentCollegeId.get() === -1) {
       return [];
     }
 
     var match = Matches.findOne({collegeId: currentCollegeId.get()});
 
-    if(!match || !match.messages) {
+    if(!match || !match.messages || match.messages.length === 0) {
       return [];
     }
 
-    return match.messages;
-  },
-  collegeLogo: function(collegeId) {
-    var college = Colleges.findOne({_id: currentCollegeId.get()});
+    console.log(match.messages);
 
-    if(!college || !college.schoolLogo) {
-      return "";
+    return match.messages;
+  }
+};
+
+var currentCollegeId;
+Template.collegeChat.created = function() {
+  currentCollegeId = new ReactiveVar(-1);
+};
+
+Template.collegeChat.helpers(helpers);
+
+Template.collegeChat.events({
+  "error .can-fallback": function(event) {
+    $(event.currentTarget).attr("src", "https://s3-us-west-2.amazonaws.com/admithub-partner-logos/varsity+owl.jpg");
+  },
+  "click #cc-main-bar .cc-icon": function(event) {
+    currentCollegeId.set(event.currentTarget.getAttribute("data-college-id"));
+  },
+  "click #cc-trigger": function() {
+    $("#cc-main").attr("data-active", "true");
+  },
+  "click #cc-main-header .icon-x": function() {
+    $("#cc-main").attr("data-active", "false");
+  },
+  "click #cc-main-chat-send button": function() {
+    var body = $("#cc-main-chat-send textarea").val();
+
+    var match = Matches.findOne({collegeId: currentCollegeId.get()});
+    var errorArea = $("#cc-main-chat-send-error");
+
+    if(!match) {
+      errorArea.text("Failed to send message: Internal error");
+      errorArea.css({
+        opacity: 1
+      });
+      console.error("Can not find college match id");
+      return;
+    } else {
+      errorArea.css({
+        opacity: 0
+      });
     }
 
-    return college.schoolLogo;
+    if(body && body.length !== 0) {
+      Meteor.call("sendMatchMessage", match._id, body);
+    } else {
+      errorArea.text("Message can not be empty");
+      errorArea.css({
+        opacity: 0
+      });
+    }
   }
 });
