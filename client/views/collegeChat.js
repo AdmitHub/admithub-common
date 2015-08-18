@@ -111,6 +111,7 @@ Template.collegeChat.events({
   },
   "click #cc-main-bar .cc-icon": function(event) {
     currentCollegeId.set(event.currentTarget.getAttribute("data-college-id"));
+    Meteor.call("markMatchMessagesRead", currentCollegeId.get());
   },
   "click #cc-trigger": function() {
     $("#cc-main").attr("data-active", "true");
@@ -139,6 +140,7 @@ Template.collegeChat.events({
 
     if(body && body.length !== 0) {
       Meteor.call("sendMatchMessage", match._id, body);
+      $("#cc-main-chat-send textarea").val("");
     } else {
       errorArea.text("Message can not be empty");
       errorArea.css({

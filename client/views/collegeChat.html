@@ -35,22 +35,24 @@
 
       <div id="cc-main-chat">
         {{#if currentCollegeMessages}}
-          {{#each currentCollegeMessages}}
-            <div class="cc-main-chat-message" data-sender="{{sender}}">
-              {{#if equal sender "college"}}
-                <img class="cc-main-chat-message-logo can-fallback" src="{{currentCollegeLogo}}">
-              {{/if}}
+          <div id="cc-main-chat-messages">
+            {{#each currentCollegeMessages}}
+              <div class="cc-main-chat-message" data-sender="{{sender}}">
+                {{#if equal sender "college"}}
+                  <img class="cc-main-chat-message-logo can-fallback" src="{{currentCollegeLogo}}">
+                {{/if}}
 
-              {{#if equal sender "student"}}
-                {{>avatar userId=user._id size="small" class="cc-main-chat-message-logo" shape="circle" }}
-              {{/if}}
+                {{#if equal sender "student"}}
+                  {{>avatar userId=chatUser._id size="small" class="cc-main-chat-message-logo" shape="circle" }}
+                {{/if}}
 
-              {{#if equal sender "admithub"}}
-                <img class="cc-main-chat-message-logo" src="https://s3-us-west-2.amazonaws.com/admithub-partner-logos/owl+bot.jpg">
-              {{/if}}
-              <div class="cc-main-chat-message-body">{{body}}</div>
-            </div>
-          {{/each}}
+                {{#if equal sender "admithub"}}
+                  <img class="cc-main-chat-message-logo" src="https://s3-us-west-2.amazonaws.com/admithub-partner-logos/owl+bot.jpg">
+                {{/if}}
+                <div class="cc-main-chat-message-body">{{body}}</div>
+              </div>
+            {{/each}}
+          </div>
 
           <div id="cc-main-chat-send">
             <div id="cc-main-chat-send-error"></div>
@@ -60,6 +62,5 @@
         {{/if}}
       </div>
     </div>
-
   </div>
 </template>
