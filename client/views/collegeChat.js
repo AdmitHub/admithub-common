@@ -92,8 +92,6 @@ var helpers = {
       return [];
     }
 
-    console.log(match.messages);
-
     return match.messages;
   }
 };
@@ -144,7 +142,7 @@ Template.collegeChat.events({
     } else {
       errorArea.text("Message can not be empty");
       errorArea.css({
-        opacity: 0
+        opacity: 1
       });
     }
   }
