@@ -5,7 +5,8 @@ var smsValidationSchema = new SimpleSchema({
   verified: {type: Boolean},
   date: {type: Date},
   tries: {type: Number, min: 0},
-  triggerMessage: {type: String, optional: true}
+  triggerMessage: {type: String, optional: true},
+  userId: {type: String, optional: true}
 });
 SmsValidations = new Mongo.Collection("smsvalidations");
 SmsValidations.attachSchema(smsValidationSchema);
@@ -31,7 +32,11 @@ SmsValidations.VERIFIED_PROMPT = _.template("Verified! Thanks.");
 //NOTE: I don't think the "explanation prompt" is being used right now...
 SmsValidations.EXPLANATION_PROMPT = _.template(
   "Hi I'm Oli. I'll ask you a questions and you answer.\n\nYou can send #skip to skip a question. Send #stop and I'll go away forever.\n\n"
-)
+);
+SmsValidations.ASSOCIATE_ACCOUNT = function(userId) {
+  var user = Meteor.users.findOne(userId);
+  return "Do you want to tie this phone number to the AdmitHub account associated with " + dotGet(user, "emails.0.address") + "?"
+};
 SmsValidations.methods = {
   cleanPhone: function(phone) {
     // strip off international prefix
@@ -51,14 +56,15 @@ SmsValidations.methods = {
     }
     return null;
   },
-  newValidation: function(phone, triggerMessage) {
+  newValidation: function(phone, triggerMessage, userId) {
     var insert = {
       phone: SmsValidations.methods.cleanPhone(phone),
       code: SmsValidations.methods.randomCode(),
       verified: false,
       date: new Date(),
       tries: 0,
-      triggerMessage: triggerMessage
+      triggerMessage: triggerMessage,
+      userId: userId
     };
     insert._id = SmsValidations.insert(insert);
     return insert;
@@ -115,3 +121,9 @@ SmsValidations.methods = {
     return SmsValidations.EXPLANATION_PROMPT();
   }
 };
+SmsValidations.askToAssociate = function(phone, userId) {
+  SmsValidations.methods.newValidation(phone, undefined, userId);
+  SMSLoadBalancer.sendSMS("+1"+phone,
+                          SmsValidations.ASSOCIATE_ACCOUNT(userId),
+                          undefined, "oli");
+}
