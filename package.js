@@ -113,7 +113,7 @@ Package.onUse(function(api) {
     'collegeProfileCountAnsweredQuestions',
     'Sponsors',
     'Testimonials',
-    'Leads'
+    'Leads',
     'Events',
     'Posts'
   ]);
