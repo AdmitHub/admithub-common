@@ -106,6 +106,7 @@ UserSchema = new SimpleSchema({
       return {};
     })
   },
+  "sharing": {type: Boolean, optional: true},
   // Debugging
   "test": {type: Boolean, defaultValue: false}
 });
