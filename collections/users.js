@@ -44,6 +44,8 @@ UserSchema = new SimpleSchema({
   },
   "profile.phone": {
     type: String,
+    min: 10,
+    max: 10,
     autoValue: function() {
       if (this.isSet) {
         // Cleaning for phone values. This only gets called for
@@ -53,6 +55,10 @@ UserSchema = new SimpleSchema({
       }
       return this.value;
     },
+    optional: true
+  },
+  "profile.phoneVerified": {
+    type: Boolean,
     optional: true
   },
   "profile.canText": {
@@ -71,14 +77,14 @@ UserSchema = new SimpleSchema({
   "services": {type: Object, blackbox: true, optional: true},
   "roles": {type: Object, blackbox: true, optional: true},
   "referralCode": {
-    type: String, 
+    type: String,
     autoValue: fields.insertOnlyValue(function() {
       return Meteor.uuid();
     })
   },
   "referralCredits": {type: [Object], optional: true},
   "referralCredits.$.sentTo": fields.id({optional: true}),
-  "referralCredits.$.referredBy": fields.id({optional: true}), 
+  "referralCredits.$.referredBy": fields.id({optional: true}),
   "referralCredits.$.value": {type: Number, optional: true},
   "referralCredits.$.spent": fields.id({optional: true}), // transaction ID
 
@@ -102,6 +108,13 @@ UserSchema = new SimpleSchema({
   },
   // Debugging
   "test": {type: Boolean, defaultValue: false}
+});
+
+Meteor.users.before.insert(function(userId, doc) {
+  if (!doc.slug) {
+    doc.slug = slugify(doc._id);
+  }
+  return doc;
 });
 
 Meteor.users.attachSchema(UserSchema);

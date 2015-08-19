@@ -4,7 +4,9 @@ var smsValidationSchema = new SimpleSchema({
   explained: {type: Boolean, defaultValue: false},
   verified: {type: Boolean},
   date: {type: Date},
-  tries: {type: Number, min: 0}
+  tries: {type: Number, min: 0},
+  triggerMessage: {type: String, optional: true},
+  userId: {type: String, optional: true}
 });
 SmsValidations = new Mongo.Collection("smsvalidations");
 SmsValidations.attachSchema(smsValidationSchema);
@@ -16,7 +18,7 @@ SmsValidations.UNVERIFIED_EXPIRATION = 1000*60*10; // 10 minutes
 // Number of attempts one can make to send a code back.
 SmsValidations.MAX_VERIFICATION_TRIES = 5;
 SmsValidations.INITIAL_PROMPT = _.template(
-  "Hi, I'm Oli, a free robot coach to help you get into college. " +
+  "Hi, I'm Oli, a free robot coach to help you apply to college. " +
   "To get started, reply with this code: <%= code %>.  (Standard messaging rates may apply.)"
 );
 SmsValidations.REPROMPT = _.template(
@@ -27,9 +29,14 @@ SmsValidations.EXPIRED_PROMPT = _.template(
   "Please text back this code: <%= code %>"
 );
 SmsValidations.VERIFIED_PROMPT = _.template("Verified! Thanks.");
+//NOTE: I don't think the "explanation prompt" is being used right now...
 SmsValidations.EXPLANATION_PROMPT = _.template(
   "Hi I'm Oli. I'll ask you a questions and you answer.\n\nYou can send #skip to skip a question. Send #stop and I'll go away forever.\n\n"
-)
+);
+SmsValidations.ASSOCIATE_ACCOUNT = function(userId) {
+  var user = Meteor.users.findOne(userId);
+  return "Do you want to tie this phone number to the AdmitHub account associated with " + dotGet(user, "emails.0.address") + "?"
+};
 SmsValidations.methods = {
   cleanPhone: function(phone) {
     // strip off international prefix
@@ -49,13 +56,15 @@ SmsValidations.methods = {
     }
     return null;
   },
-  newValidation: function(phone, verified) {
+  newValidation: function(phone, triggerMessage, userId) {
     var insert = {
       phone: SmsValidations.methods.cleanPhone(phone),
       code: SmsValidations.methods.randomCode(),
-      verified: !!verified,
+      verified: false,
       date: new Date(),
-      tries: 0
+      tries: 0,
+      triggerMessage: triggerMessage,
+      userId: userId
     };
     insert._id = SmsValidations.insert(insert);
     return insert;
@@ -112,3 +121,9 @@ SmsValidations.methods = {
     return SmsValidations.EXPLANATION_PROMPT();
   }
 };
+SmsValidations.askToAssociate = function(phone, userId) {
+  SmsValidations.methods.newValidation(phone, undefined, userId);
+  SMSLoadBalancer.sendSMS("+1"+phone,
+                          SmsValidations.ASSOCIATE_ACCOUNT(userId),
+                          undefined, "oli");
+}
