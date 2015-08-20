@@ -416,7 +416,8 @@ CollegeProfileSchema = new SimpleSchema({
   "contactable": fields.bool({optional: true}),
   "referralSource": fields.referral_source({optional: true}),
 
-  "description": fields.description({optional: true})
+  "description": fields.description({optional: true}),
+  "earlyStarter": fields.bool(o)
 });
 
 CollegeProfiles = new Mongo.Collection("collegeprofiles");
