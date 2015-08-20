@@ -74,7 +74,8 @@ var _oneHighSchool = new SimpleSchema({
   "classRank": fields.number({min: 1, optional: true}),
   "classRankType": fields.class_rank_type(o),
   "classRankRange": fields.class_rank_description(o),
-  "transcript": {type: _transcriptSchema, optional: true}
+  "transcript": {type: _transcriptSchema, optional: true},
+  "ceeb": fields.string(o)
 });
 
 var _highschoolSchema = new SimpleSchema({

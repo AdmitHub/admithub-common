@@ -87,6 +87,7 @@ Package.onUse(function(api) {
   api.addFiles('collections/leads.js');
   api.addFiles('collections/events.js');
   api.addFiles('collections/posts.js');
+  api.addFiles('collections/ceebCodes.js');
   api.addFiles('public/icons/fonts/icons.eot');
   api.addFiles('public/icons/fonts/icons.svg');
   api.addFiles('public/icons/fonts/icons.ttf');
@@ -115,6 +116,7 @@ Package.onUse(function(api) {
     'Testimonials',
     'Leads',
     'Events',
-    'Posts'
+    'Posts',
+    'CeebCodes'
   ]);
 });
