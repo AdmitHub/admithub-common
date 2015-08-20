@@ -74,8 +74,7 @@ var _oneHighSchool = new SimpleSchema({
   "classRank": fields.number({min: 1, optional: true}),
   "classRankType": fields.class_rank_type(o),
   "classRankRange": fields.class_rank_description(o),
-  "transcript": {type: _transcriptSchema, optional: true},
-  "graduatedYear": fields.graduated_year(o)
+  "transcript": {type: _transcriptSchema, optional: true}
 });
 
 var _highschoolSchema = new SimpleSchema({
