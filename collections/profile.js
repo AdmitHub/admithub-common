@@ -18,6 +18,8 @@ var _demographicsSchema = new SimpleSchema({
   "religion": fields.string(o),
   "firstGen": fields.bool(o),
   "freshmanApplicant": fields.bool(o),
+  "transfer": fields.bool(o),
+  "mostRecentCollege": fields.string(o),
   "emoji": fields.string(o)
 });
 
@@ -342,7 +344,8 @@ var _metaFields = new SimpleSchema({
     "evaluation": fields.string({allowedValues: ["Awesome", "Pretty good", "meh", "lame"], optional: true}),
     "evaluationRecommend": fields.string({max: 140, optional: true}),
     "podcastGuest": fields.bool(o),
-    "utm_medium": fields.string(o)
+    "utm_medium": fields.string(o),
+    "skip": fields.bool(o),
   }), optional: true},
   "match": {type: new SimpleSchema({
     "skip": fields.bool(o),
@@ -411,7 +414,10 @@ CollegeProfileSchema = new SimpleSchema({
   "modified": {type: Date, autoValue: function() { return new Date(); }},
   "created": fields.date(),
   "contactable": fields.bool({optional: true}),
-  "referralSource": fields.referral_source({optional: true})
+  "referralSource": fields.referral_source({optional: true}),
+
+  "description": fields.description({optional: true}),
+  "earlyStarter": fields.bool(o)
 });
 
 CollegeProfiles = new Mongo.Collection("collegeprofiles");

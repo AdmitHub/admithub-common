@@ -57,6 +57,10 @@ UserSchema = new SimpleSchema({
     },
     optional: true
   },
+  "profile.phoneVerified": {
+    type: Boolean,
+    optional: true
+  },
   "profile.canText": {
     type: Boolean,
     optional: true
@@ -102,6 +106,7 @@ UserSchema = new SimpleSchema({
       return {};
     })
   },
+  "sharing": {type: Boolean, optional: true},
   // Debugging
   "test": {type: Boolean, defaultValue: false}
 });
