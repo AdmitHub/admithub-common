@@ -20,6 +20,7 @@ UserSchema = new SimpleSchema({
   },
   "emails.$.address": {type: String, regEx: SimpleSchema.RegEx.Email},
   "emails.$.verified": {type: Boolean},
+  "emails.$.smsVerified": {type: Boolean, optional: true},
   "email_hash": {type: String, optional: true},
   "createdAt": fields.created_date(),
   "profile": {
@@ -55,10 +56,6 @@ UserSchema = new SimpleSchema({
       }
       return this.value;
     },
-    optional: true
-  },
-  "profile.phoneVerified": {
-    type: Boolean,
     optional: true
   },
   "profile.canText": {
