@@ -20,7 +20,7 @@ UserSchema = new SimpleSchema({
   },
   "emails.$.address": {type: String, regEx: SimpleSchema.RegEx.Email},
   "emails.$.verified": {type: Boolean},
-  "emails.$.smsVerified": {type: Boolean, optional: true},
+  "emails.$.smsVerifyCode": {type: String, optional: true},
   "email_hash": {type: String, optional: true},
   "createdAt": fields.created_date(),
   "profile": {
