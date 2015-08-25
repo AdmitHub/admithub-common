@@ -64,7 +64,8 @@ UserSchema = new SimpleSchema({
   },
   "profile.canText": {
     type: Boolean,
-    optional: true
+    optional: true,
+    defaultValue: true
   },
   "profile.tags": {
     type: [String],
@@ -122,7 +123,32 @@ Meteor.users.before.insert(function(userId, doc) {
 Meteor.users.before.update(function(userId, doc, fieldNames, modifier, options) {
   if (modifier && modifier.$set && modifier.$set["profile.phone"]) {
     modifier.$set.phonePending = true;
-    // send validation email
+    Meteor.defer(function() {
+      var user = Meteor.users.findOne({
+        "profile.phone": modifier.$set["profile.phone"],
+        "phonePending": {$ne: true}
+      });
+      if (user) {
+        var workflow = Workflows.push(user);
+        if (workflow) {
+          console.log('Ending workflow', "+1"+user.profile.phone, workflow.name, workflow.persona)
+          SMSLoadBalancer.endWorkflow("+1"+user.profile.phone, workflow.name, workflow.persona);
+        }
+      }
+      else {
+        user = Meteor.users.findOne({
+          "profile.phone": modifier.$set["profile.phone"],
+          "phonePending": true
+        });
+      }
+
+      var wf = new Workflows.EmailConfirmationBot;
+      wf.initialize(user);
+      SMSLoadBalancer.sendSMS("+1"+user.profile.phone,
+        wf.run().text.join(" "),
+        wf.name,
+        "oli");
+    });
   }
 });
 
