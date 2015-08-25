@@ -143,11 +143,21 @@ Meteor.users.before.update(function(userId, doc, fieldNames, modifier, options) 
       }
 
       var wf = new Workflows.EmailConfirmationBot;
-      wf.initialize(user);
-      SMSLoadBalancer.sendSMS("+1"+user.profile.phone,
-        wf.run().text.join(" "),
-        wf.name,
-        "oli");
+      if (!SmsValidations.methods.getValidation(user.profile.phone)) {
+        var validation = SmsValidations.methods.newValidation(user.profile.phone);
+        var message = SmsValidations.methods.prompt(validation);
+        SMSLoadBalancer.sendSMS("+1"+user.profile.phone,
+          message,
+          wf.name,
+          "oli");
+      }
+      else {
+        wf.initialize(user);
+        SMSLoadBalancer.sendSMS("+1"+user.profile.phone,
+          wf.run().text.join(" "),
+          wf.name,
+          "oli");
+      }
     });
   }
 });
