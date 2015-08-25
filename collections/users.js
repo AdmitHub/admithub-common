@@ -58,6 +58,10 @@ UserSchema = new SimpleSchema({
     },
     optional: true
   },
+  "phonePending": {
+    type: Boolean,
+    optional: true
+  },
   "profile.canText": {
     type: Boolean,
     optional: true
@@ -113,6 +117,13 @@ Meteor.users.before.insert(function(userId, doc) {
     doc.slug = slugify(doc._id);
   }
   return doc;
+});
+
+Meteor.users.before.update(function(userId, doc, fieldNames, modifier, options) {
+  if (modifier && modifier.$set && modifier.$set["profile.phone"]) {
+    modifier.$set.phonePending = true;
+    // send validation email
+  }
 });
 
 Meteor.users.attachSchema(UserSchema);

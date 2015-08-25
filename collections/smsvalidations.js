@@ -5,8 +5,7 @@ var smsValidationSchema = new SimpleSchema({
   verified: {type: Boolean},
   date: {type: Date},
   tries: {type: Number, min: 0},
-  triggerMessage: {type: String, optional: true},
-  userId: {type: String, optional: true}
+  triggerMessage: {type: String, optional: true}
 });
 SmsValidations = new Mongo.Collection("smsvalidations");
 SmsValidations.attachSchema(smsValidationSchema);
@@ -36,10 +35,6 @@ SmsValidations.EXPLANATION_PROMPT = _.template(
 SmsValidations.EMAIL_PROMPT = _.template(
   "Hi, Oli from AdmitHub here.\n\nTo associate this email address with the phone number, <%= phone %>, text back this code: <%= code %>"
 );
-SmsValidations.ASSOCIATE_ACCOUNT = function(userId) {
-  var user = Meteor.users.findOne(userId);
-  return "Do you want to tie this phone number to the AdmitHub account associated with " + dotGet(user, "emails.0.address") + "?"
-};
 SmsValidations.methods = {
   cleanPhone: function(phone) {
     // strip off international prefix
@@ -59,15 +54,14 @@ SmsValidations.methods = {
     }
     return null;
   },
-  newValidation: function(phone, triggerMessage, userId) {
+  newValidation: function(phone, triggerMessage) {
     var insert = {
       phone: SmsValidations.methods.cleanPhone(phone),
       code: SmsValidations.methods.randomCode(),
       verified: false,
       date: new Date(),
       tries: 0,
-      triggerMessage: triggerMessage,
-      userId: userId
+      triggerMessage: triggerMessage
     };
     insert._id = SmsValidations.insert(insert);
     return insert;
