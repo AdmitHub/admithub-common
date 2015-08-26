@@ -15,16 +15,16 @@ CeebCodes.attachSchema(new SimpleSchema({
 }));
 
 CeebCodes.findCeebCode = function(city, state, highschool) {
-  // return CeebCodes.findOne({
-  //   $text: {
-  //     $search: [state, city, highschool].join(" ")
-  //   }
-  // }, {
-  //   fields: {
-  //     score: {$meta: "textScore"}
-  //   },
-  //   sort: {
-  //     score: {$meta: "textScore"}
-  //   }
-  // });
+  return CeebCodes.findOne({
+    $text: {
+      $search: [state, city, highschool].join(" ")
+    }
+  }, {
+    fields: {
+      score: {$meta: "textScore"}
+    },
+    sort: {
+      score: {$meta: "textScore"}
+    }
+  });
 };
