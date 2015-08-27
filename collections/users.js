@@ -20,6 +20,7 @@ UserSchema = new SimpleSchema({
   },
   "emails.$.address": {type: String, regEx: SimpleSchema.RegEx.Email},
   "emails.$.verified": {type: Boolean},
+  "emails.$.smsVerifyCode": {type: String, optional: true},
   "email_hash": {type: String, optional: true},
   "createdAt": fields.created_date(),
   "profile": {
@@ -57,13 +58,14 @@ UserSchema = new SimpleSchema({
     },
     optional: true
   },
-  "profile.phoneVerified": {
+  "phonePending": {
     type: Boolean,
     optional: true
   },
   "profile.canText": {
     type: Boolean,
-    optional: true
+    optional: true,
+    defaultValue: true
   },
   "profile.tags": {
     type: [String],
@@ -116,6 +118,48 @@ Meteor.users.before.insert(function(userId, doc) {
     doc.slug = slugify(doc._id);
   }
   return doc;
+});
+
+Meteor.users.before.update(function(userId, doc, fieldNames, modifier, options) {
+  if (modifier && modifier.$set && modifier.$set["profile.phone"]) {
+    modifier.$set.phonePending = true;
+    Meteor.defer(function() {
+      var user = Meteor.users.findOne({
+        "profile.phone": modifier.$set["profile.phone"],
+        "phonePending": {$ne: true}
+      });
+      if (user) {
+        var workflow = Workflows.push(user);
+        if (workflow) {
+          console.log('Ending workflow', "+1"+user.profile.phone, workflow.name, workflow.persona)
+          SMSLoadBalancer.endWorkflow("+1"+user.profile.phone, workflow.name, workflow.persona);
+        }
+      }
+      else {
+        user = Meteor.users.findOne({
+          "profile.phone": modifier.$set["profile.phone"],
+          "phonePending": true
+        });
+      }
+
+      var wf = new Workflows.EmailConfirmationBot;
+      if (!SmsValidations.methods.getValidation(user.profile.phone)) {
+        var validation = SmsValidations.methods.newValidation(user.profile.phone);
+        var message = SmsValidations.methods.prompt(validation);
+        SMSLoadBalancer.sendSMS("+1"+user.profile.phone,
+          message,
+          wf.name,
+          "oli");
+      }
+      else {
+        wf.initialize(user);
+        SMSLoadBalancer.sendSMS("+1"+user.profile.phone,
+          wf.run().text.join(" "),
+          wf.name,
+          "oli");
+      }
+    });
+  }
 });
 
 Meteor.users.attachSchema(UserSchema);

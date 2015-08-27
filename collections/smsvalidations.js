@@ -5,8 +5,7 @@ var smsValidationSchema = new SimpleSchema({
   verified: {type: Boolean},
   date: {type: Date},
   tries: {type: Number, min: 0},
-  triggerMessage: {type: String, optional: true},
-  userId: {type: String, optional: true}
+  triggerMessage: {type: String, optional: true}
 });
 SmsValidations = new Mongo.Collection("smsvalidations");
 SmsValidations.attachSchema(smsValidationSchema);
@@ -33,10 +32,9 @@ SmsValidations.VERIFIED_PROMPT = _.template("Verified! Thanks.");
 SmsValidations.EXPLANATION_PROMPT = _.template(
   "Hi I'm Oli. I'll ask you a questions and you answer.\n\nYou can send #skip to skip a question. Send #stop and I'll go away forever.\n\n"
 );
-SmsValidations.ASSOCIATE_ACCOUNT = function(userId) {
-  var user = Meteor.users.findOne(userId);
-  return "Do you want to tie this phone number to the AdmitHub account associated with " + dotGet(user, "emails.0.address") + "?"
-};
+SmsValidations.EMAIL_PROMPT = _.template(
+  "Hi, Oli from AdmitHub here.\n\nTo associate this email address with the phone number, <%= phone %>, text back this code: <%= code %>"
+);
 SmsValidations.methods = {
   cleanPhone: function(phone) {
     // strip off international prefix
@@ -56,15 +54,14 @@ SmsValidations.methods = {
     }
     return null;
   },
-  newValidation: function(phone, triggerMessage, userId) {
+  newValidation: function(phone, triggerMessage) {
     var insert = {
       phone: SmsValidations.methods.cleanPhone(phone),
       code: SmsValidations.methods.randomCode(),
       verified: false,
       date: new Date(),
       tries: 0,
-      triggerMessage: triggerMessage,
-      userId: userId
+      triggerMessage: triggerMessage
     };
     insert._id = SmsValidations.insert(insert);
     return insert;
@@ -119,11 +116,21 @@ SmsValidations.methods = {
     }
     SmsValidations.update(smsValidation._id, {$set: {explained: true}});
     return SmsValidations.EXPLANATION_PROMPT();
+  },
+  sendEmailVerification: function(user, phone) {
+    var code = SmsValidations.methods.randomCode();
+    Meteor.users.update({
+      _id: user._id
+    }, {
+      $set: {
+        "emails.0.smsVerifyCode": code
+      }
+    });
+    Email.send({
+      to: dotGet(user, "emails.0.smsVerifyCode"),
+      from: "bot@admithub.com",
+      subject: "AdmitHub Phone Verification",
+      text: SmsValidations.EMAIL_PROMPT({phone: phone, code: code})
+    });
   }
 };
-SmsValidations.askToAssociate = function(phone, userId) {
-  SmsValidations.methods.newValidation(phone, undefined, userId);
-  SMSLoadBalancer.sendSMS("+1"+phone,
-                          SmsValidations.ASSOCIATE_ACCOUNT(userId),
-                          undefined, "oli");
-}
