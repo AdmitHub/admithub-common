@@ -88,6 +88,7 @@ Package.onUse(function(api) {
   api.addFiles('collections/events.js');
   api.addFiles('collections/posts.js');
   api.addFiles('collections/ceebCodes.js');
+  api.addFiles('collections/pendingEventReports.js');
   api.addFiles('public/icons/fonts/icons.eot');
   api.addFiles('public/icons/fonts/icons.svg');
   api.addFiles('public/icons/fonts/icons.ttf');
@@ -118,6 +119,7 @@ Package.onUse(function(api) {
     'Leads',
     'Events',
     'Posts',
-    'CeebCodes'
+    'CeebCodes',
+    'PendingEventReports'
   ]);
 });

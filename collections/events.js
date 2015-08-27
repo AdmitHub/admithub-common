@@ -6,7 +6,8 @@ Events.attachSchema(new SimpleSchema({
     type: String
   },
   location: {
-    type: String
+    type: String,
+    optional: true
   },
   start: {
     type: Date
