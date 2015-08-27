@@ -5,5 +5,8 @@ PendingEventReports.attachSchema(new SimpleSchema({
   },
   eventId: {
     type: String
+  },
+  createdAt: {
+    type: Date
   }
 }));
