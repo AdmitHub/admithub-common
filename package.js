@@ -102,6 +102,7 @@ Package.onUse(function(api) {
     'yesOrNo',
     'formatPhone',
     'UserSchema',
+    'CollegeSchema',
     'CollegeProfileSchema',
     'CollegeOfficers',
     'Colleges',
