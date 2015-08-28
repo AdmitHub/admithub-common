@@ -4,7 +4,7 @@
 var zipcodes = {};
 Meteor.startup(function() {
   if(Meteor.isServer) {
-    zipcodes = Meteor.npmRequire("zipcodes");
+    zipcodes = Npm.require("zipcodes");
   }
 });
 var o = {optional: true};
@@ -17,6 +17,10 @@ var _demographicsSchema = new SimpleSchema({
   "yearsOutsideUs": fields.number(o),
   "religion": fields.string(o),
   "firstGen": fields.bool(o),
+  "freshmanApplicant": fields.bool(o),
+  "transfer": fields.bool(o),
+  "mostRecentCollege": fields.string(o),
+  "emoji": fields.string(o)
 });
 
 var _locationSchema = new SimpleSchema({
@@ -70,7 +74,8 @@ var _oneHighSchool = new SimpleSchema({
   "classRank": fields.number({min: 1, optional: true}),
   "classRankType": fields.class_rank_type(o),
   "classRankRange": fields.class_rank_description(o),
-  "transcript": {type: _transcriptSchema, optional: true}
+  "transcript": {type: _transcriptSchema, optional: true},
+  "ceeb": fields.string(o)
 });
 
 var _highschoolSchema = new SimpleSchema({
@@ -294,6 +299,26 @@ var _preferenceSchema = new SimpleSchema({
     "any": fields.bool(o)
   }), optional: true},
 
+  "food": {type: new SimpleSchema({
+    "shitty": fields.bool(o),
+    "good": fields.bool(o),
+    "gourmet": fields.bool(o)
+  }), optional: true},
+
+  "fraternities": {type: new SimpleSchema({
+    "hate": fields.bool(o),
+    "whatever": fields.bool(o),
+    "love": fields.bool(o)
+  }), optional: true},
+
+  "nightLife": {type: new SimpleSchema({
+    "dorm": fields.bool(o),
+    "bigGame": fields.bool(o),
+    "party": fields.bool(o),
+    "show": fields.bool(o)
+  }), optional: true},
+
+  "car": fields.bool(o),
   "closeToHome": fields.yes_no_whatever(o), // within 50 miles
   "sameState": fields.yes_no_whatever(o),
 
@@ -320,32 +345,49 @@ var _metaFields = new SimpleSchema({
     "evaluation": fields.string({allowedValues: ["Awesome", "Pretty good", "meh", "lame"], optional: true}),
     "evaluationRecommend": fields.string({max: 140, optional: true}),
     "podcastGuest": fields.bool(o),
-    "utm_medium": fields.string(o)
+    "utm_medium": fields.string(o),
+    "skip": fields.bool(o),
   }), optional: true},
   "match": {type: new SimpleSchema({
     "skip": fields.bool(o),
     "finished": fields.bool(o)
   }), optional: true},
   "resumeBot": {type: new SimpleSchema({
+    "skip": fields.bool(o),
     "finished": fields.bool(o)
   }), optional: true},
   "questionBot": {type: new SimpleSchema({
+    "skip": fields.bool(o),
     "finished": fields.bool(o)
   }), optional: true}
 });
 CollegeProfileSchema = new SimpleSchema({
   // the only non-optional field
   "userId": {type: String, regEx: SimpleSchema.RegEx.Id},
+  "firstName": fields.name_part({
+    optional: true
+  }),
+  "lastName": fields.name_part({
+    optional: true
+  }),
   "name": fields.name_part({
     optional: true,
     autoValue: function() {
-      if (this.isSet) {
-        Meteor.users.update(this.userId, {
-          $set: {
-            "profile.name": this.value
-          }
-        });
+      var first = this.field('firstName').value || "";
+      var last = this.field('lastName').value || "";
+      var fullName = first + (first.length > 0 && last.length > 0 ? " " : "") + last;
+
+      if (fullName.length === 0) {
+        fullName = "Anonymous";
       }
+
+      Meteor.users.update(this.userId, {
+        $set: {
+          "profile.name": fullName
+        }
+      });
+
+      return fullName;
     }
   }),
   "headline": {type: String, max: 160, optional: true},
@@ -372,7 +414,11 @@ CollegeProfileSchema = new SimpleSchema({
 
   "modified": {type: Date, autoValue: function() { return new Date(); }},
   "created": fields.date(),
-  "contactable": fields.bool({optional: true})
+  "contactable": fields.bool({optional: true}),
+  "referralSource": fields.referral_source({optional: true}),
+
+  "description": fields.description({optional: true}),
+  "earlyStarter": fields.bool(o)
 });
 
 CollegeProfiles = new Mongo.Collection("collegeprofiles");

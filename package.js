@@ -90,9 +90,10 @@ Package.onUse(function(api) {
   api.addFiles('collections/smsvalidations.js');
   api.addFiles('collections/sponsors.js');
   api.addFiles('collections/testimonials.js');
+  api.addFiles('collections/leads.js');
   api.addFiles('collections/events.js');
   api.addFiles('collections/posts.js');
-
+  api.addFiles('collections/ceebCodes.js');
   api.addFiles('public/icons/fonts/icons.eot');
   api.addFiles('public/icons/fonts/icons.svg');
   api.addFiles('public/icons/fonts/icons.ttf');
@@ -106,7 +107,6 @@ Package.onUse(function(api) {
     'quoteRe',
     'yesOrNo',
     'formatPhone',
-
     'UserSchema',
     'CollegeProfileSchema',
     'CollegeOfficers',
@@ -120,7 +120,9 @@ Package.onUse(function(api) {
     'collegeProfileCountAnsweredQuestions',
     'Sponsors',
     'Testimonials',
+    'Leads',
     'Events',
-    'Posts'
+    'Posts',
+    'CeebCodes'
   ]);
 });

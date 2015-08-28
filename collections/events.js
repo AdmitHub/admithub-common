@@ -1,14 +1,5 @@
 Events = new Mongo.Collection("events");
 
-ParticipantSchema = new SimpleSchema({
-  collegeOfficerId: {
-    type: String
-  },
-  hashtag: {
-    type: String
-  }
-});
-
 Events.attachSchema(new SimpleSchema({
   // collegeID reference
   name: {
@@ -23,7 +14,7 @@ Events.attachSchema(new SimpleSchema({
   stop: {
     type: Date
   },
-  participants: {
-    type: [ParticipantSchema]
+  colleges: {
+    type: [String]
   }
 }));

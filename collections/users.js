@@ -20,6 +20,7 @@ UserSchema = new SimpleSchema({
   },
   "emails.$.address": {type: String, regEx: SimpleSchema.RegEx.Email},
   "emails.$.verified": {type: Boolean},
+  "emails.$.smsVerifyCode": {type: String, optional: true},
   "email_hash": {type: String, optional: true},
   "createdAt": fields.created_date(),
   "profile": {
@@ -102,8 +103,16 @@ UserSchema = new SimpleSchema({
       return {};
     })
   },
+  "sharing": {type: Boolean, optional: true},
   // Debugging
   "test": {type: Boolean, defaultValue: false}
+});
+
+Meteor.users.before.insert(function(userId, doc) {
+  if (!doc.slug) {
+    doc.slug = slugify(doc._id);
+  }
+  return doc;
 });
 
 Meteor.users.attachSchema(UserSchema);
