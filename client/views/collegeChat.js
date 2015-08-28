@@ -1,3 +1,5 @@
+Template.collegeChat.onCreated = function() {
+
 var Role = {
   STUDENT: 0,
   HIGHSCHOOL: 1,
@@ -6,3 +8,6 @@ var Role = {
 };
 
 console.log(check);
+
+
+};
