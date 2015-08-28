@@ -6,6 +6,7 @@ Matches.attachSchema({
   // Should only be set if messages is empty.
   "dismissed": {type: Boolean, defaultValue: false},
   "bot": {type: Boolean, defaultValue: false},
+  "eventId": {type: String, optional: true},
   "archived": {type: Date, optional: true},
   "messages": {type: [Object], optional: true},
   "messages.$.created": {
