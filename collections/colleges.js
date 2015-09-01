@@ -272,7 +272,7 @@ CollegesInMemory = {};
 Colleges.attachSchema(CollegeSchema);
 if (Meteor.isServer) {
   Meteor.startup(function() {
-    Colleges.find({}).forEach(function(college) {
+    Colleges.find({_distances: {$exists: true}}).forEach(function(college) {
       CollegesInMemory[college._id] = college;
     });
   });
