@@ -1,6 +1,6 @@
-Events = new Mongo.Collection("events");
+CollegeEvents = new Mongo.Collection("collegeevents");
 
-Events.attachSchema(new SimpleSchema({
+CollegeEvents.attachSchema(new SimpleSchema({
   // collegeID reference
   name: {
     type: String
