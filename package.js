@@ -42,10 +42,6 @@ Package.onUse(function(api) {
   api.addFiles('collections/posts.js');
   api.addFiles('collections/ceebCodes.js');
   api.addFiles('collections/pendingEventReports.js');
-  api.addFiles('public/icons/fonts/icons.eot');
-  api.addFiles('public/icons/fonts/icons.svg');
-  api.addFiles('public/icons/fonts/icons.ttf');
-  api.addFiles('public/icons/fonts/icons.woff');
 
   api.export([
     'fields',
