@@ -18,7 +18,8 @@ Matches.attachSchema({
     }
   },
   "messages.$.body": {type: String},
-  "messages.$.sender": {type: String, allowedValues: ["student", "college", "admithub"]}
+  "messages.$.sender": {type: String, allowedValues: ["student", "college", "admithub"]},
+  "messages.$.read": {type: Boolean, optional: true},
 });
 
 Matches.deny({
