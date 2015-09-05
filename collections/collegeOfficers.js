@@ -12,7 +12,8 @@ CollegeOfficers.attachSchema(new SimpleSchema({
     regEx: SimpleSchema.RegEx.Id, optional: true,
     autoform: { placeholder: "user _id" },
     custom: SimpleSchema.validators.uniqueArray
-  }
+  },
+  introExclamation: {type: String, optional: true}
 }));
 
 //
