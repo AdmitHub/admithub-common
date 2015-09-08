@@ -4,13 +4,13 @@ var _totalPercentSplit = new SimpleSchema({
 });
 
 var _aidMet = new SimpleSchema({
-  "applicants": {type: _totalPercentSplit},
-  "foundToHaveNeed": {type: _totalPercentSplit},
-  "receivedAid": {type: _totalPercentSplit},
-  "needFullyMet": {type: _totalPercentSplit},
+  "applicants": {type: _totalPercentSplit, optional: true},
+  "foundToHaveNeed": {type: _totalPercentSplit, optional: true},
+  "receivedAid": {type: _totalPercentSplit, optional: true},
+  "needFullyMet": {type: _totalPercentSplit, optional: true},
   "averagePercentOfNeedMet": fields.percent({optional: true}),
   "averageAward": {type: Number, decimal: true, optional: true},
-  "meritBasedGift": {type: Object},
+  "meritBasedGift": {type: Object, optional: true},
   "meritBasedGift.total": {type: Number, optional: true},
   "meritBasedGift.percent": fields.percent({optional: true}),
   "meritBasedGift.averageAward": {type: Number, decimal: true, optional: true}
@@ -37,7 +37,7 @@ var _specificCourseData = new SimpleSchema({
 
 var _testRange = new SimpleSchema({
   "average": {type: Number, decimal: true, optional: true},
-  "halfClassRange": {type: Object},
+  "halfClassRange": {type: Object, optional: true},
   "halfClassRange.low": {type: Number, decimal: true, optional: true},
   "halfClassRange.high": {type: Number, decimal: true, optional: true}
 });
@@ -65,15 +65,15 @@ CollegeSchema = new SimpleSchema({
   "gender": {type: String, allowedValues: ["Men", "Women", "coed"], optional: true},
   "population": {type: Number, decimal: true, optional: true},
   "linkedinLink": fields.url({optional: true}),
-  "hashtag": {type: String},
+  "hashtag": {type: String, optional: true},
 
-  "women": {type: _totalPercentSplit},
-  "men": {type: _totalPercentSplit},
+  "women": {type: _totalPercentSplit, optional: true},
+  "men": {type: _totalPercentSplit, optional: true},
 
   "military": {type: Boolean, defaultValue: false},
   "historicallyBlack": {type: Boolean, defaultValue: false},
 
-  "campusSetting": {type: Object},
+  "campusSetting": {type: Object, optional: true},
   "campusSetting.localPopulation": {type: Number, optional: true},
   "campusSetting.environment": {type: String, optional: true},
   "campusSetting.nearestMetropolitanArea": {type: String, optional: true},
@@ -85,14 +85,14 @@ CollegeSchema = new SimpleSchema({
   "campusSetting.nearestBusStation": {type: String, optional: true},
   "campusSetting.nearestTrainStation": {type: String, optional: true},
 
-  "campusSetting.housing": {type: Object},
+  "campusSetting.housing": {type: Object, optional: true},
   "campusSetting.housing.types": {type: [String], optional: true},
   "campusSetting.housing.freshmenGuarantee": {type: String, optional: true},
   "campusSetting.housing.studentsInCollegeHousing": {type: String, optional: true},
   "campusSetting.housing.percentOfStudentsCommuting": fields.percent({optional: true}),
   "campusSetting.housing.requirements": {type: String, optional: true},
 
-  "campusSetting.sports": {type: Object},
+  "campusSetting.sports": {type: Object, optional: true},
   "campusSetting.sports.athleticConferences": {type: String, optional: true},
   "campusSetting.sports.mascot": {type: String, optional: true},
   "campusSetting.sports.varsitySportsOffered": {type: Object, optional: true},
@@ -103,29 +103,29 @@ CollegeSchema = new SimpleSchema({
 
   "campusSetting.popularActivitiesAndOrganizations": {type: [String], optional: true},
 
-  "campusSetting.greekLife": {type: Object},
+  "campusSetting.greekLife": {type: Object, optional: true},
   "campusSetting.greekLife.percentofWomenInSororities": fields.percent({optional: true}),
   "campusSetting.greekLife.percentOfMenInFraternities": fields.percent({optional: true}),
 
   "campusSetting.ROTC": {type: String, optional: true},
 
-  "generalAdmissionsData": {type: Object},
+  "generalAdmissionsData": {type: Object, optional: true},
   "generalAdmissionsData.difficulty": {type: String, optional: true},
-  "generalAdmissionsData.acceptanceRate": {type: _totalPercentSplit},
+  "generalAdmissionsData.acceptanceRate": {type: _totalPercentSplit, optional: true},
   "generalAdmissionsData.earlyAction": {type: Boolean, optional: true},
   "generalAdmissionsData.earlyDecision": {type: Boolean, optional: true},
   "generalAdmissionsData.regularDeadline": {type: String, optional: true},
 
-  "generalAdmissionsData.SATMath": {type: _testRange},
-  "generalAdmissionsData.SATReading": {type: _testRange},
-  "generalAdmissionsData.SATWriting": {type: _testRange},
-  "generalAdmissionsData.SATComposite": {type: _testRange}, // calculated from others
-  "generalAdmissionsData.ACTComposite": {type: _testRange},
+  "generalAdmissionsData.SATMath": {type: _testRange, optional: true},
+  "generalAdmissionsData.SATReading": {type: _testRange, optional: true},
+  "generalAdmissionsData.SATWriting": {type: _testRange, optional: true},
+  "generalAdmissionsData.SATComposite": {type: _testRange, optional: true}, // calculated from others
+  "generalAdmissionsData.ACTComposite": {type: _testRange, optional: true},
 
-  "tuition": {type: Object},
+  "tuition": {type: Object, optional: true},
 
-  "tuition.costOfAttendance": {type: Object},
-  "tuition.costOfAttendance.totalCost": {type: Object},
+  "tuition.costOfAttendance": {type: Object, optional: true},
+  "tuition.costOfAttendance.totalCost": {type: Object, optional: true},
   "tuition.costOfAttendance.totalCost.general": {type: Number, optional: true},
   "tuition.costOfAttendance.totalCost.inState": {type: Number, optional: true},
   "tuition.costOfAttendance.totalCost.outOfState": {type: Number, optional: true},
@@ -139,17 +139,17 @@ CollegeSchema = new SimpleSchema({
   "tuition.costOfAttendance.otherExpenses": {type: Number, optional: true},
   "tuition.costOfAttendance.averageGraduateDebt": {type: Number, optional: true},
 
-  "tuition.financialAid": {type: Object},
+  "tuition.financialAid": {type: Object, optional: true},
   "tuition.financialAid.emailContact": fields.email({optional: true}),
   "tuition.financialAid.netPriceCalculator": fields.url({optional: true}),
   "tuition.financialAid.website": {type: String, optional: true},
   "tuition.financialAid.applicationDeadline": {type: String, optional: true},
   "tuition.financialAid.awardDate": {type: String, optional: true},
   "tuition.financialAid.FAFSACode": {type: String, optional: true},
-  "tuition.financialAid.freshmen": {type: _aidMet},
-  "tuition.financialAid.allUndergraduates": {type: _aidMet},
+  "tuition.financialAid.freshmen": {type: _aidMet, optional: true},
+  "tuition.financialAid.allUndergraduates": {type: _aidMet, optional: true},
 
-  "tuition.financialAid.borrowing": {type: Object},
+  "tuition.financialAid.borrowing": {type: Object, optional: true},
   "tuition.financialAid.borrowing.percentOfGraduatesWithLoans": fields.percent({optional: true}),
   "tuition.financialAid.borrowing.averageIndebtednessOfGraduates": {type: Number, decimal: true, optional: true},
 
@@ -157,7 +157,7 @@ CollegeSchema = new SimpleSchema({
   "tuition.roomAndBoard": {type: Number, decimal: true, optional: true},
   "tuition.averageGraduateDebt": {type: Number, decimal: true, optional: true},
 
-  "demographics": {type: [Object]},
+  "demographics": {type: [Object], optional: true},
   "demographics.$.race": {type: String, optional: true},
   "demographics.$.percentage": fields.percent({optional: true}),
 
@@ -197,28 +197,28 @@ CollegeSchema = new SimpleSchema({
   "calculatedAdmissionsData.SATMath.acceptanceRatePercent": fields.percent({optional: true}),
   "calculatedAdmissionsData.SATMath.scores": {type: _specificScoreData, optional: true},
 
-  "specificAdmissionsData": {type: Object},
-  "specificAdmissionsData.GPA": {type: _specificScoreData},
-  "specificAdmissionsData.SATWriting": {type: _specificScoreData},
-  "specificAdmissionsData.SATReading": {type: _specificScoreData},
-  "specificAdmissionsData.SATMath": {type: _specificScoreData},
-  "specificAdmissionsData.ACTComposite": {type: _specificScoreData},
+  "specificAdmissionsData": {type: Object, optional: true},
+  "specificAdmissionsData.GPA": {type: _specificScoreData, optional: true},
+  "specificAdmissionsData.SATWriting": {type: _specificScoreData, optional: true},
+  "specificAdmissionsData.SATReading": {type: _specificScoreData, optional: true},
+  "specificAdmissionsData.SATMath": {type: _specificScoreData, optional: true},
+  "specificAdmissionsData.ACTComposite": {type: _specificScoreData, optional: true},
 
-  "specificAdmissionsData.courses": {type: Object},
-  "specificAdmissionsData.courses.english": {type: _specificCourseData},
-  "specificAdmissionsData.courses.mathematics": {type: _specificCourseData},
-  "specificAdmissionsData.courses.science": {type: _specificCourseData},
-  "specificAdmissionsData.courses.foreignLanguage": {type: _specificCourseData},
-  "specificAdmissionsData.courses.socialStudies": {type: _specificCourseData},
-  "specificAdmissionsData.courses.history": {type: _specificCourseData},
-  "specificAdmissionsData.courses.electives": {type: _specificCourseData},
+  "specificAdmissionsData.courses": {type: Object, optional: true},
+  "specificAdmissionsData.courses.english": {type: _specificCourseData, optional: true},
+  "specificAdmissionsData.courses.mathematics": {type: _specificCourseData, optional: true},
+  "specificAdmissionsData.courses.science": {type: _specificCourseData, optional: true},
+  "specificAdmissionsData.courses.foreignLanguage": {type: _specificCourseData, optional: true},
+  "specificAdmissionsData.courses.socialStudies": {type: _specificCourseData, optional: true},
+  "specificAdmissionsData.courses.history": {type: _specificCourseData, optional: true},
+  "specificAdmissionsData.courses.electives": {type: _specificCourseData, optional: true},
 
-  "specificAdmissionsData.testing": {type: Object},
-  "specificAdmissionsData.testing.SATorACT": {type: Object},
+  "specificAdmissionsData.testing": {type: Object, optional: true},
+  "specificAdmissionsData.testing.SATorACT": {type: Object, optional: true},
   "specificAdmissionsData.testing.SATorACT.required": {type: Boolean, optional: true},
   "specificAdmissionsData.testing.SATorACT.scoresMustBeReceivedBy": {type: String, optional: true},
 
-  "specificAdmissionsData.applying": {type: Object},
+  "specificAdmissionsData.applying": {type: Object, optional: true},
   "specificAdmissionsData.applying.address": {type: String, optional: true},
   "specificAdmissionsData.applying.phone": {type: String, optional: true},
   "specificAdmissionsData.applying.fax": {type: String, optional: true},
@@ -227,23 +227,23 @@ CollegeSchema = new SimpleSchema({
   "specificAdmissionsData.applying.feeWaiverAvailable": {type: String, optional: true},
   "specificAdmissionsData.applying.deferOption": {type: String, optional: true},
 
-  "specificAdmissionsData.applying.earlyDecision": {type: Object},
+  "specificAdmissionsData.applying.earlyDecision": {type: Object, optional: true},
   "specificAdmissionsData.applying.earlyDecision.offered": {type: Boolean, optional: true},
   "specificAdmissionsData.applying.earlyDecision.deadline": {type: String, optional: true},
   "specificAdmissionsData.applying.earlyDecision.notification": {type: String, optional: true},
 
-  "specificAdmissionsData.applying.earlyAction": {type: Object},
+  "specificAdmissionsData.applying.earlyAction": {type: Object, optional: true},
   "specificAdmissionsData.applying.earlyAction.offered": {type: Boolean, optional: true},
   "specificAdmissionsData.applying.earlyAction.deadline": {type: String, optional: true},
   "specificAdmissionsData.applying.earlyAction.notification": {type: String, optional: true},
 
-  "specificAdmissionsData.applying.commonApplication": {type: Object},
+  "specificAdmissionsData.applying.commonApplication": {type: Object, optional: true},
   "specificAdmissionsData.applying.commonApplication.accepted": {type: Boolean, optional: true},
   "specificAdmissionsData.applying.commonApplication.supplementRequired": {type: Boolean, optional: true},
 
   "specificAdmissionsData.applying.universalApp": {type: Boolean, optional: true},
 
-  "specificAdmissionsData.applying.requirements": {type: Object},
+  "specificAdmissionsData.applying.requirements": {type: Object, optional: true},
   "specificAdmissionsData.applying.requirements.interview": {type: String, optional: true},
   "specificAdmissionsData.applying.requirements.personalStatement": {type: String, optional: true},
   "specificAdmissionsData.applying.requirements.numberOfRecLettersRequired": {type: Number, decimal: true, optional: true},
