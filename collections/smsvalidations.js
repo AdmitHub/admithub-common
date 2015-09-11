@@ -41,9 +41,7 @@ SmsValidations.methods = {
     return phone.replace(/^\+1/, '').replace(/[^\d]/g, '');
   },
   randomCode: function() {
-    // TODO: replace with random word?
-    var crypto = Meteor.npmRequire('crypto');
-    return  crypto.randomBytes(3).toString('hex').toLowerCase();
+    return (""+Math.random()).substring(2,6);
   },
   getValidation: function(phone) {
     var arr = SmsValidations.find({
