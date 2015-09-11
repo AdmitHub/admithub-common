@@ -5,10 +5,6 @@ Events.attachSchema(new SimpleSchema({
   name: {
     type: String
   },
-  location: {
-    type: String,
-    optional: true
-  },
   start: {
     type: Date,
     autoform: {type: "datetime"}
@@ -16,8 +12,5 @@ Events.attachSchema(new SimpleSchema({
   stop: {
     type: Date,
     autoform: {type: "datetime"}
-  },
-  colleges: {
-    type: [String]
   }
 }));
