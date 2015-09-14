@@ -85,7 +85,7 @@ Package.onUse(function(api) {
   api.addFiles('collections/sponsors.js');
   api.addFiles('collections/testimonials.js');
   api.addFiles('collections/leads.js');
-  api.addFiles('collections/events.js');
+  api.addFiles('collections/collegeevents.js');
   api.addFiles('collections/posts.js');
   api.addFiles('collections/ceebCodes.js');
   api.addFiles('collections/pendingEventReports.js');
@@ -117,7 +117,7 @@ Package.onUse(function(api) {
     'Sponsors',
     'Testimonials',
     'Leads',
-    'Events',
+    'CollegeEvents',
     'Posts',
     'CeebCodes',
     'PendingEventReports'
