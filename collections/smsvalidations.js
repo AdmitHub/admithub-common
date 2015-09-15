@@ -20,6 +20,10 @@ SmsValidations.INITIAL_PROMPT = _.template(
   "Hi, I'm Oli, a free robot coach to help you apply to college. " +
   "To get started, reply with this code: <%= code %>.  (Standard messaging rates may apply.)"
 );
+SmsValidations.STOP_PROMPT = _.template(
+  "We need to verify that we're talking to the right person first. " +
+  "Please text back this code: <%= code %>."
+);
 SmsValidations.REPROMPT = _.template(
   "Sorry, that wasn't quite right. Please text back this code: <%= code %>"
 );
@@ -90,6 +94,9 @@ SmsValidations.methods = {
   },
   markValid: function(smsValidation) {
     SmsValidations.update(smsValidation._id, {$set: {verified: true, date: new Date()}});
+  },
+  stopPrompt: function(smsValidation) {
+    return SmsValidations.STOP_PROMPT({code: smsValidation.code});
   },
   prompt: function(smsValidation) {
     return SmsValidations.INITIAL_PROMPT({code: smsValidation.code});
