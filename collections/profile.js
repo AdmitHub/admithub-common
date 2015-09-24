@@ -29,23 +29,25 @@ var _locationSchema = new SimpleSchema({
   "city": fields.string(o),
   "state": fields.state(o),
   "zip": fields.zip_code(_.extend(o, {
-    autoValue: function(mod) {
-      if(mod.$set && mod.$set.location && mod.$set.location.zip && this.value !== mod.$set.location.zip) {
-        var zipcodeLookup = zipcodes.lookup(mod.$set.location.zip);
+      autoValue: function(mod) {
+        if (Meteor.isServer) {
+          if(mod.$set && mod.$set.location && mod.$set.location.zip && this.value !== mod.$set.location.zip) {
+            var zipcodeLookup = zipcodes.lookup(mod.$set.location.zip);
 
-        if(zipcodeLookup !== undefined) {
-          mod.$set.location = {
-            city: zipcodeLookup.city,
-            state: zipcodeLookup.state,
-            zip: zipcodeLookup.zip
-          };
-        } else {
-          mod.$set.location = {
-            zip: mod.$set.location.zip
-          };
+            if(zipcodeLookup !== undefined) {
+              mod.$set.location = {
+                city: zipcodeLookup.city,
+                state: zipcodeLookup.state,
+                zip: zipcodeLookup.zip
+              };
+            } else {
+              mod.$set.location = {
+                zip: mod.$set.location.zip
+              };
+            }
+          }
         }
       }
-    }
   }))
 });
 
