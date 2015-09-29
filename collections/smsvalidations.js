@@ -132,7 +132,7 @@ SmsValidations.methods = {
       }
     });
     Email.send({
-      to: dotGet(user, "emails.0.smsVerifyCode"),
+      to: dotGet(user, "emails.0.address"),
       from: "bot@admithub.com",
       subject: "AdmitHub Phone Verification",
       text: SmsValidations.EMAIL_PROMPT({phone: phone, code: code})
