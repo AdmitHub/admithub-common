@@ -374,24 +374,7 @@ CollegeProfileSchema = new SimpleSchema({
     optional: true
   }),
   "name": fields.name_part({
-    optional: true,
-    autoValue: function() {
-      var first = this.field('firstName').value || "";
-      var last = this.field('lastName').value || "";
-      var fullName = first + (first.length > 0 && last.length > 0 ? " " : "") + last;
-
-      if (fullName.length === 0) {
-        fullName = "Anonymous";
-      }
-
-      Meteor.users.update(this.userId, {
-        $set: {
-          "profile.name": fullName
-        }
-      });
-
-      return fullName;
-    }
+    optional: true
   }),
   "headline": {type: String, max: 160, optional: true},
   "location": {type: _locationSchema, optional: true},
@@ -441,6 +424,29 @@ CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, option
     }
     if (range) {
       modifier.$set.highschool.gpaGeneral.normalizedGPA = (Math.min(gpa, range) / range) * 4.0;
+    }
+  }
+});
+
+CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, options) {
+  function currentValue(field) {
+    return dotGet(modifier, "$unset."+field) != undefined ?
+           "" :
+           dotGet(modifier, "$set."+field) || doc[field] || "";
+  }
+
+  var firstName = currentValue("firstName");
+  var lastName = currentValue("lastName");
+  var name = currentValue("name");
+
+  var newName = (firstName + " " + lastName).trim() || "Anonymous";
+  if (name != newName) {
+    modifier.$set.name = newName;
+    if (dotGet(modifier, "$unset.name") != undefined) {
+      delete modifier.$unset.name;
+      if (!Object.keys(modifier.$unset).length) {
+        delete modifier.$unset;
+      }
     }
   }
 });
