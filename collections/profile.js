@@ -442,6 +442,13 @@ CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, option
   var newName = (firstName + " " + lastName).trim() || "Anonymous";
   if (name != newName) {
     modifier.$set.name = newName;
+
+    Meteor.users.update(doc.userId, {
+      $set: {
+        "profile.name": newName
+      }
+    });
+
     if (dotGet(modifier, "$unset.name") != undefined) {
       delete modifier.$unset.name;
       if (!Object.keys(modifier.$unset).length) {
