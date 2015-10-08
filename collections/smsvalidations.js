@@ -13,7 +13,7 @@ SmsValidations.attachSchema(smsValidationSchema);
 SmsValidations.VERIFIED_EXPIRATION = 1000*60*60*24; // 24 hrs
 // Expiration of validation if the number has not been verified -- e.g. the
 // window during which verification must happen.
-SmsValidations.UNVERIFIED_EXPIRATION = 1000*60*10; // 10 minutes
+SmsValidations.UNVERIFIED_EXPIRATION = 1000*60*60; // 60 minutes
 // Number of attempts one can make to send a code back.
 SmsValidations.MAX_VERIFICATION_TRIES = 5;
 SmsValidations.INITIAL_PROMPT = _.template(
