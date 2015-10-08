@@ -277,3 +277,10 @@ if (Meteor.isServer) {
     });
   });
 }
+
+Colleges.findFromHashtag = function(hashtag) {
+  if (!hashtag) {
+    return null;
+  }
+  return Colleges.findOne({hashtag: {$regex: "^"+hashtag.trim()+"$", $options: "i"}});
+};
