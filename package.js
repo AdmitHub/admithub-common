@@ -26,21 +26,17 @@ Package.onUse(function(api) {
   // begin styles
   api.addFiles('client/css/screen.styl', 'client');
 
-  api.addFiles('client/css/mixins/mod.import.styl', 'client');
-  api.addFiles('client/css/mixins/ui.import.styl', 'client');
-  api.addFiles('client/css/mixins/type.import.styl', 'client');
-  api.addFiles('client/css/mixins/common.import.styl', 'client');
-
-  api.addFiles('client/css/common/base.import.styl', 'client');
   api.addFiles('client/css/common/variables.import.styl', 'client');
-  api.addFiles('client/css/common/override.import.styl', 'client');
-
+  api.addFiles('client/css/common/grid.import.styl', 'client');
+  api.addFiles('client/css/common/base.import.styl', 'client');
   api.addFiles('client/css/common/type.import.styl', 'client');
   api.addFiles('client/css/common/layout.import.styl', 'client');
-  api.addFiles('client/css/common/position.import.styl', 'client');
-  api.addFiles('client/css/common/grid.import.styl', 'client');
-  api.addFiles('client/css/common/zindex.import.styl', 'client');
   api.addFiles('client/css/common/icons.import.styl', 'client');
+  api.addFiles('client/css/common/mixin.import.styl', 'client');
+  api.addFiles('client/css/common/override.import.styl', 'client');
+
+  api.addFiles('client/css/common/position.import.styl', 'client');
+  api.addFiles('client/css/common/zindex.import.styl', 'client');
   api.addFiles('client/css/common/ui.import.styl', 'client');
   api.addFiles('client/css/common/ui-form.import.styl', 'client');
   api.addFiles('client/css/common/markdown.import.styl', 'client');
@@ -50,7 +46,6 @@ Package.onUse(function(api) {
   api.addFiles('client/css/common/no.import.styl', 'client');
   api.addFiles('client/css/common/sidebar.import.styl', 'client');
   api.addFiles('client/css/common/responsive.import.styl', 'client');
-  api.addFiles('client/css/common/color.import.styl', 'client');
 
   api.addFiles('client/css/modules/section.import.styl', 'client');
   api.addFiles('client/css/modules/page.import.styl', 'client');

@@ -2,12 +2,12 @@ pg-bot-answers-width = 25%
 
 .pg-bot
   border-bottom border
-  clearfix()
+  @extend .clearfix
 
 .pg-bot-header
   border-bottom border
   padding-bottom 2rem
-  clearfix()
+  @extend .clearfix
 
 .pg-bot-header-left
   margin-bottom 2rem
@@ -37,7 +37,7 @@ pg-bot-answers-width = 25%
   text-align center
   border-bottom border
 
-  @media mq-med 
+  @media mq-med
     padding 10rem 3rem
     width 100% - pg-bot-answers-width
     float right

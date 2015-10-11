@@ -1,11 +1,20 @@
-.grid-wrap 
+.clearfix
+  &:after
+    content " "
+    visibility hidden
+    display block
+    font-size 0
+    clear both
+    height 0
+
+.grid-wrap
   margin 0 auto
   padding 0 grid-page-gutter
   max-width mq-sm-width + 20rem
 
   @media mq-med
     max-width mq-med-width + 50rem
-    
+
   @media mq-med-desk
     padding 0 grid-page-gutter-mobile
     max-width none
@@ -15,7 +24,7 @@
     max-width grid-width
 
 .grid-row
-  clearfix()
+  @extend .clearfix
   padding 0 grid-page-gutter-mobile
 
   &:before

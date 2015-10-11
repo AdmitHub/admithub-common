@@ -10,7 +10,7 @@
     font-weight bold
 
 form
-  .at-input 
+  .at-input
     > label
       font-weight normal
       margin-bottom 0.5rem
@@ -25,7 +25,7 @@ form
   width 47.5%
 
 .at-oauth
-  clearfix()
+  @extend .clearfix
 
 .at-sep
   position relative
@@ -66,7 +66,7 @@ button#at-twitter
     iconify(twitter-bird)
 
 .at-pwd-form
-  clearfix()
+  @extend .clearfix
 
 .at-pwd-link
   type-small()

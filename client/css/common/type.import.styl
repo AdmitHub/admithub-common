@@ -1,6 +1,83 @@
+/*************************************************
+ * TYPOGRAPHY MIXIN
+ *************************************************/
+
+type-size(size, line = 1.3)
+  font-size unit(size 'px') // @TODO: where is `unit()` mixin declaration?
+  font-size unit(size/10 'rem')
+  line-height unit(line 'em')
+
+type-secondary(important = false)
+  if important
+    color color-type-secondary !important
+  else
+    color color-type-secondary
+
+remify(value)
+    u = unit(value)
+
+    if u is 'px'
+      return unit(value/10 'rem')
+    else
+      return unit(value u)
+
+type-serif(weight = 400, important = false)
+  if important
+    font-family font-serif !important
+    font-weight weight !important
+  else
+    font-family font-serif
+    font-weight weight
+
+type-sans(weight = 400)
+  font-family font-sans
+  font-weight weight
+
+type-serif-bold()
+  type-serif(600)
+
+type-sans-bold()
+  type-sans(600)
+
+type-xsmall()
+  type-size(13)
+
+type-small()
+  type-size(15 1.5)
+
+type-medium()
+  type-size(18 1.4)
+
+type-large()
+  type-size(24 1.3)
+
+type-xlarge()
+  type-size(32 1.3)
+
+type-huge()
+  type-size(44 1.2)
+
+type-xhuge()
+  type-size(60 1)
+
+type-sans-uppercase()
+  type-sans-bold()
+  text-transform uppercase
+
+type-header()
+  type-serif(600)
+  text-transform capitalize
+
+type-ui()
+  type-sans-bold()
+  type-medium()
+
+
+/*************************************************
+* TYPOGRAPHY COMMON
+*************************************************/
 html
   font-size base-font-size
-  color color-type
   @media mq-xsm-desk
     font-size base-font-size-xsm
 
