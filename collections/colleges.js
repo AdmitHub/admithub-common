@@ -65,7 +65,20 @@ CollegeSchema = new SimpleSchema({
   "gender": {type: String, allowedValues: ["Men", "Women", "coed"], optional: true},
   "population": {type: Number, decimal: true, optional: true},
   "linkedinLink": fields.url({optional: true}),
-  "hashtag": {type: String, optional: true, unique: true},
+  "hashtag": {type: String, optional: true, unique: true,
+    custom: function() {
+      if (Meteor.isServer && this.isSet) {
+        if (Highschools.findOne({
+          hashtag: {
+            $regex: "^"+this.value.trim()+"$",
+            $options: "i"
+          }
+        })) {
+          return "hashtagTaken";
+        }
+      }
+    }
+  },
 
   "women": {type: _totalPercentSplit, optional: true},
   "men": {type: _totalPercentSplit, optional: true},

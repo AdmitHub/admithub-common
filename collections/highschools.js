@@ -16,6 +16,19 @@ Highschools.attachSchema({
     optional: true
   },
   hashtag: {
-    type: String
+    type: String,
+    unique: true,
+    custom: function() {
+      if (Meteor.isServer && this.isSet) {
+        if (Colleges.findOne({
+          hashtag: {
+            $regex: "^"+this.value.trim()+"$",
+            $options: "i"
+          }
+        })) {
+          return "hashtagTaken";
+        }
+      }
+    }
   }
 });
