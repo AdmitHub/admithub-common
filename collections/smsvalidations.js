@@ -21,7 +21,7 @@ SmsValidations.INITIAL_PROMPT = _.template(
   "To get started, reply with this code: <%= code %>.  (Standard messaging rates may apply.)"
 );
 SmsValidations.STOP_PROMPT = _.template(
-  "We need to verify that we're talking to the right person first. " +
+  "Before we stop, I need to verify that we're talking to the right person first. " +
   "Please text back this code: <%= code %>."
 );
 SmsValidations.REPROMPT = _.template(
