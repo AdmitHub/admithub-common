@@ -5,10 +5,9 @@ Matches.attachSchema({
   "created": fields.created_date(),
   // Should only be set if messages is empty.
   "dismissed": {type: Boolean, defaultValue: false},
-  "bot": {type: Boolean, defaultValue: false},
-  "eventId": {type: String, optional: true},
   "archived": {type: Date, optional: true},
   "messages": {type: [Object], optional: true},
+
   "messages.$.created": {
     type: Date,
     autoform: {
@@ -20,6 +19,15 @@ Matches.attachSchema({
   "messages.$.body": {type: String},
   "messages.$.sender": {type: String, allowedValues: ["student", "college", "admithub"]},
   "messages.$.read": {type: Boolean, optional: true},
+
+  "encounters": {type: [Object], optional: true},
+  "encounters.$.created": {type: Date},
+  "encounters.$.location": {
+    type: String,
+    optional: true,
+    allowedValues: ["web", "sms"]
+  },
+  "encounters.$.eventId": {type: String, optional: true, regEx: SimpleSchema.RegEx.Id}
 });
 
 Matches.deny({
