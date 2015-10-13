@@ -21,7 +21,8 @@ var _demographicsSchema = new SimpleSchema({
   "transfer": fields.bool(o),
   "mostRecentCollege": fields.string(o),
   "emoji": fields.string(o),
-  "dateOfBirth": fields.date(o)
+  "dateOfBirth": fields.date(o),
+  "dobConfirmed": fields.bool(o)
 });
 
 var _locationSchema = new SimpleSchema({
