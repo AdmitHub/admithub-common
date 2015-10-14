@@ -32,3 +32,10 @@ Highschools.attachSchema({
     }
   }
 });
+
+Highschools.findFromHashtag = function(hashtag) {
+  if (!hashtag) {
+    return null;
+  }
+  return Highschools.findOne({hashtag: {$regex: "^"+hashtag.trim()+"$", $options: "i"}});
+};
