@@ -1,20 +1,18 @@
-.ui-base
-  ui-base()
-
 .ui-unbtn
   ui-unbtn()
 
 .ui-btn
 .button
 .btn.btn-primary
-  @extend .type-ui
+  @extend .type-sans
+  @extend .type-medium
+  inline-block()
   transition background-color 0.15s
   text-align center
   border 0
   cursor pointer
   ui-btn-color color-green, color-white
   padding 0 ui-padding
-  inline-block()
   border-radius ui-border-radius
   ui-height ui-height-default
   font-weight bold
@@ -35,7 +33,7 @@
     type-size 15
 
 .ui-sm
-  type-small()
+  @extend .type-small
   ui-height ui-small-height
   padding 0 ui-padding/2
 
@@ -76,7 +74,7 @@
     type-size 12
 
 .ui-large
-  type-medium()
+  @extend .type-medium
   ui-height ui-large-height
 
   .icon-carat-right

@@ -5,12 +5,11 @@ form
   input[type="password"]
   input[type="email"]
   textarea
-    ui-base()
     height 4.5rem
     border-radius ui-border-radius
     display inline-block
     vertical-align middle
-    type-serif()
+    @extend .type-serif
     padding 0 1em
     // background-color color-grey-xlight
     border border
@@ -37,7 +36,7 @@ form
   padding-bottom row-space
   margin-bottom row-space
 
-form 
+form
   .form-actions
     border-top border
     margin-top 3rem
@@ -52,13 +51,13 @@ form
   .control-group, .form-group
     margin-bottom 2rem
 
-    > label 
+    > label
       font-weight bold
       float left
 
     .note
       text-align right
-      type-secondary()
+      @extend .type-secondary
 
     .controls
       margin-left 20rem

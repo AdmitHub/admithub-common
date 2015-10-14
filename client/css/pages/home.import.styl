@@ -7,6 +7,7 @@
 
 .pg-home-hero-title
   margin 0 auto
+  color color-white
 
   &:after
     display none
@@ -40,8 +41,9 @@
       inline-block()
 
 .pg-home-nav
-  type-sans-uppercase()
-  type-medium()
+  @extend .type-sans
+  @extend .type-medium
+  text-transform: uppercase
   letter-spacing 0.03em
 
   ul

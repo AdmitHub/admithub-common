@@ -2,20 +2,15 @@
   mod-section()
   position relative
 
-.mod-section-dark
-  @extend .mod-section
-  background-color color-purple
-  color color-white
-
 .mod-section-grey
   @extend .mod-section
-  background-color color-grey-xlight 
+  background-color color-grey-xlight
 
 .mod-section-header
   mod-section-header()
 
 .mod-section-header-title
-  type-huge()
+  @extend .type-huge
   color color-type
   text-transform capitalize
   max-width: 75rem;
@@ -27,12 +22,13 @@
 .mod-section-header-subtitle
   margin-top 1rem
   margin-bottom 0
-  type-large()
+  @extend .type-large
 
 .mod-section-subtitle
+  @extend .type-serif
+  @extend .type-large
   margin-bottom 1rem
-  type-large()
-  type-serif-bold()
+  font-weight: bold
   text-transform capitalize
 
 .mod-space-bottom

@@ -156,20 +156,18 @@ ui-height(height, children = true)
       line-height height
 
 ui-xsmall()
-  type-small()
+  @extend .type-small
   ui-height ui-xsmall-height
 
   > *
     line-height ui-xsmall-height
 
 ui-large()
-  type-large()
+  @extend .type-large
   ui-height ui-large-height
 
   > *
     line-height ui-large-height
-
-ui-base()
 
 ui-unbtn()
   font-size inherit

@@ -5,7 +5,7 @@
 
 .at-title
   h3
-    type-huge()
+    @extend .type-huge
     mod-space-bottom()
     font-weight bold
 
@@ -69,7 +69,7 @@ button#at-twitter
   @extend .clearfix
 
 .at-pwd-link
-  type-small()
+  @extend .type-small
   float left
 
 .at-btn.submit
@@ -81,8 +81,8 @@ button#at-twitter
   mod-space-top 2
   clear both
   text-align center
-  type-small()
-  type-secondary()
+  @extend .type-small
+  @extend .type-secondary
 
   a
     text-transform capitalize
