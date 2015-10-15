@@ -457,28 +457,19 @@ CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, option
   }
 });
 
+
 CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, options) {
     var userInputDreamCollege = dotGet(doc, "preferences.dreamCollege.name");
-    if (userInputDreamCollege != undefined && dotGet(doc, "preferences.dreamCollege.dreamCollegeId") === undefined) {
-      Meteor.call(findDreamCollegeId, userInputDreamCollege, function(err, result) {
+    if ( userInputDreamCollege != undefined && dotGet(doc, "preferences.dreamCollege.dreamCollegeId") === undefined ) {
+      Meteor.call('findDreamCollegeId', userInputDreamCollege, function(err, result) {
         if (err) {
           console.log(err)
-        } else {
-          var returnedId = result;
-          modifier.$set.preferences.dreamCollege.dreamCollegeId = returnedId;
+          //if userinput is shorter than 5 char its abbrev without good match
+        } else if ( result.length > 0 && userInputDreamCollege.length > 3) {
+          modifier.$set.preferences.dreamCollege.dreamCollegeId = result;
         }
       });
-      console.log('write to db');
     }
-    // var  newName = 'ralphyraplph';
-    // modifier.$set.preferences.dreamCollege.dreamCollegeId = newName;
-
-    // Meteor.users.update(doc.userId, {
-    //   $set: {
-    //     "profile.name": newName
-    //   }
-    // });
-
 });
 
 collegeProfileCountAnsweredQuestions = function(collegeProfile) {
