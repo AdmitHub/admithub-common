@@ -21,34 +21,15 @@ var _demographicsSchema = new SimpleSchema({
   "transfer": fields.bool(o),
   "mostRecentCollege": fields.string(o),
   "emoji": fields.string(o),
-  "dateOfBirth": fields.date(o)
+  "dateOfBirth": fields.date(o),
+  "dobConfirmed": fields.bool(o)
 });
 
 var _locationSchema = new SimpleSchema({
   "address": fields.address(o),
   "city": fields.string(o),
   "state": fields.state(o),
-  "zip": fields.zip_code(_.extend(o, {
-      autoValue: function(mod) {
-        if (Meteor.isServer) {
-          if(mod.$set && mod.$set.location && mod.$set.location.zip && this.value !== mod.$set.location.zip) {
-            var zipcodeLookup = zipcodes.lookup(mod.$set.location.zip);
-
-            if(zipcodeLookup !== undefined) {
-              mod.$set.location = {
-                city: zipcodeLookup.city,
-                state: zipcodeLookup.state,
-                zip: zipcodeLookup.zip
-              };
-            } else {
-              mod.$set.location = {
-                zip: mod.$set.location.zip
-              };
-            }
-          }
-        }
-      }
-  }))
+  "zip": fields.zip_code(_.extend(o))
 });
 
 var _gpa = new SimpleSchema({
@@ -401,6 +382,7 @@ CollegeProfileSchema = new SimpleSchema({
   "modified": {type: Date, autoValue: function() { return new Date(); }},
   "created": fields.date(),
   "contactable": fields.bool({optional: true}),
+  "stopReason": fields.string({optional: true}),
   "referralSource": fields.referral_source({optional: true}),
 
   "description": fields.description({optional: true}),
@@ -410,6 +392,22 @@ CollegeProfileSchema = new SimpleSchema({
 CollegeProfiles = new Mongo.Collection("collegeprofiles");
 CollegeProfiles.attachSchema(CollegeProfileSchema);
 
+CollegeProfiles.before.update(function(userId, doc, fieldNames, mod, options) {
+  if (Meteor.isServer) {
+    if(mod.$set && mod.$set.location && mod.$set.location.zip && this.value !== mod.$set.location.zip) {
+      var zipcodeLookup = zipcodes.lookup(mod.$set.location.zip);
+
+      if(zipcodeLookup !== undefined) {
+        mod.$set.location = {
+          city: zipcodeLookup.city,
+          state: zipcodeLookup.state,
+          zip: zipcodeLookup.zip,
+          address: dotGet(mod, "$set.location.address") || doc.address
+        };
+      }
+    }
+  }
+});
 
 CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, options) {
   // Might be cleaner to implement this as an autoValue function, but as of

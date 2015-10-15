@@ -71,6 +71,20 @@ UserSchema = new SimpleSchema({
     type: [String],
     optional: true
   },
+  "profile.subscriptions": {
+    type: Object,
+    optional: true
+  },
+  "profile.subscriptions.eventReport": {
+    type: Boolean,
+    optional: true,
+    defaultValue: true
+  },
+  "profile.subscriptions.weeklyReport": {
+    type: Boolean,
+    optional: true,
+    defaultValue: true
+  },
   "smsHardStopped": {
     type: Boolean,
     optional: true
@@ -109,6 +123,7 @@ UserSchema = new SimpleSchema({
     })
   },
   "sharing": {type: Boolean, optional: true},
+  "telescope": {type: Object, optional: true, blackbox: true},
   // Debugging
   "test": {type: Boolean, defaultValue: false},
   "startInitialSurvey": {type: Boolean, optional: true},

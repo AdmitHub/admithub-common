@@ -13,7 +13,7 @@ SmsValidations.attachSchema(smsValidationSchema);
 SmsValidations.VERIFIED_EXPIRATION = 1000*60*60*24; // 24 hrs
 // Expiration of validation if the number has not been verified -- e.g. the
 // window during which verification must happen.
-SmsValidations.UNVERIFIED_EXPIRATION = 1000*60*10; // 10 minutes
+SmsValidations.UNVERIFIED_EXPIRATION = 1000*60*60; // 60 minutes
 // Number of attempts one can make to send a code back.
 SmsValidations.MAX_VERIFICATION_TRIES = 5;
 SmsValidations.INITIAL_PROMPT = _.template(
@@ -21,7 +21,7 @@ SmsValidations.INITIAL_PROMPT = _.template(
   "To get started, reply with this code: <%= code %>.  (Standard messaging rates may apply.)"
 );
 SmsValidations.STOP_PROMPT = _.template(
-  "We need to verify that we're talking to the right person first. " +
+  "Before we stop, I need to verify that we're talking to the right person first. " +
   "Please text back this code: <%= code %>."
 );
 SmsValidations.REPROMPT = _.template(
