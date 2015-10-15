@@ -1,69 +1,69 @@
 .clearfix
   &:after
-    content " "
-    visibility hidden
-    display block
-    font-size 0
+    content: " "
+    visibility: hidden
+    display: block
+    font-size: 0
     clear both
-    height 0
+    height: 0
 
 .grid-wrap
   margin 0 auto
-  padding 0 grid-page-gutter
-  max-width mq-sm-width + 20rem
+  padding: 0 grid-page-gutter
+  max-width: mq-sm-width + 20rem
 
   @media mq-med
-    max-width mq-med-width + 50rem
+    max-width: mq-med-width + 50rem
 
   @media mq-med-desk
-    padding 0 grid-page-gutter-mobile
-    max-width none
+    padding: 0 grid-page-gutter-mobile
+    max-width: none
     margin 0
 
   @media mq-lg
-    max-width grid-width
+    max-width: grid-width
 
 .grid-row
   @extend .clearfix
-  padding 0 grid-page-gutter-mobile
+  padding: 0 grid-page-gutter-mobile
 
   &:before
   &:after
-    display none
+    display: none
 
   @media mq-med
-    padding 0 grid-page-gutter
-    margin-left: -(grid-gutter);
+    padding: 0 grid-page-gutter
+    margin-left: -(grid-gutter)
 
 for i in 1 2 3 4
   .grid-{i}
     grid-col i
 
 .grid-inline-block
-  float none
+  float: none
   inline-block()
 
 .grid-left-sidebar
   @media mq-med
-    width 20%
-    float left
+    width: 20%
+    float: left
 
   @media mq-lg
-    width 17%
+    width: 17%
 
 .grid-right-sidebar-collapse-left
   @media mq-lg
-    position absolute
-    top 0
-    right 0
-    width 24%
+    position: absolute
+    top: 0
+    right: 0
+    width: 24%
 
 .grid-posts
 
   @media mq-med
-    float left
-    width 80%
-    padding-left space*2
+    float: left
+    width: 80%
+    padding-left: space*2
 
   @media mq-lg
-    width 56%
+    width: 56%

@@ -1,84 +1,84 @@
 .ui-unbtn
   ui-unbtn()
 
-.ui-btn
-.button
+.ui-btn,
+.button,
 .btn.btn-primary
   @extend .type-sans
   @extend .type-medium
   inline-block()
-  transition background-color 0.15s
-  text-align center
-  border 0
+  transition: background-color 0.15s
+  text-align: center
+  border: 0
   cursor pointer
-  ui-btn-color color-green, color-white
-  padding 0 ui-padding
-  border-radius ui-border-radius
-  ui-height ui-height-default
-  font-weight bold
-  box-shadow inset 0px -1px 0px rgba(0,0,0,0.25), inset 0px 1px 2px rgba(255,255,255,0.25)
-  text-transform uppercase
+  ui-btn-color: color-brand-cool, color-light
+  padding: 0 ui-padding
+  border-radius: ui-border-radius
+  ui-height: ui-height-default
+  font-weight: bold
+  box-shadow: inset 0px -1px 0px rgba(0,0,0,0.25), inset 0px 1px 2px rgba(255,255,255,0.25)
+  text-transform: uppercase
 
   > *
     inline-block()
-    vertical-align middle
+    vertical-align: middle
 
     &.button-loader
-      display none
+      display: none
 
   &:hover
     text-decoration none
 
   .icon-carat-right
-    type-size 15
+    type-size(15)
 
 .ui-sm
   @extend .type-small
-  ui-height ui-small-height
-  padding 0 ui-padding/2
+  ui-height: ui-small-height
+  padding: 0 ui-padding/2
 
 .ui-pill-checked
   @extend .ui-btn
-  border border-secondary
+  border: border-secondary
 
   &.ui-small
-    ui-height ui-small-height + 0.4rem false
+    ui-height: ui-small-height + 0.4rem false
 
   .icon-check
-    color color-green
+    color: color-brand-cool
 
 .ui-btn-next-prev
-  width 12rem
+  width: 12rem
 
   @media mq-sm
-    width 18rem
+    width: 18rem
 
 .ui-btn-secondary
   @extend .ui-btn
-  border ui-btn-secondary-border
-  ui-btn-color color-white color-grey-dark
+  border: ui-btn-secondary-border
+  ui-btn-color: color-light color-grey-dark
 
 .ui-btn-circle
-  padding 0
-  border-radius 100px
+  padding: 0
+  border-radius: 100px
   pos-y-center-companion()
-  line-height inherit
-  width ui-height-default
+  line-height: inherit
+  width: ui-height-default
 
   &.ui-small
-    width ui-small-height
-    padding 0
-    border-radius 100px
+    width: ui-small-height
+    padding: 0
+    border-radius: 100px
 
   .icon-x
-    type-size 12
+    type-size(12)
 
 .ui-large
   @extend .type-medium
-  ui-height ui-large-height
+  ui-height: ui-large-height
 
   .icon-carat-right
-    type-size 20
+    type-size(20)
 
 
 .ui-xsmall
@@ -86,20 +86,20 @@ a.ui-xsmall
   ui-xsmall()
 
 .ui-round
-  border-radius 10rem !important
+  border-radius: 10rem !important
 
 .ui-btn-icon-right
-  margin-left 1em
+  margin-left: 1em
 
 .ui-btn-with-rank
-  padding-right 0
+  padding-right: 0
 
 .ui-rank
-  padding-right ui-padding
+  padding-right: ui-padding
   span
-    border-left 1px solid rgba(color-white, 0.35)
-    margin-left ui-padding - 0.4rem
-    padding-left ui-padding
+    border-left: 1px solid rgba(color-light, 0.35)
+    margin-left: ui-padding - 0.4rem
+    padding-left: ui-padding
 
 .ui-btn-set-middle
   > *
@@ -111,7 +111,7 @@ a.ui-xsmall
     margin-bottom: 1.5rem
 
     &:last-child
-      margin-right 0
+      margin-right: 0
 
 .ui-btn-set-right
   > *
@@ -124,52 +124,52 @@ a.ui-xsmall
 .ui-btn-linked-in
 .ui-btn-google-plus
   @extend .ui-btn
-  position relative
+  position: relative
 
   i
-    position absolute
-    left (space/2)
-    top 50%
+    position: absolute
+    left: (space/2)
+    top: 50%
     margin-top: -0.5em
-    line-height 1em
+    line-height: 1em
 
 .ui-btn-facebook
-  ui-btn-color color-facebook
+  ui-btn-color: color-facebook
 
 .ui-btn-twitter
-  ui-btn-color color-twitter
+  ui-btn-color: color-twitter
 
 .ui-btn-linked-in
-  ui-btn-color color-linked-in
+  ui-btn-color: color-linked-in
 
 .ui-btn-google-plus
-  ui-btn-color color-google-plus
+  ui-btn-color: color-google-plus
 
 .ui-tag
-  background-color #f2e9ee
-  border-radius 10rem
-  padding 0.2rem 0.75rem
+  background-color: #f2e9ee
+  border-radius: 10rem
+  padding: 0.2rem 0.75rem
 
 .ui-btn-x
-  font-size 2.5rem
-  color color-red
-  background-color rgba(color-red, 0.15)
-  border 0
+  font-size: 2.5rem
+  color: color-red
+  background-color: rgba(color-red, 0.15)
+  border: 0
 
   &:hover
-    color color-red
-    background-color rgba(color-red, 0.25)
+    color: color-red
+    background-color: rgba(color-red, 0.25)
 
 .ui-btn-heart
-  font-size 3rem
-  background-color rgba(color-green, 0.15)
-  color color-green
+  font-size: 3rem
+  background-color: rgba(color-brand-cool, 0.15)
+  color: color-brand-cool
 
   &:hover
-    color color-green
-    background-color rgba(color-green, 0.25)
+    color: color-brand-cool
+    background-color: rgba(color-brand-cool, 0.25)
 
 .ui-btn-x
 .ui-btn-heart
-  padding 0
-  width 6.5rem
+  padding: 0
+  width: 6.5rem

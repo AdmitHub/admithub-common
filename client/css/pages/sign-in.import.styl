@@ -1,5 +1,5 @@
 .at-form
-  max-width 40rem
+  max-width: 40rem
   margin 0 auto
   mod-section()
 
@@ -7,60 +7,60 @@
   h3
     @extend .type-huge
     mod-space-bottom()
-    font-weight bold
+    font-weight: bold
 
 form
   .at-input
     > label
-      font-weight normal
-      margin-bottom 0.5rem
-      display block
+      font-weight: normal
+      margin-bottom: 0.5rem
+      display: block
 
     > input
       stretch()
-      margin-bottom 2rem
+      margin-bottom: 2rem
 
 .at-social-btn
-  float left
-  width 47.5%
+  float: left
+  width: 47.5%
 
 .at-oauth
   @extend .clearfix
 
 .at-sep
-  position relative
-  text-align center
+  position: relative
+  text-align: center
   mod-space(2)
 
   &:before
     content ''
-    height at-sep-height
-    background-color color-grey-light
-    width 100%
-    position absolute
-    top 50%
-    left 0
-    margin-top -(at-sep-height/2)
+    height: at-sep-height
+    background-color: color-grey-light
+    width: 100%
+    position: absolute
+    top: 50%
+    left: 0
+    margin-top: -(at-sep-height/2)
 
   strong
-    position relative
-    background-color color-bg
-    padding 0 (grid-gutter/2)
+    position: relative
+    background-color: color-bg
+    padding: 0 (grid-gutter/2)
 
 button#at-facebook
   @extend .ui-btn
-  ui-btn-color color-facebook
+  ui-btn-color: color-facebook
   ui-small()
-  margin-right 2.5%
+  margin-right: 2.5%
 
   .fa-facebook
     iconify(facebook)
 
 button#at-twitter
   @extend .ui-btn
-  ui-btn-color color-twitter
+  ui-btn-color: color-twitter
   ui-small()
-  margin-left 2.5%
+  margin-left: 2.5%
 
   .fa-twitter
     iconify(twitter-bird)
@@ -70,19 +70,19 @@ button#at-twitter
 
 .at-pwd-link
   @extend .type-small
-  float left
+  float: left
 
 .at-btn.submit
   @extend .ui-btn
-  float right
+  float: right
 
 .at-signup-link
 .at-signin-link
-  mod-space-top 2
+  mod-space-top: 2
   clear both
-  text-align center
+  text-align: center
   @extend .type-small
   @extend .type-secondary
 
   a
-    text-transform capitalize
+    text-transform: capitalize

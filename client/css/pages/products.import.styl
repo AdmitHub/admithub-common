@@ -1,10 +1,10 @@
 .pg-products-hero
   background-image url('/hero-bg-products.jpg')
-  text-align center
-  height 30rem
+  text-align: center
+  height: 30rem
 
   @media mq-med
-    height 40rem
+    height: 40rem
 
   > *
     inline-block()
@@ -15,94 +15,94 @@
   background-color: color-grey-xlight
 
   .info-text
-    position relative
-    display table
-    background-color white
-    box-shadow 0 0.1rem 1rem rgba(color-black, 0.15)
-    padding pg-products-padding
-    width 100%
+    position: relative
+    display: table
+    background-color: white
+    box-shadow: 0 0.1rem 1rem rgba(color-black, 0.15)
+    padding: pg-products-padding
+    width: 100%
 
     @media mq-lg
-      min-height pg-products-product-height
+      min-height: pg-products-product-height
 
     ul
-      margin-left 0
-      padding-left 0
+      margin-left: 0
+      padding-left: 0
       list-style disc
-      list-style-position inside
+      list-style-position: inside
 
     li
-      margin-bottom 2rem
+      margin-bottom: 2rem
 
     // `display: table-cell` is the cleanest way I know to get the button to
     // hang out on the bottom.
     .text-row, .button-row
-      display table-row
+      display: table-row
     .text-cell
-      display table-cell
-      height 100%
+      display: table-cell
+      height: 100%
     .button-cell
-      display table-cell
+      display: table-cell
 
   .most-popular
     @extend .type-sans
-    padding (pg-products-padding/2) pg-products-padding
-    background-color color-green
-    color color-white
+    padding: (pg-products-padding/2) pg-products-padding
+    background-color: color-brand-cool
+    color: color-light
     text-transform: uppercase
 
     span
-      line-height 1.75em
+      line-height: 1.75em
 
     @media mq-lg
-      position absolute
-      bottom 100%
-      width 100%
+      position: absolute
+      bottom: 100%
+      width: 100%
 
   .price
     @extend .type-sans
-    margin-bottom 2rem
-    color color-green
+    margin-bottom: 2rem
+    color: color-brand-cool
     font-weight: bold
-    type-size 36
+    type-size(36)
 
   .purchase
-    display block
-    width 100%
-    border-radius 5rem
+    display: block
+    width: 100%
+    border-radius: 5rem
 
   .asterisk
-    margin-top 1.5rem
-    text-align center
+    margin-top: 1.5rem
+    text-align: center
     @extend .type-small
 
 .pg-product-info
-  position relative
+  position: relative
 
 .pg-product-title
   @extend .type-serif
   @extend .type-xlarge
-  margin-bottom 1rem
+  margin-bottom: 1rem
   font-weight: bold
 
 .pg-product-audience
   @extend .type-sans
   @extend .type-medium
   font-weight: bold
-  margin-bottom 1rem
+  margin-bottom: 1rem
 
 .pg-product-desc
-  margin-bottom 3rem
+  margin-bottom: 3rem
   @extend .type-medium
 
 .pg-products-contact
-  text-align center
-  margin-bottom 6rem
+  text-align: center
+  margin-bottom: 6rem
 
   h2
-    margin-bottom 1.5rem
+    margin-bottom: 1.5rem
 
   a
-    background-color color-grey-dark
-    color white
-    border-radius 5rem
+    background-color: color-grey-dark
+    color: white
+    border-radius: 5rem

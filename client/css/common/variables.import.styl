@@ -27,7 +27,6 @@ grid-width = 105rem
 grid-page-gutter = 4.5rem
 grid-page-gutter-mobile = grid-page-gutter*0.75
 
-
 g-header-height = 5.7rem
 g-header-row-height = g-header-height*0.65
 g-header-search-height = 3.5rem
@@ -40,76 +39,76 @@ comment-avatar-width = 4.5rem
 comment-width = 75rem
 
 
-// COLORS
+/*************************************************
+ * COLORS
+ *************************************************/
+color-light                        = #fff
+color-black                        = #000
+color-grey-xxlight                 = #f5f2f4
+color-grey-xlight                  = #f5f5f5
+color-grey-light                   = #d5d5d5
+color-grey-med                     = #aaa
+color-grey-dark                    = #736d72
+color-grey-xdark                   = #222
 
-hero-mask = rgba(66, 46, 60, 0.8)
-control-mask = rgba(38, 15, 30, 0.3)
-control-mask-mobile = rgba(38, 15, 30, 0.85)
+color-brand                        = #992c73
+color-brand-dark                   = #591240
+color-brand-light                  = #cc96b9
+color-brand-light-transparent      = rgba(color-brand-light, 0.2)
 
-color-white = #fff
-color-black = #000
-color-grey-xxlight = #f5f2f4
-color-grey-xlight = #f5f5f5
-color-grey-light = #d5d5d5
-color-grey-med = #aaa
-color-grey-dark = #736D72
-color-grey-xdark = #222
+// color-brand-cool                = #13ae8a
+color-brand-cool                   = #09a883
+color-brand-cool-dark              = #457a6e
+color-brand-cool-light             = #91d6c5
+color-brand-cool-light-transparent = rgba(color-brand-cool-light, 0.2)
 
-color-bg-mod-secondary = #f0ebe9
+color-type                         = #253a40
+color-type-dark                    = color-type
+color-type-light                   = color-light
+color-type-secondary               = #80777d
 
-color-green-dark = #457A6E
-// color-green = #13AE8A
-color-green = #09a883
-color-green-light = #91D6C5
-color-green-light-transparent = rgba(color-green-light, 0.2)
+color-blue                         = #3f65d9
+color-blue-light                   = #9fb2ec
+color-blue-light-transparent       = rgba(color-blue-light, 0.2)
 
-color-blue = #3F65D9
-color-blue-light = #9FB2EC
-color-blue-light-transparent = rgba(color-blue-light, 0.2)
+color-chat-unread                  = #be2f5a
+color-red                          = #db396a
+color-yellow                       = #bf8a02
+color-maroon                       = #7f296b
 
-color-purple = #992C73
-color-purple-light = #CC96B9
-color-purple-light-transparent = rgba(color-purple-light, 0.2)
+color-twitter                      = #00aced
+color-facebook                     = #3b5998
+color-linked-in                    = #007bb6
+color-github                       = #222
+color-google-plus                  = #c63d2d
+color-border                       = #ebe1e9
+color-border-light                 = lighten(color-border, 3)
+color-bg                           = #fff
+color-bg-mod-secondary             = #f0ebe9
 
-color-chat-sidebar = #D1C5CF
-color-chat-background = #F2EDF1
-color-chat-me = #E6DFE4
-color-chat-other = color-white
-color-chat-unread = #BE2F5A
+color-chat-sidebar                 = #d1c5cf
+color-chat-background              = #f2edf1
+color-chat-me                      = #e6dfe4
+color-chat-other                   = color-light
 
-color-purple-dark = #591240
+color-link                         = color-brand
+color-ui-form-input                = #fafafa
 
-color-red = #DB396A
+hero-mask                          = rgba(66, 46, 60, 0.8)
+control-mask                       = rgba(38, 15, 30, 0.3)
+control-mask-mobile                = rgba(38, 15, 30, 0.85)
 
-color-yellow = #BF8A02
-
-color-maroon = #7f296b
-color-type = #253a40
-color-type-secondary = #80777d
-color-twitter = #00aced
-color-facebook = #3b5998
-color-linked-in = #007bb6
-color-github = #222
-color-google-plus = #C63D2D
-color-border = #ebe1e9
-color-border-light = lighten(color-border, 3)
-
-color-bg = #fff
-
-color-ui-form-input = #fafafa
-
-color-link = color-purple
-
-
-// BORDERS
-
+/*************************************************
+ * BORDERS
+ *************************************************/
 border-style = 0.1rem solid
 border = border-style color-border
 border-light= border-style color-border-light
 
 
-// UI
-
+/*************************************************
+ * UI
+ *************************************************/
 ui-padding = 1.5em
 ui-border-radius = 0.2rem
 ui-input-border = border-style color-grey-light
@@ -123,8 +122,9 @@ ui-large-height = 6rem
 ui-btn-secondary-border = border-style #e5e5e5
 
 
-// MODULES
-
+/*************************************************
+ * MODULES
+ *************************************************/
 mod-section-header-divide-width = 7.5rem
 mod-section-header-divide-height =  0.1rem
 mod-section-header-divide-space = grid-gutter
@@ -163,14 +163,14 @@ mq-xlg-width  = 1500px
 mq-text = "only screen and (min-width: "
 mq-desktop-first-text = "only screen and (max-width: "
 
-mq-xsm     = mq-text + mq-xsm-width + ")"
-mq-sm      = mq-text + mq-sm-width + ")"
-mq-med     = mq-text + mq-med-width + ")"
-mq-lg      = mq-text + mq-lg-width + ")"
-mq-xlg     = mq-text + mq-xlg-width + ")"
-mq-lg-desk = mq-desktop-first-text + mq-lg-width + ")"
+mq-xsm      = mq-text + mq-xsm-width + ")"
+mq-sm       = mq-text + mq-sm-width + ")"
+mq-med      = mq-text + mq-med-width + ")"
+mq-lg       = mq-text + mq-lg-width + ")"
+mq-xlg      = mq-text + mq-xlg-width + ")"
+mq-lg-desk  = mq-desktop-first-text + mq-lg-width + ")"
 mq-med-desk = mq-desktop-first-text + mq-med-width + ")"
-mq-sm-desk = mq-desktop-first-text + mq-sm-width + ")"
+mq-sm-desk  = mq-desktop-first-text + mq-sm-width + ")"
 mq-xsm-desk = mq-desktop-first-text + mq-xsm-width + ")"
 
 at-sep-height = 0.1rem
