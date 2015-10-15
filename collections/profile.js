@@ -238,6 +238,7 @@ var _preferenceSchema = new SimpleSchema({
   "dreamCollege": {type: new SimpleSchema({
     "name": fields.string({max: 140, optional: true}),
     "reason": fields.string({max: 140, optional: true}),
+    "dreamCollegeId": fields.string({max: 140, optional: true}),
   }), optional: true},
 
   "schoolTypes": {type: new SimpleSchema({
@@ -454,6 +455,30 @@ CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, option
       }
     }
   }
+});
+
+CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, options) {
+    var userInputDreamCollege = dotGet(doc, "preferences.dreamCollege.name");
+    if (userInputDreamCollege != undefined && dotGet(doc, "preferences.dreamCollege.dreamCollegeId") === undefined) {
+      Meteor.call(findDreamCollegeId, userInputDreamCollege, function(err, result) {
+        if (err) {
+          console.log(err)
+        } else {
+          var returnedId = result;
+          modifier.$set.preferences.dreamCollege.dreamCollegeId = returnedId;
+        }
+      });
+      console.log('write to db');
+    }
+    // var  newName = 'ralphyraplph';
+    // modifier.$set.preferences.dreamCollege.dreamCollegeId = newName;
+
+    // Meteor.users.update(doc.userId, {
+    //   $set: {
+    //     "profile.name": newName
+    //   }
+    // });
+
 });
 
 collegeProfileCountAnsweredQuestions = function(collegeProfile) {
