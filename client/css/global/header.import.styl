@@ -262,6 +262,13 @@ input.g-header-search-input
     color color-white
     type-sans()
     text-transform uppercase
+    font-size 130%
+    line-height 30px
+    @media only screen and (max-width: mq-xsm-width)
+      font-size 160%
+    @media mq-med
+      font-size 100%
+    
 
   .user-name
     ellipsis()
@@ -543,3 +550,5 @@ input.g-header-search-input
 @media mq-med
   .g-header-center .title
     display none
+
+
