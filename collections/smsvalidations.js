@@ -34,7 +34,7 @@ SmsValidations.EXPIRED_PROMPT = _.template(
 SmsValidations.VERIFIED_PROMPT = _.template("Verified! Thanks.");
 //NOTE: I don't think the "explanation prompt" is being used right now...
 SmsValidations.EXPLANATION_PROMPT = _.template(
-  "Hi I'm Oli. I'll ask you a questions and you answer.\n\nYou can send #skip to skip a question. Send #stop and I'll go away forever.\n\n"
+  "Hi I'm Oli. I'll ask you a questions and you answer.\n\nYou can send #skip to skip a question. Send #pause and I'll go away forever.\n\n"
 );
 SmsValidations.EMAIL_PROMPT = _.template(
   "Hi, Oli from AdmitHub here.\n\nTo associate this email address with the phone number, <%= phone %>, text back this code: <%= code %>"
