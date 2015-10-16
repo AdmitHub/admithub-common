@@ -459,8 +459,8 @@ CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, option
 
 
 CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, options) {
-    var userInputDreamCollege = dotGet(doc, "preferences.dreamCollege.name");
-    if ( userInputDreamCollege != undefined && dotGet(doc, "preferences.dreamCollege.dreamCollegeId") === undefined ) {
+    var userInputDreamCollege = dotGet(modifier.$set, "preferences.dreamCollege.name");
+    if ( userInputDreamCollege && dotGet(doc, "preferences.dreamCollege.dreamCollegeId") === undefined ) {
       Meteor.call('findDreamCollegeId', userInputDreamCollege, function(err, result) {
         if (err) {
           console.log(err)
