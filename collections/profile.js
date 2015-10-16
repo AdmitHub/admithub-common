@@ -238,6 +238,7 @@ var _preferenceSchema = new SimpleSchema({
   "dreamCollege": {type: new SimpleSchema({
     "name": fields.string({max: 140, optional: true}),
     "reason": fields.string({max: 140, optional: true}),
+    "dreamCollegeId": fields.string({max: 140, optional: true}),
   }), optional: true},
 
   "schoolTypes": {type: new SimpleSchema({
@@ -454,6 +455,21 @@ CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, option
       }
     }
   }
+});
+
+
+CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, options) {
+    var userInputDreamCollege = dotGet(modifier.$set, "preferences.dreamCollege.name");
+    if ( userInputDreamCollege && dotGet(doc, "preferences.dreamCollege.dreamCollegeId") === undefined ) {
+      Meteor.call('findDreamCollegeId', userInputDreamCollege, function(err, result) {
+        if (err) {
+          console.log(err)
+          //if userinput is shorter than 5 char its abbrev without good match
+        } else if ( result.length > 0 && userInputDreamCollege.length > 3) {
+          modifier.$set.preferences.dreamCollege.dreamCollegeId = result;
+        }
+      });
+    }
 });
 
 collegeProfileCountAnsweredQuestions = function(collegeProfile) {
