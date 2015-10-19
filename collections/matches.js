@@ -7,6 +7,8 @@ Matches.attachSchema({
   "dismissed": {type: Boolean, defaultValue: false},
   "archived": {type: Date, optional: true},
   "messages": {type: [Object], optional: true},
+  "smsStop": {type: Boolean, optional: true},
+  "smsSent": {type: Boolean, optional: true},
 
   "messages.$.created": {
     type: Date,
