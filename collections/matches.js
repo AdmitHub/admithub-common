@@ -7,9 +7,30 @@ Matches.attachSchema({
   "dismissed": {type: Boolean, defaultValue: false},
   "archived": {type: Date, optional: true},
   "messages": {type: [Object], optional: true},
-  "smsStop": {type: Boolean, optional: true},
-  "smsSent": {type: Boolean, optional: true},
-
+  "transports": {
+    type: Object,
+    optional: true
+  },
+  "transports.sms": {
+    type: Object,
+    optional: true
+  },
+  "transports.sms.unsubscribed": {
+    type: Boolean,
+    optional: true
+  },
+  "transports.sms.sent": {
+    type: Boolean,
+    optional: true
+  },
+  "transports.email.unsubscribed": {
+    type: Boolean,
+    optional: true
+  },
+  "transports.web.unsubscribed": {
+    type: Boolean,
+    optional: true
+  },
   "messages.$.created": {
     type: Date,
     autoform: {
