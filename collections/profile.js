@@ -457,7 +457,6 @@ CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, option
   }
 });
 
-
 CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, options) {
     var userInputDreamCollege = dotGet(modifier.$set, "preferences.dreamCollege.name");
     if ( userInputDreamCollege && dotGet(doc, "preferences.dreamCollege.dreamCollegeId") === undefined ) {
@@ -467,6 +466,13 @@ CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, option
           //if userinput is shorter than 5 char its abbrev without good match
         } else if ( result.length > 0 && userInputDreamCollege.length > 3) {
           modifier.$set.preferences.dreamCollege.dreamCollegeId = result;
+          Meteor.call('createBotMatch', userId, result);
+           if (!dotGet(doc, 'preferences.likes')) {
+                modifier.$set.preferences.likes = [result];
+            } else {
+                var currentLikes = dotGet(doc, 'preferences.likes');
+                modifier.$set.preferences.likes = currentLikes.push(result);
+            }
         }
       });
     }
