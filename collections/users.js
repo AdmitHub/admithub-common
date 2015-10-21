@@ -134,6 +134,9 @@ Meteor.users.before.insert(function(userId, doc) {
   if (!doc.slug) {
     doc.slug = slugify(doc._id);
   }
+  if (!dotGet(doc, "telescope.slug")) {
+    dotSet(doc, "telescope.slug", doc.slug || doc._id);
+  }
   return doc;
 });
 
