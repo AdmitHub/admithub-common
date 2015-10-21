@@ -27,22 +27,21 @@ Package.onUse(function(api) {
   api.addFiles('lib/helpers.js', ['client', 'server']);
   api.addFiles('lib/ui.js', ['client']);
   api.addFiles('lib/simpleSchema.js');
-  api.addFiles('collections/users.js');
+  api.addFiles('collections/ceebCodes.js');
+  api.addFiles('collections/collegeevents.js');
   api.addFiles('collections/collegeOfficers.js');
   api.addFiles('collections/colleges.js');
-  api.addFiles('collections/collegeEvents.js');
   api.addFiles('collections/highschools.js');
+  api.addFiles('collections/leads.js');
   api.addFiles('collections/matches.js');
+  api.addFiles('collections/pendingEventReports.js');
+  api.addFiles('collections/posts.js');
   api.addFiles('collections/profile.js');
   api.addFiles('collections/smslogs.js');
   api.addFiles('collections/smsvalidations.js');
   api.addFiles('collections/sponsors.js');
   api.addFiles('collections/testimonials.js');
-  api.addFiles('collections/leads.js');
-  api.addFiles('collections/collegeevents.js');
-  api.addFiles('collections/posts.js');
-  api.addFiles('collections/ceebCodes.js');
-  api.addFiles('collections/pendingEventReports.js');
+  api.addFiles('collections/users.js');
 
   api.export([
     'fields',
