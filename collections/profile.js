@@ -473,7 +473,7 @@ CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, option
     }
 });
 
-collegeProfileCountAnsweredQuestions = function(collegeProfile) {
+CollegeProfiles.countAnsweredQuestions = function(collegeProfile) {
   var clone = _.clone(collegeProfile);
   ["_id", "college", "userId", "created", "modified", "contactable",
     "match", "preferences.likes", "preferences.dislikes"].forEach(function(key) {

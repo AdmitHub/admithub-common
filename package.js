@@ -6,7 +6,8 @@ Package.describe({
 });
 
 Npm.depends({
-  'zipcodes': '1.1.1'
+  'zipcodes': '1.1.1',
+  "dot-get": "1.0.0"
 });
 
 Package.onUse(function(api) {
@@ -20,7 +21,8 @@ Package.onUse(function(api) {
     'aldeed:simple-schema@1.3.3',
     'aldeed:collection2@2.5.0',
     'aldeed:autoform@5.5.1',
-    'matb33:collection-hooks@0.8.0'
+    'matb33:collection-hooks@0.8.0',
+    'mquandalle:bower'
   ]);
 
   api.addFiles('lib/_fields.js', ['client', 'server']);

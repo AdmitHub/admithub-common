@@ -1,0 +1,8 @@
+{
+    "name": "admithub-common",
+    "versions": "0.0.1",
+    "dependencies": {
+        "dot-get": "1.0.0"
+    },
+    "private": true
+}
