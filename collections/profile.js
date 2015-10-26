@@ -223,7 +223,7 @@ var _essaySchema = new SimpleSchema({
 });
 
 var _recommendationSchema = new SimpleSchema({
-  "friendsAdjectives": fields.string({max: 140, optional: true}),
+  "friendsAdjectives": fields.string({max: 300, optional: true}),
   "recommenders": {type: [new SimpleSchema({
     "name": fields.name_part(o),
     "role": fields.recommender_role(o),
@@ -237,7 +237,7 @@ var _recommendationSchema = new SimpleSchema({
 var _preferenceSchema = new SimpleSchema({
   "dreamCollege": {type: new SimpleSchema({
     "name": fields.string({max: 140, optional: true}),
-    "reason": fields.string({max: 140, optional: true}),
+    "reason": fields.string({max: 300, optional: true}),
     "dreamCollegeId": fields.string({max: 140, optional: true}),
   }), optional: true},
 
