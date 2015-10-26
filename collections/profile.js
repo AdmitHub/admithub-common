@@ -190,7 +190,7 @@ var _activitySchema = new SimpleSchema({
     "hoursPerWeek": fields.number({max: 168, optional: true}),
     "weeksPerYear": fields.number({max: 52, optional: true}),
     "intentToPursue": fields.bool(o),
-    "description": fields.string({max: 160, optional: true}),
+    "description": fields.string({max: 300, optional: therue}),
     "achievement": fields.string({max: 160, optional: true}),
     "type": fields.activity_type({optional: true}),
   })], optional: true}
@@ -202,7 +202,7 @@ var _volunteerSchema = new SimpleSchema({
     "position": fields.string({max: 160, optional: true}),
     "startDate": fields.date(o),
     "endDate": fields.date(o),
-    "summary": fields.string({max: 160, optional: true}),
+    "summary": fields.string({max: 300, optional: true}),
     "highlights": {type: [fields.string({max: 160})], optional: true}
   })]}
 });
@@ -358,7 +358,7 @@ CollegeProfileSchema = new SimpleSchema({
   "name": fields.name_part({
     optional: true
   }),
-  "headline": {type: String, max: 160, optional: true},
+  "headline": {type: String, max: 300, optional: true},
   "location": {type: _locationSchema, optional: true},
   "demographics": {type: _demographicsSchema, optional: true},
   "parents": {type: _parentSchema, optional: true},
