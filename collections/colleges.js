@@ -281,16 +281,7 @@ CollegeSchema = new SimpleSchema({
 });
 
 Colleges = new Mongo.Collection("colleges");
-CollegesInMemory = {};
 Colleges.attachSchema(CollegeSchema);
-if (Meteor.isServer) {
-  Meteor.startup(function() {
-    Colleges.find({_distances: {$exists: true}}).forEach(function(college) {
-      CollegesInMemory[college._id] = college;
-    });
-  });
-}
-
 Colleges.findFromHashtag = function(hashtag) {
   if (!hashtag) {
     return null;
