@@ -1,6 +1,7 @@
 Highschools = new Mongo.Collection("highschools");
-Highschools.attachSchema({
+Highschools.attachSchema(new SimpleSchema({
   // userId reference
+  _id: {type: String, regEx: SimpleSchema.RegEx.Id},
   name: {type: String, unique: true},
   incomingPhoneNumber: fields.phone_number({optional: true}),
   counselors: {
@@ -31,7 +32,7 @@ Highschools.attachSchema({
       }
     }
   }
-});
+}));
 
 Highschools.findFromHashtag = function(hashtag) {
   if (!hashtag) {
