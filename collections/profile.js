@@ -327,7 +327,7 @@ var _intentionSchema = new SimpleSchema({
 var _metaFields = new SimpleSchema({
   "initialSurvey": {type: new SimpleSchema({
     "finished": fields.bool(o),
-    "evaluation": fields.string({allowedValues: ["Awesome", "Pretty good", "meh", "lame"], optional: true}),
+    "evaluation": fields.string({allowedValues: ["Great", "Pretty good", "Meh", "Lame"], optional: true}),
     "evaluationRecommend": fields.string({max: 140, optional: true}),
     "podcastGuest": fields.bool(o),
     "utm_medium": fields.string(o),
