@@ -396,16 +396,26 @@ CollegeProfiles.attachSchema(CollegeProfileSchema);
 
 CollegeProfiles.before.update(function(userId, doc, fieldNames, mod, options) {
   if (Meteor.isServer) {
-    if(mod.$set && mod.$set.location && mod.$set.location.zip && this.value !== mod.$set.location.zip) {
-      var zipcodeLookup = zipcodes.lookup(mod.$set.location.zip);
+    var $set = mod.$set || {};
+    // $set could look like either of the following depending on the environment:
+    //  1. {"location.zip": "59715"}
+    //  2. {"location": {"zip": "59715"}}
+    //  Flatten before lookups to put it into a consistent form 1.
+    var flat = dot.flatten($set);
+    var zip = flat["location.zip"];
+    if (zip) {
+      var zipcodeLookup = zipcodes.lookup(zip);
 
-      if(zipcodeLookup !== undefined) {
+      if (zipcodeLookup !== undefined) {
         mod.$set.location = {
           city: zipcodeLookup.city,
           state: zipcodeLookup.state,
           zip: zipcodeLookup.zip,
-          address: dotGet(mod, "$set.location.address") || doc.address
+          address: flat["location.address"] || doc.address
         };
+        // Remove "location.zip" if it exists so we don't try to set both
+        // dot-notation-style and full-object style at the same time.
+        delete mod.$set["location.zip"];
       }
     }
   }
@@ -415,15 +425,17 @@ CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, option
   // Might be cleaner to implement this as an autoValue function, but as of
   // 2015-04-23, we get a mongo error ("cannot $set both "highschool" and
   // "highschool.gpaGeneral.normalizedGPA") if we do so.
-  var gpa = dotGet(modifier.$set, "highschool.gpaGeneral.gpa");
-  var range = dotGet(modifier.$set, "highschool.gpaGeneral.range");
+  var $set = modifier.$set || {};
+  var flat = dot.flatten($set);
+  var gpa = flat["highschool.gpaGeneral.gpa"];
+  var range = flat["highschool.gpaGeneral.range"];
   if (gpa) {
     if (!range && gpa <= 4.0) {
       // assume a range of 4.0 if plausible
       range = 4.0;
     }
     if (range) {
-      modifier.$set.highschool.gpaGeneral.normalizedGPA = (Math.min(gpa, range) / range) * 4.0;
+      modifier.$set["highschool.gpaGeneral.normalizedGPA"] = (Math.min(gpa, range) / range) * 4.0;
     }
   }
 });
@@ -459,8 +471,21 @@ CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, option
 });
 
 CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, options) {
-    var userInputDreamCollege = dotGet(modifier.$set, "preferences.dreamCollege.name");
-    if ( userInputDreamCollege && dotGet(doc, "preferences.dreamCollege.dreamCollegeId") === undefined ) {
+  var set = modifier.$set || {};
+  var flat = dotFlatten(set);
+  var userInputDreamCollege = flat["preferences.dreamCollege.name"];
+
+  if (userInputDreamCollege && dotGet(doc, "preferences.dreamCollege.dreamCollegeId") === undefined) {
+    if (Meteor.isVanillaNode) {
+      // Run async with promise.
+      return Colleges.findByName(userInputDreamCollege).then(function(doc) {
+        if (doc && doc.score < 1.5) {
+          modifier.$set = modifier.$set || {};
+          modifier.$set["preferences.dreamCollege.dreamCollegeId"] = doc._id;
+        }
+      });
+    } else {
+      // Run with meteor method.
       Meteor.call('findDreamCollegeId', userInputDreamCollege, function(err, result) {
         if (err) {
           console.log(err)
@@ -472,6 +497,7 @@ CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, option
         }
       });
     }
+  }
 });
 
 CollegeProfiles.countAnsweredQuestions = function(collegeProfile) {

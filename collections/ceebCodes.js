@@ -1,5 +1,6 @@
 CeebCodes = new Mongo.Collection("ceebcodes");
 CeebCodes.attachSchema(new SimpleSchema({
+  _id: {type: String, regEx: SimpleSchema.RegEx.Id},
   ceeb: {
     type: String
   },

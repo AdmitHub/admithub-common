@@ -43,6 +43,7 @@ var _testRange = new SimpleSchema({
 });
 
 CollegeSchema = new SimpleSchema({
+  "_id": {type: String, regEx: SimpleSchema.RegEx.Id},
   "idNumber": {type: Number},
   "name": {type: String},
   "slug": {type: String, regEx: /^[-a-z0-9]+$/, unique: true},
@@ -287,4 +288,13 @@ Colleges.findFromHashtag = function(hashtag) {
     return null;
   }
   return Colleges.findOne({hashtag: {$regex: "^"+hashtag.trim()+"$", $options: "i"}});
+};
+
+Colleges.findByName = function(name) {
+  return Colleges.findOne({
+    $text: {$search: name}
+  }, {
+    fields: {score: {$meta: "textScore"}},
+    sort: {score: {$meta: "textScore"}}
+  });
 };

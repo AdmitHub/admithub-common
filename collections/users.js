@@ -142,6 +142,8 @@ Meteor.users.before.insert(function(userId, doc) {
 
 Meteor.users.before.update(function(userId, doc, fieldNames, modifier, options) {
   if (modifier && modifier.$set && modifier.$set["profile.phone"]) {
+    // FIXME
+    return;
     modifier.$set.phonePending = true;
     Meteor.defer(function() {
       var user = Meteor.users.findOne({
