@@ -190,7 +190,7 @@ var _activitySchema = new SimpleSchema({
     "hoursPerWeek": fields.number({max: 168, optional: true}),
     "weeksPerYear": fields.number({max: 52, optional: true}),
     "intentToPursue": fields.bool(o),
-    "description": fields.string({max: 300, optional: therue}),
+    "description": fields.string({max: 300, optional: true}),
     "achievement": fields.string({max: 160, optional: true}),
     "type": fields.activity_type({optional: true}),
   })], optional: true}
