@@ -15,4 +15,29 @@ HighschoolConversations.attachSchema({
   "messages.$.body": {type: String},
   "messages.$.sender": {type: String, allowedValues: ["student", "highschool", "admithub"]},
   "messages.$.read": {type: Boolean, optional: true},
+
+  "transports": {
+    type: Object,
+    optional: true
+  },
+  "transports.sms": {
+    type: Object,
+    optional: true
+  },
+  "transports.sms.unsubscribed": {
+    type: Boolean,
+    optional: true
+  },
+  "transports.sms.sent": {
+    type: Boolean,
+    optional: true
+  },
+  "transports.email.unsubscribed": {
+    type: Boolean,
+    optional: true
+  },
+  "transports.web.unsubscribed": {
+    type: Boolean,
+    optional: true
+  }
 });
