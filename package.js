@@ -40,7 +40,6 @@ Package.onUse(function(api) {
   api.addFiles('collections/posts.js');
   api.addFiles('collections/profile.js');
   api.addFiles('collections/smslogs.js');
-  api.addFiles('collections/smsvalidations.js');
   api.addFiles('collections/sponsors.js');
   api.addFiles('collections/testimonials.js');
   api.addFiles('collections/users.js');
@@ -62,7 +61,6 @@ Package.onUse(function(api) {
     'Matches',
     'CollegeProfiles',
     'SmsLogs',
-    'SmsValidations',
     'CollegesInMemory',
     'collegeProfileCountAnsweredQuestions',
     'Sponsors',
