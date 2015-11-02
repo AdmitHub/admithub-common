@@ -186,7 +186,13 @@ var _activitySchema = new SimpleSchema({
     "role": fields.string({max: 160, optional: true}),
     "startDate": fields.date(o),
     "endDate": fields.date(o),
-    "years": fields.high_school_years({optional: true}),
+    "years": {type: new SimpleSchema({
+      "freshman": fields.bool(o),
+      "sophomore": fields.bool(o),
+      "junior": fields.bool(o),
+      "senior": fields.bool(o),
+      "continue": fields.bool(o)
+    }), optional: true},
     "hoursPerWeek": fields.number({max: 168, optional: true}),
     "weeksPerYear": fields.number({max: 52, optional: true}),
     "intentToPursue": fields.bool(o),
