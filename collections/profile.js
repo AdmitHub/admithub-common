@@ -453,8 +453,10 @@ CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, option
 
   var newName = (firstName + " " + lastName).trim() || "Anonymous";
   if (name != newName) {
+    modifier.$set = modifier.$set || {};
     modifier.$set.name = newName;
 
+    // On oli, this is fire and forget.
     Meteor.users.update(doc.userId, {
       $set: {
         "profile.name": newName
