@@ -1,5 +1,6 @@
 Matches = new Mongo.Collection('matches');
-Matches.attachSchema({
+Matches.attachSchema(new SimpleSchema({
+  "_id": {type: String, regEx: SimpleSchema.RegEx.Id},
   "collegeId": {type: String, regEx: SimpleSchema.RegEx.Id},
   "userId": {type: String, regEx: SimpleSchema.RegEx.Id},
   "created": fields.created_date(),
@@ -51,7 +52,7 @@ Matches.attachSchema({
     allowedValues: ["web", "sms"]
   },
   "encounters.$.eventId": {type: String, optional: true, regEx: SimpleSchema.RegEx.Id}
-});
+}));
 
 Matches.deny({
   insert: function(userId, doc) {
