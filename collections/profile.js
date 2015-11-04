@@ -186,11 +186,17 @@ var _activitySchema = new SimpleSchema({
     "role": fields.string({max: 160, optional: true}),
     "startDate": fields.date(o),
     "endDate": fields.date(o),
-    "years": fields.high_school_years({optional: true}),
+    "years": {type: new SimpleSchema({
+      "freshman": fields.bool(o),
+      "sophomore": fields.bool(o),
+      "junior": fields.bool(o),
+      "senior": fields.bool(o),
+      "continue": fields.bool(o)
+    }), optional: true},
     "hoursPerWeek": fields.number({max: 168, optional: true}),
     "weeksPerYear": fields.number({max: 52, optional: true}),
     "intentToPursue": fields.bool(o),
-    "description": fields.string({max: 160, optional: true}),
+    "description": fields.string({max: 300, optional: true}),
     "achievement": fields.string({max: 160, optional: true}),
     "type": fields.activity_type({optional: true}),
   })], optional: true}
@@ -202,7 +208,7 @@ var _volunteerSchema = new SimpleSchema({
     "position": fields.string({max: 160, optional: true}),
     "startDate": fields.date(o),
     "endDate": fields.date(o),
-    "summary": fields.string({max: 160, optional: true}),
+    "summary": fields.string({max: 300, optional: true}),
     "highlights": {type: [fields.string({max: 160})], optional: true}
   })]}
 });
@@ -223,7 +229,7 @@ var _essaySchema = new SimpleSchema({
 });
 
 var _recommendationSchema = new SimpleSchema({
-  "friendsAdjectives": fields.string({max: 140, optional: true}),
+  "friendsAdjectives": fields.string({max: 300, optional: true}),
   "recommenders": {type: [new SimpleSchema({
     "name": fields.name_part(o),
     "role": fields.recommender_role(o),
@@ -237,7 +243,7 @@ var _recommendationSchema = new SimpleSchema({
 var _preferenceSchema = new SimpleSchema({
   "dreamCollege": {type: new SimpleSchema({
     "name": fields.string({max: 140, optional: true}),
-    "reason": fields.string({max: 140, optional: true}),
+    "reason": fields.string({max: 300, optional: true}),
     "dreamCollegeId": fields.string({max: 140, optional: true}),
   }), optional: true},
 
@@ -327,7 +333,7 @@ var _intentionSchema = new SimpleSchema({
 var _metaFields = new SimpleSchema({
   "initialSurvey": {type: new SimpleSchema({
     "finished": fields.bool(o),
-    "evaluation": fields.string({allowedValues: ["Awesome", "Pretty good", "meh", "lame"], optional: true}),
+    "evaluation": fields.string({allowedValues: ["Great", "Pretty good", "Meh", "Lame"], optional: true}),
     "evaluationRecommend": fields.string({max: 140, optional: true}),
     "podcastGuest": fields.bool(o),
     "utm_medium": fields.string(o),
@@ -359,7 +365,7 @@ CollegeProfileSchema = new SimpleSchema({
   "name": fields.name_part({
     optional: true
   }),
-  "headline": {type: String, max: 160, optional: true},
+  "headline": {type: String, max: 300, optional: true},
   "location": {type: _locationSchema, optional: true},
   "demographics": {type: _demographicsSchema, optional: true},
   "parents": {type: _parentSchema, optional: true},
