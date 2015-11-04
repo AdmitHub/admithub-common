@@ -225,7 +225,14 @@ var _languageSchema = new SimpleSchema({
 
 var _essaySchema = new SimpleSchema({
   "personalEssay": fields.essay(o),
-  "additionalInformation": fields.essay(o)
+  "additionalInformation": fields.essay(o),
+  "personalTraits": {
+    type: new SimpleSchema({
+      "when": fields.string({optional: true}),
+      "where": fields.string({optional: true}),
+      "story": {type: [fields.string({optional: true})],optional: true}
+    })
+  }
 });
 
 var _recommendationSchema = new SimpleSchema({
@@ -344,6 +351,10 @@ var _metaFields = new SimpleSchema({
     "finished": fields.bool(o)
   }), optional: true},
   "resumeBot": {type: new SimpleSchema({
+    "skip": fields.bool(o),
+    "finished": fields.bool(o)
+  }), optional: true},
+  "essayBot": {type: new SimpleSchema({
     "skip": fields.bool(o),
     "finished": fields.bool(o)
   }), optional: true},
