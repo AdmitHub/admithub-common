@@ -304,6 +304,46 @@ var _essaySchema = new SimpleSchema({
     }),
     optional: true
   },
+  "failure": {
+    type: new SimpleSchema({
+      "failure": {type: String, optional: true},
+      "howOld": {type: String, optional: true},
+      "timeOfLife": {type: String, optional: true},
+      "learned": {type: String, optional: true}
+    }),
+    optional: true
+  },
+  "challengedBelief": {
+    type: new SimpleSchema({
+      "belief": {type: String, optional: true},
+      "why": {type: String, optional: true},
+      "difficultDecision": {type: Boolean, optional: true},
+      "difficultReasoning": {type: String, optional: true},
+      "story": {type: [{type: String, optional: true}],optional: true}
+    }),
+    optional: true
+  },
+  "problemSolved": {
+    type: new SimpleSchema({
+      "failed": {type: String, optional: true},
+      "knowNow": {type: String, optional: true},
+      "doneDifferently": {type: String, optional: true},
+      "solved": {type: String, optional: true},
+      "approach": {type: String, optional: true},
+      "outcome": {type: String, optional: true}
+    }),
+    optional: true
+  },
+  "accomplishment": {
+    type: new SimpleSchema({
+      "accomplishment": {type: String, optional: true},
+      "more": {type: String, optional: true},
+      "workHard": {type: Boolean, optional: true},
+      "workStory": {type: String, optional: true},
+      "comesEasy": {type: Boolean, optional: true}
+    }),
+    optional: true
+  }
 });
 
 var _recommendationSchema = new SimpleSchema({
