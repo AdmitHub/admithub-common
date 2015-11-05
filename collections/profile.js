@@ -228,11 +228,82 @@ var _essaySchema = new SimpleSchema({
   "additionalInformation": fields.essay(o),
   "personalTraits": {
     type: new SimpleSchema({
-      "when": fields.string({optional: true}),
-      "where": fields.string({optional: true}),
-      "story": {type: [fields.string({optional: true})],optional: true}
-    })
-  }
+      "when": {type: String, optional: true},
+      "where": {type: String, optional: true},
+      "story": {type: [{type: String, optional: true}],optional: true}
+    }),
+    optional: true
+  },
+  "idealDay": {
+    type: new SimpleSchema({
+      "start": fields.string({allowedValues: [
+        "Relax and sleep in",
+        "Get up early and seize the day"
+      ], optional: true}),
+      "activities": {
+        type: [new SimpleSchema({
+          "activity": {type: String, optional: true},
+          "why": {type: String, optional: true}
+        })],
+        optional: true
+      }
+    }),
+    optional: true
+  },
+  "advice": {
+    type: new SimpleSchema({
+      "rather": fields.string({allowedValues: [
+        "Give good advice",
+        "Get good advice",
+      ], optional: true}),
+      "why": {type: String, optional: true},
+      "story": {type: [{type: String, optional: true}],optional: true}
+    }),
+    optional: true
+  },
+  "loseOrTry": {
+    type: new SimpleSchema({
+      "rather": fields.string({allowedValues: [
+        "Always lose",
+        "Never try",
+      ], optional: true}),
+      "why": {type: String, optional: true},
+      "story": {type: [{type: String, optional: true}],optional: true}
+    }),
+    optional: true
+  },
+  "roommates": {
+    type: new SimpleSchema({
+      "info": {
+        type: [new SimpleSchema({
+          "important": {type: String, optional: true},
+          "why": {type: String, optional: true},
+        })],optional: true
+      },
+      "questions": {
+        type: [new SimpleSchema({
+          "prompt": {type: String, optional: true},
+          "reprompt": {type: String, optional: true},
+          "why": {type: String, optional: true},
+        })],
+        optional: true
+      }
+    }),
+    optional: true
+  },
+  "misc": {
+    type: new SimpleSchema({
+      "emoji": {type: String, optional: true},
+      "activities": {type: [new SimpleSchema({
+          "why": {type: String, optional: true},
+          "activity": {type: String, optional: true},
+          "story": {type: [{type: String, optional: true}],optional: true}
+        })],
+        optional: true
+      }
+    }),
+    optional: true
+  },
 });
 
 var _recommendationSchema = new SimpleSchema({
