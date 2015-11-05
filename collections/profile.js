@@ -381,7 +381,6 @@ CollegeProfileSchema = new SimpleSchema({
 
   "intentions": {type: _intentionSchema, optional: true},
   "recommendations": {type: _recommendationSchema, optional: true},
-
   "preferences": {type: _preferenceSchema, optional: true},
 
   "meta": {type: _metaFields, optional: true},

@@ -159,7 +159,7 @@ Meteor.users.before.update(function(userId, doc, fieldNames, modifier, options) 
         user = Meteor.users.findOne({
           "profile.phone": modifier.$set["profile.phone"],
           "phonePending": true
-        });
+        }); 
       }
 
       var wf = new Workflows.EmailConfirmationBot;
@@ -178,6 +178,15 @@ Meteor.users.before.update(function(userId, doc, fieldNames, modifier, options) 
           wf.name,
           "oli");
       }
+    });
+  }
+});
+
+Meteor.users.before.insert(function(userId, doc) {
+  var email = dotGet(doc, "emails.0.address");
+  if (doc.profile.subscribedToNewsletter && email) {
+    Meteor.call('addEmailToMailChimpList', email, function (error, result){
+      if (error){console.log(error)}
     });
   }
 });
