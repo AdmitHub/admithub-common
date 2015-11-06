@@ -43,6 +43,7 @@ Package.onUse(function(api) {
   api.addFiles('collections/testimonials.js');
   api.addFiles('collections/users.js');
   api.addFiles('collections/highschoolConversations.js');
+  api.addFiles('collections/recentlyAsked.js');
 
   api.export([
     'fields',
@@ -71,6 +72,7 @@ Package.onUse(function(api) {
     'Posts',
     'CeebCodes',
     'PendingEventReports',
-    'HighschoolConversations'
+    'HighschoolConversations',
+    'RecentlyAsked'
   ]);
 });
