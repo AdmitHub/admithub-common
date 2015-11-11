@@ -1,5 +1,6 @@
 SmsLogs = new Mongo.Collection("smslogs");
 SmsLogs.attachSchema(new SimpleSchema({
+  _id: {type: String, regEx: SimpleSchema.RegEx.Id},
   createdAt: {type: Date},
   incoming: {type: Boolean, defaultValue: false},
   inReplyTo: {type: String, optional: true},

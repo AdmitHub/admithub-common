@@ -1,5 +1,5 @@
 HighschoolConversations = new Mongo.Collection("highschoolConversations");
-HighschoolConversations.attachSchema({
+HighschoolConversations.attachSchema(new SimpleSchema({
   // userId reference
   userId: {type: String, regEx: SimpleSchema.RegEx.Id},
   highschoolId: {type: String, regEx: SimpleSchema.RegEx.Id},
@@ -40,4 +40,4 @@ HighschoolConversations.attachSchema({
     type: Boolean,
     optional: true
   }
-});
+}));
