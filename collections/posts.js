@@ -12,7 +12,8 @@ Posts.findMostSimilarPost = function(question) {
   return Posts.findOne({
     $text: {
       $search: question
-    }
+    },
+    status: Posts.STATUS_APPROVED
   }, {
     fields: {
       score: {$meta: "textScore"}
