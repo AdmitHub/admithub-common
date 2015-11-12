@@ -225,7 +225,125 @@ var _languageSchema = new SimpleSchema({
 
 var _essaySchema = new SimpleSchema({
   "personalEssay": fields.essay(o),
-  "additionalInformation": fields.essay(o)
+  "additionalInformation": fields.essay(o),
+  "personalTraits": {
+    type: new SimpleSchema({
+      "when": {type: String, optional: true},
+      "where": {type: String, optional: true},
+      "story": {type: [{type: String, optional: true}],optional: true}
+    }),
+    optional: true
+  },
+  "idealDay": {
+    type: new SimpleSchema({
+      "start": fields.string({allowedValues: [
+        "Relax and sleep in",
+        "Get up early and seize the day"
+      ], optional: true}),
+      "activities": {
+        type: [new SimpleSchema({
+          "activity": {type: String, optional: true},
+          "why": {type: String, optional: true}
+        })],
+        optional: true
+      }
+    }),
+    optional: true
+  },
+  "advice": {
+    type: new SimpleSchema({
+      "rather": fields.string({allowedValues: [
+        "Give good advice",
+        "Get good advice",
+      ], optional: true}),
+      "why": {type: String, optional: true},
+      "story": {type: [{type: String, optional: true}],optional: true}
+    }),
+    optional: true
+  },
+  "loseOrTry": {
+    type: new SimpleSchema({
+      "rather": fields.string({allowedValues: [
+        "Always lose",
+        "Never try",
+      ], optional: true}),
+      "why": {type: String, optional: true},
+      "story": {type: [{type: String, optional: true}],optional: true}
+    }),
+    optional: true
+  },
+  "roommates": {
+    type: new SimpleSchema({
+      "info": {
+        type: [new SimpleSchema({
+          "important": {type: String, optional: true},
+          "why": {type: String, optional: true},
+        })],optional: true
+      },
+      "questions": {
+        type: [new SimpleSchema({
+          "prompt": {type: String, optional: true},
+          "reprompt": {type: String, optional: true},
+          "why": {type: String, optional: true},
+        })],
+        optional: true
+      }
+    }),
+    optional: true
+  },
+  "misc": {
+    type: new SimpleSchema({
+      "emoji": {type: String, optional: true},
+      "activities": {type: [new SimpleSchema({
+          "why": {type: String, optional: true},
+          "activity": {type: String, optional: true},
+          "story": {type: [{type: String, optional: true}],optional: true}
+        })],
+        optional: true
+      }
+    }),
+    optional: true
+  },
+  "failure": {
+    type: new SimpleSchema({
+      "failure": {type: String, optional: true},
+      "howOld": {type: String, optional: true},
+      "timeOfLife": {type: String, optional: true},
+      "learned": {type: String, optional: true}
+    }),
+    optional: true
+  },
+  "challengedBelief": {
+    type: new SimpleSchema({
+      "belief": {type: String, optional: true},
+      "why": {type: String, optional: true},
+      "difficultDecision": {type: Boolean, optional: true},
+      "difficultReasoning": {type: String, optional: true},
+      "story": {type: [{type: String, optional: true}],optional: true}
+    }),
+    optional: true
+  },
+  "problemSolved": {
+    type: new SimpleSchema({
+      "failed": {type: String, optional: true},
+      "knowNow": {type: String, optional: true},
+      "doneDifferently": {type: String, optional: true},
+      "solved": {type: String, optional: true},
+      "approach": {type: String, optional: true},
+      "outcome": {type: String, optional: true}
+    }),
+    optional: true
+  },
+  "accomplishment": {
+    type: new SimpleSchema({
+      "accomplishment": {type: String, optional: true},
+      "more": {type: String, optional: true},
+      "workHard": {type: Boolean, optional: true},
+      "workStory": {type: String, optional: true},
+      "comesEasy": {type: Boolean, optional: true}
+    }),
+    optional: true
+  }
 });
 
 var _recommendationSchema = new SimpleSchema({
@@ -344,6 +462,10 @@ var _metaFields = new SimpleSchema({
     "finished": fields.bool(o)
   }), optional: true},
   "resumeBot": {type: new SimpleSchema({
+    "skip": fields.bool(o),
+    "finished": fields.bool(o)
+  }), optional: true},
+  "essayBot": {type: new SimpleSchema({
     "skip": fields.bool(o),
     "finished": fields.bool(o)
   }), optional: true},
