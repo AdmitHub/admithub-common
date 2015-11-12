@@ -141,46 +141,27 @@ Meteor.users.before.insert(function(userId, doc) {
 });
 
 Meteor.users.before.update(function(userId, doc, fieldNames, modifier, options) {
-  if (modifier && modifier.$set && modifier.$set["profile.phone"]) {
-    // FIXME
-    return;
-    modifier.$set.phonePending = true;
-    Meteor.defer(function() {
-      var user = Meteor.users.findOne({
-        "profile.phone": modifier.$set["profile.phone"],
-        "phonePending": {$ne: true}
-      });
-      if (user) {
-        var workflow = Workflows.push(user);
-        if (workflow) {
-          console.log('Ending workflow', "+1"+user.profile.phone, workflow.name, workflow.persona)
-          SMSLoadBalancer.endWorkflow("+1"+user.profile.phone, workflow.name, workflow.persona);
-        }
-      }
-      else {
-        user = Meteor.users.findOne({
-          "profile.phone": modifier.$set["profile.phone"],
-          "phonePending": true
-        });
-      }
-
-      var wf = new Workflows.EmailConfirmationBot;
-      if (!SmsValidations.methods.getValidation(user.profile.phone)) {
-        var validation = SmsValidations.methods.newValidation(user.profile.phone);
-        var message = SmsValidations.methods.prompt(validation);
-        SMSLoadBalancer.sendSMS("+1"+user.profile.phone,
-          message,
-          wf.name,
-          "oli");
-      }
-      else {
-        wf.initialize(user);
-        SMSLoadBalancer.sendSMS("+1"+user.profile.phone,
-          wf.run().text.join(" "),
-          wf.name,
-          "oli");
-      }
-    });
+  // Set 'phonePending' if this update changes the phone number.
+  if (modifier && modifier.$set) {
+    // flatten, so that we can check for both 
+    //     {$set: {"profile.phone": <num>}}
+    // and {$set: {profile: {phone: <num>, ...}}}
+    var flatSet = dotFlatten(modifier.$set);
+    if (flatSet["profile.phone"] &&
+        (flatSet["profile.phone"] !== dotGet(doc, "profile.phone")) &&
+        (!modifier.$unset || !modifier.$unset.hasOwnProperty("phonePending"))) {
+      modifier.$set.phonePending = true;
+    }
+  }
+});
+Meteor.users.after.update(function(userId, doc, fieldNames, modifier, options) {
+  // If we just changed the phone number, 
+  var currentPhone = dotGet(doc, "profile.phone");
+  var previousPhone = dotGet(this.previous, "profile.phone");
+  var cleanCurrent = currentPhone && cleanPhone(currentPhone);
+  var cleanPrevious = previousPhone && cleanPhone(previousPhone);
+  if (cleanCurrent && doc.phonePending && (cleanPrevious !== cleanCurrent)) {
+    return Meteor.call("initiatePhoneConfirmation", doc._id);      
   }
 });
 

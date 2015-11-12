@@ -484,6 +484,9 @@ CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, option
   var userInputDreamCollege = flat["preferences.dreamCollege.name"];
 
   if (userInputDreamCollege && dotGet(doc, "preferences.dreamCollege.dreamCollegeId") === undefined) {
+    // WARNING: if you change the logic to either the vanilla node or meteor
+    // variants here, be sure to change the other and test in both oli and
+    // college-chooser!
     if (Meteor.isVanillaNode) {
       // Run async with promise.
       return Colleges.findByName(userInputDreamCollege).then(function(doc) {
