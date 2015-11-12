@@ -18,7 +18,7 @@ UserSchema = new SimpleSchema({
       return [];
     })
   },
-  "emails.$.address": {type: String, regEx: SimpleSchema.RegEx.Email},
+  "emails.$.address": {type: String, regEx: SimpleSchema.RegEx.Email, optional: true},
   "emails.$.verified": {type: Boolean},
   "emails.$.smsVerifyCode": {type: String, optional: true},
   "email_hash": {type: String, optional: true},
