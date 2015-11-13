@@ -410,7 +410,7 @@ var _preferenceSchema = new SimpleSchema({
   }), optional: true},
 
   "food": {type: new SimpleSchema({
-    "shitty": fields.bool(o),
+    "shitty": fields.bool({label: "Don't Care", optional: true}),
     "good": fields.bool(o),
     "gourmet": fields.bool(o)
   }), optional: true},
@@ -422,7 +422,7 @@ var _preferenceSchema = new SimpleSchema({
   }), optional: true},
 
   "nightLife": {type: new SimpleSchema({
-    "dorm": fields.bool(o),
+    "dorm": fields.bool({label: "Chill", optional: true}),
     "bigGame": fields.bool(o),
     "party": fields.bool(o),
     "show": fields.bool(o)
