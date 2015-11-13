@@ -226,6 +226,7 @@ var _languageSchema = new SimpleSchema({
 var _essaySchema = new SimpleSchema({
   "personalEssay": fields.essay(o),
   "additionalInformation": fields.essay(o),
+  "driveFolderId": {type: String, optional: true, autoform: {type: "hidden"}},
   "personalTraits": {
     type: new SimpleSchema({
       "when": {type: String, optional: true},
