@@ -479,34 +479,57 @@ CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, option
 });
 
 CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, options) {
+  // flatten $set and $unset so that we can key into them in a consistent
+  // fashion, even if they're doing $set: {preferences: {dreamCollege: ...}
   var set = modifier.$set || {};
-  var flat = dotFlatten(set);
-  var userInputDreamCollege = flat["preferences.dreamCollege.name"];
+  var unset = modifier.$unset || {};
+  var flatSet = dotFlatten(set);
+  var flatUnset = dotFlatten(unset);
 
-  if (userInputDreamCollege && dotGet(doc, "preferences.dreamCollege.dreamCollegeId") === undefined) {
+  // Note that userId refers to the executing user, which may not be the same
+  // as the profile's user (e.g. admin updating the doc).
+  var profileUserId = doc.userId;
+  var newDreamCollegeName = flatSet["preferences.dreamCollege.name"];
+
+  var isUnsetting = flatUnset.hasOwnProperty("preferences.dreamCollege.name") || (
+    newDreamCollegeName === "" || newDreamCollegeName === null
+  );
+
+  var isSetting = !!flatSet["preferences.dreamCollege.name"] && (
+    flatSet["preferences.dreamCollege.name"] !== dot.get(doc, "preferences.dreamCollege.name")
+  );
+
+  // Unset dream college ID if we're unsetting the name.
+  if (isUnsetting) {
+    modifier.$unset = modifier.$unset || {};
+    modifier.$unset["preferences.dreamCollege.dreamCollegeId"] = "";
+    // Note: we do not remove the "bot match" or likes when unsetting dream
+    // college id.
+  }
+  if (isSetting) {
     // WARNING: if you change the logic to either the vanilla node or meteor
     // variants here, be sure to change the other and test in both oli and
     // college-chooser!
+    var similarityCutoff = 1.2;
+    modifier.$set = modifier.$set || {};
+
     if (Meteor.isVanillaNode) {
       // Run async with promise.
-      return Colleges.findByName(userInputDreamCollege).then(function(doc) {
-        if (doc && doc.score < 1.5) {
-          modifier.$set = modifier.$set || {};
-          modifier.$set["preferences.dreamCollege.dreamCollegeId"] = doc._id;
+      return Colleges.findByName(newDreamCollegeName).then(function(dream) {
+        if (dream && dream.score >= similarityCutoff) {
+          modifier.$set["preferences.dreamCollege.dreamCollegeId"] = dream._id;
+          return Meteor.call('createBotMatch', {
+            userId: profileUserId, collegeId: dream._id
+          });
         }
       });
     } else {
-      // Run with meteor method.
-      Meteor.call('findDreamCollegeId', userInputDreamCollege, function(err, result) {
-        if (err) {
-          console.log(err)
-          //if userinput is shorter than 5 char its abbrev without good match
-        } else if (result && result.length > 0 &&
-                   userInputDreamCollege && userInputDreamCollege.length > 3) {
-          dotSet(modifier, "$set.preferences.dreamCollege.dreamCollegeId", result);
-          Meteor.call('createBotMatch', userId, result);
-        }
-      });
+      // Run with sync in fiber.
+      var dream = Colleges.findByName(newDreamCollegeName);
+      if (dream && dream.score >= similarityCutoff) {
+        modifier.$set["preferences.dreamCollege.dreamCollegeId"] = dream._id;
+        Meteor.call("createBotMatch", profileUserId, dream._id);
+      }
     }
   }
 });
