@@ -16,10 +16,11 @@ UserSchema = new SimpleSchema({
     type: [Object],
     autoValue: fields.callableDefaultValue(function() {
       return [];
-    })
+    }),
+    optional: true
   },
-  "emails.$.address": {type: String, regEx: SimpleSchema.RegEx.Email},
-  "emails.$.verified": {type: Boolean},
+  "emails.$.address": {type: String, regEx: SimpleSchema.RegEx.Email, optional: true},
+  "emails.$.verified": {type: Boolean, optional: true},
   "emails.$.smsVerifyCode": {type: String, optional: true},
   "email_hash": {type: String, optional: true},
   "createdAt": fields.created_date(),
