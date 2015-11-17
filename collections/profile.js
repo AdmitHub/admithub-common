@@ -639,3 +639,48 @@ collegeProfileCountAnsweredQuestions = function(collegeProfile) {
   countAnswers(clone);
   return total;
 }
+
+getFirstContact = function(match) {
+  var location = dotGet(match, "encounters.0.location");
+  var eventId = dotGet(match, "encounters.0.eventId");
+  if (location == "sms") {
+    var event = CollegeEvents.findOne(eventId);
+    if (event) {
+      return event.name;
+      }
+      else {
+        return "SMS";
+      }
+    }
+  else {
+    return "Web";
+  }
+}
+
+CollegeProfiles.getUserData = function(user, profile, match) {
+  var created = dotGet(match, "created") || dotGet(profile, "created");
+  created = moment(created).format("MMM Do YYYY, h:mm A");
+  return {
+    "Created At": created,
+    "First Contact": getFirstContact(match),
+    "Email Address": dotGet(user, "emails.0.address") || "",
+    "Date of Birth": dotGet(profile, "demographics.dateOfBirth") ? moment(dotGet(profile, "demographics.dateOfBirth")).format('M-D-YYYY') : "",
+    "First Name": dotGet(profile, "firstName") || "",
+    "Last Name": dotGet(profile, "lastName") || "",
+    "Description": dotGet(profile, "description") || "",
+    "Zip Code": dotGet(profile, "location.zip") ? dotGet(profile, "location.zip") : "",
+    "City": dotGet(profile, "location.city") || "",
+    "State": dotGet(profile, "location.state") || "",
+    "Street Address": dotGet(profile, "location.address") || "",
+    "High School": dotGet(profile, "highschool.current.name") || "",
+    "CEEB Code": dotGet(profile, "highschool.current.ceeb") || "",
+    "Expected Year of Graduation": dotGet(profile, "highschool.expectedGraduationYear") || "",
+    "GPA": dotGet(profile, "highschool.gpaGeneral.gpa") || "",
+    "SAT": dotGet(profile, "tests.sat.composite") || "",
+    "ACT": dotGet(profile, "tests.act.composite") || "",
+    "Intended Major": dotGet(profile, "intentions.intendToStudy") || "",
+    "College Transfer": dotGet(profile, "demographics.transfer") ? "Yes" : "No",
+    "Most Recent College": dotGet(profile, "demographics.mostRecentCollege") || "",
+    "Contactable": dotGet(profile, "contactable") || ""
+  }
+}
