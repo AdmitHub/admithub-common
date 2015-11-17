@@ -507,12 +507,12 @@ CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, option
     // college id.
   }
   if (isSetting) {
-    // WARNING: if you change the logic to either the vanilla node or meteor
-    // variants here, be sure to change the other and test in both oli and
-    // college-chooser!
     var similarityCutoff = 1.2;
     modifier.$set = modifier.$set || {};
 
+    // WARNING: if you change the logic to either the vanilla node or meteor
+    // variants here, be sure to change the other and test in both oli and
+    // college-chooser!
     if (Meteor.isVanillaNode) {
       // Run async with promise.
       return Colleges.findByName(newDreamCollegeName).then(function(dream) {
@@ -524,7 +524,8 @@ CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, option
         }
       });
     } else {
-      // Run with sync in fiber.
+      // Run with sync in fiber.  FIXME -- need to put in meteor method as the
+      // text search won't work on client....
       var dream = Colleges.findByName(newDreamCollegeName);
       if (dream && dream.score >= similarityCutoff) {
         modifier.$set["preferences.dreamCollege.dreamCollegeId"] = dream._id;
