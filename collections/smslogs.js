@@ -7,7 +7,7 @@ SmsLogs.attachSchema(new SimpleSchema({
   messageSid: {type: String, optional: true},
   smsSid: {type: String, optional: true},
   accountSid: {type: String, optional: true},
-  to: {type: String},
+  to: {type: String, optional: true},
   from: {type: String, optional: true},
   body: {type: String, optional: true},
   mediaFiles: {type: [Object], optional: true},
@@ -16,5 +16,6 @@ SmsLogs.attachSchema(new SimpleSchema({
   "mediaFiles.$.deleted": {type: Boolean, defaultValue: false},
   userId: {type: String, optional: true},
   workflow: {type: String, optional: true},
-  error: {type: Boolean, defaultValue: false}
+  error: {type: Boolean, defaultValue: false},
+  transport: {type: String, allowedValues: ["web", "twilio"], optional: false}
 }));
