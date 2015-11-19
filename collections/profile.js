@@ -354,7 +354,12 @@ var _recommendationSchema = new SimpleSchema({
     "name": fields.name_part(o),
     "role": fields.recommender_role(o),
     "subjects": fields.string(o),
-    "grades": fields.high_school_years(o),
+    "grades": {type: new SimpleSchema({
+      "freshman": fields.bool(o),
+      "sophomore": fields.bool(o),
+      "junior": fields.bool(o),
+      "senior": fields.bool(o)
+    }), optional: true},
     "favoriteAcademicLesson": fields.string(o),
     "fondestPersonalMemory": fields.string(o)
   })], optional: true}
