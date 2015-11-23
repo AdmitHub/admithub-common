@@ -43,7 +43,7 @@ var _testRange = new SimpleSchema({
 });
 
 CollegeSchema = new SimpleSchema({
-  "_id": {type: String, regEx: SimpleSchema.RegEx.Id},
+  "_id": {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   "idNumber": {type: Number},
   "name": {type: String},
   "slug": {type: String, regEx: /^[-a-z0-9]+$/, unique: true},

@@ -1,6 +1,6 @@
 CollegeOfficers = new Mongo.Collection("collegeofficers");
 CollegeOfficers.attachSchema(new SimpleSchema({
-  _id: {type: String, regEx: SimpleSchema.RegEx.Id},
+  _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   // collegeID reference
   collegeId: {
     type: String,

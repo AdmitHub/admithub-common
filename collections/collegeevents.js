@@ -1,7 +1,7 @@
 CollegeEvents = new Mongo.Collection("collegeevents");
 
 CollegeEvents.attachSchema(new SimpleSchema({
-  _id: {type: String, regEx: SimpleSchema.RegEx.Id},
+  _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   name: {
     type: String
   },

@@ -1,13 +1,12 @@
 Package.describe({
   name: "admithub:admithub-common",
   summary: "Common styles, templates, and libraries for AdmitHub sites",
-  version: "0.0.7",
+  version: "0.1.1",
   git: "https://github.com/AdmitHub/admithub-common.git"
 });
 
 Npm.depends({
-  'zipcodes': '1.1.1',
-  "dot-get": "1.0.0"
+  'zipcodes': '1.1.1'
 });
 
 Package.onUse(function(api) {
@@ -18,16 +17,18 @@ Package.onUse(function(api) {
     'templating',
     'underscore',
 
+    'admithub:dot-get@1.0.0',
     'aldeed:simple-schema@1.3.3',
     'aldeed:collection2@2.5.0',
     'aldeed:autoform@5.5.1',
     'matb33:collection-hooks@0.8.0',
-    'mquandalle:bower'
+    'meteorhacks:npm',
+    'mquandalle:bower@1.5.2'
   ]);
 
   api.addFiles('lib/_fields.js', ['client', 'server']);
   api.addFiles('lib/helpers.js', ['client', 'server']);
-  api.addFiles('lib/ui.js', ['client']);
+  api.addFiles('lib/ui.js', 'client');
   api.addFiles('lib/simpleSchema.js');
   api.addFiles('collections/ceebCodes.js');
   api.addFiles('collections/collegeevents.js');
@@ -49,8 +50,6 @@ Package.onUse(function(api) {
   api.export([
     'fields',
     'slugify', 'unslugify',
-    'dotGet', 'dotSet', 'dotClear', 'dotFlatten',
-    'mongoReplacementModifier',
     'quoteRe',
     'yesOrNo',
     'formatPhone',

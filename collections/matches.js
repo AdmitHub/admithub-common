@@ -1,6 +1,6 @@
 Matches = new Mongo.Collection('matches');
 Matches.attachSchema(new SimpleSchema({
-  "_id": {type: String, regEx: SimpleSchema.RegEx.Id},
+  "_id": {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   "collegeId": {type: String, regEx: SimpleSchema.RegEx.Id},
   "userId": {type: String, regEx: SimpleSchema.RegEx.Id},
   "created": fields.created_date(),

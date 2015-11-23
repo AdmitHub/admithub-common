@@ -1,6 +1,6 @@
 HighschoolConversations = new Mongo.Collection("highschoolConversations");
 HighschoolConversations.attachSchema(new SimpleSchema({
-  _id: {type: String, regEx: SimpleSchema.RegEx.Id},
+  _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   // userId reference
   userId: {type: String, regEx: SimpleSchema.RegEx.Id},
   highschoolId: {type: String, regEx: SimpleSchema.RegEx.Id},

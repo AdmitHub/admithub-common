@@ -1,7 +1,7 @@
 Highschools = new Mongo.Collection("highschools");
 Highschools.attachSchema(new SimpleSchema({
   // userId reference
-  _id: {type: String, regEx: SimpleSchema.RegEx.Id},
+  _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   name: {type: String, unique: true},
   incomingPhoneNumber: fields.phone_number({optional: true}),
   counselors: {
