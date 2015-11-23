@@ -416,7 +416,7 @@ var _preferenceSchema = new SimpleSchema({
   }), optional: true},
 
   "food": {type: new SimpleSchema({
-    "shitty": fields.bool(o),
+    "shitty": fields.bool({label: "Don't Care", optional: true}),
     "good": fields.bool(o),
     "gourmet": fields.bool(o)
   }), optional: true},
@@ -428,7 +428,7 @@ var _preferenceSchema = new SimpleSchema({
   }), optional: true},
 
   "nightLife": {type: new SimpleSchema({
-    "dorm": fields.bool(o),
+    "dorm": fields.bool({label: "Chill", optional: true}),
     "bigGame": fields.bool(o),
     "party": fields.bool(o),
     "show": fields.bool(o)
@@ -472,6 +472,10 @@ var _metaFields = new SimpleSchema({
     "skip": fields.bool(o),
     "finished": fields.bool(o)
   }), optional: true},
+  "essayBot": {type: new SimpleSchema({
+    "skip": fields.bool(o),
+    "finished": fields.bool(o)
+  }), optional: true},
   "questionBot": {type: new SimpleSchema({
     "skip": fields.bool(o),
     "finished": fields.bool(o)
@@ -507,7 +511,6 @@ CollegeProfileSchema = new SimpleSchema({
 
   "intentions": {type: _intentionSchema, optional: true},
   "recommendations": {type: _recommendationSchema, optional: true},
-
   "preferences": {type: _preferenceSchema, optional: true},
 
   "meta": {type: _metaFields, optional: true},
@@ -692,3 +695,73 @@ CollegeProfiles.countAnsweredQuestions = function(collegeProfile) {
   countAnswers(clone);
   return total;
 }
+
+getFirstContact = function(match) {
+  var location = dotGet(match, "encounters.0.location");
+  var eventId = dotGet(match, "encounters.0.eventId");
+  if (location == "sms") {
+    var event = CollegeEvents.findOne(eventId);
+    if (event) {
+      return event.name;
+      }
+      else {
+        return "SMS";
+      }
+    }
+  else {
+    return "Web";
+  }
+}
+
+CollegeProfiles.getUserData = function(user, profile, match) {
+  var created = dotGet(match, "created") || dotGet(profile, "created");
+  created = moment(created).format("MMM Do YYYY, h:mm A");
+  return {
+    "Created At": "\""+created+"\"",
+    "First Contact": getFirstContact(match),
+    "Email Address": dotGet(user, "emails.0.address") || "",
+    "Date of Birth": dotGet(profile, "demographics.dateOfBirth") ? moment(dotGet(profile, "demographics.dateOfBirth")).format('M-D-YYYY') : "",
+    "First Name": dotGet(profile, "firstName") || "",
+    "Last Name": dotGet(profile, "lastName") || "",
+    "Description": dotGet(profile, "description") || "",
+    "Zip Code": dotGet(profile, "location.zip") ? dotGet(profile, "location.zip") : "",
+    "City": dotGet(profile, "location.city") || "",
+    "State": dotGet(profile, "location.state") || "",
+    "Street Address": dotGet(profile, "location.address") || "",
+    "High School": dotGet(profile, "highschool.current.name") || "",
+    "CEEB Code": dotGet(profile, "highschool.current.ceeb") || "",
+    "Expected Year of Graduation": dotGet(profile, "highschool.expectedGraduationYear") || "",
+    "GPA": dotGet(profile, "highschool.gpaGeneral.gpa") || "",
+    "SAT": dotGet(profile, "tests.sat.composite") || "",
+    "ACT": dotGet(profile, "tests.act.composite") || "",
+    "Intended Major": dotGet(profile, "intentions.intendToStudy") || "",
+    "College Transfer": dotGet(profile, "demographics.transfer") ? "Yes" : "No",
+    "Most Recent College": dotGet(profile, "demographics.mostRecentCollege") || "",
+    "Contactable": dotGet(profile, "contactable") || ""
+  }
+};
+
+CollegeProfiles.getHighschoolStudentData = function(user, profile) {
+  return {
+    "Created At": moment(dotGet(profile, "created")).format("MMM Do YYYY, h:mm A"),
+    "Email Address": dotGet(user, "emails.0.address") || "",
+    "Date of Birth": dotGet(profile, "demographics.dateOfBirth") ? moment(dotGet(profile, "demographics.dateOfBirth")).format('M-D-YYYY') : "",
+    "First Name": dotGet(profile, "firstName") || "",
+    "Last Name": dotGet(profile, "lastName") || "",
+    "Description": dotGet(profile, "description") || "",
+    "Zip Code": dotGet(profile, "location.zip") ? dotGet(profile, "location.zip") : "",
+    "City": dotGet(profile, "location.city") || "",
+    "State": dotGet(profile, "location.state") || "",
+    "Street Address": dotGet(profile, "location.address") || "",
+    "High School": dotGet(profile, "highschool.current.name") || "",
+    "CEEB Code": dotGet(profile, "highschool.current.ceeb") || "",
+    "Expected Year of Graduation": dotGet(profile, "highschool.expectedGraduationYear") || "",
+    "GPA": dotGet(profile, "highschool.gpaGeneral.gpa") || "",
+    "SAT": dotGet(profile, "tests.sat.composite") || "",
+    "ACT": dotGet(profile, "tests.act.composite") || "",
+    "Intended Major": dotGet(profile, "intentions.intendToStudy") || "",
+    "College Transfer": dotGet(profile, "demographics.transfer") ? "Yes" : "No",
+    "Most Recent College": dotGet(profile, "demographics.mostRecentCollege") || "",
+    "Contactable": dotGet(profile, "contactable") || ""
+  }
+};
