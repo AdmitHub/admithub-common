@@ -6,7 +6,8 @@ Package.describe({
 });
 
 Npm.depends({
-  'zipcodes': '1.1.1'
+  'zipcodes': '1.1.1',
+  'twilio': '2.1.0'
 });
 
 Package.onUse(function(api) {
@@ -26,8 +27,8 @@ Package.onUse(function(api) {
     'mquandalle:bower@1.5.2'
   ]);
 
-  api.addFiles('lib/_fields.js', ['client', 'server']);
-  api.addFiles('lib/helpers.js', ['client', 'server']);
+  api.addFiles('lib/_fields.js');
+  api.addFiles('lib/helpers.js');
   api.addFiles('lib/ui.js', 'client');
   api.addFiles('lib/simpleSchema.js');
   api.addFiles('collections/ceebCodes.js');
@@ -47,31 +48,36 @@ Package.onUse(function(api) {
   api.addFiles('collections/highschoolConversations.js');
   api.addFiles('collections/recentlyAsked.js');
 
+  api.addFiles('server/indexes.js', 'server');
+  api.addFiles('server/methods.js', 'server');
+  api.addFiles('server/oli.js', 'server');
+
   api.export([
-    'fields',
-    'slugify', 'unslugify',
-    'quoteRe',
-    'yesOrNo',
-    'formatPhone',
-    'UserSchema',
-    'CollegeSchema',
-    'CollegeProfileSchema',
-    'CollegeOfficers',
-    'Colleges',
-    'Highschools',
-    'Matches',
+    'CeebCodes',
+    'CollegeEvents',
     'CollegeProfiles',
-    'SmsLogs',
-    'CollegesInMemory',
+    'CollegeProfileSchema',
     'collegeProfileCountAnsweredQuestions',
+    'CollegeOfficers',
+    'CollegesInMemory',
+    'CollegeSchema',
+    'Colleges',
+    'fields',
+    'formatPhone',
+    'HighschoolConversations',
+    'Highschools',
+    'Leads',
+    'Matches',
+    'Oli',
+    'PendingEventReports',
+    'Posts',
+    'quoteRe',
+    'RecentlyAsked',
+    'slugify', 'unslugify',
+    'SmsLogs',
     'Sponsors',
     'Testimonials',
-    'Leads',
-    'CollegeEvents',
-    'Posts',
-    'CeebCodes',
-    'PendingEventReports',
-    'HighschoolConversations',
-    'RecentlyAsked'
+    'UserSchema',
+    'yesOrNo',
   ]);
 });
