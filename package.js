@@ -45,7 +45,7 @@ Package.onUse(function(api) {
   api.addFiles('collections/users.js');
   api.addFiles('collections/highschoolConversations.js');
   api.addFiles('collections/recentlyAsked.js');
-  api.addFiles('server/methods.js');
+  api.addFiles('server/methods.js',['server']);
 
   api.export([
     'fields',
