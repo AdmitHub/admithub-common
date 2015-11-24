@@ -1,5 +1,8 @@
 {
   "dependencies": {
+    "fuzzy": {
+      "version": "0.1.1"
+    },
     "twilio": {
       "version": "2.1.0",
       "dependencies": {

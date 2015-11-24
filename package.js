@@ -7,7 +7,8 @@ Package.describe({
 
 Npm.depends({
   'zipcodes': '1.1.1',
-  'twilio': '2.1.0'
+  'twilio': '2.1.0',
+  'fuzzy': '0.1.1'
 });
 
 Package.onUse(function(api) {
@@ -23,13 +24,13 @@ Package.onUse(function(api) {
     'aldeed:collection2@2.5.0',
     'aldeed:autoform@5.5.1',
     'matb33:collection-hooks@0.8.0',
-    'meteorhacks:npm',
-    'mquandalle:bower@1.5.2'
+    'meteorhacks:npm'
   ]);
+
+  api.addFiles('lib/ui.js', 'client');
 
   api.addFiles('lib/_fields.js');
   api.addFiles('lib/helpers.js');
-  api.addFiles('lib/ui.js', 'client');
   api.addFiles('lib/simpleSchema.js');
   api.addFiles('collections/ceebCodes.js');
   api.addFiles('collections/collegeevents.js');
