@@ -697,7 +697,7 @@ CollegeProfiles.countAnsweredQuestions = function(collegeProfile) {
   return total;
 }
 
-getFirstContact = function(match) {
+var getFirstContact = function(match) {
   var location = dotGet(match, "encounters.0.location");
   var eventId = dotGet(match, "encounters.0.eventId");
   if (location == "sms") {
