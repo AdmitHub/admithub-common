@@ -49,6 +49,7 @@ Package.onUse(function(api) {
   api.addFiles('collections/highschoolConversations.js');
   api.addFiles('collections/recentlyAsked.js');
 
+  api.addFiles('server/collegesInMemory.js', 'server');
   api.addFiles('server/indexes.js', 'server');
   api.addFiles('server/methods.js', 'server');
   api.addFiles('server/oli.js', 'server');
