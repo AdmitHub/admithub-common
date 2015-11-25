@@ -7,8 +7,7 @@ Package.describe({
 
 Npm.depends({
   'zipcodes': '1.1.1',
-  'twilio': '2.1.0',
-  'fuzzy': '0.1.1'
+  'twilio': '2.1.0'
 });
 
 Package.onUse(function(api) {
