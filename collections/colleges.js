@@ -298,3 +298,4 @@ Colleges.findByName = function(name) {
     sort: {score: {$meta: "textScore"}}
   });
 };
+Colleges.FIND_BY_NAME_CUTOFF = 1.2;
