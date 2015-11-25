@@ -77,6 +77,7 @@ Package.onUse(function(api) {
     'SmsLogs',
     'Sponsors',
     'Testimonials',
+    'twilioValidatedCallback',
     'UserSchema',
     'yesOrNo',
   ]);
