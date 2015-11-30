@@ -19,17 +19,19 @@ SmsLogs.attachSchema(new SimpleSchema({
   error: {type: Boolean, defaultValue: false},
   transport: {type: String, allowedValues: ["web", "twilio"], optional: false}
 }));
-SmsLogs.allow({
-  insert: function(userId, doc) {
-    return (
-      doc.userId === userId &&
-      !!doc.body &&
-      doc.transport === "web" &&
-      doc.incoming === true &&
-      _.none([
-        doc.messageSid, doc.smsSid, doc.accountSid,
-        doc.from, doc.to, doc.mediaFiles, doc.error
-      ])
-    );
-  }
-});
+if (Meteor.isServer) {
+  SmsLogs.allow({
+    insert: function(userId, doc) {
+      return (
+        doc.userId === userId &&
+        !!doc.body &&
+        doc.transport === "web" &&
+        doc.incoming === true &&
+        !_.any([
+          doc.messageSid, doc.smsSid, doc.accountSid,
+          doc.from, doc.to, doc.mediaFiles, doc.error
+        ])
+      );
+    }
+  });
+}
