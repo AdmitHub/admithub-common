@@ -114,7 +114,7 @@ Oli = {
       next();
     } else {
       if (Meteor.isDevelopment) {
-        logger.error("Twilio auth failed.");
+        logger.error("Twilio auth failed; but allowing anyway, because isDevelopment is true");
         next();
       } else {
         res.writeHead(401, {"Content-Type": "text/plain"});
