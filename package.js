@@ -35,6 +35,7 @@ Package.onUse(function(api) {
   api.addFiles('collections/collegeevents.js');
   api.addFiles('collections/collegeOfficers.js');
   api.addFiles('collections/colleges.js');
+  api.addFiles('collections/heartbeat.js');
   api.addFiles('collections/highschools.js');
   api.addFiles('collections/leads.js');
   api.addFiles('collections/matches.js');
@@ -65,6 +66,7 @@ Package.onUse(function(api) {
     'Colleges',
     'fields',
     'formatPhone',
+    'Heartbeats',
     'HighschoolConversations',
     'Highschools',
     'Leads',
