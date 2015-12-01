@@ -388,9 +388,9 @@ var _preferenceSchema = new SimpleSchema({
   }), optional: true},
 
   "weather": {type: new SimpleSchema({
-    "flipFlops": fields.bool(o),
-    "allSeasons": fields.bool(o),
-    "frozenTundra": fields.bool(o),
+    "flipFlops": fields.bool({label: "Warm", optional: true}),
+    "allSeasons": fields.bool({label: "Mild", optional: true}),
+    "frozenTundra": fields.bool({label: "All Seasons", optional: true}),
   }), optional: true},
 
   "size": {type: new SimpleSchema({
@@ -403,7 +403,7 @@ var _preferenceSchema = new SimpleSchema({
     "big": fields.bool(o),
     "medium": fields.bool(o),
     "small": fields.bool(o),
-    "sticks": fields.bool(o),
+    "sticks": fields.bool({label: "Tiny", optional: true}),
     "irrelevant": fields.bool(o)
   }), optional: true},
 
@@ -431,7 +431,7 @@ var _preferenceSchema = new SimpleSchema({
     "dorm": fields.bool({label: "Chill", optional: true}),
     "bigGame": fields.bool(o),
     "party": fields.bool(o),
-    "show": fields.bool(o)
+    "show": fields.bool({label: "Concert", optional: true})
   }), optional: true},
 
   "car": fields.bool(o),
