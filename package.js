@@ -84,7 +84,6 @@ Package.onUse(function(api) {
     'Snapshots',
     'Sponsors',
     'Testimonials',
-    'twilioValidatedCallback',
     'UnverifiedEmailMessages',
     'UserSchema',
     'VerifiedCollegeEmails',
