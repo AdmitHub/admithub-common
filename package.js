@@ -82,7 +82,6 @@ Package.onUse(function(api) {
     'SmsLogs',
     'Sponsors',
     'Testimonials',
-    'twilioValidatedCallback',
     'UnverifiedEmailMessages',
     'UserSchema',
     'VerifiedCollegeEmails',
