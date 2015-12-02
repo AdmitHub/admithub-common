@@ -35,6 +35,7 @@ Package.onUse(function(api) {
   api.addFiles('collections/collegeevents.js');
   api.addFiles('collections/collegeOfficers.js');
   api.addFiles('collections/colleges.js');
+  api.addFiles('collections/heartbeat.js');
   api.addFiles('collections/highschools.js');
   api.addFiles('collections/leads.js');
   api.addFiles('collections/matches.js');
@@ -47,6 +48,8 @@ Package.onUse(function(api) {
   api.addFiles('collections/users.js');
   api.addFiles('collections/highschoolConversations.js');
   api.addFiles('collections/recentlyAsked.js');
+  api.addFiles('collections/unverifiedEmailMessages.js');
+  api.addFiles('collections/verifiedCollegeEmails.js');
 
   api.addFiles('server/collegesInMemory.js', 'server');
   api.addFiles('server/indexes.js', 'server');
@@ -65,6 +68,7 @@ Package.onUse(function(api) {
     'Colleges',
     'fields',
     'formatPhone',
+    'Heartbeats',
     'HighschoolConversations',
     'Highschools',
     'Leads',
@@ -78,7 +82,10 @@ Package.onUse(function(api) {
     'SmsLogs',
     'Sponsors',
     'Testimonials',
+    'twilioValidatedCallback',
+    'UnverifiedEmailMessages',
     'UserSchema',
+    'VerifiedCollegeEmails',
     'yesOrNo',
   ]);
 });
