@@ -23,18 +23,19 @@ Package.onUse(function(api) {
     'aldeed:collection2@2.5.0',
     'aldeed:autoform@5.5.1',
     'matb33:collection-hooks@0.8.0',
-    'meteorhacks:npm',
-    'mquandalle:bower@1.5.2'
+    'meteorhacks:npm'
   ]);
+
+  api.addFiles('lib/ui.js', 'client');
 
   api.addFiles('lib/_fields.js');
   api.addFiles('lib/helpers.js');
-  api.addFiles('lib/ui.js', 'client');
   api.addFiles('lib/simpleSchema.js');
   api.addFiles('collections/ceebCodes.js');
   api.addFiles('collections/collegeevents.js');
   api.addFiles('collections/collegeOfficers.js');
   api.addFiles('collections/colleges.js');
+  api.addFiles('collections/heartbeat.js');
   api.addFiles('collections/highschools.js');
   api.addFiles('collections/leads.js');
   api.addFiles('collections/matches.js');
@@ -50,6 +51,7 @@ Package.onUse(function(api) {
   api.addFiles('collections/unverifiedEmailMessages.js');
   api.addFiles('collections/verifiedCollegeEmails.js');
 
+  api.addFiles('server/collegesInMemory.js', 'server');
   api.addFiles('server/indexes.js', 'server');
   api.addFiles('server/methods.js', 'server');
   api.addFiles('server/oli.js', 'server');
@@ -66,6 +68,7 @@ Package.onUse(function(api) {
     'Colleges',
     'fields',
     'formatPhone',
+    'Heartbeats',
     'HighschoolConversations',
     'Highschools',
     'Leads',

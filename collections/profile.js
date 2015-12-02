@@ -388,9 +388,9 @@ var _preferenceSchema = new SimpleSchema({
   }), optional: true},
 
   "weather": {type: new SimpleSchema({
-    "flipFlops": fields.bool(o),
-    "allSeasons": fields.bool(o),
-    "frozenTundra": fields.bool(o),
+    "flipFlops": fields.bool({label: "Warm", optional: true}),
+    "allSeasons": fields.bool({label: "Mild", optional: true}),
+    "frozenTundra": fields.bool({label: "All Seasons", optional: true}),
   }), optional: true},
 
   "size": {type: new SimpleSchema({
@@ -403,7 +403,7 @@ var _preferenceSchema = new SimpleSchema({
     "big": fields.bool(o),
     "medium": fields.bool(o),
     "small": fields.bool(o),
-    "sticks": fields.bool(o),
+    "sticks": fields.bool({label: "Tiny", optional: true}),
     "irrelevant": fields.bool(o)
   }), optional: true},
 
@@ -431,7 +431,7 @@ var _preferenceSchema = new SimpleSchema({
     "dorm": fields.bool({label: "Chill", optional: true}),
     "bigGame": fields.bool(o),
     "party": fields.bool(o),
-    "show": fields.bool(o)
+    "show": fields.bool({label: "Concert", optional: true})
   }), optional: true},
 
   "car": fields.bool(o),
@@ -635,8 +635,11 @@ CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, option
     // Note: we do not remove the "bot match" or likes when unsetting dream
     // college id.
   }
-  if (isSetting) {
-    var similarityCutoff = 1.2;
+
+  // Set happens only on the server, so we can synchronously update the
+  // modifier after fuzzy matching the name. The update will propagate back to
+  // the client after it finishes on the server.
+  if (isSetting && Meteor.isServer) {
     modifier.$set = modifier.$set || {};
 
     // WARNING: if you change the logic to either the vanilla node or meteor
@@ -644,21 +647,28 @@ CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, option
     // college-chooser!
     if (Meteor.isVanillaNode) {
       // Run async with promise.
-      return Colleges.findByName(newDreamCollegeName).then(function(dream) {
-        if (dream && dream.score >= similarityCutoff) {
-          modifier.$set["preferences.dreamCollege.dreamCollegeId"] = dream._id;
+      return Meteor.call(
+        "findDreamCollegeId", newDreamCollegeName
+      ).then(function(id) {
+        if (id) {
+          modifier.$set["preferences.dreamCollege.dreamCollegeId"] = id;
           return Meteor.call('createBotMatch', {
-            userId: profileUserId, collegeId: dream._id
+            userId: profileUserId, collegeId: id
           });
+        } else {
+          modifier.$unset = modifier.$unset || {};
+          modifier.$unset["preferences.dreamCollege.dreamCollegeId"] = "";
         }
       });
     } else {
-      // Run with sync in fiber.  FIXME -- need to put in meteor method as the
-      // text search won't work on client....
-      var dream = Colleges.findByName(newDreamCollegeName);
-      if (dream && dream.score >= similarityCutoff) {
-        modifier.$set["preferences.dreamCollege.dreamCollegeId"] = dream._id;
-        Meteor.call("createBotMatch", profileUserId, dream._id);
+      // Run sync in fiber.
+      var id = Meteor.call("findDreamCollegeId", newDreamCollegeName);
+      if (id) {
+        modifier.$set["preferences.dreamCollege.dreamCollegeId"] = id;
+        Meteor.call("createBotMatch", profileUserId, id);
+      } else {
+        modifier.$unset = modifier.$unset || {};
+        modifier.$unset["preferences.dreamCollege.dreamCollegeId"] = "";
       }
     }
   }
