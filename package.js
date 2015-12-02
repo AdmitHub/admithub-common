@@ -47,6 +47,8 @@ Package.onUse(function(api) {
   api.addFiles('collections/users.js');
   api.addFiles('collections/highschoolConversations.js');
   api.addFiles('collections/recentlyAsked.js');
+  api.addFiles('collections/unverifiedEmailMessages.js');
+  api.addFiles('collections/verifiedCollegeEmails.js');
 
   api.addFiles('server/indexes.js', 'server');
   api.addFiles('server/methods.js', 'server');
@@ -78,7 +80,9 @@ Package.onUse(function(api) {
     'Sponsors',
     'Testimonials',
     'twilioValidatedCallback',
+    'UnverifiedEmailMessages',
     'UserSchema',
+    'VerifiedCollegeEmails',
     'yesOrNo',
   ]);
 });
