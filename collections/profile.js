@@ -469,6 +469,10 @@ var _metaFields = new SimpleSchema({
     "skip": fields.bool(o),
     "finished": fields.bool(o)
   }), optional: true},
+  "matchSupplemental": {type: new SimpleSchema({
+    "skip": fields.bool(o),
+    "finished": fields.bool(o)
+  }), optional: true},
   "resumeBot": {type: new SimpleSchema({
     "skip": fields.bool(o),
     "finished": fields.bool(o)
