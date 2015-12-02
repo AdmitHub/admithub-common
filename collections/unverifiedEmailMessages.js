@@ -9,6 +9,10 @@ UnverifiedEmailMessages.attachSchema(new SimpleSchema({
     type: String,
     regEx: SimpleSchema.RegEx.Id
   },
+  collegeId: {
+    type: String,
+    regEx: SimpleSchema.RegEx.Id
+  },
   email: {
     type: String
   },
