@@ -445,7 +445,12 @@ var _preferenceSchema = new SimpleSchema({
   "somethingInteresting": fields.string(o),
 
   "likes": {type: [String], regEx: SimpleSchema.RegEx.Id, optional: true}, // college ID
-  "dislikes": {type: [String], regEx: SimpleSchema.RegEx.Id, optional: true} // college ID
+  "dislikes": {type: [String], regEx: SimpleSchema.RegEx.Id, optional: true}, // college ID
+
+  "hasVisited": {type: [String], regEx: SimpleSchema.RegEx.Id, optional: true},
+  "wantsToVisit": {type: [String], regEx: SimpleSchema.RegEx.Id, optional: true},
+  "familyAttended": {type: [String], regEx: SimpleSchema.RegEx.Id, optional: true},
+  "consideringEarlyApply": {type: [String], regEx: SimpleSchema.RegEx.Id, optional: true}
 });
 
 var _intentionSchema = new SimpleSchema({
