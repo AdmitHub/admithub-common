@@ -51,7 +51,12 @@ Matches.attachSchema(new SimpleSchema({
     optional: true,
     allowedValues: ["web", "sms"]
   },
-  "encounters.$.eventId": {type: String, optional: true, regEx: SimpleSchema.RegEx.Id}
+  "encounters.$.eventId": {type: String, optional: true, regEx: SimpleSchema.RegEx.Id},
+
+  "hasVisited": {type: Boolean, optional: true},
+  "wantsToVisit": {type: Boolean, optional: true},
+  "legacy": {type: Boolean, optional: true},
+  "consideringEarlyApply": {type: Boolean, optional: true}
 }));
 
 Matches.deny({
