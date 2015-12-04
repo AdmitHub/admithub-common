@@ -753,7 +753,11 @@ CollegeProfiles.getUserData = function(user, profile, match) {
     "Intended Major": dotGet(profile, "intentions.intendToStudy") || "",
     "College Transfer": dotGet(profile, "demographics.transfer") ? "Yes" : "No",
     "Most Recent College": dotGet(profile, "demographics.mostRecentCollege") || "",
-    "Contactable": dotGet(profile, "contactable") || ""
+    "Contactable": dotGet(profile, "contactable") || "",
+    "Has Visited": dotGet(match, "hasVisited") ? "Yes" : "No",
+    "Wants to Visit": dotGet(match, "wantsToVisit") ? "Yes" : "No",
+    "Legacy": dotGet(match, "legacy") ? "Yes" : "No",
+    "Considering Early Apply": dotGet(match, "consideringEarlyApply") ? "Yes" : "No"
   }
 };
 
