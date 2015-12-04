@@ -14,6 +14,19 @@ CollegeOfficers.attachSchema(new SimpleSchema({
     autoform: { placeholder: "user _id" },
     custom: SimpleSchema.validators.uniqueArray
   },
+  associatedEmails: {
+    type: [Object],
+    optional: true
+  },
+  "associatedEmails.$.email": {
+    type: String,
+    optional: true
+  },
+  "associatedEmails.$.states": fields.state({optional: true}),
+  blacklistedEmails: {
+    type: [String],
+    optional: true
+  },
   introExclamation: {type: String, optional: true}
 }));
 

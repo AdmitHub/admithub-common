@@ -50,7 +50,6 @@ Package.onUse(function(api) {
   api.addFiles('collections/highschoolConversations.js');
   api.addFiles('collections/recentlyAsked.js');
   api.addFiles('collections/unverifiedEmailMessages.js');
-  api.addFiles('collections/verifiedCollegeEmails.js');
 
   api.addFiles('server/collegesInMemory.js', 'server');
   api.addFiles('server/indexes.js', 'server');
@@ -86,7 +85,6 @@ Package.onUse(function(api) {
     'Testimonials',
     'UnverifiedEmailMessages',
     'UserSchema',
-    'VerifiedCollegeEmails',
     'yesOrNo',
   ]);
 });
