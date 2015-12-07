@@ -125,10 +125,11 @@ UserSchema = new SimpleSchema({
   },
   "sharing": {type: Boolean, optional: true},
   "telescope": {type: Object, optional: true, blackbox: true},
-  // Debugging
-  "test": {type: Boolean, defaultValue: false},
+  "test": {type: Boolean, defaultValue: false}, // Debugging
   "startInitialSurvey": {type: Boolean, optional: true},
-  "resumeWorkflow": {type: Boolean, optional: true}
+  "resumeWorkflow": {type: Boolean, optional: true},
+
+  "abGroup": {type: Number, optional: true, max: 1, min: 0, decimal: true}
 });
 
 Meteor.users.before.insert(function(userId, doc) {
