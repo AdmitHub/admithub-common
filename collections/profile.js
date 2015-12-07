@@ -142,6 +142,9 @@ var _standardizedTestSchema = new SimpleSchema({
       "essay": fields.act_essay_score(o),
     })], optional: true}
   }), optional: true},
+  "psat": {type: new SimpleSchema({
+    "composite": fields.psat_composite_score(o)
+  }), optional: true},
   "other": {type: new SimpleSchema({
     "tests": {type: [new SimpleSchema({
       "date": fields.date(o),
