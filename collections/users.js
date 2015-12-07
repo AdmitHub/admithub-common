@@ -156,22 +156,27 @@ Meteor.users.before.update(function(userId, doc, fieldNames, modifier, options) 
   }
 });
 Meteor.users.after.update(function(userId, doc, fieldNames, modifier, options) {
-  // If we just changed the phone number,
-  var currentPhone = dotGet(doc, "profile.phone");
-  var previousPhone = dotGet(this.previous, "profile.phone");
-  var cleanCurrent = currentPhone && fields.cleanPhone(currentPhone);
-  var cleanPrevious = previousPhone && fields.cleanPhone(previousPhone);
-  if (cleanCurrent && doc.phonePending && (cleanPrevious !== cleanCurrent)) {
-    return Meteor.call("initiatePhoneConfirmation", doc._id);
+  if (Meteor.isServer) {
+    // If we just changed the phone number, initiate phone confirmation.
+    var currentPhone = dotGet(doc, "profile.phone");
+    var previousPhone = dotGet(this.previous, "profile.phone");
+    var cleanCurrent = currentPhone && fields.cleanPhone(currentPhone);
+    var cleanPrevious = previousPhone && fields.cleanPhone(previousPhone);
+    if (cleanCurrent && doc.phonePending && (cleanPrevious !== cleanCurrent)) {
+      return Meteor.call("initiatePhoneConfirmation", doc._id);
+    }
   }
 });
 
 Meteor.users.before.insert(function(userId, doc) {
-  var email = dotGet(doc, "emails.0.address");
-  if (doc.profile.subscribedToNewsletter && email) {
-    Meteor.call('addEmailToMailChimpList', email, function (error, result){
-      if (error){console.log(error)}
-    });
+  if (Meteor.isServer) {
+    // Add new email to mailchimp list if we change our email
+    var email = dotGet(doc, "emails.0.address");
+    if (doc.profile.subscribedToNewsletter && email) {
+      Meteor.call('addEmailToMailChimpList', email, function (error, result){
+        if (error){console.log(error)}
+      });
+    }
   }
 });
 
