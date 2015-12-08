@@ -462,7 +462,7 @@ var _metaFields = new SimpleSchema({
   "initialSurvey": {type: new SimpleSchema({
     "crushedThat": fields.bool(o),
     "finished": fields.bool(o),
-    "evaluation": fields.string({allowedValues: ["Great", "Pretty good", "Meh", "Lame"], optional: true}),
+    "evaluation": fields.string({allowedValues: ["Great", "Pretty good", "Meh", "Lame", "Beyond aweful"], optional: true}),
     "evaluationRecommend": fields.string({max: 140, optional: true}),
     "podcastGuest": fields.bool(o),
     "utm_medium": fields.string(o),
