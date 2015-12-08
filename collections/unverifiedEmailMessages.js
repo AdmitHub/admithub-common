@@ -19,8 +19,8 @@ UnverifiedEmailMessages.attachSchema(new SimpleSchema({
   message: {
     type: String
   },
-  verified: {
-    type: Boolean,
-    defaultValue: false
+  verifiedAt: {
+    type: Date,
+    optional: true
   }
 }));
