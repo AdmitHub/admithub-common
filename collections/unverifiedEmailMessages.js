@@ -5,6 +5,9 @@ UnverifiedEmailMessages.attachSchema(new SimpleSchema({
     regEx: SimpleSchema.RegEx.Id,
     optional: true
   },
+  token: {
+    type: String
+  },
   matchId: {
     type: String,
     regEx: SimpleSchema.RegEx.Id

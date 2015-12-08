@@ -56,7 +56,22 @@ Matches.attachSchema(new SimpleSchema({
   "hasVisited": {type: Boolean, optional: true},
   "wantsToVisit": {type: Boolean, optional: true},
   "legacy": {type: Boolean, optional: true},
-  "consideringEarlyApply": {type: Boolean, optional: true}
+  "consideringEarlyApply": {type: Boolean, optional: true},
+
+  "collegeToken": {
+    type: String,
+    optional: true,
+    autoValue: function() {
+      return Random.secret(20);
+    }
+  },
+  "studentToken": {
+    type: String,
+    optional: true,
+    autoValue: function() {
+      return Random.secret(20);
+    }
+  }
 }));
 
 Matches.deny({
