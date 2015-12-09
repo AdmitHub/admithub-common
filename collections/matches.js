@@ -61,15 +61,19 @@ Matches.attachSchema(new SimpleSchema({
   "collegeToken": {
     type: String,
     optional: true,
-    autoValue: function() {
-      return Random.secret(20);
+    autoValue: function(doc) {
+      if (!this.isSet) {
+        return Random.secret(20);
+      }
     }
   },
   "studentToken": {
     type: String,
     optional: true,
     autoValue: function() {
-      return Random.secret(20);
+      if (!this.isSet) {
+        return Random.secret(20);
+      }
     }
   }
 }));
