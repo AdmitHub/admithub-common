@@ -75,7 +75,7 @@ Package.onUse(function(api) {
     'Matches',
     'Oli',
     'PendingEventReports',
-    'Posts',
+    'TelescopePosts',
     'quoteRe',
     'RecentlyAsked',
     'slugify', 'unslugify',

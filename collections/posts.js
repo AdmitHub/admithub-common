@@ -1,19 +1,25 @@
-// Owned and maintained by Telescope
+// The Posts collection is owned 
 try {
-  Posts = new Mongo.Collection("posts");
+  TelescopePosts = new Mongo.Collection("posts");
 } catch (e) {
-  Posts = {};
+  TelescopePosts = {};
+}
+TelescopePosts.getCollection = function() {
+  if (typeof Posts !== "undefined") {
+    return Posts;
+  }
+  return TelescopePosts;
 }
 
-Posts.STATUS_PENDING=1;
-Posts.STATUS_APPROVED=2;
-Posts.STATUS_REJECTED=3;
-Posts.findMostSimilarPost = function(question) {
-  return Posts.findOne({
+TelescopePosts.STATUS_PENDING=1;
+TelescopePosts.STATUS_APPROVED=2;
+TelescopePosts.STATUS_REJECTED=3;
+TelescopePosts.findMostSimilarPost = function(question) {
+  return TelescopePosts.getCollection().findOne({
     $text: {
       $search: question
     },
-    status: Posts.STATUS_APPROVED
+    status: TelescopePosts.STATUS_APPROVED
   }, {
     fields: {
       score: {$meta: "textScore"}
