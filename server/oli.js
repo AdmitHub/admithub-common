@@ -80,7 +80,7 @@ Oli = {
   // parameter schema for ``Oli.coldSMS``
   coldSmsParams: new SimpleSchema({
     userId: {type: String, regEx: SimpleSchema.RegEx.Id},
-    body: {type: String, optional: true},
+    text: {type: String, optional: true},
     media: {type: String, regEx: SimpleSchema.RegEx.Url, optional: true},
     workflow: {type: String, optional: true},
     persona: {type: String, optional: true},
