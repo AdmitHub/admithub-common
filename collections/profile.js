@@ -578,7 +578,16 @@ CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, option
       range = 4.0;
     }
     if (range) {
-      modifier.$set["highschool.gpaGeneral.normalizedGPA"] = (Math.min(gpa, range) / range) * 4.0;
+      var normalized = (Math.min(gpa, range) / range) * 4.0;
+      if ($set.highschool && $set.highschool.gpaGeneral) {
+        modifier.$set.highschool.gpaGeneral.normalizedGPA = normalized;
+      }
+      else if ($set.highschool) {
+        modifier.$set.highschool["gpaGeneral.normalizedGPA"] = normalized;
+      }
+      else {
+        modifier.$set["highschool.gpaGeneral.normalizedGPA"] = normalized;
+      }
     }
   }
 });
