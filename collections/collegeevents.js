@@ -2,6 +2,8 @@ CollegeEvents = new Mongo.Collection("collegeevents");
 
 CollegeEvents.attachSchema(new SimpleSchema({
   _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
+  highschoolId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
+  collegeId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   name: {
     type: String
   },
@@ -12,5 +14,35 @@ CollegeEvents.attachSchema(new SimpleSchema({
   stop: {
     type: Date,
     autoform: {type: "datetime"}
+  },
+  location: {
+    type: String,
+    optional: true
+  },
+  timezone: {
+    type: String,
+    optional: true
+  },
+  code: {
+    type: String,
+    optional: true,
+    regEx: /\w+/
+  },
+  attendees: {
+    type: [Object],
+    optional: true
+  },
+  "attendees.$.userId": {
+    type: String,
+    regEx: SimpleSchema.RegEx.Id,
+    optional: true
+  },
+  "attendees.$.createdAt": {
+    type: Date,
+    optional: true
+  },
+  "attendees.$.remindersSent": {
+    type: Object,
+    optional: true
   }
 }));
