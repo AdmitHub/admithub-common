@@ -43,6 +43,7 @@ CollegeEvents.attachSchema(new SimpleSchema({
   },
   "attendees.$.remindersSent": {
     type: Object,
-    optional: true
+    optional: true,
+    blackbox: true
   }
 }));
