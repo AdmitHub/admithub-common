@@ -559,6 +559,9 @@ CollegeProfiles.before.update(function(userId, doc, fieldNames, mod, options) {
         // Remove "location.zip" if it exists so we don't try to set both
         // dot-notation-style and full-object style at the same time.
         delete mod.$set["location.zip"];
+        delete mod.$set["location.address"];
+        delete mod.$set["location.city"];
+        delete mod.$set["location.state"];
       }
     }
   }
