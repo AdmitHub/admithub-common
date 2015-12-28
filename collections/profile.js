@@ -75,6 +75,10 @@ var _highschoolSchema = new SimpleSchema({
   "past": {type: [_oneHighSchool], optional: true}
 });
 
+var _collegeSchema = new SimpleSchema({
+  "name": {type: String, optional: true}
+});
+
 var _subjectBooleans = new SimpleSchema({
   "math": fields.bool(o),
   "science": fields.bool(o),
@@ -468,6 +472,14 @@ var _metaFields = new SimpleSchema({
     "utm_medium": fields.string(o),
     "skip": fields.bool(o),
   }), optional: true},
+  "inquiryCardBot": {type: new SimpleSchema({
+    "skip": fields.bool(o),
+    "finished": fields.bool(o)
+  }), optional: true},
+  "preferencesBot": {type: new SimpleSchema({
+    "skip": fields.bool(o),
+    "finished": fields.bool(o)
+  }), optional: true},
   "match": {type: new SimpleSchema({
     "skip": fields.bool(o),
     "finished": fields.bool(o)
@@ -488,6 +500,7 @@ var _metaFields = new SimpleSchema({
     "skip": fields.bool(o),
     "finished": fields.bool(o)
   }), optional: true}
+
 });
 CollegeProfileSchema = new SimpleSchema({
   "_id": {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
@@ -499,6 +512,7 @@ CollegeProfileSchema = new SimpleSchema({
   "lastName": fields.name_part({
     optional: true
   }),
+  "middleInitial": {type: String, max: 1, optional: true},
   "name": fields.name_part({
     optional: true
   }),
@@ -508,6 +522,7 @@ CollegeProfileSchema = new SimpleSchema({
   "parents": {type: _parentSchema, optional: true},
   "siblings": {type: _siblingSchema, optional: true},
   "highschool": {type: _highschoolSchema, optional: true},
+  "college": {type: _collegeSchema, optional: true},
   "courses": {type: _courseSchema, optional: true},
   "tests": {type: _standardizedTestSchema, optional: true},
   "honors": {type: _honorSchema, optional: true},
@@ -516,6 +531,7 @@ CollegeProfileSchema = new SimpleSchema({
   "languages": {type: [_languageSchema], optional: true},
   "volunteer": {type: _volunteerSchema, optional: true},
   "essays": {type: _essaySchema, optional: true},
+  "feelingAboutApplication": fields.feelingAboutApplication(o),
 
   "intentions": {type: _intentionSchema, optional: true},
   "recommendations": {type: _recommendationSchema, optional: true},
