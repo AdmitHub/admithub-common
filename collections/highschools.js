@@ -38,5 +38,16 @@ Highschools.findFromHashtag = function(hashtag) {
   if (!hashtag) {
     return null;
   }
-  return Highschools.findOne({hashtag: {$regex: "^"+hashtag.trim()+"$", $options: "i"}});
+  return Highschools.findOne({
+    hashtag: {$regex: "^"+quoteRe(hashtag).trim()+"$", $options: "i"}
+  });
+};
+Highschools.findFromAtname = function(atname) {
+  if (!atname) {
+    return null;
+  }
+  var hashtag = atname.replace(/^@/, "#");
+  return Highschools.findOne({
+    hashtag: {$regex: "^"+quoteRe(hashtag.trim()) + "$", $options: "i"}
+  });
 };

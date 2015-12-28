@@ -287,7 +287,18 @@ Colleges.findFromHashtag = function(hashtag) {
   if (!hashtag) {
     return null;
   }
-  return Colleges.findOne({hashtag: {$regex: "^"+hashtag.trim()+"$", $options: "i"}});
+  return Colleges.findOne({
+    hashtag: {$regex: "^"+ quoteRe(hashtag).trim() + "$", $options: "i"}
+  });
+};
+Colleges.findFromAtname = function(atname) {
+  if (!atname) {
+    return null;
+  }
+  var hashtag = atname.replace(/^@/, "#");
+  return Colleges.findOne({
+    hashtag: {$regex: "^" + quoteRe(hashtag.trim()) + "$", $options: "i"}
+  });
 };
 
 Colleges.findByName = function(name) {

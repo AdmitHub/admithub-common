@@ -575,6 +575,9 @@ CollegeProfiles.before.update(function(userId, doc, fieldNames, mod, options) {
         // Remove "location.zip" if it exists so we don't try to set both
         // dot-notation-style and full-object style at the same time.
         delete mod.$set["location.zip"];
+        delete mod.$set["location.address"];
+        delete mod.$set["location.city"];
+        delete mod.$set["location.state"];
       }
     }
   }
@@ -594,7 +597,16 @@ CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, option
       range = 4.0;
     }
     if (range) {
-      modifier.$set["highschool.gpaGeneral.normalizedGPA"] = (Math.min(gpa, range) / range) * 4.0;
+      var normalized = (Math.min(gpa, range) / range) * 4.0;
+      if ($set.highschool && $set.highschool.gpaGeneral) {
+        modifier.$set.highschool.gpaGeneral.normalizedGPA = normalized;
+      }
+      else if ($set.highschool) {
+        modifier.$set.highschool["gpaGeneral.normalizedGPA"] = normalized;
+      }
+      else {
+        modifier.$set["highschool.gpaGeneral.normalizedGPA"] = normalized;
+      }
     }
   }
 });
