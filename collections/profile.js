@@ -531,7 +531,7 @@ CollegeProfileSchema = new SimpleSchema({
   "languages": {type: [_languageSchema], optional: true},
   "volunteer": {type: _volunteerSchema, optional: true},
   "essays": {type: _essaySchema, optional: true},
-  "feeling_about_application": fields.feeling_about_application(o),
+  "feelingAboutApplication": fields.feeling_about_application(o),
   "intentions": {type: _intentionSchema, optional: true},
   "recommendations": {type: _recommendationSchema, optional: true},
   "preferences": {type: _preferenceSchema, optional: true},
