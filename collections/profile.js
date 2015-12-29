@@ -75,7 +75,7 @@ var _highschoolSchema = new SimpleSchema({
   "past": {type: [_oneHighSchool], optional: true}
 });
 
-var _collegeSchema = new SimpleSchema({
+var _currentCollegeSchema = new SimpleSchema({
   "name": {type: String, optional: true}
 });
 
@@ -522,7 +522,7 @@ CollegeProfileSchema = new SimpleSchema({
   "parents": {type: _parentSchema, optional: true},
   "siblings": {type: _siblingSchema, optional: true},
   "highschool": {type: _highschoolSchema, optional: true},
-  "college": {type: _collegeSchema, optional: true},
+  "currentCollege": {type: _currentCollegeSchema, optional: true},
   "courses": {type: _courseSchema, optional: true},
   "tests": {type: _standardizedTestSchema, optional: true},
   "honors": {type: _honorSchema, optional: true},
@@ -531,8 +531,7 @@ CollegeProfileSchema = new SimpleSchema({
   "languages": {type: [_languageSchema], optional: true},
   "volunteer": {type: _volunteerSchema, optional: true},
   "essays": {type: _essaySchema, optional: true},
-  "feelingAboutApplication": fields.feelingAboutApplication(o),
-
+  "feeling_about_application": fields.feeling_about_application(o),
   "intentions": {type: _intentionSchema, optional: true},
   "recommendations": {type: _recommendationSchema, optional: true},
   "preferences": {type: _preferenceSchema, optional: true},
