@@ -476,7 +476,7 @@ var _metaFields = new SimpleSchema({
     "skip": fields.bool(o),
     "finished": fields.bool(o)
   }), optional: true},
-  "preferencesBot": {type: new SimpleSchema({
+  "collegePreferencesBot": {type: new SimpleSchema({
     "skip": fields.bool(o),
     "finished": fields.bool(o)
   }), optional: true},
@@ -532,6 +532,7 @@ CollegeProfileSchema = new SimpleSchema({
   "volunteer": {type: _volunteerSchema, optional: true},
   "essays": {type: _essaySchema, optional: true},
   "feelingAboutApplication": fields.feeling_about_application(o),
+  "whyYouStressed": {type: String, max: 500, optional: true},
   "intentions": {type: _intentionSchema, optional: true},
   "recommendations": {type: _recommendationSchema, optional: true},
   "preferences": {type: _preferenceSchema, optional: true},
