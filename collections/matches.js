@@ -49,10 +49,12 @@ Matches.attachSchema(new SimpleSchema({
 
   "encounters": {type: [Object], optional: true},
   "encounters.$.created": {type: Date},
-  "encounters.$.location": {
+  "encounters.$.source": {
     type: String,
     optional: true,
-    allowedValues: ["web", "sms"]
+    allowedValues: [
+      "Match workflow", "Dream college", "Atname match", "Message"
+    ],
   },
   "encounters.$.eventId": {type: String, optional: true, regEx: SimpleSchema.RegEx.Id},
 
