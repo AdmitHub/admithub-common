@@ -1,13 +1,14 @@
 Matches = new Mongo.Collection('matches');
 Matches.attachSchema(new SimpleSchema({
   "_id": {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
-  "collegeId": {type: String, regEx: SimpleSchema.RegEx.Id},
+  "collegeId": {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
+  "highschoolId": {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   "userId": {type: String, regEx: SimpleSchema.RegEx.Id},
   "created": fields.created_date(),
-  // Should only be set if messages is empty.
-  "dismissed": {type: Boolean, defaultValue: false},
+
+  "shareData": {type: Boolean, defaultValue: false},
   "archived": {type: Date, optional: true},
-  "messages": {type: [Object], optional: true},
+
   "transports": {
     type: Object,
     optional: true
@@ -32,6 +33,8 @@ Matches.attachSchema(new SimpleSchema({
     type: Boolean,
     optional: true
   },
+
+  "messages": {type: [Object], optional: true},
   "messages.$.created": {
     type: Date,
     autoform: {
@@ -53,11 +56,11 @@ Matches.attachSchema(new SimpleSchema({
   },
   "encounters.$.eventId": {type: String, optional: true, regEx: SimpleSchema.RegEx.Id},
 
+  // College-specific parts
   "hasVisited": {type: Boolean, optional: true},
   "wantsToVisit": {type: Boolean, optional: true},
   "legacy": {type: Boolean, optional: true},
   "consideringEarlyApply": {type: Boolean, optional: true},
-
   "collegeToken": {
     type: String,
     optional: true,
