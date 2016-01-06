@@ -9,30 +9,12 @@ Matches.attachSchema(new SimpleSchema({
   "shareData": {type: Boolean, defaultValue: false},
   "archived": {type: Date, optional: true},
 
-  "transports": {
-    type: Object,
-    optional: true
-  },
-  "transports.sms": {
-    type: Object,
-    optional: true
-  },
-  "transports.sms.unsubscribed": {
-    type: Boolean,
-    optional: true
-  },
-  "transports.sms.sent": {
-    type: Boolean,
-    optional: true
-  },
-  "transports.email.unsubscribed": {
-    type: Boolean,
-    optional: true
-  },
-  "transports.web.unsubscribed": {
-    type: Boolean,
-    optional: true
-  },
+  "transports": {type: Object, optional: true},
+  "transports.email.unsubscribed": {type: Boolean, optional: true},
+  "transports.web.unsubscribed": {type: Boolean, optional: true},
+  "transports.sms": {type: Object, optional: true},
+  "transports.sms.unsubscribed": {type: Boolean, optional: true},
+  "transports.sms.sent": {type: Boolean, optional: true},
 
   "messages": {type: [Object], optional: true},
   "messages.$.created": {
@@ -80,8 +62,28 @@ Matches.attachSchema(new SimpleSchema({
         return Random.secret(20);
       }
     }
-  }
+  },
+
+  //XXX Legacy -- do not use
+  "dismissed": {type: Boolean, optional: true},
+  "encounters.$.location": {type: String, optional: true},
 }));
+
+// Denormalize matches onto "preferences.likes".
+Matches.after.insert(function(uid, doc) {
+  if (doc.collegeId) {
+    return CollegeProfiles.update({userId: doc.userId}, {
+      "$addToSet": {"preferences.likes": doc.collegeId}
+    });
+  }
+});
+Matches.after.remove(function(uid, doc) {
+  if (doc.collegeId) {
+    return CollegeProfiles.update({userId: doc.userId}, {
+      "$pull": {"preferences.likes": doc.collegeId}
+    });
+  }
+});
 
 Matches.deny({
   insert: function(userId, doc) {
