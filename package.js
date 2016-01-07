@@ -50,6 +50,7 @@ Package.onUse(function(api) {
   api.addFiles('collections/highschoolConversations.js');
   api.addFiles('collections/recentlyAsked.js');
   api.addFiles('collections/unverifiedEmailMessages.js');
+  api.addFiles('collections/demoBotProfile.js');
 
   api.addFiles('server/collegesInMemory.js', 'server');
   api.addFiles('server/indexes.js', 'server');
@@ -60,6 +61,8 @@ Package.onUse(function(api) {
     'CeebCodes',
     'CollegeEvents',
     'CollegeProfiles',
+    'DemoBotProfiles',
+    'DemoBotProfileSchema',
     'CollegeProfileSchema',
     'collegeProfileCountAnsweredQuestions',
     'CollegeOfficers',
