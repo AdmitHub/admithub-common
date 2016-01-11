@@ -499,8 +499,15 @@ var _metaFields = new SimpleSchema({
   "questionBot": {type: new SimpleSchema({
     "skip": fields.bool(o),
     "finished": fields.bool(o)
-  }), optional: true}
-
+  }), optional: true},
+  "salesDemoInitialBot": {type: new SimpleSchema({
+    "skip": fields.bool(o),
+    "finished": fields.bool(o)
+  }), optional: true},
+  "salesDemoCronBot": {type: new SimpleSchema({
+    "skip": fields.bool(o),
+    "finished": fields.bool(o)
+  }), optional: true},
 });
 CollegeProfileSchema = new SimpleSchema({
   "_id": {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
@@ -536,7 +543,6 @@ CollegeProfileSchema = new SimpleSchema({
   "intentions": {type: _intentionSchema, optional: true},
   "recommendations": {type: _recommendationSchema, optional: true},
   "preferences": {type: _preferenceSchema, optional: true},
-
   "meta": {type: _metaFields, optional: true},
 
   "modified": {type: Date, autoValue: function() { return new Date(); }},
@@ -547,7 +553,8 @@ CollegeProfileSchema = new SimpleSchema({
   "referralSource": fields.referral_source({optional: true}),
 
   "description": fields.description({optional: true}),
-  "earlyStarter": fields.bool(o)
+  "earlyStarter": fields.bool(o),
+  "isDemoUser": {type: Boolean, optional: true}
 });
 
 CollegeProfiles = new Mongo.Collection("collegeprofiles");
