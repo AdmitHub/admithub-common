@@ -26,7 +26,7 @@ Matches.attachSchema(new SimpleSchema({
     }
   },
   "messages.$.body": {type: String},
-  "messages.$.sender": {type: String, allowedValues: ["student", "college", "admithub"]},
+  "messages.$.sender": {type: String, allowedValues: ["student", "college", "highschool", "admithub"]},
   "messages.$.read": {type: Boolean, optional: true},
 
   "encounters": {type: [Object], optional: true},
