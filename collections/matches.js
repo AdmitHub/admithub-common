@@ -35,7 +35,7 @@ Matches.attachSchema(new SimpleSchema({
     type: String,
     optional: true,
     allowedValues: [
-      "Match workflow", "Dream college", "Atname match", "Message"
+      "Match workflow", "Dream college", "Atname match", "Message", "Web like"
     ],
   },
   "encounters.$.eventId": {type: String, optional: true, regEx: SimpleSchema.RegEx.Id},

@@ -688,8 +688,11 @@ CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, option
       ).then(function(id) {
         if (id) {
           modifier.$set["preferences.dreamCollege.dreamCollegeId"] = id;
-          return Meteor.call('createBotMatch', {
-            userId: profileUserId, collegeId: id
+          return Meteor.call('createMatchRecordEncounterIntroMessage', {
+            userId: profileUserId,
+            collegeId: id,
+            shareData: true,
+            source: "Dream college"
           });
         } else {
           modifier.$unset = modifier.$unset || {};
@@ -701,7 +704,12 @@ CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, option
       var id = Meteor.call("findDreamCollegeId", newDreamCollegeName);
       if (id) {
         modifier.$set["preferences.dreamCollege.dreamCollegeId"] = id;
-        Meteor.call("createBotMatch", profileUserId, id);
+        Meteor.call("createMatchRecordEncounterIntroMessage", {
+          userId: profileUserId,
+          collegeId: id,
+          shareData: true,
+          source: "Dream college"
+        });
       } else {
         modifier.$unset = modifier.$unset || {};
         modifier.$unset["preferences.dreamCollege.dreamCollegeId"] = "";
