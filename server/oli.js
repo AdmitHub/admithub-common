@@ -11,7 +11,7 @@ Oli = {
                                 .digest('Base64');
   },
   _callEndpoint: function(method, endpoint, params) {
-    var authToken = dotGet(Meteor, 'settings.twilio.auth_token');
+    var authToken = dotGet(Meteor, 'settings.twilio.authToken');
 
     var headers = {
       'X-Twilio-Signature': Oli.getTwilioSignature(
@@ -104,7 +104,7 @@ Oli = {
   authenticateTwilio: function(req, res, next) {
     var twilio = Meteor.npmRequire('twilio');
     var valid = twilio.validateRequest(
-      dotGet(Meteor, "settings.twilio.auth_token") || '1234',
+      dotGet(Meteor, "settings.twilio.authToken") || '1234',
       dotGet(req, "headers.x-twilio-signature"),
       Meteor.absoluteUrl(req.url.substring(1)), // strip leading "/"
       req.body
