@@ -752,21 +752,17 @@ CollegeProfiles.countAnsweredQuestions = function(collegeProfile) {
 }
 
 var getFirstContact = function(match) {
-  var location = dotGet(match, "encounters.0.location");
+  var source = dotGet(match, "encounters.0.source");
   var eventId = dotGet(match, "encounters.0.eventId");
-  if (location == "sms") {
+  if (eventId) {
     var event = CollegeEvents.findOne(eventId);
     if (event) {
       return event.name;
-      }
-      else {
-        return "SMS";
-      }
     }
-  else {
-    return "Web";
+  } else {
+    return source;
   }
-}
+};
 
 CollegeProfiles.getUserData = function(user, profile, match) {
   var created = dotGet(match, "created") || dotGet(profile, "created");
