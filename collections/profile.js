@@ -506,7 +506,8 @@ var _metaFields = new SimpleSchema({
   }), optional: true},
   "salesDemoCronBot": {type: new SimpleSchema({
     "skip": fields.bool(o),
-    "finished": fields.bool(o)
+    "finished": fields.bool(o),
+    "remindersSent": fields.number(o)
   }), optional: true},
 });
 CollegeProfileSchema = new SimpleSchema({
