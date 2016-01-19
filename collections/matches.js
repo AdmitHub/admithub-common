@@ -7,8 +7,12 @@ Matches.attachSchema(new SimpleSchema({
   "created": fields.created_date(),
 
   "shareData": {type: Boolean, defaultValue: false},
+  /* Value of 'like' is denormalized into CollegeProfile.preferences.likes and
+     CollegeProfile.preferences.dislikes */
+  "like": {type: Boolean, defaultValue: true},
   "archived": {type: Date, optional: true},
 
+  // FIXME: update this impl to accord with #settings
   "transports": {type: Object, optional: true},
   "transports.email.unsubscribed": {type: Boolean, optional: true},
   "transports.web.unsubscribed": {type: Boolean, optional: true},
@@ -35,7 +39,7 @@ Matches.attachSchema(new SimpleSchema({
     type: String,
     optional: true,
     allowedValues: [
-      "Match workflow", "Dream college", "Atname match", "Message"
+      "Match workflow", "Dream college", "Atname match", "Message", "Web like", "Unknown"
     ],
   },
   "encounters.$.eventId": {type: String, optional: true, regEx: SimpleSchema.RegEx.Id},
@@ -70,20 +74,41 @@ Matches.attachSchema(new SimpleSchema({
 }));
 
 // Denormalize matches onto "preferences.likes".
-Matches.after.insert(function(uid, doc) {
-  if (doc.collegeId) {
-    return CollegeProfiles.update({userId: doc.userId}, {
-      "$addToSet": {"preferences.likes": doc.collegeId}
-    });
+var updateLikes = function(match) {
+  if (match.collegeId) {
+    var add, pull;
+    if (match.like) {
+      add = "preferences.likes";
+      pull = "preferences.dislikes";
+    } else {
+      add = "preferences.dislikes";
+      pull = "preferences.likes";
+    }
+    var update = {$addToSet: {}, $pull: {}};
+    update.$addToSet[add] = match.collegeId;
+    update.$pull[pull] = match.collegeId;
+    return CollegeProfiles.update({userId: match.userId}, update);
   }
+}
+Matches.after.insert(function(uid, doc) {
+  return updateLikes(doc);
 });
 Matches.after.remove(function(uid, doc) {
   if (doc.collegeId) {
     return CollegeProfiles.update({userId: doc.userId}, {
-      "$pull": {"preferences.likes": doc.collegeId}
+      "$pull": {
+        "preferences.likes": doc.collegeId,
+        "preferences.dislikes": doc.collegeId
+      }
     });
   }
 });
+Matches.after.update(function(userId, doc, fieldNames, modifier, options) {
+  if (doc.like !== this.previous.like) {
+    return updateLikes(doc);
+  }
+});
+
 
 Matches.deny({
   insert: function(userId, doc) {

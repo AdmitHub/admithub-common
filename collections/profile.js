@@ -695,8 +695,10 @@ CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, option
       ).then(function(id) {
         if (id) {
           modifier.$set["preferences.dreamCollege.dreamCollegeId"] = id;
-          return Meteor.call('createBotMatch', {
-            userId: profileUserId, collegeId: id
+          return Meteor.call('createMatchRecordEncounterIntroMessage', {
+            userId: profileUserId,
+            collegeId: id,
+            source: "Dream college"
           });
         } else {
           modifier.$unset = modifier.$unset || {};
@@ -708,7 +710,11 @@ CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, option
       var id = Meteor.call("findDreamCollegeId", newDreamCollegeName);
       if (id) {
         modifier.$set["preferences.dreamCollege.dreamCollegeId"] = id;
-        Meteor.call("createBotMatch", profileUserId, id);
+        Meteor.call("createMatchRecordEncounterIntroMessage", {
+          userId: profileUserId,
+          collegeId: id,
+          source: "Dream college"
+        });
       } else {
         modifier.$unset = modifier.$unset || {};
         modifier.$unset["preferences.dreamCollege.dreamCollegeId"] = "";
@@ -751,21 +757,17 @@ CollegeProfiles.countAnsweredQuestions = function(collegeProfile) {
 }
 
 var getFirstContact = function(match) {
-  var location = dotGet(match, "encounters.0.location");
+  var source = dotGet(match, "encounters.0.source");
   var eventId = dotGet(match, "encounters.0.eventId");
-  if (location == "sms") {
+  if (eventId) {
     var event = CollegeEvents.findOne(eventId);
     if (event) {
       return event.name;
-      }
-      else {
-        return "SMS";
-      }
     }
-  else {
-    return "Web";
+  } else {
+    return source;
   }
-}
+};
 
 CollegeProfiles.getUserData = function(user, profile, match) {
   var created = dotGet(match, "created") || dotGet(profile, "created");

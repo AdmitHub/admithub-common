@@ -144,7 +144,7 @@ Meteor.users.before.insert(function(userId, doc) {
 
 Meteor.users.before.update(function(userId, doc, fieldNames, modifier, options) {
   // Set 'phonePending' if this update changes the phone number.
-  if (modifier && modifier.$set) {
+  if (Meteor.isServer && modifier && modifier.$set) {
     // flatten, so that we can check for both
     //     {$set: {"profile.phone": <num>}}
     // and {$set: {profile: {phone: <num>, ...}}}
