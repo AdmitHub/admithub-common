@@ -691,7 +691,6 @@ CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, option
           return Meteor.call('createMatchRecordEncounterIntroMessage', {
             userId: profileUserId,
             collegeId: id,
-            shareData: true,
             source: "Dream college"
           });
         } else {
@@ -707,7 +706,6 @@ CollegeProfiles.before.update(function(userId, doc, fieldNames, modifier, option
         Meteor.call("createMatchRecordEncounterIntroMessage", {
           userId: profileUserId,
           collegeId: id,
-          shareData: true,
           source: "Dream college"
         });
       } else {
