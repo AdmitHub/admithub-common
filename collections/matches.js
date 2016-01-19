@@ -7,10 +7,25 @@ Matches.attachSchema(new SimpleSchema({
   "created": fields.created_date(),
 
   "shareData": {type: Boolean, defaultValue: false},
-  /* Value of 'like' is denormalized into CollegeProfile.preferences.likes and
-     CollegeProfile.preferences.dislikes */
+  /*
+    States for like/dislike/dismissal:
+
+                    | like true  | like false |
+    ----------------+------------+------------+
+    dismissed true  | Unfollowed | Disliked   |
+    ----------------+------------+------------+
+    dismissed false |  Liked     |     x      |
+    ----------------+------------+------------+
+
+    The "like false" and "dismissed false" quadrant isn't used, it'd be a
+    "hate follow" or something.
+
+    Value of 'like' is denormalized into CollegeProfile.preferences.likes and
+    CollegeProfile.preferences.dislikes, to avoid having to fetch collections
+    of Matches all the time.
+  */
   "like": {type: Boolean, defaultValue: true},
-  "archived": {type: Date, optional: true},
+  "dismissed": {type: Boolean, optional: true},
 
   // FIXME: update this impl to accord with #settings
   "transports": {type: Object, optional: true},
@@ -69,7 +84,7 @@ Matches.attachSchema(new SimpleSchema({
   },
 
   //XXX Legacy -- do not use
-  "dismissed": {type: Boolean, optional: true},
+  "archived": {type: Date, optional: true},
   "encounters.$.location": {type: String, optional: true},
 }));
 
