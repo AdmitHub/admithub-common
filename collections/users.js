@@ -86,6 +86,10 @@ UserSchema = new SimpleSchema({
     optional: true,
     defaultValue: true
   },
+  "profile.notifications": {
+    type: String,
+    optional: true
+  },
   "smsHardStopped": {
     type: Boolean,
     optional: true
