@@ -27,6 +27,9 @@ Matches.attachSchema(new SimpleSchema({
   "like": {type: Boolean, defaultValue: true},
   "dismissed": {type: Boolean, optional: true},
 
+  // "archived" is only for the college/highschool views.
+  "archived": {type: Date, optional: true},
+
   // FIXME: update this impl to accord with #settings
   "transports": {type: Object, optional: true},
   "transports.email.unsubscribed": {type: Boolean, optional: true},
@@ -84,7 +87,6 @@ Matches.attachSchema(new SimpleSchema({
   },
 
   //XXX Legacy -- do not use
-  "archived": {type: Date, optional: true},
   "encounters.$.location": {type: String, optional: true},
 }));
 
