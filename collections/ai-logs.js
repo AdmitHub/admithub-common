@@ -6,8 +6,12 @@ AILogs.attachSchema(new SimpleSchema({
   question: {type: String},
   outputContexts: {type: [String]},
   inputContexts: {type: [String]},
-  responseAction: {type: String},
-  response: {type: String},
+  responseAction: {type: String, optional: true},
+  response: {type: String, optional: true},
+  messagingService: {type: String},
   handled: {type: Boolean, defaultValue: false},
-  handleAction: {type: String, optional: true}
+  handledBy: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
+  handledDate: {type: Date, optional: true},
+  handleAction: {type: String, optional: true},
+  error: {type: String, optional: true}
 }));
