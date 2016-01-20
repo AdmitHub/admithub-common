@@ -1,7 +1,7 @@
 AILogs = new Mongo.Collection("ai.logs");
 AILogs.attachSchema(new SimpleSchema({
   _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
-  created: {type: Date},
+  created: fields.created_date(),
   userId: {type: String, regEx: SimpleSchema.RegEx.Id},
   question: {type: String},
   outputContexts: {type: [String]},
