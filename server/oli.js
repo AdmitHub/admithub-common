@@ -26,7 +26,11 @@ Oli = {
       });
     }
     catch (e) {
-      logger.error('Error calling ' + endpoint + ':\n  params: ', params,'\n',e);
+      if (typeof logger !== "undefined") {
+        logger.error('Error calling ' + endpoint + ':\n  params: ', params,'\n',e);
+      } else {
+        console.log("Error calling " + endpoint + ":\n params: ", params,'\n',e);
+      }
       throw e;
     }
   },
@@ -38,7 +42,7 @@ Oli = {
     body: {type: String, optional: true},
     media: {type: String, regEx: SimpleSchema.RegEx.Url, optional: true},
     workflow: {type: String, optional: true},
-    workflowOptions: {type: Object, optional: true},
+    workflowOptions: {type: Object, optional: true, blackbox: true},
     forceRevalidate: {type: Boolean, optional: true},
     prefix: {type: String, optional: true}
   }),
@@ -123,7 +127,11 @@ Oli = {
       next();
     } else {
       if (Meteor.isDevelopment) {
-        logger.error("Twilio auth failed; but allowing anyway, because isDevelopment is true");
+        if (typeof logger !== "undefined") {
+          logger.error("Twilio auth failed; but allowing anyway, because isDevelopment is true");
+        } else {
+          console.error("Twilio auth failed; but allowing anyway, because isDevelopment is true");
+        }
         next();
       } else {
         res.writeHead(401, {"Content-Type": "text/plain"});
