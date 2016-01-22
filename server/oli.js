@@ -38,7 +38,7 @@ Oli = {
     body: {type: String, optional: true},
     media: {type: String, regEx: SimpleSchema.RegEx.Url, optional: true},
     workflow: {type: String, optional: true},
-    persona: {type: String, optional: true},
+    workflowOptions: {type: Object, optional: true},
     forceRevalidate: {type: Boolean, optional: true},
     prefix: {type: String, optional: true}
   }),
@@ -50,6 +50,9 @@ Oli = {
    */
   initiate: function(params) {
     check(params, Oli.initiateParams);
+    params.workflowOptions = params.workflowOptions && JSON.stringify(
+      params.workflowOptions
+    );
     return Oli._callEndpoint(
       'POST',
       dotGet(Meteor, 'settings.oli.initiate'),
@@ -62,7 +65,7 @@ Oli = {
     body: {type: String, optional: true},
     media: {type: String, regEx: SimpleSchema.RegEx.Url, optional: true},
     workflow: {type: String, optional: true},
-    persona: {type: String, optional: true}
+    workflowOptions: {type: Object, optional: true}
   }),
   /**
    * Forward a message posted via the web on to Oli.
@@ -71,6 +74,9 @@ Oli = {
    */
   handleWebMessage: function(params) {
     check(params, Oli.handleWebMessageParams);
+    params.workflowOptions = params.workflowOptions && JSON.stringify(
+      params.workflowOptions
+    );
     return Oli._callEndpoint(
       'POST',
       dotGet(Meteor, 'settings.oli.handleWebMessage'),
@@ -83,7 +89,7 @@ Oli = {
     text: {type: String, optional: true},
     media: {type: String, regEx: SimpleSchema.RegEx.Url, optional: true},
     workflow: {type: String, optional: true},
-    persona: {type: String, optional: true},
+    workflowOptions: {type: Object, optional: true, blackbox: true}
     forceRevalidate: {type: Boolean, optional: true}
   }),
   /**
@@ -92,6 +98,9 @@ Oli = {
    */
   coldSMS: function(params) {
     check(params, Oli.coldSmsParams);
+    params.workflowOptions = params.workflowOptions && JSON.stringify(
+      params.workflowOptions
+    );
     return Oli._callEndpoint('POST',
       dotGet(Meteor, 'settings.oli.coldSMS'),
       params
