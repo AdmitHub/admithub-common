@@ -71,7 +71,7 @@ Matches.attachSchema(new SimpleSchema({
     type: String,
     optional: true,
     autoValue: function(doc) {
-      if (!this.isSet) {
+      if (this.operator === null && !this.isSet) {
         return Random.secret(20);
       }
     }
@@ -80,7 +80,7 @@ Matches.attachSchema(new SimpleSchema({
     type: String,
     optional: true,
     autoValue: function() {
-      if (!this.isSet) {
+      if (this.operator === null && !this.isSet) {
         return Random.secret(20);
       }
     }
