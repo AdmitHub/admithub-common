@@ -110,6 +110,26 @@ Oli = {
       params
     );
   },
+  // parameter schema for ``Oli.officerChat``
+  officerChatParams: new SimpleSchema({
+    userId: {type: String, regEx: SimpleSchema.RegEx.Id},
+    text: {type: String, optional: true},
+    media: {type: String, regEx: SimpleSchema.RegEx.Url, optional: true},
+    workflow: {type: String, optional: true},
+    persona: {type: String, optional: true},
+    forceRevalidate: {type: Boolean, optional: true}
+  }),
+  /**
+   * Send a message from a college officer to a student
+   * @param {Object} params - Parameters as defined in ``officerChatParams`` schema
+   */
+  officerChat: function(params) {
+    check(params, Oli.officerChatParams);
+    return Oli._callEndpoint('POST',
+      dotGet(Meteor, 'settings.oli.officerChat'),
+      params
+    );
+  },
   /**
    * Express middleware to authenticate requests using twilio's authentication
    * strategy. See https://www.twilio.com/docs/security
