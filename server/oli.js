@@ -116,7 +116,7 @@ Oli = {
     text: {type: String, optional: true},
     media: {type: String, regEx: SimpleSchema.RegEx.Url, optional: true},
     workflow: {type: String, optional: true},
-    persona: {type: String, optional: true},
+    workflowOptions: {type: Object, optional: true, blackbox: true},
     forceRevalidate: {type: Boolean, optional: true}
   }),
   /**
