@@ -112,12 +112,9 @@ Oli = {
   },
   // parameter schema for ``Oli.officerChat``
   officerChatParams: new SimpleSchema({
-    userId: {type: String, regEx: SimpleSchema.RegEx.Id},
-    text: {type: String, optional: true},
-    media: {type: String, regEx: SimpleSchema.RegEx.Url, optional: true},
-    workflow: {type: String, optional: true},
-    workflowOptions: {type: Object, optional: true, blackbox: true},
-    forceRevalidate: {type: Boolean, optional: true}
+    collegeToken: {type: String},
+    from: {type: String},
+    message: {type: String}
   }),
   /**
    * Send a message from a college officer to a student
