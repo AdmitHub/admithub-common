@@ -13,7 +13,51 @@ AILogs.attachSchema(new SimpleSchema({
   needsReview: {type: Boolean, defaultValue: false},
   handledBy: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true}, // User
   handledDate: {type: Date, optional: true},
-  handleAction: {type: String, optional: true},
+  handledAction: {
+    type: [String],
+    allowedValues: ["needsReview", "humanResponse", "emailCollege"],
+    optional: true
+  },
   humanResponse: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true}, //AILog
   error: {type: String, optional: true}
 }));
+
+// Discussion of categories: https://github.com/AdmitHub/admin/issues/15#issuecomment-175178035
+AILogs.getCategory = function(log) {
+  if (log.error) {
+    return "error";
+  }
+  if (log.response && /^\/(?!control).+/.test(log.responseAction)) {
+    return "valid";
+  }
+  if (log.response && /^smalltalk.*/.test(log.responseAction)) {
+    return "smalltalk";
+  }
+  if (!log.response && /^\/control\/human/.test(log.responseAction)) {
+    return "sendToHuman";
+  }
+  if (!log.response && /^\/(?!control).+/.test(log.responseAction)) {
+    return "notFound";
+  }
+  if (log.responseAction === '/control/lackOfUnderstanding') {
+    return "lackOfUnderstanding";
+  }
+};
+AILogs.getPrevious = function(log, limit) {
+  limit = limit === undefined ? 1 : limit;
+  return AILogs.find({
+    userId: log.userId,
+    created: {$lt: log.created}
+  }, {
+    limit: limit
+  })
+};
+AILogs.getNext = function(log, limit) {
+  limit = limit === undefined ? 1 : limit;
+  return AILogs.find({
+    userId: log.userId,
+    created: {$gt: log.created}
+  }, {
+    limit: limit
+  });
+};
