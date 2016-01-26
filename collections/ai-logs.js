@@ -36,7 +36,7 @@ AILogs.getCategory = function(log) {
   if (!log.response && /^\/control\/human/.test(log.responseAction)) {
     return "sendToHuman";
   }
-  if (!log.response && /^\/(?!control).+/.test(log.responseAction)) {
+  if (!log.response && /^(?!\/control).+/.test(log.responseAction)) {
     return "notFound";
   }
   if (log.responseAction === '/control/lackOfUnderstanding') {

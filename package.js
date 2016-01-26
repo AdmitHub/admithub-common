@@ -1,7 +1,7 @@
 Package.describe({
   name: "admithub:admithub-common",
   summary: "Common styles, templates, and libraries for AdmitHub sites",
-  version: "0.1.1",
+  version: "0.1.2",
   git: "https://github.com/AdmitHub/admithub-common.git"
 });
 
@@ -31,6 +31,10 @@ Package.onUse(function(api) {
   api.addFiles('lib/_fields.js');
   api.addFiles('lib/helpers.js');
   api.addFiles('lib/simpleSchema.js');
+  api.addFiles('collections/ai-answers.js');
+  api.addFiles('collections/ai-entities.js');
+  api.addFiles('collections/ai-intents.js');
+  api.addFiles('collections/ai-logs.js');
   api.addFiles('collections/ceebCodes.js');
   api.addFiles('collections/collegeevents.js');
   api.addFiles('collections/collegeOfficers.js');
@@ -58,6 +62,10 @@ Package.onUse(function(api) {
   api.addFiles('server/oli.js', 'server');
 
   api.export([
+    'AIAnswers',
+    'AIEntities',
+    'AIIntents',
+    'AILogs',
     'CeebCodes',
     'CollegeEvents',
     'CollegeProfiles',
