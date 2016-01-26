@@ -18,7 +18,7 @@ AILogs.attachSchema(new SimpleSchema({
     allowedValues: ["needsReview", "humanResponse", "emailCollege"],
     optional: true
   },
-  humanResponse: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true}, //AILog
+  humanResponse: {type: String, optional: true},
   error: {type: String, optional: true}
 }));
 
