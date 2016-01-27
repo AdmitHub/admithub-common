@@ -57,6 +57,9 @@ Oli = {
     params.workflowOptions = params.workflowOptions && JSON.stringify(
       params.workflowOptions
     );
+    if (!params.workflowOptions) {
+      delete params.workflowOptions;
+    }
     return Oli._callEndpoint(
       'POST',
       dotGet(Meteor, 'settings.oli.initiate'),
@@ -81,6 +84,9 @@ Oli = {
     params.workflowOptions = params.workflowOptions && JSON.stringify(
       params.workflowOptions
     );
+    if (!params.workflowOptions) {
+      delete params.workflowOptions;
+    }
     return Oli._callEndpoint(
       'POST',
       dotGet(Meteor, 'settings.oli.handleWebMessage'),
@@ -105,6 +111,9 @@ Oli = {
     params.workflowOptions = params.workflowOptions && JSON.stringify(
       params.workflowOptions
     );
+    if (!params.workflowOptions) {
+      delete params.workflowOptions;
+    }
     return Oli._callEndpoint('POST',
       dotGet(Meteor, 'settings.oli.coldSMS'),
       params
