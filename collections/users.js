@@ -94,6 +94,11 @@ UserSchema = new SimpleSchema({
     type: Boolean,
     optional: true
   },
+  "hardStopReason": {
+    type: String,
+    allowedValues: ["mistake", "oliTalksTooMuch", "notAStudent", "noHelp", "somethingElse"],
+    optional: true
+  },
 
   "services": {type: Object, blackbox: true, optional: true},
   "roles": {type: Object, blackbox: true, optional: true},
