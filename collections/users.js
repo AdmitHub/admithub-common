@@ -190,6 +190,11 @@ Meteor.users.before.insert(function(userId, doc) {
   }
 });
 
+Meteor.users.getHash = function(user) {
+  var recipientAddress = dotGet(user, "emails.0.address");
+  return Gravatar.hash(recipientAddress || "");
+};
+
 Meteor.users.updateHash = function(user) {
   var recipientAddress = dotGet(user, "emails.0.address");
   var emailHash = Gravatar.hash(recipientAddress || "");
