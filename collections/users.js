@@ -99,6 +99,15 @@ UserSchema = new SimpleSchema({
     allowedValues: ["mistake", "oliTalksTooMuch", "notAStudent", "noHelp", "somethingElse"],
     optional: true
   },
+  "secretToken": {
+    type: String,
+    optional: true,
+    autoValue: function(doc) {
+      if (this.operator === null && !this.isSet) {
+        return Random.secret(20);
+      }
+    }
+  },
 
   "services": {type: Object, blackbox: true, optional: true},
   "roles": {type: Object, blackbox: true, optional: true},
@@ -189,11 +198,6 @@ Meteor.users.before.insert(function(userId, doc) {
     }
   }
 });
-
-Meteor.users.getHash = function(user) {
-  var recipientAddress = dotGet(user, "emails.0.address");
-  return Gravatar.hash(recipientAddress || "");
-};
 
 Meteor.users.updateHash = function(user) {
   var recipientAddress = dotGet(user, "emails.0.address");
