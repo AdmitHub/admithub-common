@@ -4,7 +4,7 @@ Meteor.startup(function() {
   CeebCodes._ensureIndex({"$**": "text"});
   Colleges._ensureIndex({"name": "text"});
   TelescopePosts.getCollection()._ensureIndex({"title": "text"});
-  if (Meteor.isDevelopment) {
+  if (Meteor.isDevelopment && typeof WorkflowTestCollection !== "undefined") {
     WorkflowTestCollection._ensureIndex({'userId': 1}, {unique: true});
   }
 });

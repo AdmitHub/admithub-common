@@ -185,4 +185,20 @@ Meteor.users.before.insert(function(userId, doc) {
   }
 });
 
+Meteor.users.updateHash = function(user) {
+  var recipientAddress = dotGet(user, "emails.0.address");
+  var emailHash = Gravatar.hash(recipientAddress || "");
+  if (emailHash !== dotGet(user, "telescope.emailHash")) {
+    Meteor.users.update({
+      _id: user._id
+    }, {
+      $set: {
+        "telescope.emailHash": emailHash
+      }
+    });
+  }
+
+  return emailHash;
+}
+
 Meteor.users.attachSchema(UserSchema);

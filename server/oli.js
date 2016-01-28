@@ -57,6 +57,9 @@ Oli = {
     params.workflowOptions = params.workflowOptions && JSON.stringify(
       params.workflowOptions
     );
+    if (!params.workflowOptions) {
+      delete params.workflowOptions;
+    }
     return Oli._callEndpoint(
       'POST',
       dotGet(Meteor, 'settings.oli.initiate'),
@@ -81,6 +84,9 @@ Oli = {
     params.workflowOptions = params.workflowOptions && JSON.stringify(
       params.workflowOptions
     );
+    if (!params.workflowOptions) {
+      delete params.workflowOptions;
+    }
     return Oli._callEndpoint(
       'POST',
       dotGet(Meteor, 'settings.oli.handleWebMessage'),
@@ -105,8 +111,28 @@ Oli = {
     params.workflowOptions = params.workflowOptions && JSON.stringify(
       params.workflowOptions
     );
+    if (!params.workflowOptions) {
+      delete params.workflowOptions;
+    }
     return Oli._callEndpoint('POST',
       dotGet(Meteor, 'settings.oli.coldSMS'),
+      params
+    );
+  },
+  // parameter schema for ``Oli.officerChat``
+  officerChatParams: new SimpleSchema({
+    collegeToken: {type: String},
+    from: {type: String},
+    message: {type: String}
+  }),
+  /**
+   * Send a message from a college officer to a student
+   * @param {Object} params - Parameters as defined in ``officerChatParams`` schema
+   */
+  officerChat: function(params) {
+    check(params, Oli.officerChatParams);
+    return Oli._callEndpoint('POST',
+      dotGet(Meteor, 'settings.oli.officerChat'),
       params
     );
   },
