@@ -18,11 +18,14 @@ CollegeOfficers.attachSchema(new SimpleSchema({
     type: [Object],
     optional: true
   },
-  "associatedEmails.$.email": {
-    type: String,
-    optional: true
-  },
-  "associatedEmails.$.states": fields.state({optional: true}),
+  "associatedEmails.$.email": {type: String, optional: true},
+  "associatedEmails.$.name": {type: String, optional: true},
+  "associatedEmails.$.general": {type: Boolean, optional: true},
+  "associatedEmails.$.topics": {type: [String], optional: true},
+  "associatedEmails.$.counties": {type: [Object], optional: true},
+  "associatedEmails.$.counties.$.state": fields.state({optional: true}),
+  "associatedEmails.$.counties.$.county": {type: String, optional: true},
+  "associatedEmails.$.states": fields.state({optional: true, type: [String]}),
   blacklistedEmails: {
     type: [String],
     optional: true
