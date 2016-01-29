@@ -4,5 +4,6 @@ BrandedColleges.attachSchema(new SimpleSchema({
   name: {type: String},
   messagingService: {type: String},
   oliName: {type: String},
-  aiSubject: {type: String}
+  aiSubject: {type: String},
+  collegeId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true}
 }));
