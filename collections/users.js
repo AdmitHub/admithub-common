@@ -99,14 +99,9 @@ UserSchema = new SimpleSchema({
     allowedValues: ["mistake", "oliTalksTooMuch", "notAStudent", "noHelp", "somethingElse"],
     optional: true
   },
-  "secretToken": {
+  "hardStopToken": {
     type: String,
-    optional: true,
-    autoValue: function(doc) {
-      if (this.operator === null && !this.isSet) {
-        return Random.secret(20);
-      }
-    }
+    optional: true
   },
 
   "services": {type: Object, blackbox: true, optional: true},
