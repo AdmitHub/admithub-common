@@ -1,6 +1,11 @@
 AIAnswers = new Mongo.Collection("ai.answers");
 AIAnswers.attachSchema(new SimpleSchema({
   _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
-  answer: {type: String},
+  answer: {
+    type: String,
+    autoform: {
+      rows: 3
+    }
+  },
   topic: {type: String}
 }));
