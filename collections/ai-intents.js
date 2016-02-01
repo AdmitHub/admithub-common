@@ -7,3 +7,15 @@ AIIntents.attachSchema(new SimpleSchema({
   outputContexts: {type: [String]},
   inputContexts: {type: [String]}
 }));
+
+AIIntents.allow({
+  insert: function(userId) {
+    return Roles.userIsInRole(userId, "Admin", Roles.GLOBAL_GROUP);
+  },
+  update: function(userId) {
+    return Roles.userIsInRole(userId, "Admin", Roles.GLOBAL_GROUP);
+  },
+  remove: function(userId) {
+    return Roles.userIsInRole(userId, "Admin", Roles.GLOBAL_GROUP);
+  }
+});
