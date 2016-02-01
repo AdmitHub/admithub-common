@@ -9,3 +9,15 @@ AIAnswers.attachSchema(new SimpleSchema({
   },
   topic: {type: String}
 }));
+
+AIAnswers.allow({
+  insert: function(userId) {
+    return Roles.userIsInRole(userId, "Admin", Roles.GLOBAL_GROUP);
+  },
+  update: function(userId) {
+    return Roles.userIsInRole(userId, "Admin", Roles.GLOBAL_GROUP);
+  },
+  remove: function(userId) {
+    return Roles.userIsInRole(userId, "Admin", Roles.GLOBAL_GROUP);
+  }
+});
