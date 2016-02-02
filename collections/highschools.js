@@ -17,7 +17,7 @@ Highschools.attachSchema(new SimpleSchema({
     optional: true
   },
   atname: {
-    type: String,
+    type: [String],
     optional: true,
     unique: true,
     custom: function() {
