@@ -16,38 +16,30 @@ Highschools.attachSchema(new SimpleSchema({
     regEx: SimpleSchema.RegEx.Id,
     optional: true
   },
-  hashtag: {
+  atname: {
     type: String,
+    optional: true,
     unique: true,
     custom: function() {
       if (Meteor.isServer && this.isSet) {
         if (Colleges.findOne({
-          hashtag: {
+          atname: {
             $regex: "^"+this.value.trim()+"$",
             $options: "i"
           }
         })) {
-          return "hashtagTaken";
+          return "atnameTaken";
         }
       }
     }
   }
 }));
 
-Highschools.findFromHashtag = function(hashtag) {
-  if (!hashtag) {
-    return null;
-  }
-  return Highschools.findOne({
-    hashtag: {$regex: "^"+quoteRe(hashtag).trim()+"$", $options: "i"}
-  });
-};
 Highschools.findFromAtname = function(atname) {
   if (!atname) {
     return null;
   }
-  var hashtag = atname.replace(/^@/, "#");
   return Highschools.findOne({
-    hashtag: {$regex: "^"+quoteRe(hashtag.trim()) + "$", $options: "i"}
+    atname: {$regex: "^"+quoteRe(atname.trim()) + "$", $options: "i"}
   });
 };

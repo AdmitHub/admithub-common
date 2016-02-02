@@ -66,16 +66,19 @@ CollegeSchema = new SimpleSchema({
   "gender": {type: String, allowedValues: ["Men", "Women", "coed"], optional: true},
   "population": {type: Number, decimal: true, optional: true},
   "linkedinLink": fields.url({optional: true}),
-  "hashtag": {type: String, optional: true, unique: true,
+  "atname": {
+    type: String,
+    optional: true,
+    unique: true,
     custom: function() {
       if (Meteor.isServer && this.isSet) {
         if (Highschools.findOne({
-          hashtag: {
+          atname: {
             $regex: "^"+this.value.trim()+"$",
             $options: "i"
           }
         })) {
-          return "hashtagTaken";
+          return "atnameTaken";
         }
       }
     }
@@ -283,21 +286,12 @@ CollegeSchema = new SimpleSchema({
 
 Colleges = new Mongo.Collection("colleges");
 Colleges.attachSchema(CollegeSchema);
-Colleges.findFromHashtag = function(hashtag) {
-  if (!hashtag) {
-    return null;
-  }
-  return Colleges.findOne({
-    hashtag: {$regex: "^"+ quoteRe(hashtag).trim() + "$", $options: "i"}
-  });
-};
 Colleges.findFromAtname = function(atname) {
   if (!atname) {
     return null;
   }
-  var hashtag = atname.replace(/^@/, "#");
   return Colleges.findOne({
-    hashtag: {$regex: "^" + quoteRe(hashtag.trim()) + "$", $options: "i"}
+    atname: {$regex: "^" + quoteRe(atname.trim()) + "$", $options: "i"}
   });
 };
 
