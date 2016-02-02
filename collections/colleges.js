@@ -67,7 +67,7 @@ CollegeSchema = new SimpleSchema({
   "population": {type: Number, decimal: true, optional: true},
   "linkedinLink": fields.url({optional: true}),
   "atname": {
-    type: String,
+    type: [String],
     optional: true,
     unique: true,
     custom: function() {
