@@ -22,9 +22,12 @@ Highschools.attachSchema(new SimpleSchema({
     unique: true,
     custom: function() {
       if (Meteor.isServer && this.isSet) {
+        var joined = (this.value || []).map(function(atname) {
+          return atname.trim();
+        }).join("|");
         if (Colleges.findOne({
           atname: {
-            $regex: "^"+this.value.trim()+"$",
+            $regex: "^"+joined+"$",
             $options: "i"
           }
         })) {
