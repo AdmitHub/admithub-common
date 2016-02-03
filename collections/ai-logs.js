@@ -61,9 +61,9 @@ AILogs.getNext = function(log, limit) {
     limit: limit
   });
 };
-AILogs.getIntent = function(log) {
+AILogs.getUnderstanding = function(log) {
   limit = limit === undefined ? 1 : limit;
-  return AIIntents.findOne({
+  return AIUnderstandings.findOne({
     topic: log.responseAction,
   });
 };
