@@ -18,6 +18,9 @@ AILogs.attachSchema(new SimpleSchema({
     allowedValues: ["needsReview", "humanResponse", "emailCollege"],
     optional: true
   },
+  reviewedBy: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true}, // User
+  reviewedDate: {type: Date, optional: true},
+  reviewedAction: {type: Object, blackbox: true},
   humanResponse: {type: String, optional: true},
   error: {type: String, optional: true}
 }));
@@ -67,3 +70,15 @@ AILogs.getUnderstanding = function(log) {
     topic: log.responseAction,
   });
 };
+
+AILogs.allow({
+  insert: function(userId) {
+    return Roles.userIsInRole(userId, "Admin", Roles.GLOBAL_GROUP);
+  },
+  update: function(userId) {
+    return Roles.userIsInRole(userId, "Admin", Roles.GLOBAL_GROUP);
+  },
+  remove: function(userId) {
+    return Roles.userIsInRole(userId, "Admin", Roles.GLOBAL_GROUP);
+  }
+});

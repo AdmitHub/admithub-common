@@ -43,7 +43,10 @@ AIUnderstandings.attachSchema(new SimpleSchema({
   },
   answer: {
     type: String,
-    autoform: {rows: 3}
+    autoform: {
+      rows: 3,
+      template: 'answer'
+    }
   },
   outputContexts: {
     type: [String],
