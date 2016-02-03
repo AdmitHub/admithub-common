@@ -4,7 +4,8 @@ AIAnswers.attachSchema(new SimpleSchema({
   answer: {
     type: String,
     autoform: {
-      rows: 3
+      rows: 3,
+      template: "answer"
     }
   },
   topic: {type: String}
