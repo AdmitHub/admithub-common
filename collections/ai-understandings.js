@@ -61,12 +61,12 @@ AIUnderstandings.attachSchema(new SimpleSchema({
 
 AIUnderstandings.allow({
   insert: function(userId) {
-    return Roles.userIsInRole(userId, "Admin", Roles.GLOBAL_GROUP);
+    return Roles.userIsInRole(userId, "Admin");
   },
   update: function(userId) {
-    return Roles.userIsInRole(userId, "Admin", Roles.GLOBAL_GROUP);
+    return Roles.userIsInRole(userId, "Admin");
   },
   remove: function(userId) {
-    return Roles.userIsInRole(userId, "Admin", Roles.GLOBAL_GROUP);
+    return Roles.userIsInRole(userId, "Admin");
   }
 });
