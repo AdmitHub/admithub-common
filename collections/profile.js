@@ -775,7 +775,7 @@ CollegeProfiles.getUserData = function(user, profile, match) {
   created = moment(created).format("MMM Do YYYY, h:mm A");
   return {
     "Created At": "\""+created+"\"",
-    "First Contact": getFirstContact(match),
+    "First Contact": getFirstContact(match) || "",
     "Email Address": dotGet(user, "emails.0.address") || "",
     "Date of Birth": dotGet(profile, "demographics.dateOfBirth") ? moment(dotGet(profile, "demographics.dateOfBirth")).format('M-D-YYYY') : "",
     "First Name": dotGet(profile, "firstName") || "",
