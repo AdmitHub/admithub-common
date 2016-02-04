@@ -20,7 +20,7 @@ AILogs.attachSchema(new SimpleSchema({
   },
   reviewedBy: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true}, // User
   reviewedDate: {type: Date, optional: true},
-  reviewedAction: {type: Object, blackbox: true},
+  reviewedAction: {type: Object, blackbox: true, optional: true},
   humanResponse: {type: String, optional: true},
   error: {type: String, optional: true}
 }));
