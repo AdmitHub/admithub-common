@@ -20,7 +20,7 @@ AILogs.attachSchema(new SimpleSchema({
   },
   reviewedBy: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true}, // User
   reviewedDate: {type: Date, optional: true},
-  reviewedAction: {type: Object, blackbox: true},
+  reviewedAction: {type: Object, blackbox: true, optional: true},
   humanResponse: {type: String, optional: true},
   error: {type: String, optional: true}
 }));
@@ -64,9 +64,9 @@ AILogs.getNext = function(log, limit) {
     limit: limit
   });
 };
-AILogs.getIntent = function(log) {
+AILogs.getUnderstanding = function(log) {
   limit = limit === undefined ? 1 : limit;
-  return AIIntents.findOne({
+  return AIUnderstandings.findOne({
     topic: log.responseAction,
   });
 };
