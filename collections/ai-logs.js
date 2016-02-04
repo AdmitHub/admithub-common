@@ -18,6 +18,9 @@ AILogs.attachSchema(new SimpleSchema({
     allowedValues: ["needsReview", "humanResponse", "emailCollege"],
     optional: true
   },
+  reviewedBy: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true}, // User
+  reviewedDate: {type: Date, optional: true},
+  reviewedAction: {type: Object, blackbox: true, optional: true},
   humanResponse: {type: String, optional: true},
   error: {type: String, optional: true}
 }));
@@ -61,9 +64,21 @@ AILogs.getNext = function(log, limit) {
     limit: limit
   });
 };
-AILogs.getIntent = function(log) {
+AILogs.getUnderstanding = function(log) {
   limit = limit === undefined ? 1 : limit;
-  return AIIntents.findOne({
+  return AIUnderstandings.findOne({
     topic: log.responseAction,
   });
 };
+
+AILogs.allow({
+  insert: function(userId) {
+    return Roles.userIsInRole(userId, "Admin", Roles.GLOBAL_GROUP);
+  },
+  update: function(userId) {
+    return Roles.userIsInRole(userId, "Admin", Roles.GLOBAL_GROUP);
+  },
+  remove: function(userId) {
+    return Roles.userIsInRole(userId, "Admin", Roles.GLOBAL_GROUP);
+  }
+});
