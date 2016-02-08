@@ -842,6 +842,20 @@ CollegeProfiles.getUserData = function(user, profile, match) {
   }
 };
 
+CollegeProfiles.getAttendeeData = function(user, profile, attendee) {
+  var created = moment(dotGet(attendee, "createdAt")).format("MMM Do YYYY, h:mm A");
+  return {
+    "RSVD'd On": "\""+created+"\"",
+    "First Name": dotGet(profile, "firstName") || "",
+    "Last Name": dotGet(profile, "lastName") || "",
+    "Zip Code": dotGet(profile, "location.zip") ? dotGet(profile, "location.zip") : "",
+    "City": dotGet(profile, "location.city") || "",
+    "State": dotGet(profile, "location.state") || "",
+    "High School": dotGet(profile, "highschool.current.name") || "",
+    "CEEB Code": dotGet(profile, "highschool.current.ceeb") || ""
+  }
+};
+
 CollegeProfiles.getHighschoolStudentData = function(user, profile) {
   return {
     "Created At": moment(dotGet(profile, "created")).format("MMM Do YYYY, h:mm A"),
