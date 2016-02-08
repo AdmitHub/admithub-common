@@ -509,7 +509,46 @@ var _metaFields = new SimpleSchema({
     "finished": fields.bool(o),
     "remindersSent": fields.number(o)
   }), optional: true},
+  "fafsaGetReadyBot": {type: new SimpleSchema({
+    "skip": fields.bool(o),
+    "finished": fields.bool(o),
+  }), optional: true},
+  "fafsaCompletingBot": {type: new SimpleSchema({
+    "skip": fields.bool(o),
+    "finished": fields.bool(o),
+  }), optional: true},
+  "fafsaSarReviewBot": {type: new SimpleSchema({
+    "skip": fields.bool(o),
+    "finished": fields.bool(o),
+  }), optional: true},
 });
+
+var _fafsaSchema = new SimpleSchema({
+  "getReady": {type: new SimpleSchema({
+    "applyFinancialAid": fields.bool(o),
+    "usCitizen": fields.bool(o),
+    "dependent": fields.bool(o),
+    "parentalSituation": fields.parental_situation(o),
+    "talkedWithParents": fields.bool(o),
+    "eligibleNoncitizen": fields.bool(o),
+    "filedTaxes": fields.bool(o),
+    "computerAccess": fields.bool(o),
+    "gatheredDocs": fields.bool(o),
+  }), optional: true },
+  "completing": {type: new SimpleSchema({
+    "readyToStart": fields.bool(o),
+    "signedSubmitted": fields.bool(o),
+    "receivedConfirmation": fields.bool(o),
+    "preventedFromSubmission": fields.bool(o),
+  }), optional: true },
+  "reviewing": {type: new SimpleSchema ({
+    "receivedSAR": fields.bool(o),
+    "noMistakes": fields.bool(o),
+    "appliedToMore": fields.bool(o),
+    "taxEstimates": fields.bool(o),
+  }), optional: true },
+});
+
 CollegeProfileSchema = new SimpleSchema({
   "_id": {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   // the only non-optional field
@@ -525,6 +564,7 @@ CollegeProfileSchema = new SimpleSchema({
     optional: true
   }),
   "headline": {type: String, max: 300, optional: true},
+  "fafsa": {type: _fafsaSchema, optional: true},
   "location": {type: _locationSchema, optional: true},
   "demographics": {type: _demographicsSchema, optional: true},
   "parents": {type: _parentSchema, optional: true},
