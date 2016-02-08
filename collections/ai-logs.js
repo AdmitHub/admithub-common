@@ -46,6 +46,31 @@ AILogs.getCategory = function(log) {
     return "lackOfUnderstanding";
   }
 };
+AILogs.getCategoryQuery = function (category) {
+  if (category === 'valid') {
+    return {
+      response: {$exists: true},
+      responseAction: /^\/(?!control)/
+    }
+  } else if (category === 'questionable') {
+    return {
+      responseAction: /^smalltalk|^\/control\/human/
+    }
+  } else if (category === 'problem') {
+    return {
+      $or: [
+        {
+          error: {$exists: true}
+        }, {
+          responseAction: /^(?!\/control).+/,
+          response: {$exists: false}
+        }, {
+          responseAction: '/control/lackOfUnderstanding'
+        }
+      ]
+    }
+  }
+}
 AILogs.getPrevious = function(log, limit) {
   limit = limit === undefined ? 1 : limit;
   return AILogs.find({
