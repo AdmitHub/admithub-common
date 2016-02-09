@@ -585,17 +585,17 @@ CollegeProfileSchema = new SimpleSchema({
   "recommendations": {type: _recommendationSchema, optional: true},
   "preferences": {type: _preferenceSchema, optional: true},
   "meta": {type: _metaFields, optional: true},
-
   "modified": {type: Date, autoValue: function() { return new Date(); }},
   "created": fields.date(),
   "contactable": fields.bool({optional: true}),
   "contactableConfirmed": fields.bool({optional: true}),
   "stopReason": fields.string({optional: true}),
   "referralSource": fields.referral_source({optional: true}),
-
   "description": fields.description({optional: true}),
   "earlyStarter": fields.bool(o),
-  "isDemoUser": {type: Boolean, optional: true}
+  "isDemoUser": {type: Boolean, optional: true},
+  "juniorOrSenior": {type: Boolean, optional: true},
+  "hasAppliedFinancialAid": {type: Boolean, optional: true},
 });
 
 CollegeProfiles = new Mongo.Collection("collegeprofiles");
