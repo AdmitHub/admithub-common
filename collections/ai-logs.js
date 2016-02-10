@@ -8,6 +8,7 @@ AILogs.attachSchema(new SimpleSchema({
   inputContexts: {type: [String]},
   responseAction: {type: String, optional: true},
   response: {type: String, optional: true},
+  sentToHuman: {type: String, optional: true},
   messagingService: {type: String},
   handled: {type: Boolean, defaultValue: false},
   needsReview: {type: Boolean, defaultValue: false},

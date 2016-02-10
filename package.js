@@ -34,7 +34,9 @@ Package.onUse(function(api) {
   api.addFiles('collections/ai-entities.js');
   api.addFiles('collections/ai-understandings.js');
   api.addFiles('collections/ai-logs.js');
+  api.addFiles('collections/brandedApplicantConversations.js');
   api.addFiles('collections/brandedColleges.js');
+  api.addFiles('collections/brandedCollegeApplicants.js');
   api.addFiles('collections/ceebCodes.js');
   api.addFiles('collections/collegeevents.js');
   api.addFiles('collections/collegeOfficers.js');
@@ -65,7 +67,9 @@ Package.onUse(function(api) {
     'AIUnderstandings',
     'AIEntities',
     'AILogs',
+    'BrandedApplicantConversations',
     'BrandedColleges',
+    'BrandedCollegeApplicants',
     'CeebCodes',
     'CollegeEvents',
     'CollegeProfiles',
