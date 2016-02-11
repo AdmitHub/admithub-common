@@ -8,7 +8,16 @@ CollegeEvents.attachSchema(new SimpleSchema({
     optional: true
   },
   subscribers: {
-    type: [String],
+    type: [Object],
+    optional: true
+  },
+  "subscribers.$.userId": {
+    type: String,
+    regEx: SimpleSchema.RegEx.Id,
+    optional: true
+  },
+  "subscribers.$.collegeId": {
+    type: String,
     regEx: SimpleSchema.RegEx.Id,
     optional: true
   },
