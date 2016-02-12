@@ -100,6 +100,7 @@ Package.onUse(function(api) {
     'Sponsors',
     'Testimonials',
     'UnverifiedEmailMessages',
+    'PendingOfficers',
     'UserSchema',
     'yesOrNo',
   ]);
