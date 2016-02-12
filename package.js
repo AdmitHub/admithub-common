@@ -56,6 +56,7 @@ Package.onUse(function(api) {
   api.addFiles('collections/highschoolConversations.js');
   api.addFiles('collections/recentlyAsked.js');
   api.addFiles('collections/unverifiedEmailMessages.js');
+  api.addFiles('collections/pendingOfficers.js');
   api.addFiles('collections/demoBotProfile.js');
 
   api.addFiles('server/collegesInMemory.js', 'server');
