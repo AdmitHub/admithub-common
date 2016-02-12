@@ -14,12 +14,6 @@ CollegeOfficers.attachSchema(new SimpleSchema({
     autoform: { placeholder: "user _id" },
     custom: SimpleSchema.validators.uniqueArray
   },
-  pendingOfficers: {
-    type: [String],
-    regEx: SimpleSchema.RegEx.Id, optional: true,
-    autoform: { placeholder: "user _id" },
-    custom: SimpleSchema.validators.uniqueArray
-  },
   associatedEmails: {
     type: [Object],
     optional: true
