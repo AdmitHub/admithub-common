@@ -846,13 +846,25 @@ CollegeProfiles.getAttendeeData = function(user, profile, attendee) {
   var created = moment(dotGet(attendee, "createdAt")).format("MMM Do YYYY, h:mm A");
   return {
     "RSVD'd On": "\""+created+"\"",
+    "Email Address": dotGet(user, "emails.0.address") || "",
+    "Date of Birth": dotGet(profile, "demographics.dateOfBirth") ? moment(dotGet(profile, "demographics.dateOfBirth")).format('M-D-YYYY') : "",
     "First Name": dotGet(profile, "firstName") || "",
     "Last Name": dotGet(profile, "lastName") || "",
+    "Description": dotGet(profile, "description") || "",
     "Zip Code": dotGet(profile, "location.zip") ? dotGet(profile, "location.zip") : "",
     "City": dotGet(profile, "location.city") || "",
     "State": dotGet(profile, "location.state") || "",
+    "Street Address": dotGet(profile, "location.address") || "",
     "High School": dotGet(profile, "highschool.current.name") || "",
-    "CEEB Code": dotGet(profile, "highschool.current.ceeb") || ""
+    "CEEB Code": dotGet(profile, "highschool.current.ceeb") || "",
+    "Expected Year of Graduation": dotGet(profile, "highschool.expectedGraduationYear") || "",
+    "GPA": dotGet(profile, "highschool.gpaGeneral.gpa") || "",
+    "SAT": dotGet(profile, "tests.sat.composite") || "",
+    "ACT": dotGet(profile, "tests.act.composite") || "",
+    "Intended Major": dotGet(profile, "intentions.intendToStudy") || "",
+    "College Transfer": dotGet(profile, "demographics.transfer") ? "Yes" : "No",
+    "Most Recent College": dotGet(profile, "demographics.mostRecentCollege") || "",
+    "Contactable": dotGet(profile, "contactable") || ""
   }
 };
 
