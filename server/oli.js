@@ -136,6 +136,26 @@ Oli = {
       params
     );
   },
+  // parameter schema for ``Oli.appendMatchMessage``
+  appendMatchMessageParams: new SimpleSchema({
+    userId: {type: String, regEx: SimpleSchema.RegEx.Id},
+    collegeId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
+    highschoolId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
+    message: {type: String},
+    sender: {type: String, allowedValues: ["student", "highschool", "college", "admithub"]},
+    onlyIfEmpty: {type: Boolean, optional: true}
+  }),
+  /**
+   * Send a message from a student to a officer/highschool
+   * @param {Object} params - Parameters as defined in ``appendMatchMessageParams`` schema
+   */
+  appendMatchMessage: function(params) {
+    check(params, Oli.appendMatchMessageParams);
+    return Oli._callEndpoint('POST',
+      dotGet(Meteor, 'settings.oli.appendMatchMessage'),
+      params
+    );
+  },
   /**
    * Express middleware to authenticate requests using twilio's authentication
    * strategy. See https://www.twilio.com/docs/security
