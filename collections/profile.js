@@ -792,13 +792,13 @@ CollegeProfiles.getUserData = function(user, profile, match) {
     "SAT": dotGet(profile, "tests.sat.composite") || "",
     "ACT": dotGet(profile, "tests.act.composite") || "",
     "Intended Major": dotGet(profile, "intentions.intendToStudy") || "",
-    "College Transfer": dotGet(profile, "demographics.transfer") ? "Yes" : "No",
+    "College Transfer": dotGet(profile, "demographics.transfer") ? "Yes" : "",
     "Most Recent College": dotGet(profile, "demographics.mostRecentCollege") || "",
     "Contactable": dotGet(profile, "contactable") || "",
-    "Has Visited": dotGet(match, "hasVisited") ? "Yes" : "No",
-    "Wants to Visit": dotGet(match, "wantsToVisit") ? "Yes" : "No",
-    "Legacy": dotGet(match, "legacy") ? "Yes" : "No",
-    "Considering Early Apply": dotGet(match, "consideringEarlyApply") ? "Yes" : "No"
+    "Has Visited": dotGet(match, "hasVisited") ? "Yes" : "",
+    "Wants to Visit": dotGet(match, "wantsToVisit") ? "Yes" : "",
+    "Legacy": dotGet(match, "legacy") ? "Yes" : "",
+    "Considering Early Apply": dotGet(match, "consideringEarlyApply") ? "Yes" : ""
   }
 };
 
