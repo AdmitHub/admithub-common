@@ -11,7 +11,7 @@ var o = {optional: true};
 
 var _demographicsSchema = new SimpleSchema({
   "gender": fields.gender(o),
-  "race": fields.race(o),
+  "race": fields.race_multiple(o),
   "citizenship": fields.string(o),
   "nativeLanguage": fields.string(o),
   "yearsOutsideUs": fields.number(o),
