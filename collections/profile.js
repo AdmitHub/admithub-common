@@ -11,7 +11,6 @@ var o = {optional: true};
 
 var _demographicsSchema = new SimpleSchema({
   "gender": fields.gender(o),
-  "race": fields.race_multiple(o),
   "citizenship": fields.string(o),
   "nativeLanguage": fields.string(o),
   "yearsOutsideUs": fields.number(o),
@@ -22,7 +21,17 @@ var _demographicsSchema = new SimpleSchema({
   "mostRecentCollege": fields.string(o),
   "emoji": fields.string(o),
   "dateOfBirth": fields.date(o),
-  "dobConfirmed": fields.bool(o)
+  "dobConfirmed": fields.bool(o),
+
+  "race": {type: new SimpleSchema ({
+    "americanIndianAlaskanNative": fields.bool({label: "American Indian/Alaskan Native", optional: true}),
+    "asian": fields.bool({label: "Asian", optional: true}),
+    "blackAfricanAmerican": fields.bool({label: "Black/African-American", optional: true}),
+    "hispanicLatino": fields.bool({label: "Hispanic/Latino", optional: true}),
+    "nativeHawaiianPacificIslander": fields.bool({label: "Native Hawaiian/ Pacific Islander", optional: true}),
+    "white": fields.bool({label: "White", optional: true})
+  }), optional: true}
+
 });
 
 var _locationSchema = new SimpleSchema({
