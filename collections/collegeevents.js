@@ -2,7 +2,25 @@ CollegeEvents = new Mongo.Collection("collegeevents");
 
 CollegeEvents.attachSchema(new SimpleSchema({
   _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
-  organizers: {type: [String], regEx: SimpleSchema.RegEx.Id, optional: true},
+  organizers: {
+    type: [String], 
+    regEx: SimpleSchema.RegEx.Id, 
+    optional: true
+  },
+  subscribers: {
+    type: [Object],
+    optional: true
+  },
+  "subscribers.$.userId": {
+    type: String,
+    regEx: SimpleSchema.RegEx.Id,
+    optional: true
+  },
+  "subscribers.$.collegeId": {
+    type: String,
+    regEx: SimpleSchema.RegEx.Id,
+    optional: true
+  },
   name: {
     type: String
   },

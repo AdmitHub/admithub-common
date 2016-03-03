@@ -4,6 +4,7 @@ Highschools.attachSchema(new SimpleSchema({
   _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   name: {type: String, unique: true},
   incomingPhoneNumber: fields.phone_number({optional: true}),
+  primaryEmail: fields.email({optional: true}),
   counselors: {
     type: [String],
     regEx: SimpleSchema.RegEx.Id,

@@ -509,7 +509,46 @@ var _metaFields = new SimpleSchema({
     "finished": fields.bool(o),
     "remindersSent": fields.number(o)
   }), optional: true},
+  "fafsaGetReadyBot": {type: new SimpleSchema({
+    "skip": fields.bool(o),
+    "finished": fields.bool(o),
+  }), optional: true},
+  "fafsaCompletingBot": {type: new SimpleSchema({
+    "skip": fields.bool(o),
+    "finished": fields.bool(o),
+  }), optional: true},
+  "fafsaSarReviewBot": {type: new SimpleSchema({
+    "skip": fields.bool(o),
+    "finished": fields.bool(o),
+  }), optional: true},
 });
+
+var _fafsaSchema = new SimpleSchema({
+  "getReady": {type: new SimpleSchema({
+    "applyFinancialAid": fields.bool(o),
+    "usCitizen": fields.bool(o),
+    "dependent": fields.bool(o),
+    "parentalSituation": fields.parental_situation(o),
+    "talkedWithParents": fields.bool(o),
+    "eligibleNoncitizen": fields.bool(o),
+    "filedTaxes": fields.bool(o),
+    "computerAccess": fields.bool(o),
+    "gatheredDocs": fields.bool(o),
+  }), optional: true },
+  "completing": {type: new SimpleSchema({
+    "readyToStart": fields.bool(o),
+    "signedSubmitted": fields.bool(o),
+    "receivedConfirmation": fields.bool(o),
+    "preventedFromSubmission": fields.bool(o),
+  }), optional: true },
+  "reviewing": {type: new SimpleSchema ({
+    "receivedSAR": fields.bool(o),
+    "noMistakes": fields.bool(o),
+    "appliedToMore": fields.bool(o),
+    "taxEstimates": fields.bool(o),
+  }), optional: true },
+});
+
 CollegeProfileSchema = new SimpleSchema({
   "_id": {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   // the only non-optional field
@@ -525,6 +564,7 @@ CollegeProfileSchema = new SimpleSchema({
     optional: true
   }),
   "headline": {type: String, max: 300, optional: true},
+  "fafsa": {type: _fafsaSchema, optional: true},
   "location": {type: _locationSchema, optional: true},
   "demographics": {type: _demographicsSchema, optional: true},
   "parents": {type: _parentSchema, optional: true},
@@ -545,17 +585,17 @@ CollegeProfileSchema = new SimpleSchema({
   "recommendations": {type: _recommendationSchema, optional: true},
   "preferences": {type: _preferenceSchema, optional: true},
   "meta": {type: _metaFields, optional: true},
-
   "modified": {type: Date, autoValue: function() { return new Date(); }},
   "created": fields.date(),
   "contactable": fields.bool({optional: true}),
   "contactableConfirmed": fields.bool({optional: true}),
   "stopReason": fields.string({optional: true}),
   "referralSource": fields.referral_source({optional: true}),
-
   "description": fields.description({optional: true}),
   "earlyStarter": fields.bool(o),
-  "isDemoUser": {type: Boolean, optional: true}
+  "isDemoUser": {type: Boolean, optional: true},
+  "juniorOrSenior": {type: Boolean, optional: true},
+  "hasAppliedFinancialAid": {type: Boolean, optional: true},
 });
 
 CollegeProfiles = new Mongo.Collection("collegeprofiles");
@@ -774,8 +814,38 @@ CollegeProfiles.getUserData = function(user, profile, match) {
   var created = dotGet(match, "created") || dotGet(profile, "created");
   created = moment(created).format("MMM Do YYYY, h:mm A");
   return {
-    "Created At": "\""+created+"\"",
+    "Created At": created,
     "First Contact": getFirstContact(match) || "",
+    "Email Address": dotGet(user, "emails.0.address") || "",
+    "Date of Birth": dotGet(profile, "demographics.dateOfBirth") ? moment(dotGet(profile, "demographics.dateOfBirth")).format('M-D-YYYY') : "",
+    "First Name": dotGet(profile, "firstName") || "",
+    "Last Name": dotGet(profile, "lastName") || "",
+    "Description": dotGet(profile, "description") || "",
+    "Zip Code": dotGet(profile, "location.zip") ? dotGet(profile, "location.zip") : "",
+    "City": dotGet(profile, "location.city") || "",
+    "State": dotGet(profile, "location.state") || "",
+    "Street Address": dotGet(profile, "location.address") || "",
+    "High School": dotGet(profile, "highschool.current.name") || "",
+    "CEEB Code": dotGet(profile, "highschool.current.ceeb") || "",
+    "Expected Year of Graduation": dotGet(profile, "highschool.expectedGraduationYear") || "",
+    "GPA": dotGet(profile, "highschool.gpaGeneral.gpa") || "",
+    "SAT": dotGet(profile, "tests.sat.composite") || "",
+    "ACT": dotGet(profile, "tests.act.composite") || "",
+    "Intended Major": dotGet(profile, "intentions.intendToStudy") || "",
+    "College Transfer": dotGet(profile, "demographics.transfer") ? "Yes" : "",
+    "Most Recent College": dotGet(profile, "demographics.mostRecentCollege") || "",
+    "Contactable": dotGet(profile, "contactable") || "",
+    "Has Visited": dotGet(match, "hasVisited") ? "Yes" : "",
+    "Wants to Visit": dotGet(match, "wantsToVisit") ? "Yes" : "",
+    "Legacy": dotGet(match, "legacy") ? "Yes" : "",
+    "Considering Early Apply": dotGet(match, "consideringEarlyApply") ? "Yes" : ""
+  }
+};
+
+CollegeProfiles.getAttendeeData = function(user, profile, attendee) {
+  var created = moment(dotGet(attendee, "createdAt")).format("MMM Do YYYY, h:mm A");
+  return {
+    "RSVD'd On": "\""+created+"\"",
     "Email Address": dotGet(user, "emails.0.address") || "",
     "Date of Birth": dotGet(profile, "demographics.dateOfBirth") ? moment(dotGet(profile, "demographics.dateOfBirth")).format('M-D-YYYY') : "",
     "First Name": dotGet(profile, "firstName") || "",
@@ -794,11 +864,7 @@ CollegeProfiles.getUserData = function(user, profile, match) {
     "Intended Major": dotGet(profile, "intentions.intendToStudy") || "",
     "College Transfer": dotGet(profile, "demographics.transfer") ? "Yes" : "No",
     "Most Recent College": dotGet(profile, "demographics.mostRecentCollege") || "",
-    "Contactable": dotGet(profile, "contactable") || "",
-    "Has Visited": dotGet(match, "hasVisited") ? "Yes" : "No",
-    "Wants to Visit": dotGet(match, "wantsToVisit") ? "Yes" : "No",
-    "Legacy": dotGet(match, "legacy") ? "Yes" : "No",
-    "Considering Early Apply": dotGet(match, "consideringEarlyApply") ? "Yes" : "No"
+    "Contactable": dotGet(profile, "contactable") || ""
   }
 };
 

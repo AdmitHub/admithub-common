@@ -31,7 +31,9 @@ Package.onUse(function(api) {
   api.addFiles('lib/_fields.js');
   api.addFiles('lib/helpers.js');
   api.addFiles('lib/simpleSchema.js');
+  api.addFiles('collections/brandedApplicantConversations.js');
   api.addFiles('collections/brandedColleges.js');
+  api.addFiles('collections/brandedCollegeApplicants.js');
   api.addFiles('collections/ceebCodes.js');
   api.addFiles('collections/collegeevents.js');
   api.addFiles('collections/collegeOfficers.js');
@@ -51,6 +53,7 @@ Package.onUse(function(api) {
   api.addFiles('collections/highschoolConversations.js');
   api.addFiles('collections/recentlyAsked.js');
   api.addFiles('collections/unverifiedEmailMessages.js');
+  api.addFiles('collections/pendingOfficers.js');
   api.addFiles('collections/demoBotProfile.js');
 
   api.addFiles('server/collegesInMemory.js', 'server');
@@ -59,7 +62,9 @@ Package.onUse(function(api) {
   api.addFiles('server/oli.js', 'server');
 
   api.export([
+    'BrandedApplicantConversations',
     'BrandedColleges',
+    'BrandedCollegeApplicants',
     'CeebCodes',
     'CollegeEvents',
     'CollegeProfiles',
@@ -89,6 +94,7 @@ Package.onUse(function(api) {
     'Sponsors',
     'Testimonials',
     'UnverifiedEmailMessages',
+    'PendingOfficers',
     'UserSchema',
     'yesOrNo',
   ]);
