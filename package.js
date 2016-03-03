@@ -31,9 +31,6 @@ Package.onUse(function(api) {
   api.addFiles('lib/_fields.js');
   api.addFiles('lib/helpers.js');
   api.addFiles('lib/simpleSchema.js');
-  api.addFiles('collections/ai-entities.js');
-  api.addFiles('collections/ai-understandings.js');
-  api.addFiles('collections/ai-logs.js');
   api.addFiles('collections/brandedColleges.js');
   api.addFiles('collections/ceebCodes.js');
   api.addFiles('collections/collegeevents.js');
@@ -62,9 +59,6 @@ Package.onUse(function(api) {
   api.addFiles('server/oli.js', 'server');
 
   api.export([
-    'AIUnderstandings',
-    'AIEntities',
-    'AILogs',
     'BrandedColleges',
     'CeebCodes',
     'CollegeEvents',
