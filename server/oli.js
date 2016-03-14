@@ -156,6 +156,25 @@ Oli = {
       params
     );
   },
+  // parameter schema for ``Oli.forwardToCollege``
+  forwardToCollegeParams: new SimpleSchema({
+    messagingService: {type: String},
+    userId: {type: String},
+    logId: {type: String},
+    prefix: {type: String},
+    question: {type: String}
+  }),
+  /**
+   * Forwards a student message to a college
+   * @param {Object} params - Parameters as defined in ``forwardToCollegeParams`` schema
+   */
+  forwardToCollege: function(params) {
+    check(params, Oli.forwardToCollegeParams);
+    return Oli._callEndpoint('POST',
+      dotGet(Meteor, 'settings.oli.forwardToCollege'),
+      params
+    );
+  },
   /**
    * Express middleware to authenticate requests using twilio's authentication
    * strategy. See https://www.twilio.com/docs/security
