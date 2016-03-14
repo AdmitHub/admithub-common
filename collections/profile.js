@@ -826,6 +826,7 @@ CollegeProfiles.getUserData = function(user, profile, match) {
     "Created At": created,
     "First Contact": getFirstContact(match) || "",
     "Email Address": dotGet(user, "emails.0.address") || "",
+    "Phone Number": dotGet(user, "profile.phone") || "",
     "Date of Birth": dotGet(profile, "demographics.dateOfBirth") ? moment(dotGet(profile, "demographics.dateOfBirth")).format('M-D-YYYY') : "",
     "First Name": dotGet(profile, "firstName") || "",
     "Last Name": dotGet(profile, "lastName") || "",
@@ -856,6 +857,7 @@ CollegeProfiles.getAttendeeData = function(user, profile, attendee) {
   return {
     "RSVD'd On": "\""+created+"\"",
     "Email Address": dotGet(user, "emails.0.address") || "",
+    "Phone Number": dotGet(user, "profile.phone") || "",
     "Date of Birth": dotGet(profile, "demographics.dateOfBirth") ? moment(dotGet(profile, "demographics.dateOfBirth")).format('M-D-YYYY') : "",
     "First Name": dotGet(profile, "firstName") || "",
     "Last Name": dotGet(profile, "lastName") || "",
@@ -881,6 +883,7 @@ CollegeProfiles.getHighschoolStudentData = function(user, profile) {
   return {
     "Created At": moment(dotGet(profile, "created")).format("MMM Do YYYY, h:mm A"),
     "Email Address": dotGet(user, "emails.0.address") || "",
+    "Phone Number": dotGet(user, "profile.phone") || "",
     "Date of Birth": dotGet(profile, "demographics.dateOfBirth") ? moment(dotGet(profile, "demographics.dateOfBirth")).format('M-D-YYYY') : "",
     "First Name": dotGet(profile, "firstName") || "",
     "Last Name": dotGet(profile, "lastName") || "",
