@@ -543,6 +543,7 @@ var _fafsaSchema = new SimpleSchema({
     "filedTaxes": fields.bool(o),
     "computerAccess": fields.bool(o),
     "gatheredDocs": fields.bool(o),
+    "heardOfFafsa": fields.bool(o)
   }), optional: true },
   "completing": {type: new SimpleSchema({
     "readyToStart": fields.bool(o),
