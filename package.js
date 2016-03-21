@@ -41,6 +41,7 @@ Package.onUse(function(api) {
   api.addFiles('collections/heartbeat.js');
   api.addFiles('collections/highschools.js');
   api.addFiles('collections/leads.js');
+  api.addFiles('collections/hsLeads.js');
   api.addFiles('collections/matches.js');
   api.addFiles('collections/pendingEventReports.js');
   api.addFiles('collections/posts.js');
@@ -82,6 +83,7 @@ Package.onUse(function(api) {
     'HighschoolConversations',
     'Highschools',
     'Leads',
+    'HsLeads',
     'Matches',
     'Oli',
     'PendingEventReports',
