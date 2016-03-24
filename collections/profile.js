@@ -534,6 +534,7 @@ var _metaFields = new SimpleSchema({
 
 var _fafsaSchema = new SimpleSchema({
   "getReady": {type: new SimpleSchema({
+    "completedFafsa": fields.bool(o),
     "applyFinancialAid": fields.bool(o),
     "usCitizen": fields.bool(o),
     "dependent": fields.bool(o),
