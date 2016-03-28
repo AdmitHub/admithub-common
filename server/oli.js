@@ -162,7 +162,8 @@ Oli = {
     userId: {type: String},
     logId: {type: String},
     prefix: {type: String},
-    question: {type: String}
+    question: {type: String},
+    email: {type: String}
   }),
   /**
    * Forwards a student message to a college
