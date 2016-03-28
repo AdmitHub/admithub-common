@@ -56,6 +56,7 @@ Package.onUse(function(api) {
   api.addFiles('collections/unverifiedEmailMessages.js');
   api.addFiles('collections/pendingOfficers.js');
   api.addFiles('collections/demoBotProfile.js');
+  api.addFiles('collections/georgiaStateUsers.js');
 
   api.addFiles('server/collegesInMemory.js', 'server');
   api.addFiles('server/indexes.js', 'server');
@@ -99,5 +100,6 @@ Package.onUse(function(api) {
     'PendingOfficers',
     'UserSchema',
     'yesOrNo',
+    'GeorgiaStateUsers',
   ]);
 });
