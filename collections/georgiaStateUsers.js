@@ -58,8 +58,8 @@ BrandedUserSchema = new SimpleSchema({
 		hardStop: fields.bool(o),
 	}), optional: true},
 	interest: {type: new SimpleSchema({
-		crm: fields.number(o),
-		admithub: fields.number(o),
+		crm: fields.number({min: 0, max: 5, optional: true}),
+		admithub: fields.number({min: 0, max: 5, optional: true}),
 	}), optional: true},
 	intent: {type: new SimpleSchema({
 		intendsToEnroll: fields.bool(o),
