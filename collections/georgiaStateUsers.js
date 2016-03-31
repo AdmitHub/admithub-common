@@ -1,6 +1,7 @@
 var o = {optional: true};
 
 BrandedUserSchema = new SimpleSchema({
+	userId: fields.string(),
 	"_id": {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
 	crmId: fields.string({optional: false}), //gsu unique id
 	created: fields.date(),
@@ -15,7 +16,6 @@ BrandedUserSchema = new SimpleSchema({
 		full: fields.string(o),
 		nickName: fields.string(o),
 	}),optional: true},
-	phone: fields.phone_number(o),
 	dob: fields.date(o),
 	location: {type: new SimpleSchema({
 		address1: fields.address(o),
@@ -54,8 +54,7 @@ BrandedUserSchema = new SimpleSchema({
 	}),optional: true},
 	textSetting:{type: new SimpleSchema ({
 		canText: fields.bool(o),
-		softStop: fields.bool(o),
-		hardStop: fields.bool(o),
+		wrongNumber: fields.bool(o),
 	}), optional: true},
 	interest: {type: new SimpleSchema({
 		crm: fields.number({min: 0, max: 5, optional: true}),
@@ -65,27 +64,27 @@ BrandedUserSchema = new SimpleSchema({
 		intendsToEnroll: fields.bool(o),
 		intentRecievedDate: fields.date(o),
 	}), optional: true},
-	initialBrandedSurvey: {type: new SimpleSchema({
+	initialBrandedBot: {type: new SimpleSchema({
     skip: fields.bool(o),
     finished: fields.bool(o),
   }), optional: true},
-  finAidWorkflow: {type: new SimpleSchema({
+  finAidBot: {type: new SimpleSchema({
     skip: fields.bool(o),
     finished: fields.bool(o),
   }), optional: true},
-  orientationWorkflow: {type: new SimpleSchema({
+  orientationBot: {type: new SimpleSchema({
     skip: fields.bool(o),
     finished: fields.bool(o),
   }), optional: true},
-  campusIdWorkflow: {type: new SimpleSchema({
+  campusIdBot: {type: new SimpleSchema({
     skip: fields.bool(o),
     finished: fields.bool(o),
   }), optional: true},
-  emailSetUpWorkflow: {type: new SimpleSchema({
+  emailSetUpBot: {type: new SimpleSchema({
     skip: fields.bool(o),
     finished: fields.bool(o),
   }), optional: true},
-  housingWorkflow: {type: new SimpleSchema({
+  housingBot: {type: new SimpleSchema({
     skip: fields.bool(o),
     finished: fields.bool(o),
   }), optional: true},
