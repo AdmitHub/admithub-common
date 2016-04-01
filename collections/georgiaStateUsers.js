@@ -68,26 +68,43 @@ BrandedUserSchema = new SimpleSchema({
     skip: fields.bool(o),
     finished: fields.bool(o),
   }), optional: true},
-  finAidBot: {type: new SimpleSchema({
-    skip: fields.bool(o),
-    finished: fields.bool(o),
-  }), optional: true},
-  orientationBot: {type: new SimpleSchema({
-    skip: fields.bool(o),
-    finished: fields.bool(o),
-  }), optional: true},
-  campusIdBot: {type: new SimpleSchema({
-    skip: fields.bool(o),
-    finished: fields.bool(o),
-  }), optional: true},
-  emailSetUpBot: {type: new SimpleSchema({
-    skip: fields.bool(o),
-    finished: fields.bool(o),
-  }), optional: true},
-  housingBot: {type: new SimpleSchema({
-    skip: fields.bool(o),
-    finished: fields.bool(o),
-  }), optional: true},
+  meta: {
+      type: new SimpleSchema({
+        pounceIntroBot: {type: new SimpleSchema({
+          skip: fields.bool(o),
+          finished: fields.bool(o),
+        }), optional: true},
+        fafsaCompletingBot: {type: new SimpleSchema({
+          skip: fields.bool(o),
+          finished: fields.bool(o),
+        }), optional: true},
+        fafsaGetReadyBot: {type: new SimpleSchema({
+          skip: fields.bool(o),
+          finished: fields.bool(o),
+        }), optional: true},
+        fafsaSarReviewBot: {type: new SimpleSchema({
+          skip: fields.bool(o),
+          finished: fields.bool(o),
+        }), optional: true},
+        orientationBot: {type: new SimpleSchema({
+          skip: fields.bool(o),
+           finished: fields.bool(o),
+        }), optional: true},
+        campusIdBot: {type: new SimpleSchema({
+          skip: fields.bool(o),
+          finished: fields.bool(o),
+        }), optional: true},
+        emailSetUpBot: {type: new SimpleSchema({
+          skip: fields.bool(o),
+          finished: fields.bool(o),
+        }), optional: true},
+        housingBot: {type: new SimpleSchema({
+          skip: fields.bool(o),
+          finished: fields.bool(o),
+        }), optional: true}
+      }),
+      optional: true
+  }
 });
 
 GeorgiaStateUsers = new Mongo.Collection('georgiaStateUsers');
