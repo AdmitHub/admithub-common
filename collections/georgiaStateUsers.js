@@ -64,11 +64,7 @@ BrandedUserSchema = new SimpleSchema({
 		intendsToEnroll: fields.bool(o),
 		intentRecievedDate: fields.date(o),
 	}), optional: true},
-	initialBrandedBot: {type: new SimpleSchema({
-    skip: fields.bool(o),
-    finished: fields.bool(o),
-  }), optional: true},
-  meta: {
+    meta: {
       type: new SimpleSchema({
         pounceIntroBot: {type: new SimpleSchema({
           skip: fields.bool(o),
@@ -104,7 +100,7 @@ BrandedUserSchema = new SimpleSchema({
         }), optional: true}
       }),
       optional: true
-  }
+    }
 });
 
 GeorgiaStateUsers = new Mongo.Collection('georgiaStateUsers');
