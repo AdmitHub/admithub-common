@@ -27,10 +27,10 @@ BrandedUserSchema = new SimpleSchema({
 	}), optional: true},
 	inStateStudent: fields.bool(o),
 	application: {type: new SimpleSchema({
-		status: fields.string(o), 
+		status: fields.status(o), 
 	}), optional: true},
 	profile: {type: new SimpleSchema({
-		studentType: fields.string(o),
+		studentType: fields.student_type(o),
 	}), optional: true},
 	finAid: {type: new SimpleSchema({
 		fafsaComplete: fields.bool(o),
@@ -42,7 +42,7 @@ BrandedUserSchema = new SimpleSchema({
 	}),optional: true},
 	housing: {type: new SimpleSchema({
 		onCampus: fields.bool(o),
-		preferenceType: fields.string(o),
+		preferenceType: fields.preference_type(o),
 		depositPaid: fields.bool(o),
 		depositDate: fields.bool(o),
 	}),optional: true},
