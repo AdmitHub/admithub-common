@@ -55,6 +55,7 @@ BrandedUserSchema = new SimpleSchema({
 	textSetting:{type: new SimpleSchema ({
 		canText: fields.bool(o),
 		wrongNumber: fields.bool(o),
+        newPhone: fields.phone_number(o)
 	}), optional: true},
 	interest: {type: new SimpleSchema({
 		crm: fields.number({min: 0, max: 5, optional: true}),
@@ -64,11 +65,7 @@ BrandedUserSchema = new SimpleSchema({
 		intendsToEnroll: fields.bool(o),
 		intentRecievedDate: fields.date(o),
 	}), optional: true},
-	initialBrandedBot: {type: new SimpleSchema({
-    skip: fields.bool(o),
-    finished: fields.bool(o),
-  }), optional: true},
-  meta: {
+    meta: {
       type: new SimpleSchema({
         pounceIntroBot: {type: new SimpleSchema({
           skip: fields.bool(o),
@@ -104,7 +101,7 @@ BrandedUserSchema = new SimpleSchema({
         }), optional: true}
       }),
       optional: true
-  }
+    }
 });
 
 GeorgiaStateUsers = new Mongo.Collection('georgiaStateUsers');
