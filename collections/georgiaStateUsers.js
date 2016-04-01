@@ -55,6 +55,7 @@ BrandedUserSchema = new SimpleSchema({
 	textSetting:{type: new SimpleSchema ({
 		canText: fields.bool(o),
 		wrongNumber: fields.bool(o),
+        newPhone: fields.phone_number(o)
 	}), optional: true},
 	interest: {type: new SimpleSchema({
 		crm: fields.number({min: 0, max: 5, optional: true}),
