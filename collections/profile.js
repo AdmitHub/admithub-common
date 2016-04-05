@@ -226,7 +226,7 @@ var _volunteerSchema = new SimpleSchema({
     "endDate": fields.date(o),
     "summary": fields.string({max: 300, optional: true}),
     "highlights": {type: [fields.string({max: 160})], optional: true}
-  })]}
+  })], optional: true}
 });
 
 var _skillSchema = new SimpleSchema({
