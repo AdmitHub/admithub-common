@@ -44,7 +44,7 @@ BrandedUserSchema = new SimpleSchema({
 		onCampus: fields.bool(o),
 		preferenceType: fields.preference_type(o),
 		depositPaid: fields.bool(o),
-		depositDate: fields.bool(o),
+		depositDate: fields.date(o),
 	}),optional: true},
 	orientation:{type: new SimpleSchema ({
 		needsToRsvp: fields.bool(o),
