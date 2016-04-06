@@ -23,6 +23,7 @@ BrandedUserSchema = new SimpleSchema({
     address2: fields.address(o),
     address3: fields.address(o),
     city: fields.string(o),
+    county: fields.string(o),
     state: fields.state(o),
     zip: fields.zip_code(_.extend(o)),
     country: fields.string(o),
