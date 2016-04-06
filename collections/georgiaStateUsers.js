@@ -10,6 +10,8 @@ BrandedUserSchema = new SimpleSchema({
   entryYear: fields.number(o),
   entryTerm: fields.string(o),
   studyGroupMember: fields.bool(o),
+  email: fields.string(o),
+  phone: fields.string(o),
   name: {type: new SimpleSchema({
     first: fields.string(o),
     last: fields.string(o),
