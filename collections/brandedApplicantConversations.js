@@ -1,7 +1,7 @@
 BrandedApplicantConversations = new Mongo.Collection("brandedapplicantconversations");
 BrandedApplicantConversations.attachSchema(new SimpleSchema({
   _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
-  applicantId: {type: String, regEx: SimpleSchema.RegEx.Id},
+  applicantId: {type: String}, // this could very well be a Mongo-style ID
   brandedCollegeId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   messages: {type: [Object]},
   "messages.$.created": {type: Date},
