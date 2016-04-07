@@ -39,7 +39,7 @@ BrandedUserSchema = new SimpleSchema({
   }), optional: true},
   finAid: {type: new SimpleSchema({
     fafsaReceived: fields.bool(o),
-    finAidOutstanding: fields.bool(o),
+    finAidComplete: fields.bool(o),
     fafsaComplete: fields.bool(o),
     finAidInterest: fields.bool(o),
     scholarshipAwarded: fields.bool(o),
