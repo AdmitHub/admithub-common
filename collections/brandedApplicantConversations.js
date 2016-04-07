@@ -2,7 +2,7 @@ BrandedApplicantConversations = new Mongo.Collection("brandedapplicantconversati
 BrandedApplicantConversations.attachSchema(new SimpleSchema({
   _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   applicantId: {type: String, regEx: SimpleSchema.RegEx.Id},
-  brandedCollegeId: {type: String, regEx: SimpleSchema.RegEx.Id},
+  brandedCollegeId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   messages: {type: [Object]},
   "messages.$.created": {type: Date},
   "messages.$.sender": {type: String, allowedValues: ["student", "college", "admithub"]},
