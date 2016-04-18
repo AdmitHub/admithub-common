@@ -10,5 +10,6 @@ Leads.attachSchema(new SimpleSchema({
   "phone": fields.phone_number({optional: true, label: "Phone Number"}),
   "createdAt": fields.created_date(o),
   "organization": fields.string({optional: true, label: "Institution Name"})
-}))
+}));
+
 

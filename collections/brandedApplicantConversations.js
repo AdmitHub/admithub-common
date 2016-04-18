@@ -7,5 +7,6 @@ BrandedApplicantConversations.attachSchema(new SimpleSchema({
   "messages.$.created": {type: Date},
   "messages.$.sender": {type: String, allowedValues: ["student", "college", "admithub"]},
   "messages.$.email": {type: String, optional: true},
-  "messages.$.body": {type: String}
+  "messages.$.body": {type: String},
+  "messages.$.unverified": {type: Boolean, optional: true}
 }));

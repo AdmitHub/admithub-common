@@ -101,7 +101,8 @@ Oli = {
     media: {type: String, regEx: SimpleSchema.RegEx.Url, optional: true},
     workflow: {type: String, optional: true},
     workflowOptions: {type: Object, optional: true, blackbox: true},
-    forceRevalidate: {type: Boolean, optional: true}
+    forceRevalidate: {type: Boolean, optional: true},
+    messagingService: {type: String, optional: true}
   }),
   /**
    * Fire off an SMS to Oli, bypassing any usual workflow processing.
