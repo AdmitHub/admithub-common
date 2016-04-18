@@ -70,22 +70,19 @@ BrandedUserSchema = new SimpleSchema({
   }), optional: true},
   intent: {type: new SimpleSchema({
     intendsToEnroll: fields.bool(o),
+    intendsToEnrollInternal: fields.bool(o),
     intentRecievedDate: fields.date(o),
+    whyNotAttending: fields.string(o),
+    whyNotAttendingExtended: fields.string(o),
+    counselorCanContact: fields.bool(o),
+    whyUnsure: fields.string(o)
   }), optional: true},
   meta: {type: new SimpleSchema({
     pounceIntroBot: {type: new SimpleSchema({
       skip: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
-    fafsaCompletingBot: {type: new SimpleSchema({
-      skip: fields.bool(o),
-      finished: fields.bool(o),
-    }), optional: true},
-    fafsaGetReadyBot: {type: new SimpleSchema({
-      skip: fields.bool(o),
-      finished: fields.bool(o),
-    }), optional: true},
-    fafsaSarReviewBot: {type: new SimpleSchema({
+    pounceIntentBot: {type: new SimpleSchema({
       skip: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
