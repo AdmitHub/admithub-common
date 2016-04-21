@@ -73,7 +73,7 @@ BrandedUserSchema = new SimpleSchema({
     intendsToEnrollInternal: fields.bool(o),
     intentRecievedDate: fields.date(o),
     whyNotAttending: fields.string(o),
-    whyNotAttendingExtended: fields.string(o),
+    whyNotAttendingExtended: {type: String, max: 150, optional: true},
     counselorCanContact: fields.bool(o),
     whyUnsure: fields.string(o)
   }), optional: true},
