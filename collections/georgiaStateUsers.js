@@ -38,8 +38,8 @@ BrandedUserSchema = new SimpleSchema({
     studentType: fields.student_type(o),
   }), optional: true},
   finAid: {type: new SimpleSchema({
-    fafsaReceived: fields.bool(o),
-    finAidComplete: fields.bool(o),
+    fafsaReceived: fields.bool(o), // make copy
+    finAidComplete: fields.bool(o), // make copy
     fafsaComplete: fields.bool(o),
     finAidInterest: fields.bool(o),
     scholarshipAwarded: fields.bool(o),
@@ -50,14 +50,14 @@ BrandedUserSchema = new SimpleSchema({
   housing: {type: new SimpleSchema({
     onCampus: fields.bool(o),
     preferenceType: fields.preference_type(o),
-    depositPaid: fields.bool(o),
-    depositDate: fields.date(o),
+    depositPaid: fields.bool(o), // make copy
+    depositDate: fields.date(o), 
   }),optional: true},
   orientation:{type: new SimpleSchema ({
-    needsToRsvp: fields.bool(o),
-    attended: fields.bool(o),
-    attendedDate: fields.date(o),
-    registeredDate: fields.date(o),
+    needsToRsvp: fields.bool(o), // make copy
+    attended: fields.bool(o), // make copy
+    attendedDate: fields.date(o), 
+    registeredDate: fields.date(o), 
   }),optional: true},
   textSetting:{type: new SimpleSchema ({
     canText: fields.bool(o),
@@ -69,13 +69,21 @@ BrandedUserSchema = new SimpleSchema({
     admithub: fields.number({min: 0, max: 5, optional: true}),
   }), optional: true},
   intent: {type: new SimpleSchema({
-    intendsToEnroll: fields.bool(o),
+    intendsToEnroll: fields.bool(o), // make copy
     intendsToEnrollInternal: fields.bool(o),
-    intentRecievedDate: fields.date(o),
+    intentReceivedDate: fields.date(o), 
     whyNotAttending: fields.string(o),
     whyNotAttendingExtended: {type: String, max: 150, optional: true},
     counselorCanContact: fields.bool(o),
     whyUnsure: fields.string(o)
+  }), optional: true},
+  presumedState: {type: new SimpleSchema({
+    fafsaReceived: fields.bool(o), // finAid.fafsaReceived /
+    finAidComplete: fields.bool(o), // finAid.finAidComplete /
+    housingDepositPaid: fields.bool(o), // housing.depositPaid /
+    orientationAttendedDate: fields.date(o), // orientation.attendedDate /
+    orientationNeedsToRsvp: fields.bool(o), // orientation.needsToRsvp /
+    intendsToEnroll: fields.bool(o) // intent.intendsToEnroll /
   }), optional: true},
   meta: {type: new SimpleSchema({
     pounceIntroBot: {type: new SimpleSchema({
