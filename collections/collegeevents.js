@@ -45,6 +45,11 @@ CollegeEvents.attachSchema(new SimpleSchema({
     optional: true,
     regEx: /\w+/
   },
+  when: {
+    label: "Optional \"when\" description (\"So you want to attend ${name} on ${when}...\")",
+    type: String,
+    optional: true
+  },
   attendees: {
     type: [Object],
     optional: true
