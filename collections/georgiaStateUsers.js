@@ -73,7 +73,7 @@ BrandedUserSchema = new SimpleSchema({
     intendsToEnrollInternal: fields.bool(o),
     intentReceivedDate: fields.date(o), 
     whyNotAttending: fields.string(o),
-    whyNotAttendingExtended: {type: String, max: 150, optional: true},
+    whyNotAttendingExtended: {type: String, max: 300, optional: true},
     counselorCanContact: fields.bool(o),
     whyUnsure: fields.string(o)
   }), optional: true},
@@ -85,11 +85,6 @@ BrandedUserSchema = new SimpleSchema({
     orientationNeedsToRsvp: fields.bool(o), // orientation.needsToRsvp /
     intendsToEnroll: fields.bool(o) // intent.intendsToEnroll /
   }), optional: true},
-  georgiaSpecific: {
-    type: Object,
-    blackbox: true,
-    optional: true
-  },
   meta: {type: new SimpleSchema({
     pounceIntroBot: {type: new SimpleSchema({
       skip: fields.bool(o),
@@ -112,6 +107,10 @@ BrandedUserSchema = new SimpleSchema({
       finished: fields.bool(o),
     }), optional: true},
     housingBot: {type: new SimpleSchema({
+      skip: fields.bool(o),
+      finished: fields.bool(o),
+    }), optional: true},
+    scholarshipBot: {type: new SimpleSchema({
       skip: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true}
