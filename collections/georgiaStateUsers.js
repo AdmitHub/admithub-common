@@ -85,6 +85,11 @@ BrandedUserSchema = new SimpleSchema({
     orientationNeedsToRsvp: fields.bool(o), // orientation.needsToRsvp /
     intendsToEnroll: fields.bool(o) // intent.intendsToEnroll /
   }), optional: true},
+  georgiaSpecific: {
+    type: Object,
+    blackbox: true,
+    optional: true
+  },
   meta: {type: new SimpleSchema({
     pounceIntroBot: {type: new SimpleSchema({
       skip: fields.bool(o),
