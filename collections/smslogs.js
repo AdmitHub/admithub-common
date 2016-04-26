@@ -18,7 +18,7 @@ SmsLogs.attachSchema(new SimpleSchema({
   workflow: {type: String, optional: true},
   messagingService: {type: String, optional: true},
   error: {type: Boolean, defaultValue: false},
-  transport: {type: String, allowedValues: ["web", "twilio"], optional: false}
+  transport: {type: String, allowedValues: ["web", "twilio", "facebook"], optional: false}
 }));
 if (Meteor.isServer) {
   SmsLogs.allow({
