@@ -52,6 +52,7 @@ BrandedUserSchema = new SimpleSchema({
     preferenceType: fields.preference_type(o),
     depositPaid: fields.bool(o), // make copy
     depositDate: fields.date(o), 
+    internalResponse: fields.string(o),
   }),optional: true},
   orientation:{type: new SimpleSchema ({
     needsToRsvp: fields.bool(o), // make copy
@@ -85,6 +86,9 @@ BrandedUserSchema = new SimpleSchema({
     orientationNeedsToRsvp: fields.bool(o), // orientation.needsToRsvp /
     intendsToEnroll: fields.bool(o) // intent.intendsToEnroll /
   }), optional: true},
+  checkIn: { type: new SimpleSchema({
+    notCommingChangedMind: fields.bool(o)
+  }), optional: true},
   meta: {type: new SimpleSchema({
     pounceIntroBot: {type: new SimpleSchema({
       skip: fields.bool(o),
@@ -111,6 +115,14 @@ BrandedUserSchema = new SimpleSchema({
       finished: fields.bool(o),
     }), optional: true},
     scholarshipBot: {type: new SimpleSchema({
+      skip: fields.bool(o),
+      finished: fields.bool(o),
+    }), optional: true},
+    pounceHousingBot: {type: new SimpleSchema({
+      skip: fields.bool(o),
+      finished: fields.bool(o),
+    }), optional: true},
+    pounceNotAttendingBot: {type: new SimpleSchema({
       skip: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true}
