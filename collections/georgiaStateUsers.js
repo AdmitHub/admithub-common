@@ -38,8 +38,8 @@ BrandedUserSchema = new SimpleSchema({
     studentType: fields.student_type(o),
   }), optional: true},
   finAid: {type: new SimpleSchema({
-    fafsaReceived: fields.bool(o), // make copy
-    finAidComplete: fields.bool(o), // make copy
+    fafsaReceived: fields.bool(o), 
+    finAidComplete: fields.bool(o), 
     fafsaComplete: fields.bool(o),
     finAidInterest: fields.bool(o),
     scholarshipAwarded: fields.bool(o),
@@ -50,13 +50,13 @@ BrandedUserSchema = new SimpleSchema({
   housing: {type: new SimpleSchema({
     onCampus: fields.bool(o),
     preferenceType: fields.preference_type(o),
-    depositPaid: fields.bool(o), // make copy
+    depositPaid: fields.bool(o), 
     depositDate: fields.date(o), 
     internalResponse: fields.string(o),
   }),optional: true},
   orientation:{type: new SimpleSchema ({
-    needsToRsvp: fields.bool(o), // make copy
-    attended: fields.bool(o), // make copy
+    needsToRsvp: fields.bool(o), 
+    attended: fields.bool(o), 
     attendedDate: fields.date(o), 
     registeredDate: fields.date(o), 
   }),optional: true},
@@ -70,13 +70,15 @@ BrandedUserSchema = new SimpleSchema({
     admithub: fields.number({min: 0, max: 5, optional: true}),
   }), optional: true},
   intent: {type: new SimpleSchema({
-    intendsToEnroll: fields.bool(o), // make copy
+    intendsToEnroll: fields.bool(o), 
     intendsToEnrollInternal: fields.bool(o),
     intentReceivedDate: fields.date(o), 
     whyNotAttending: fields.string(o),
     whyNotAttendingExtended: {type: String, max: 300, optional: true},
     counselorCanContact: fields.bool(o),
-    whyUnsure: fields.string(o)
+    whyUnsure: fields.string(o),
+    changedMind: fields.bool(o),
+    followUpInternal: fields.attending(o), // second time around asking intent
   }), optional: true},
   presumedState: {type: new SimpleSchema({
     fafsaReceived: fields.bool(o), // finAid.fafsaReceived /
@@ -85,9 +87,6 @@ BrandedUserSchema = new SimpleSchema({
     orientationAttendedDate: fields.date(o), // orientation.attendedDate /
     orientationNeedsToRsvp: fields.bool(o), // orientation.needsToRsvp /
     intendsToEnroll: fields.bool(o) // intent.intendsToEnroll /
-  }), optional: true},
-  checkIn: { type: new SimpleSchema({
-    notCommingChangedMind: fields.bool(o)
   }), optional: true},
   meta: {type: new SimpleSchema({
     pounceIntroBot: {type: new SimpleSchema({
@@ -125,7 +124,11 @@ BrandedUserSchema = new SimpleSchema({
     pounceNotAttendingBot: {type: new SimpleSchema({
       skip: fields.bool(o),
       finished: fields.bool(o),
-    }), optional: true}
+    }), optional: true},
+    pounceNotSureBot: {type: new SimpleSchema({
+      skip: fields.bool(o),
+      finished: fields.bool(o),
+    }), optional: true},
   }), optional: true},
   abGroup: {type: Number, optional: true, max: 1, min: 0, decimal: true}
 });
