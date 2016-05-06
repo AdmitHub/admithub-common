@@ -44,6 +44,7 @@ Oli = {
     workflow: {type: String, optional: true},
     workflowOptions: {type: Object, optional: true, blackbox: true},
     forceRevalidate: {type: Boolean, optional: true},
+    validationWindow: {type: Number, optional: true},
     prefix: {type: String, optional: true},
     messagingService: {type: String, optional: true}
   }),
@@ -102,6 +103,7 @@ Oli = {
     workflow: {type: String, optional: true},
     workflowOptions: {type: Object, optional: true, blackbox: true},
     forceRevalidate: {type: Boolean, optional: true},
+    validationWindow: {type: Number, optional: true},
     messagingService: {type: String, optional: true}
   }),
   /**
