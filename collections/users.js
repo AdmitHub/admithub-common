@@ -45,6 +45,10 @@ UserSchema = new SimpleSchema({
       return this.value;
     }
   },
+  "profile.facebookId": {
+    type: String,
+    optional: true
+  },
   "profile.phone": {
     type: String,
     min: 10,
