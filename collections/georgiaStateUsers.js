@@ -33,6 +33,7 @@ BrandedUserSchema = new SimpleSchema({
   inStateStudent: fields.bool(o),
   application: {type: new SimpleSchema({
     status: fields.status(o), 
+    statusExtended: fields.string(o)
   }), optional: true},
   profile: {type: new SimpleSchema({
     studentType: fields.student_type(o),
