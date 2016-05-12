@@ -59,7 +59,8 @@ BrandedUserSchema = new SimpleSchema({
     needsToRsvp: fields.bool(o), 
     attended: fields.bool(o), 
     attendedDate: fields.date(o), 
-    registeredDate: fields.date(o), 
+    registeredDate: fields.date(o),
+    registeredYetInternal: fields.bool(o)
   }),optional: true},
   textSetting:{type: new SimpleSchema ({
     canText: fields.bool(o),
