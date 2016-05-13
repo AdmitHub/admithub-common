@@ -104,6 +104,10 @@ BrandedUserSchema = new SimpleSchema({
       skip: fields.bool(o),
        finished: fields.bool(o),
     }), optional: true},
+    orientationDoneBot: {type: new SimpleSchema({
+      skip: fields.bool(o),
+       finished: fields.bool(o),
+    }), optional: true},
     campusIdBot: {type: new SimpleSchema({
       skip: fields.bool(o),
       finished: fields.bool(o),
