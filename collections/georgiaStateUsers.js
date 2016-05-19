@@ -43,6 +43,7 @@ BrandedUserSchema = new SimpleSchema({
     finAidComplete: fields.bool(o), 
     fafsaComplete: fields.bool(o),
     finAidInterest: fields.bool(o),
+    finAidInterestInternal: fields.bool(o),
     scholarshipAwarded: fields.bool(o),
     scholarshipAccepted: fields.bool(o),
     missingEntryLoan: fields.bool(o),
@@ -133,6 +134,10 @@ BrandedUserSchema = new SimpleSchema({
       finished: fields.bool(o),
     }), optional: true},
     pounceNotSureBot: {type: new SimpleSchema({
+      skip: fields.bool(o),
+      finished: fields.bool(o),
+    }), optional: true},
+    fafsaFollowUpTwoBot: {type: new SimpleSchema({
       skip: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
