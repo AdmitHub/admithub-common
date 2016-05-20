@@ -48,6 +48,8 @@ BrandedUserSchema = new SimpleSchema({
     scholarshipAccepted: fields.bool(o),
     missingEntryLoan: fields.bool(o),
     missingPromissoryLoan: fields.bool(o),
+    acceptedOfferInternal: fields.bool(o),
+    offered: fields.bool(o),
   }),optional: true},
   housing: {type: new SimpleSchema({
     onCampus: fields.bool(o),
@@ -138,6 +140,10 @@ BrandedUserSchema = new SimpleSchema({
       finished: fields.bool(o),
     }), optional: true},
     fafsaFollowUpTwoBot: {type: new SimpleSchema({
+      skip: fields.bool(o),
+      finished: fields.bool(o),
+    }), optional: true},
+    acceptFinAidBot: {type: new SimpleSchema({
       skip: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
