@@ -4,6 +4,7 @@ ScheduledMessages.attachSchema(new SimpleSchema({
     query: {type: String},
     collection: {type: String},
     messagingService: {type: String},
+    workflow: {type: String, optional: true},
     message: {type: String},
     scheduledAt: {type: Date}
 }));
