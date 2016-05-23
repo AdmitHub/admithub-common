@@ -58,6 +58,7 @@ Package.onUse(function(api) {
   api.addFiles('collections/pendingOfficers.js');
   api.addFiles('collections/demoBotProfile.js');
   api.addFiles('collections/georgiaStateUsers.js');
+  api.addFiles('collections/scheduledMessages.js');
 
   api.addFiles('server/collegesInMemory.js', 'server');
   api.addFiles('server/indexes.js', 'server');
@@ -102,5 +103,6 @@ Package.onUse(function(api) {
     'UserSchema',
     'yesOrNo',
     'GeorgiaStateUsers',
+    'ScheduledMessages',
   ]);
 });
