@@ -86,6 +86,19 @@ BrandedUserSchema = new SimpleSchema({
     changedMind: fields.bool(o),
     followUpInternal: fields.attending(o), // second time around asking intent
   }), optional: true},
+  _internal: {type: new SimpleSchema({
+    housingResponse: fields.string(o),
+    interest: fields.number({min: 0, max: 5, optional: true}),
+    intendsToEnroll: fields.bool(o),
+    whyNotAttending: fields.string(o),
+    whyNotAttendingExtended: {type: String, max: 700, optional: true},
+    whyUnsure: fields.string(o),
+    whyUnsureExtended: {type: String, max: 700, optional: true},
+    counselorCanContact: fields.bool(o),
+    changedMindIntent: fields.bool(o),
+    followUpIntent: fields.attending(o),
+    registeredOrientation: fields.bool(o),
+  }), optional: true},
   presumedState: {type: new SimpleSchema({
     fafsaReceived: fields.bool(o), // finAid.fafsaReceived /
     finAidComplete: fields.bool(o), // finAid.finAidComplete /
