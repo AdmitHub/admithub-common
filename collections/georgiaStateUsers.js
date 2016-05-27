@@ -98,6 +98,7 @@ BrandedUserSchema = new SimpleSchema({
     changedMindIntent: fields.bool(o),
     followUpIntent: fields.attending(o),
     registeredOrientation: fields.bool(o),
+    intentUnsure: fields.bool(o)
   }), optional: true},
   presumedState: {type: new SimpleSchema({
     fafsaReceived: fields.bool(o), // finAid.fafsaReceived /
@@ -169,6 +170,10 @@ BrandedUserSchema = new SimpleSchema({
       finished: fields.bool(o),
     }), optional: true},
     finAidFollowUpBot: {type: new SimpleSchema({
+      skip: fields.bool(o),
+      finished: fields.bool(o),
+    }), optional: true},
+    intentFinalReminderBot: {type: new SimpleSchema({
       skip: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
