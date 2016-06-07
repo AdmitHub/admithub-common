@@ -96,6 +96,9 @@
         }
       }
     },
+    "us-zcta-counties": {
+      "version": "0.0.2"
+    },
     "zipcodes": {
       "version": "1.1.1"
     }
