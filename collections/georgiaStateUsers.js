@@ -2,7 +2,7 @@ var o = {optional: true};
 
 BrandedUserSchema = new SimpleSchema({
   userId: fields.string(),
-  "_id": {type: Meteor.Collection.ObjectId, regEx: SimpleSchema.RegEx.Id, optional: true},
+  "_id": {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   crmId: fields.string({optional: false}), //gsu unique id
   created: fields.date(),
   enrollmentId: fields.string(o), //pantherId for gsu
