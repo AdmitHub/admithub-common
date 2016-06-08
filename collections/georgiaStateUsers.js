@@ -2,9 +2,7 @@ var o = {optional: true};
 
 BrandedUserSchema = new SimpleSchema({
   userId: fields.string(),
-  "_id": {optional: true, custom: function(){
-    return (this.value instanceof Mongo.Collection.ObjectID) || (typeof this.value === 'string')
-  }},
+  "_id": {optional: true, type: null},
   crmId: fields.string({optional: false}), //gsu unique id
   created: fields.date(),
   enrollmentId: fields.string(o), //pantherId for gsu
