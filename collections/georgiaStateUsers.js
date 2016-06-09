@@ -33,10 +33,14 @@ BrandedUserSchema = new SimpleSchema({
   inStateStudent: fields.bool(o),
   application: {type: new SimpleSchema({
     status: fields.status(o), 
-    statusExtended: fields.string(o)
+    statusExtended: fields.string(o),
+    receivedHSTranscript: fields.bool(o)
   }), optional: true},
   profile: {type: new SimpleSchema({
     studentType: fields.student_type(o),
+    citizenVerified: fields.bool(o),
+    immunizationHold: fields.bool(o),
+    emergencyContactHold: fields.bool(o)
   }), optional: true},
   finAid: {type: new SimpleSchema({
     fafsaReceived: fields.bool(o), 
