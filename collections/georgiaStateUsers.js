@@ -103,7 +103,8 @@ BrandedUserSchema = new SimpleSchema({
     followUpIntent: fields.attending(o),
     registeredOrientation: fields.bool(o),
     intentUnsure: fields.bool(o),
-    secondGroup: fields.bool(o)
+    secondGroup: fields.bool(o),
+    needsParking: fields.bool(o)
   }), optional: true},
   presumedState: {type: new SimpleSchema({
     fafsaReceived: fields.bool(o), // finAid.fafsaReceived /
@@ -187,6 +188,10 @@ BrandedUserSchema = new SimpleSchema({
       finished: fields.bool(o),
     }), optional: true},
     pounceWaveTwoIntroduction: {type: new SimpleSchema({
+      skip: fields.bool(o),
+      finished: fields.bool(o),
+    }), optional: true},
+    parkingBot: {type: new SimpleSchema({
       skip: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
