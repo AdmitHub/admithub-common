@@ -106,7 +106,12 @@ BrandedUserSchema = new SimpleSchema({
     secondGroup: fields.bool(o),
     needsParking: fields.bool(o),
     whyNotTexting: fields.string(o),
-    needHelpPaying: fields.bool(o)
+    needHelpPaying: fields.bool(o),
+    orientationBest: fields.string(o),
+    orientationExperience: fields.string(o),
+    orientationExperienceExtended: fields.long_string(o),
+    orientationStoodOut: fields.long_string(o),
+    orientationImprovement: fields.long_string(o),
   }), optional: true},
   presumedState: {type: new SimpleSchema({
     fafsaReceived: fields.bool(o), // finAid.fafsaReceived /
@@ -198,6 +203,10 @@ BrandedUserSchema = new SimpleSchema({
       finished: fields.bool(o),
     }), optional: true},
     fafsaIntroWaveTwoBot: {type: new SimpleSchema({
+      skip: fields.bool(o),
+      finished: fields.bool(o),
+    }), optional: true},
+    orientationFollowUpBot: {type: new SimpleSchema({
       skip: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
