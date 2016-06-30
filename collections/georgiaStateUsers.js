@@ -95,9 +95,9 @@ BrandedUserSchema = new SimpleSchema({
     interest: fields.number({min: 0, max: 5, optional: true}),
     intendsToEnroll: fields.bool(o),
     whyNotAttending: fields.string(o),
-    whyNotAttendingExtended: {type: String, max: 700, optional: true},
+    whyNotAttendingExtended: fields.long_string(o),
     whyUnsure: fields.string(o),
-    whyUnsureExtended: {type: String, max: 700, optional: true},
+    whyUnsureExtended: fields.long_string(o),
     counselorCanContact: fields.bool(o),
     changedMindIntent: fields.bool(o),
     followUpIntent: fields.attending(o),
@@ -107,11 +107,14 @@ BrandedUserSchema = new SimpleSchema({
     needsParking: fields.bool(o),
     whyNotTexting: fields.string(o),
     needHelpPaying: fields.bool(o),
-    orientationBest: fields.string(o),
-    orientationExperience: fields.string(o),
-    orientationExperienceExtended: fields.long_string(o),
-    orientationStoodOut: fields.long_string(o),
-    orientationImprovement: fields.long_string(o),
+    orientation: {type: new SimpleSchema({
+      best: fields.string(o),
+      experience: fields.string(o),
+      experienceExtended: fields.long_string(o),
+      stoodOut: fields.long_string(o),
+      improvement: fields.long_string(o),
+      willYouAttend: fields.string(o),
+    }), optional: true}
   }), optional: true},
   presumedState: {type: new SimpleSchema({
     fafsaReceived: fields.bool(o), // finAid.fafsaReceived /
@@ -207,6 +210,10 @@ BrandedUserSchema = new SimpleSchema({
       finished: fields.bool(o),
     }), optional: true},
     orientationFollowUpBot: {type: new SimpleSchema({
+      skip: fields.bool(o),
+      finished: fields.bool(o),
+    }), optional: true},
+    registerDontAttendBot: {type: new SimpleSchema({
       skip: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
