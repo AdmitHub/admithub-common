@@ -217,6 +217,10 @@ BrandedUserSchema = new SimpleSchema({
       skip: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
+    weekBeforeOrientationBot: {type: new SimpleSchema({
+      skip: fields.bool(o),
+      finished: fields.bool(o),
+    }), optional: true},
   }), optional: true},
   abGroup: {type: Number, optional: true, max: 1, min: 0, decimal: true}
 });
