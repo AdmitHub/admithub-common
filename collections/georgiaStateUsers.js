@@ -94,7 +94,7 @@ BrandedUserSchema = new SimpleSchema({
     housingResponse: fields.string(o),
     interest: fields.number({min: 0, max: 5, optional: true}),
     intendsToEnroll: fields.bool(o),
-    whyNotAttending: fields.string(o),
+    whyNotAttending: fields.long_string(o),
     whyNotAttendingExtended: fields.long_string(o),
     whyUnsure: fields.string(o),
     whyUnsureExtended: fields.long_string(o),
@@ -104,8 +104,12 @@ BrandedUserSchema = new SimpleSchema({
     registeredOrientation: fields.bool(o),
     intentUnsure: fields.bool(o),
     secondGroup: fields.bool(o),
+    goingInstead: fields.long_string(o),
     needsParking: fields.bool(o),
     whyNotTexting: fields.string(o),
+    whyGsu: fields.long_string(o),
+    howSolid: fields.string(o),
+    whyNoCollege: fields.string(o),
     needHelpPaying: fields.bool(o),
     orientation: {type: new SimpleSchema({
       best: fields.string(o),
@@ -113,7 +117,7 @@ BrandedUserSchema = new SimpleSchema({
       experienceExtended: fields.long_string(o),
       stoodOut: fields.long_string(o),
       improvement: fields.long_string(o),
-      willYouAttend: fields.string(o),
+      willYouAttend: fields.string(o)
     }), optional: true}
   }), optional: true},
   presumedState: {type: new SimpleSchema({
@@ -218,6 +222,10 @@ BrandedUserSchema = new SimpleSchema({
       finished: fields.bool(o),
     }), optional: true},
     weekBeforeOrientationBot: {type: new SimpleSchema({
+      skip: fields.bool(o),
+      finished: fields.bool(o),
+    }), optional: true},
+    intentFollowUpBot: {type: new SimpleSchema({
       skip: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
