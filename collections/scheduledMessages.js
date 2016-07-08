@@ -8,5 +8,6 @@ ScheduledMessages.attachSchema(new SimpleSchema({
     message: {type: String, optional: true},
     scheduledAt: {type: Date},
     usersContacted: {type: Number, optional: true},
-    sent: {type: Boolean, optional: true}
+    sent: {type: Boolean, optional: true},
+    note: {type: String, optional: true}
 }));
