@@ -94,6 +94,7 @@ BrandedUserSchema = new SimpleSchema({
     housingResponse: fields.string(o),
     interest: fields.number({min: 0, max: 5, optional: true}),
     intendsToEnroll: fields.bool(o),
+    intentDate: fields.date(o),
     whyNotAttending: fields.long_string(o),
     whyNotAttendingExtended: fields.long_string(o),
     whyUnsure: fields.string(o),
