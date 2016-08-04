@@ -147,7 +147,10 @@ UserSchema = new SimpleSchema({
   "startInitialSurvey": {type: Boolean, optional: true},
   "resumeWorkflow": {type: Boolean, optional: true},
 
-  "abGroup": {type: Number, optional: true, max: 1, min: 0, decimal: true}
+  "abGroup": {type: Number, optional: true, max: 1, min: 0, decimal: true},
+  "phoenixUser": {type: Boolean, optional: true, defaultValue: false},
+  "pinnedConversations": {type: [String], optional: true, defaultValue: []}
+
 });
 
 Meteor.users.before.insert(function(userId, doc) {
