@@ -6,7 +6,8 @@ Workflows.attachSchema(new SimpleSchema({
   "messagingService": {type: String, optional: true},
   "steps": {type: [
     new SimpleSchema({
-      "prompt": {type: String}
+      "prompt": {type: String, optional: true},
+      "editable": {type: Boolean},
     })
   ]}
 }));
