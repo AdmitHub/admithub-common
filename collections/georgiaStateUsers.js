@@ -119,6 +119,10 @@ BrandedUserSchema = new SimpleSchema({
       stoodOut: fields.long_string(o),
       improvement: fields.long_string(o),
       willYouAttend: fields.string(o)
+    }), optional: true},
+    aidLastPush: {type: new SimpleSchema({
+     planSubmitFafsa: fields.bool(o),
+     helpCompletingFafsa: fields.string(o)
     }), optional: true}
   }), optional: true},
   presumedState: {type: new SimpleSchema({
@@ -239,6 +243,18 @@ BrandedUserSchema = new SimpleSchema({
       finished: fields.bool(o),
     }), optional: true},
     mealPlanNudgeBot: {type: new SimpleSchema({
+      skip: fields.bool(o),
+      finished: fields.bool(o),
+    }), optional: true},
+    aidOrientationDayOneCaseOneBot: {type: new SimpleSchema({
+      skip: fields.bool(o),
+      finished: fields.bool(o),
+    }), optional: true},
+    aidOrientationDayOneCaseTwoBot: {type: new SimpleSchema({
+      skip: fields.bool(o),
+      finished: fields.bool(o),
+    }), optional: true},
+    aidOrientationDayOneIntroBot: {type: new SimpleSchema({
       skip: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true}
