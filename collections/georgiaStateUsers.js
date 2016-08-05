@@ -248,10 +248,12 @@ BrandedUserSchema = new SimpleSchema({
     }), optional: true},
     aidOrientationDayOneCaseOneBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     aidOrientationDayOneCaseTwoBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     aidOrientationDayOneIntroBot: {type: new SimpleSchema({
