@@ -122,7 +122,8 @@ BrandedUserSchema = new SimpleSchema({
     }), optional: true},
     aidLastPush: {type: new SimpleSchema({
      planSubmitFafsa: fields.bool(o),
-     helpCompletingFafsa: fields.string(o)
+     helpCompletingFafsa: fields.string(o),
+     planAttendOrientation: fields.bool(o)
     }), optional: true}
   }), optional: true},
   presumedState: {type: new SimpleSchema({
@@ -260,7 +261,11 @@ BrandedUserSchema = new SimpleSchema({
       skip: fields.bool(o),
       started: fields.bool(o),
       finished: fields.bool(o),
-    }), optional: true}
+    }), optional: true},
+    aidOrientationDayTwoBot: {type: new SimpleSchema({
+      skip: fields.bool(o),
+      finished: fields.bool(o),
+    }), optional: true},
   }), optional: true},
   abGroup: {type: Number, optional: true, max: 1, min: 0, decimal: true}
 });
