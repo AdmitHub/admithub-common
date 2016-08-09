@@ -600,7 +600,7 @@ CollegeProfileSchema = new SimpleSchema({
   "created": fields.date(),
   "contactable": fields.bool({optional: true}),
   "contactableConfirmed": fields.bool({optional: true}),
-  "stopReason": fields.string({optional: true}),
+  "stopReason": fields.long_string({optional: true}),
   "referralSource": fields.referral_source({optional: true}),
   "description": fields.description({optional: true}),
   "earlyStarter": fields.bool(o),
