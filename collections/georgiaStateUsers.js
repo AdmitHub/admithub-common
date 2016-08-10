@@ -110,6 +110,7 @@ BrandedUserSchema = new SimpleSchema({
     whyNotTexting: fields.string(o),
     whyGsu: fields.long_string(o),
     howSolid: fields.string(o),
+    gapInAid: fields.number(o),
     whyNoCollege: fields.string(o),
     needHelpPaying: fields.bool(o),
     orientation: {type: new SimpleSchema({
@@ -124,7 +125,8 @@ BrandedUserSchema = new SimpleSchema({
      planSubmitFafsa: fields.bool(o),
      helpCompletingFafsa: fields.string(o),
      planAttendOrientation: fields.bool(o),
-     allSetHousing: fields.bool(o)
+     allSetHousing: fields.bool(o),
+     unableToMakePayment: fields.bool(o)
     }), optional: true}
   }), optional: true},
   presumedState: {type: new SimpleSchema({
@@ -282,6 +284,11 @@ BrandedUserSchema = new SimpleSchema({
       finished: fields.bool(o),
     }), optional: true},
     acceptingLoansThreeBot: {type: new SimpleSchema({
+      skip: fields.bool(o),
+      started: fields.bool(o),
+      finished: fields.bool(o),
+    }), optional: true},
+    gapInAidBot: {type: new SimpleSchema({
       skip: fields.bool(o),
       started: fields.bool(o),
       finished: fields.bool(o),
