@@ -114,7 +114,6 @@ BrandedUserSchema = new SimpleSchema({
     whyNotTexting: fields.string(o),
     whyGsu: fields.long_string(o),
     howSolid: fields.string(o),
-    gapInAid: fields.number(o),
     whyNoCollege: fields.string(o),
     needHelpPaying: fields.bool(o),
     orientation: {type: new SimpleSchema({
