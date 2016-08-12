@@ -91,6 +91,10 @@ BrandedUserSchema = new SimpleSchema({
     followUpInternal: fields.attending(o), // second time around asking intent
   }), optional: true},
   _internal: {type: new SimpleSchema({
+    gapInAid: fields.bool(o),
+    acceptingLoansOne: fields.bool(o),
+    acceptingLoansTwo: fields.bool(o),
+    acceptingLoansThree: fields.bool(o),
     housingResponse: fields.string(o),
     interest: fields.number({min: 0, max: 5, optional: true}),
     intendsToEnroll: fields.bool(o),
