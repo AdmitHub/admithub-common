@@ -137,10 +137,11 @@ BrandedUserSchema = new SimpleSchema({
         friendUnderstands: fields.bool(o),
         partyNow: fields.bool(o),
         workNow: fields.bool(o),
-        honesty: fields.bool(o)
+        honesty: fields.bool(o),
+        kindness: fields.bool(o)
       }), optional: true},
       phoneType: {type: new SimpleSchema({
-        android: fields.bool(o),
+        iphone: fields.bool(o),
         android: fields.bool(o),
         other: fields.bool(o),
         dumbPhone: fields.bool(o)
