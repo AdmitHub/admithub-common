@@ -150,6 +150,7 @@ UserSchema = new SimpleSchema({
   "abGroup": {type: Number, optional: true, max: 1, min: 0, decimal: true},
   "phoenixUser": {type: Boolean, optional: true, defaultValue: false},
   "pinnedConversations": {type: [String], optional: true, defaultValue: []},
+  "recentConversations": {type: [String], optional: true, defaultValue: []},
   "status": {type: Object, blackbox: true, optional: true},
   "presence": {type: Object, blackbox: true, optional: true}
 });
