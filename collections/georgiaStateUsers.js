@@ -116,6 +116,40 @@ BrandedUserSchema = new SimpleSchema({
     howSolid: fields.string(o),
     whyNoCollege: fields.string(o),
     needHelpPaying: fields.bool(o),
+    studentBelonging: {type: new SimpleSchema({
+      intelligenceChangeable: fields.number(o),
+      mostWorried: fields.string(o),
+      mostExcited: fields.string(o),
+      friendsToCollege: fields.string(o),
+      connectWithFriends: fields.string(o),
+      playsInstrument: fields.bool(o),
+      favoriteEmoji: fields.string(o),
+      whyAwful: fields.long_string(o),
+      workingWithMe: fields.string(o),
+      spiritualOrReligious: fields.bool(o),
+      moreImportant: {type: new SimpleSchema({
+        personality: fields.bool(o),
+        lifeGoals: fields.bool(o),
+        trying: fields.bool(o),
+        workingWithOthers: fields.bool(o),
+        learnFromMistakes: fields.bool(o),
+        recognizeTalents: fields.bool(o),
+        beAlone: fields.bool(o),
+        hangWithFriends: fields.bool(o),
+        friendHasBack: fields.bool(o),
+        friendUnderstands: fields.bool(o),
+        partyNow: fields.bool(o),
+        workNow: fields.bool(o),
+        honesty: fields.bool(o),
+        kindness: fields.bool(o)
+      }), optional: true},
+      phoneType: {type: new SimpleSchema({
+        iphone: fields.bool(o),
+        android: fields.bool(o),
+        other: fields.bool(o),
+        dumbPhone: fields.bool(o)
+      }), optional: true},
+    }), optional: true},
     orientation: {type: new SimpleSchema({
       best: fields.string(o),
       experience: fields.string(o),
@@ -292,6 +326,11 @@ BrandedUserSchema = new SimpleSchema({
       finished: fields.bool(o),
     }), optional: true},
     gapInAidBot: {type: new SimpleSchema({
+      skip: fields.bool(o),
+      started: fields.bool(o),
+      finished: fields.bool(o),
+    }), optional: true},
+    studentBelongingBot: {type: new SimpleSchema({
       skip: fields.bool(o),
       started: fields.bool(o),
       finished: fields.bool(o),
