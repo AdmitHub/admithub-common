@@ -13,13 +13,13 @@ BrandedColleges.attachSchema(new SimpleSchema({
   collegeId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   facebookId: {type: Number, optional: true},
   animal: {type: String, optional: true}, // Panther
-  linkIntentToEnroll: {type: String, optional: true}, // bit.ly/gsu-intent
-  linkAcceptAid: {type: String, optional: true}, // bit.ly/accept-aid
-  linkFinAid: {type: String, optional: true}, // bit.ly/finaid-resources
-  linkFafsa: {type: String, optional: true}, // bit.ly/gsu-fafsa
-  linkOrientationInfo: {type: String, optional: true}, // bit.ly/1ZnYK6x
-  linkOrientationChecklist: {type: String, optional: true}, //bit.ly/1O3UDMp
-  linkTourSignUp: {type: String, optional: true}, // bit.ly/gsu-tours
-  linkVisitTips: {type: String, optional: true}, // bit.ly/24yIgQ9
-  phoneFinAid: {type: String, optional: true}, // 404-413-2600
+  linkIntentToEnroll: {type: String, optional: true}, 
+  linkAcceptAid: {type: String, optional: true}, 
+  linkFinAid: {type: String, optional: true}, 
+  linkFafsa: {type: String, optional: true}, 
+  linkOrientationInfo: {type: String, optional: true}, 
+  linkOrientationChecklist: {type: String, optional: true}, 
+  linkTourSignUp: {type: String, optional: true}, 
+  linkVisitTips: {type: String, optional: true}, 
+  phoneFinAid: {type: String, optional: true}, 
 }));
