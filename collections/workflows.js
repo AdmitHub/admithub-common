@@ -10,7 +10,7 @@ Workflows.attachSchema(new SimpleSchema({
     new SimpleSchema({
       "name": {type: String, optional: true},
       "prompt": {type: String, optional: true},
-      "options": {type [String], optional: true},
+      "options": {type: [String], optional: true},
       "editable": {type: Boolean},
     })
   ]}
