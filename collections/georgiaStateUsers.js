@@ -112,7 +112,7 @@ BrandedUserSchema = new SimpleSchema({
     goingInstead: fields.long_string(o),
     needsParking: fields.bool(o),
     whyNotTexting: fields.string(o),
-    whyGsu: fields.long_string(o),
+    whyHere: fields.long_string(o),
     howSolid: fields.string(o),
     whyNoCollege: fields.string(o),
     needHelpPaying: fields.bool(o),
