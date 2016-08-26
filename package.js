@@ -60,7 +60,9 @@ Package.onUse(function(api) {
   api.addFiles('collections/georgiaStateUsers.js');
   api.addFiles('collections/scheduledMessages.js');
   api.addFiles('collections/introducedMessages.js');
-  api.addFiles('collections/workflows.js');
+  api.addFiles('collections/messageTemplates.js');
+  api.addFiles('collections/workflowScripts.js');
+ api.addFiles('collections/workflows.js');
 
   api.addFiles('server/collegesInMemory.js', 'server');
   api.addFiles('server/indexes.js', 'server');
@@ -107,6 +109,8 @@ Package.onUse(function(api) {
     'GeorgiaStateUsers',
     'ScheduledMessages',
     'IntroducedMessages',
-    'Workflows'
+    'Workflows',
+    'MessageTemplates',
+    'WorkflowScripts'
   ]);
 });
