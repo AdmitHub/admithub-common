@@ -3,6 +3,7 @@ BrandedColleges.attachSchema(new SimpleSchema({
   _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   name: {type: String},
   messagingService: {type: String},
+  messagingServiceSid: {type: String, optional: true},
   abbr: {type: String, optional: true}, // GSU
   tuitionDueDate: {type: Date, optional: true}, //8 -15
   intentDeadline: {type: Date, optional: true}, // june 1
