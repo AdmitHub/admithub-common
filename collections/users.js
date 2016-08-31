@@ -152,7 +152,8 @@ UserSchema = new SimpleSchema({
   "pinnedConversations": {type: [String], optional: true, defaultValue: []},
   "recentConversations": {type: [String], optional: true, defaultValue: []},
   "status": {type: Object, blackbox: true, optional: true},
-  "presence": {type: Object, blackbox: true, optional: true}
+  "presence": {type: Object, blackbox: true, optional: true},
+  "nonWorkingNumber": {type: Boolean, optional: true}
 });
 
 Meteor.users.before.insert(function(userId, doc) {
