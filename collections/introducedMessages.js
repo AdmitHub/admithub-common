@@ -1,7 +1,7 @@
 IntroducedMessages = new Mongo.Collection("introducedMessages");
 IntroducedMessages.attachSchema(new SimpleSchema({
   _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
-  query: {type: String},
+  query: {type: String, optional: true},
   sentDate: {type: Date}, 
   messagingService: {type: String, optional: true},
   collection: {type: String, optional: true},
@@ -9,5 +9,6 @@ IntroducedMessages.attachSchema(new SimpleSchema({
   message: {type: String, optional: true},
   usersContacted: {type: Number, optional: true},
   note: {type: String, optional: true},
-  scheduled: {type: Boolean, optional: true}
+  scheduled: {type: Boolean, optional: true},
+  userSearch: {type: Object, blackbox: true, optional: true}
 }));
