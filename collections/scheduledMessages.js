@@ -10,5 +10,6 @@ ScheduledMessages.attachSchema(new SimpleSchema({
     usersContacted: {type: Number, optional: true},
     sent: {type: Boolean, optional: true},
     note: {type: String, optional: true},
-    context: {type: String, optional: true}
+    context: {type: String, optional: true},
+    userSearch: {type: Object, optional: true, blackbox: true}
 }));
