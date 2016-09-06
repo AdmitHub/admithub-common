@@ -153,7 +153,8 @@ UserSchema = new SimpleSchema({
   "recentConversations": {type: [String], optional: true, defaultValue: []},
   "status": {type: Object, blackbox: true, optional: true},
   "presence": {type: Object, blackbox: true, optional: true},
-  "nonWorkingNumber": {type: Boolean, optional: true}
+  "nonWorkingNumber": {type: Boolean, optional: true},
+  "currentInstitution": {type: String, optional: true}
 });
 
 Meteor.users.before.insert(function(userId, doc) {
