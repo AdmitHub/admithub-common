@@ -23,4 +23,5 @@ BrandedColleges.attachSchema(new SimpleSchema({
   linkTourSignUp: {type: String, optional: true}, 
   linkVisitTips: {type: String, optional: true}, 
   phoneFinAid: {type: String, optional: true}, 
+  filterOn: {type: Boolean, optional: true}
 }));
