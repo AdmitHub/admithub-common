@@ -38,6 +38,7 @@ BrandedUserSchema = new SimpleSchema({
   }), optional: true},
   profile: {type: new SimpleSchema({
     studentType: fields.student_type(o),
+    studentCategory: fields.student_category(o),
     citizenVerified: fields.bool(o),
     immunizationHold: fields.bool(o),
     emergencyContactHold: fields.bool(o)
