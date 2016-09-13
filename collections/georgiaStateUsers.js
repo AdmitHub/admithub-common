@@ -168,6 +168,13 @@ BrandedUserSchema = new SimpleSchema({
      unableToMakePayment: fields.bool(o)
     }), optional: true}
   }), optional: true},
+  supplemental: {type: new SimpleSchema({
+    first: fields.string(o),
+    second: fields.string(o),
+    third: fields.string(o),
+    fourth: fields.string(o),
+    fifth: fields.string(o)
+  }), optional: true},
   presumedState: {type: new SimpleSchema({
     fafsaReceived: fields.bool(o), // finAid.fafsaReceived /
     finAidComplete: fields.bool(o), // finAid.finAidComplete /
@@ -348,6 +355,11 @@ BrandedUserSchema = new SimpleSchema({
       finished: fields.bool(o),
     }), optional: true},
     gaugeBelongingBot: {type: new SimpleSchema({
+      skip: fields.bool(o),
+      started: fields.bool(o),
+      finished: fields.bool(o),
+    }), optional: true},
+    supplementalBot: {type: new SimpleSchema({
       skip: fields.bool(o),
       started: fields.bool(o),
       finished: fields.bool(o),
