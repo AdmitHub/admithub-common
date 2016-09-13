@@ -118,6 +118,7 @@ BrandedUserSchema = new SimpleSchema({
     whyNoCollege: fields.string(o),
     needHelpPaying: fields.bool(o),
     studentBelonging: {type: new SimpleSchema({
+      excitementLevel: fields.number(o),
       intelligenceChangeable: fields.number(o),
       mostWorried: fields.string(o),
       mostExcited: fields.string(o),
@@ -342,6 +343,11 @@ BrandedUserSchema = new SimpleSchema({
       finished: fields.bool(o),
     }), optional: true},
     senseOfBelongingFollowUpBot: {type: new SimpleSchema({
+      skip: fields.bool(o),
+      started: fields.bool(o),
+      finished: fields.bool(o),
+    }), optional: true},
+    gaugeBelongingBot: {type: new SimpleSchema({
       skip: fields.bool(o),
       started: fields.bool(o),
       finished: fields.bool(o),
