@@ -91,6 +91,11 @@ BrandedUserSchema = new SimpleSchema({
     changedMind: fields.bool(o),
     followUpInternal: fields.attending(o), // second time around asking intent
   }), optional: true},
+  _profile: {type: new SimpleSchema({
+    description: fields.profile_description(o),
+    parent: fields.bool(o),
+    plannedApplication: fields.planned_application(o),
+  }), optional: true},
   _internal: {type: new SimpleSchema({
     gapInAid: fields.bool(o),
     acceptingLoansOne: fields.bool(o),
@@ -360,6 +365,11 @@ BrandedUserSchema = new SimpleSchema({
       finished: fields.bool(o),
     }), optional: true},
     supplementalBot: {type: new SimpleSchema({
+      skip: fields.bool(o),
+      started: fields.bool(o),
+      finished: fields.bool(o),
+    }), optional: true},
+    unknownUserBot: {type: new SimpleSchema({
       skip: fields.bool(o),
       started: fields.bool(o),
       finished: fields.bool(o),
