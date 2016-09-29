@@ -198,6 +198,21 @@ BrandedUserSchema = new SimpleSchema({
      unableToMakePayment: fields.bool(o)
     }), optional: true}
   }), optional: true},
+  _finalStudySurveyBot: {type: new SimpleSchema({
+    enrollmentHowHard: fields.string(o),
+    textHowHelpful: fields.string(o),
+    helpfulInTransition: fields.long_string(o),
+    recommendToFriend: fields.long_string(o),
+    recommendToSchool: fields.long_string(o),
+    recommendImprovements: fields.long_string(o), 
+    howToImprove: fields.long_string(o),
+    whatElseCanIDo: fields.other_features(o),
+    whatElseCanIDoExtended: fields.long_string(o),
+    didYouRead: fields.bool(o),
+    whyNoResponse: fields.long_string(o),
+    didYouRead: fields.bool(o),
+    whyNoText: fields.long_string(o)
+  }),optional: true},
   supplemental: {type: new SimpleSchema({
     first: fields.string(o),
     second: fields.string(o),
@@ -437,6 +452,16 @@ BrandedUserSchema = new SimpleSchema({
       finished: fields.bool(o),
     }), optional: true},
     fafsaNudgeBot: {type: new SimpleSchema({
+      skip: fields.bool(o),
+      started: fields.bool(o),
+      finished: fields.bool(o),
+    }), optional: true},
+    finalStudySurveyBot: {type: new SimpleSchema({
+      skip: fields.bool(o),
+      started: fields.bool(o),
+      finished: fields.bool(o),
+    }), optional: true},
+    finalStudySurveyAltBot: {type: new SimpleSchema({
       skip: fields.bool(o),
       started: fields.bool(o),
       finished: fields.bool(o),
