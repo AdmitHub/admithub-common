@@ -245,6 +245,11 @@ BrandedUserSchema = new SimpleSchema({
     actOrganization: fields.act_composite_score(o),
     actLangaugeConvention: fields.act_composite_score(o),
   }), optional: true},
+  _oneOff: {
+    type: Object,
+    blackbox: true,
+    optional: true
+  },
   meta: {type: new SimpleSchema({
     pounceIntroBot: {type: new SimpleSchema({
       skip: fields.bool(o),
