@@ -268,114 +268,142 @@ BrandedUserSchema = new SimpleSchema({
   meta: {type: new SimpleSchema({
     pounceIntroBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     pounceIntentBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     orientationBot: {type: new SimpleSchema({
       skip: fields.bool(o),
-       finished: fields.bool(o),
+      started: fields.bool(o),
+      finished: fields.bool(o),
     }), optional: true},
     orientationDoneBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
        finished: fields.bool(o),
     }), optional: true},
     campusIdBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     emailSetUpBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     housingBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     scholarshipBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     pounceHousingBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     housingReminderBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     pounceNotAttendingBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     pounceNotSureBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     pounceNotSureFollowUpBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     fafsaFollowUpTwoBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     acceptFinAidBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     finAidFollowUpBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     intentFinalReminderBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     newStudentOrientationBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     pounceWaveTwoIntroduction: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     parkingBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     fafsaIntroWaveTwoBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     orientationFollowUpBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     registerDontAttendBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     weekBeforeOrientationBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     intentFollowUpBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     notAttendingSurveyBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     tuitionFeesPaidBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     mealPlanNudgeBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     aidOrientationDayOneCaseOneBot: {type: new SimpleSchema({
@@ -395,10 +423,12 @@ BrandedUserSchema = new SimpleSchema({
     }), optional: true},
     aidOrientationDayTwoBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     preEnrollmentDayThreeBot: {type: new SimpleSchema({
       skip: fields.bool(o),
+      started: fields.bool(o),
       finished: fields.bool(o),
     }), optional: true},
     acceptingLoansOneBot: {type: new SimpleSchema({
@@ -467,6 +497,11 @@ BrandedUserSchema = new SimpleSchema({
       finished: fields.bool(o),
     }), optional: true},
     finalStudySurveyAltBot: {type: new SimpleSchema({
+      skip: fields.bool(o),
+      started: fields.bool(o),
+      finished: fields.bool(o),
+    }), optional: true},
+    finalSenseBelongingBot: {type: new SimpleSchema({
       skip: fields.bool(o),
       started: fields.bool(o),
       finished: fields.bool(o),
