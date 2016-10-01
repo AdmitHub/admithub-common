@@ -11,5 +11,8 @@ ScheduledMessages.attachSchema(new SimpleSchema({
     sent: {type: Boolean, optional: true},
     note: {type: String, optional: true},
     context: {type: String, optional: true},
-    userSearch: {type: Object, optional: true, blackbox: true}
+    userSearch: {type: Object, optional: true, blackbox: true},
+    onGoing: {type: Boolean, optional: true},
+    startDate: {type: Date, optional: true},
+    endDate: {type: Date, optional: true},
 }));
