@@ -15,4 +15,5 @@ ScheduledMessages.attachSchema(new SimpleSchema({
     onGoing: {type: Boolean, optional: true},
     startDate: {type: Date, optional: true},
     endDate: {type: Date, optional: true},
+    weekends: {type: Boolean, optional: true}
 }));
