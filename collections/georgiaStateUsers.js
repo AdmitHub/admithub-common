@@ -279,7 +279,7 @@ BrandedUserSchema = new SimpleSchema({
     orientationBot: {type: new SimpleSchema({
       skip: fields.bool(o),
       started: fields.bool(o),
-       finished: fields.bool(o),
+      finished: fields.bool(o),
     }), optional: true},
     orientationDoneBot: {type: new SimpleSchema({
       skip: fields.bool(o),
@@ -497,6 +497,16 @@ BrandedUserSchema = new SimpleSchema({
       finished: fields.bool(o),
     }), optional: true},
     finalStudySurveyAltBot: {type: new SimpleSchema({
+      skip: fields.bool(o),
+      started: fields.bool(o),
+      finished: fields.bool(o),
+    }), optional: true},
+    finalSenseBelongingBot: {type: new SimpleSchema({
+      skip: fields.bool(o),
+      started: fields.bool(o),
+      finished: fields.bool(o),
+    }), optional: true},
+    studyGroupFilterBot: {type: new SimpleSchema({
       skip: fields.bool(o),
       started: fields.bool(o),
       finished: fields.bool(o),
