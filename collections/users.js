@@ -148,13 +148,18 @@ UserSchema = new SimpleSchema({
   "resumeWorkflow": {type: Boolean, optional: true},
 
   "abGroup": {type: Number, optional: true, max: 1, min: 0, decimal: true},
+  "nonWorkingNumber": {type: Boolean, optional: true},
+
+  // For phoenix users (staff)
   "phoenixUser": {type: Boolean, optional: true, defaultValue: false},
+  "presence": {type: Object, blackbox: true, optional: true},
+  "status": {type: Object, blackbox: true, optional: true},
   "pinnedConversations": {type: [String], optional: true, defaultValue: []},
   "recentConversations": {type: [String], optional: true, defaultValue: []},
-  "status": {type: Object, blackbox: true, optional: true},
-  "presence": {type: Object, blackbox: true, optional: true},
-  "nonWorkingNumber": {type: Boolean, optional: true},
-  "currentInstitution": {type: String, optional: true}
+  "currentInstitution": {type: String, optional: true},
+
+  // For admithub users (students)
+  "schools": {type: [String], optional: true, defaultValue: []}
 });
 
 Meteor.users.before.insert(function(userId, doc) {
