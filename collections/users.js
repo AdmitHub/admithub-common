@@ -64,6 +64,10 @@ UserSchema = new SimpleSchema({
     },
     optional: true
   },
+  "profile.previousPhone": {
+    type: String,
+    optional: true
+  },
   "phonePending": {
     type: Boolean,
     optional: true
