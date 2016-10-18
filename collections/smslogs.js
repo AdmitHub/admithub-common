@@ -20,7 +20,8 @@ SmsLogs.attachSchema(new SimpleSchema({
   aiLog: {type: String, optional: true},
   error: {type: Boolean, defaultValue: false},
   source: {type: String, optional: true},
-  transport: {type: String, allowedValues: ["web", "twilio", "facebook", "email"], optional: false}
+  transport: {type: String, allowedValues: ["web", "twilio", "facebook", "email"], optional: false},
+  msgParts: {type: Number, optional: true}
 }));
 if (Meteor.isServer) {
   SmsLogs.allow({
