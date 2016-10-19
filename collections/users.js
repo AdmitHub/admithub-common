@@ -149,7 +149,7 @@ UserSchema = new SimpleSchema({
 
   "abGroup": {type: Number, optional: true, max: 1, min: 0, decimal: true},
   "nonWorkingNumber": {type: Boolean, optional: true},
-
+  "wrongNumber": {type: Boolean, optional: true},
   // For phoenix users (staff)
   "phoenixUser": {type: Boolean, optional: true, defaultValue: false},
   "presence": {type: Object, blackbox: true, optional: true},
