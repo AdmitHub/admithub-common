@@ -77,8 +77,7 @@ BrandedUserSchema = new SimpleSchema({
   }),optional: true},
   textSetting:{type: new SimpleSchema ({
     canText: fields.bool(o),
-    wrongNumber: fields.bool(o),
-    nonWorkingNumber: fields.bool(o),
+    wrongNumber: fields.bool(o), // moved to user doc
     newPhone: fields.phone_number(o)
   }), optional: true},
   tests: {type: new SimpleSchema ({
