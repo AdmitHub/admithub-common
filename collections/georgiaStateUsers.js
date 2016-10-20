@@ -16,7 +16,7 @@ BrandedUserSchema = new SimpleSchema({
   name: {type: new SimpleSchema({
     first: fields.string(o),
     last: fields.string(o),
-    middleInitial: fields.string(o),
+    middleName: fields.string(o),
     full: fields.string(o),
     nickName: fields.string(o),
   }), optional: true},
