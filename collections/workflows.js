@@ -7,6 +7,7 @@ Workflows.attachSchema(new SimpleSchema({
   "description": {type: String, optional: true},
   "messagingService": {type: String, optional: true},
   "hidden": {type: Boolean, defaultValue: false},
+  "custom": {type: Boolean, optional: true},
   "steps": {
     type: Object,
     blackbox: true
