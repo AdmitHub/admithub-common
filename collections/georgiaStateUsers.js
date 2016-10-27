@@ -265,6 +265,11 @@ BrandedUserSchema = new SimpleSchema({
     blackbox: true,
     optional: true
   },
+  _custom: {
+    type: Object,
+    blackbox: true,
+    optional: true
+  },
   meta: {type: new SimpleSchema({
     pounceIntroBot: {type: new SimpleSchema({
       skip: fields.bool(o),
