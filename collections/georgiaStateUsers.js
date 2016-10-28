@@ -5,6 +5,7 @@ BrandedUserSchema = new SimpleSchema({
   "_id": {optional: true, type: null},
   crmId: fields.string({optional: false}), //gsu unique id
   created: fields.date(),
+  collegeName: fields.string(o),
   enrollmentId: fields.string(o), //pantherId for gsu
   schoolEmail: fields.email(o),
   entryYear: fields.number(o),
@@ -265,6 +266,11 @@ BrandedUserSchema = new SimpleSchema({
     blackbox: true,
     optional: true
   },
+  _responseBlackBox: {
+    type: Object,
+    blackbox: true,
+    optional: true
+  },
   meta: {type: new SimpleSchema({
     pounceIntroBot: {type: new SimpleSchema({
       skip: fields.bool(o),
@@ -517,4 +523,7 @@ BrandedUserSchema = new SimpleSchema({
 });
 
 GeorgiaStateUsers = new Mongo.Collection('georgiaStateUsers');
+GeorgiaStateUsers.attachSchema(BrandedUserSchema);
+
+CollegeUserProfiles = new Mongo.Collection('collegeUserProfiles');
 GeorgiaStateUsers.attachSchema(BrandedUserSchema);
