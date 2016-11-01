@@ -267,6 +267,11 @@ GeorgiaStateSchema = new SimpleSchema({
     optional: true
   },
   _responseBlackBox: {
+     type: Object,
+    blackbox: true,
+    optional: true
+  },
+  _custom: {
     type: Object,
     blackbox: true,
     optional: true
