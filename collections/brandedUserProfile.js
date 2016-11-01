@@ -1,6 +1,6 @@
 var o = {optional: true};
 
-WhiteLabelSchema = new SimpleSchema({
+BrandedUserSchema = new SimpleSchema({
   userId: fields.string(),
   "_id": {optional: true, type: null},
   crmId: fields.string({optional: false}), //gsu unique id
@@ -487,5 +487,5 @@ WhiteLabelSchema = new SimpleSchema({
   abGroup: {type: Number, optional: true, max: 1, min: 0, decimal: true}
 });
 
-CollegeUserProfiles = new Mongo.Collection('collegeUserProfiles');
-CollegeUserProfiles.attachSchema(WhiteLabelSchema)
+BrandedUserProfiles = new Mongo.Collection('brandedUserProfiles');
+BrandedUserProfiles.attachSchema(BrandedUserSchema)
