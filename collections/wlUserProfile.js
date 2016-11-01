@@ -1,6 +1,6 @@
 var o = {optional: true};
 
-GeorgiaStateSchema = new SimpleSchema({
+WhiteLabelSchema = new SimpleSchema({
   userId: fields.string(),
   "_id": {optional: true, type: null},
   crmId: fields.string({optional: false}), //gsu unique id
@@ -54,7 +54,6 @@ GeorgiaStateSchema = new SimpleSchema({
     finAidComplete: fields.bool(o), 
     fafsaComplete: fields.bool(o),
     finAidInterest: fields.bool(o),
-    finAidInterestInternal: fields.bool(o),
     scholarshipAwarded: fields.bool(o),
     scholarshipAccepted: fields.bool(o),
     missingEntryLoan: fields.bool(o),
@@ -67,14 +66,12 @@ GeorgiaStateSchema = new SimpleSchema({
     preferenceType: fields.preference_type(o),
     depositPaid: fields.bool(o), 
     depositDate: fields.date(o), 
-    internalResponse: fields.string(o),
   }),optional: true},
   orientation:{type: new SimpleSchema ({
     needsToRsvp: fields.bool(o), 
     attended: fields.bool(o), 
     attendedDate: fields.date(o), 
-    registeredDate: fields.date(o),
-    registeredYetInternal: fields.bool(o)
+    registeredDate: fields.date(o)
   }),optional: true},
   textSetting:{type: new SimpleSchema ({
     canText: fields.bool(o),
@@ -103,101 +100,64 @@ GeorgiaStateSchema = new SimpleSchema({
   }),optional: true},
   interest: {type: new SimpleSchema({
     crm: fields.number({min: 0, max: 5, optional: true}),
-    admithub: fields.number({min: 0, max: 5, optional: true}),
   }), optional: true},
   intent: {type: new SimpleSchema({
     intendsToEnroll: fields.bool(o), 
-    intendsToEnrollInternal: fields.bool(o),
     intentReceivedDate: fields.date(o), 
-    whyNotAttending: fields.string(o),
-    whyNotAttendingExtended: {type: String, max: 700, optional: true},
-    whyUnsureExtended: {type: String, max: 700, optional: true},
     counselorCanContact: fields.bool(o),
-    whyUnsure: fields.string(o),
-    changedMind: fields.bool(o),
-    followUpInternal: fields.attending(o), // second time around asking intent
   }), optional: true},
   _profile: {type: new SimpleSchema({
     description: fields.profile_description(o),
     parent: fields.bool(o),
     plannedApplication: fields.planned_application(o),
   }), optional: true},
-  _internal: {type: new SimpleSchema({
-    gapInAid: fields.bool(o),
-    acceptingLoansOne: fields.bool(o),
-    acceptingLoansTwo: fields.bool(o),
-    acceptingLoansThree: fields.bool(o),
-    housingResponse: fields.string(o),
-    interest: fields.number({min: 0, max: 5, optional: true}),
+  _finAid: {type: new SimpleSchema({
+    finAidInterest: fields.bool(o),
+    gapInAid: fields.bool(o), // _internal.gapInAid
+    needHelpPaying: fields.bool(o), // _internal.needHelpPaying
+  }),optional: true},
+  _housing: {type: new SimpleSchema({
+    intention: fields.string(o), // _internal.housingResponse
+  }),optional: true},
+  _parking: {type: new SimpleSchema({
+    bringCar: fields.bool(o), // _internal.needsParking
+  }), optional: true},
+  _intent: {type: new SimpleSchema({
     intendsToEnroll: fields.bool(o),
-    intentDate: fields.date(o),
-    whyNotAttending: fields.long_string(o),
-    whyNotAttendingExtended: fields.long_string(o),
-    whyUnsure: fields.string(o),
-    whyUnsureExtended: fields.long_string(o),
-    counselorCanContact: fields.bool(o),
-    changedMindIntent: fields.bool(o),
-    followUpIntent: fields.attending(o),
-    registeredOrientation: fields.bool(o),
-    intentUnsure: fields.bool(o),
-    secondGroup: fields.bool(o),
-    goingInstead: fields.long_string(o),
-    needsParking: fields.bool(o),
-    whyNotTexting: fields.string(o),
-    whyHere: fields.long_string(o),
-    howSolid: fields.string(o),
-    whyNoCollege: fields.string(o),
-    needHelpPaying: fields.bool(o),
-    studentBelonging: {type: new SimpleSchema({
-      excitementLevel: fields.number(o),
-      intelligenceChangeable: fields.number(o),
-      mostWorried: fields.string(o),
-      mostExcited: fields.string(o),
-      friendsToCollege: fields.string(o),
-      connectWithFriends: fields.string(o),
-      playsInstrument: fields.bool(o),
-      favoriteEmoji: fields.string(o),
-      whyAwful: fields.long_string(o),
-      workingWithMe: fields.string(o),
-      spiritualOrReligious: fields.bool(o),
-      moreImportant: {type: new SimpleSchema({
-        personality: fields.bool(o),
-        lifeGoals: fields.bool(o),
-        trying: fields.bool(o),
-        workingWithOthers: fields.bool(o),
-        learnFromMistakes: fields.bool(o),
-        recognizeTalents: fields.bool(o),
-        beAlone: fields.bool(o),
-        hangWithFriends: fields.bool(o),
-        friendHasBack: fields.bool(o),
-        friendUnderstands: fields.bool(o),
-        partyNow: fields.bool(o),
-        workNow: fields.bool(o),
-        honesty: fields.bool(o),
-        kindness: fields.bool(o)
-      }), optional: true},
-      phoneType: {type: new SimpleSchema({
-        iphone: fields.bool(o),
-        android: fields.bool(o),
-        other: fields.bool(o),
-        dumbPhone: fields.bool(o)
-      }), optional: true},
-    }), optional: true},
-    orientation: {type: new SimpleSchema({
-      best: fields.string(o),
-      experience: fields.string(o),
-      experienceExtended: fields.long_string(o),
-      stoodOut: fields.long_string(o),
-      improvement: fields.long_string(o),
-      willYouAttend: fields.string(o)
-    }), optional: true},
-    aidLastPush: {type: new SimpleSchema({
-     planSubmitFafsa: fields.bool(o),
-     helpCompletingFafsa: fields.string(o),
-     planAttendOrientation: fields.bool(o),
-     allSetHousing: fields.bool(o),
-     unableToMakePayment: fields.bool(o)
-    }), optional: true}
+    whyUnsure: fields.string(o), //was internal.whyUnsure
+    whyUnsureExtended: fields.long_string(o), //was internal.whyUnsureExtended
+    whyNotAttending: fields.long_string(o), // internal.whyNotAttending
+    whyNotAttendingExtended: fields.long_string(o), //internal.whyNotAttendingExtended
+    date: fields.date(o), //internal.intentDate
+    followUpIntent: fields.attending(o), // internal./followUpIntent
+    unsure: fields.bool(o), // internal.intentUnsure todo - mark this in unsure questions
+    alreadySubmitted: fields.bool(o), //new
+    whyNoCollege: fields.string(o), //internal.whyNoCollege
+    whyHere: fields.long_string(o), // internal.whyHere
+    goingInstead: fields.long_string(o), // internal.goingInstead
+    howSolid: fields.string(o) //internal.howSolid
+  }), optional: true},
+  _orientation: {type: new SimpleSchema({
+    best: fields.string(o), // internal.orienation.best
+    experience: fields.string(o), // internal.orientation.experience.best
+    experienceExtended: fields.long_string(o), // internal.orientation.experienceExtended.best
+    stoodOut: fields.long_string(o), // internal.orientation.stoodOut
+    improvement: fields.long_string(o), // internal.orientation.improvement
+    willYouAttend: fields.string(o), // internal.orientation.willYouAttend
+    registered: fields.bool(o), // internal.registeredOrientation
+  }), optional: true},
+  _general: {type: new SimpleSchema({
+    //interest: fields.number({min: 0, max: 5, optional: true}),
+    //counselorCanContact: fields.bool(o),
+    secondGroup: fields.bool(o), // internal.secondGroup
+    whyNotTexting: fields.string(o), //internal.whyNotTexting
+  }), optional: true},
+  _aidLastPush: {type: new SimpleSchema({ // all internal._aidLast 
+    planSubmitFafsa: fields.bool(o), // all internal._aidLast 
+    helpCompletingFafsa: fields.string(o), // all internal._aidLast 
+    planAttendOrientation: fields.bool(o), // all internal._aidLast 
+    allSetHousing: fields.bool(o), // all internal._aidLast
+    unableToMakePayment: fields.bool(o) // all internal._aidLast 
   }), optional: true},
   _finalStudySurveyBot: {type: new SimpleSchema({
     enrollmentHowHard: fields.string(o),
@@ -230,18 +190,18 @@ GeorgiaStateSchema = new SimpleSchema({
     intendsToEnroll: fields.bool(o) // intent.intendsToEnroll /
   }), optional: true},
   _gather: {type: new SimpleSchema({
-    firstName: fields.string(o), //
-    lastName: fields.string(o), //
-    middleInitial: fields.string(o), //
-    email: fields.email(o), //
-    phone: fields.phone_number(o), //
-    dob: fields.date(o), //
+    firstName: fields.string(o), 
+    lastName: fields.string(o), 
+    middleInitial: fields.string(o), 
+    email: fields.email(o), 
+    phone: fields.phone_number(o), 
+    dob: fields.date(o), 
     hsName: fields.string(o),
     hsZip: fields.zip_code(o),
     hsGradYear: fields.expected_graduation_year(o),
     intendedMajor: fields.long_string(o),
-    zip: fields.zip_code(o), //
-    address: fields.string(o), //
+    zip: fields.zip_code(o), 
+    address: fields.string(o), 
     gpa: fields.number({decimal: true, optional: true}),
     maxGpa: fields.number({decimal: true, optional: true}),
     satComposite: fields.sat_composite_score(o),
@@ -522,7 +482,5 @@ GeorgiaStateSchema = new SimpleSchema({
   abGroup: {type: Number, optional: true, max: 1, min: 0, decimal: true}
 });
 
-GeorgiaStateUsers = new Mongo.Collection('georgiaStateUsers');
-GeorgiaStateUsers.attachSchema(GeorgiaStateSchema);
-
-
+CollegeUserProfiles = new Mongo.Collection('collegeUserProfiles');
+CollegeUserProfiles.attachSchema(WhiteLabelSchema)
