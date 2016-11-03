@@ -11,5 +11,6 @@ Workflows.attachSchema(new SimpleSchema({
   "steps": {
     type: Object,
     blackbox: true
-  }
+  },
+  "sentToUsers": {type: Boolean, optional: true}
 }));
