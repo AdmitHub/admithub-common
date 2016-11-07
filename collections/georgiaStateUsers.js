@@ -148,56 +148,56 @@ GeorgiaStateSchema = new SimpleSchema({
     howSolid: fields.string(o),
     whyNoCollege: fields.string(o),
     needHelpPaying: fields.bool(o),
-    studentBelonging: {type: new SimpleSchema({
-      excitementLevel: fields.number(o),
-      intelligenceChangeable: fields.number(o),
-      mostWorried: fields.string(o),
-      mostExcited: fields.string(o),
-      friendsToCollege: fields.string(o),
-      connectWithFriends: fields.string(o),
-      playsInstrument: fields.bool(o),
-      favoriteEmoji: fields.string(o),
-      whyAwful: fields.long_string(o),
-      workingWithMe: fields.string(o),
-      spiritualOrReligious: fields.bool(o),
-      moreImportant: {type: new SimpleSchema({
-        personality: fields.bool(o),
-        lifeGoals: fields.bool(o),
-        trying: fields.bool(o),
-        workingWithOthers: fields.bool(o),
-        learnFromMistakes: fields.bool(o),
-        recognizeTalents: fields.bool(o),
-        beAlone: fields.bool(o),
-        hangWithFriends: fields.bool(o),
-        friendHasBack: fields.bool(o),
-        friendUnderstands: fields.bool(o),
-        partyNow: fields.bool(o),
-        workNow: fields.bool(o),
-        honesty: fields.bool(o),
-        kindness: fields.bool(o)
-      }), optional: true},
-      phoneType: {type: new SimpleSchema({
-        iphone: fields.bool(o),
-        android: fields.bool(o),
-        other: fields.bool(o),
-        dumbPhone: fields.bool(o)
-      }), optional: true},
-    }), optional: true},
-    orientation: {type: new SimpleSchema({
-      best: fields.string(o),
-      experience: fields.string(o),
-      experienceExtended: fields.long_string(o),
-      stoodOut: fields.long_string(o),
-      improvement: fields.long_string(o),
-      willYouAttend: fields.string(o)
-    }), optional: true},
-    aidLastPush: {type: new SimpleSchema({
-     planSubmitFafsa: fields.bool(o),
-     helpCompletingFafsa: fields.string(o),
-     planAttendOrientation: fields.bool(o),
-     allSetHousing: fields.bool(o),
-     unableToMakePayment: fields.bool(o)
-    }), optional: true}
+    // studentBelonging: {type: new SimpleSchema({
+    //   excitementLevel: fields.number(o),
+    //   intelligenceChangeable: fields.number(o),
+    //   mostWorried: fields.string(o),
+    //   mostExcited: fields.string(o),
+    //   friendsToCollege: fields.string(o),
+    //   connectWithFriends: fields.string(o),
+    //   playsInstrument: fields.bool(o),
+    //   favoriteEmoji: fields.string(o),
+    //   whyAwful: fields.long_string(o),
+    //   workingWithMe: fields.string(o),
+    //   spiritualOrReligious: fields.bool(o),
+    //   moreImportant: {type: new SimpleSchema({
+    //     personality: fields.bool(o),
+    //     lifeGoals: fields.bool(o),
+    //     trying: fields.bool(o),
+    //     workingWithOthers: fields.bool(o),
+    //     learnFromMistakes: fields.bool(o),
+    //     recognizeTalents: fields.bool(o),
+    //     beAlone: fields.bool(o),
+    //     hangWithFriends: fields.bool(o),
+    //     friendHasBack: fields.bool(o),
+    //     friendUnderstands: fields.bool(o),
+    //     partyNow: fields.bool(o),
+    //     workNow: fields.bool(o),
+    //     honesty: fields.bool(o),
+    //     kindness: fields.bool(o)
+    //   }), optional: true},
+    //   phoneType: {type: new SimpleSchema({
+    //     iphone: fields.bool(o),
+    //     android: fields.bool(o),
+    //     other: fields.bool(o),
+    //     dumbPhone: fields.bool(o)
+    //   }), optional: true},
+    // }), optional: true},
+    // orientation: {type: new SimpleSchema({
+    //   best: fields.string(o),
+    //   experience: fields.string(o),
+    //   experienceExtended: fields.long_string(o),
+    //   stoodOut: fields.long_string(o),
+    //   improvement: fields.long_string(o),
+    //   willYouAttend: fields.string(o)
+    // }), optional: true},
+    // aidLastPush: {type: new SimpleSchema({
+    //  planSubmitFafsa: fields.bool(o),
+    //  helpCompletingFafsa: fields.string(o),
+    //  planAttendOrientation: fields.bool(o),
+    //  allSetHousing: fields.bool(o),
+    //  unableToMakePayment: fields.bool(o)
+    // }), optional: true}
   }), optional: true},
   _finalStudySurveyBot: {type: new SimpleSchema({
     enrollmentHowHard: fields.string(o),
