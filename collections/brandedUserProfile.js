@@ -110,6 +110,7 @@ BrandedUserSchema = new SimpleSchema({
     description: fields.profile_description(o),
     parent: fields.bool(o),
     plannedApplication: fields.planned_application(o),
+    setCanTextFalse: fields.bool(o)
   }), optional: true},
   _finAid: {type: new SimpleSchema({
     finAidInterest: fields.bool(o),
@@ -147,8 +148,6 @@ BrandedUserSchema = new SimpleSchema({
     registered: fields.bool(o), // internal.registeredOrientation
   }), optional: true},
   _general: {type: new SimpleSchema({
-    //interest: fields.number({min: 0, max: 5, optional: true}),
-    //counselorCanContact: fields.bool(o),
     secondGroup: fields.bool(o), // internal.secondGroup
     whyNotTexting: fields.string(o), //internal.whyNotTexting
   }), optional: true},
@@ -498,6 +497,11 @@ BrandedUserSchema = new SimpleSchema({
       finished: fields.bool(o),
     }), optional: true},
     honorsCampusVisitBot: {type: new SimpleSchema({
+      skip: fields.bool(o),
+      started: fields.bool(o),
+      finished: fields.bool(o),
+    }), optional: true},
+    introKnownProspectBot: {type: new SimpleSchema({
       skip: fields.bool(o),
       started: fields.bool(o),
       finished: fields.bool(o),
