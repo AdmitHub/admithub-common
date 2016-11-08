@@ -12,5 +12,13 @@ Workflows.attachSchema(new SimpleSchema({
     type: Object,
     blackbox: true
   },
-  "sentToUsers": {type: Boolean, optional: true}
+  "sentToUsers": {type: Boolean, optional: true},
+  "reminders": { type: Array, optional: true },
+  "reminders.$": {
+    type: new SimpleSchema({
+      "query": { type: Object, blackbox: true },
+      "message": { type: String },
+      "after": { type: Number }
+    })
+  }
 }));
