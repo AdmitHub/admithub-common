@@ -49,6 +49,8 @@ BrandedUserSchema = new SimpleSchema({
     hsZip: fields.zip_code(o),
     hsGradYear: fields.expected_graduation_year(o),
     intendedMajor: fields.long_string(o),
+    honors: fields.bool(o),
+    honorsProspect: fields.bool(o)
   }), optional: true},
   finAid: {type: new SimpleSchema({
     fafsaReceived: fields.bool(o), 
@@ -107,6 +109,10 @@ BrandedUserSchema = new SimpleSchema({
     intentReceivedDate: fields.date(o), 
     counselorCanContact: fields.bool(o),
   }), optional: true},
+  _georgia: {type: new SimpleSchema({
+    honors: fields.bool(o),
+    honorsProspect: fields.bool(o)
+  }),optional: true},
   _profile: {type: new SimpleSchema({
     description: fields.profile_description(o),
     parent: fields.bool(o),
@@ -503,6 +509,16 @@ BrandedUserSchema = new SimpleSchema({
       finished: fields.bool(o),
     }), optional: true},
     introKnownProspectBot: {type: new SimpleSchema({
+      skip: fields.bool(o),
+      started: fields.bool(o),
+      finished: fields.bool(o),
+    }), optional: true},
+    nonStudyGroupFilterBot: {type: new SimpleSchema({
+      skip: fields.bool(o),
+      started: fields.bool(o),
+      finished: fields.bool(o),
+    }), optional: true},
+    didntEnrollFilterBot: {type: new SimpleSchema({
       skip: fields.bool(o),
       started: fields.bool(o),
       finished: fields.bool(o),
