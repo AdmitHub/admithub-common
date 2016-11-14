@@ -3,6 +3,8 @@ BrandedApplicantConversations.attachSchema(new SimpleSchema({
   _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   applicantId: {type: String}, // this could very well be a Mongo-style ID
   brandedCollegeId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
+  userId: {type: String, optional: true},
+  messagingService: {type: String, optional: true},
   created: {type: Date, optional: true}, // additional createdAt date for ease of query in metabase
   messages: {type: [Object]},
   "messages.$.created": {type: Date},
