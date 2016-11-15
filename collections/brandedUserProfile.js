@@ -109,10 +109,6 @@ BrandedUserSchema = new SimpleSchema({
     intentReceivedDate: fields.date(o), 
     counselorCanContact: fields.bool(o),
   }), optional: true},
-  _georgia: {type: new SimpleSchema({
-    honors: fields.bool(o),
-    honorsProspect: fields.bool(o)
-  }),optional: true},
   _profile: {type: new SimpleSchema({
     description: fields.profile_description(o),
     parent: fields.bool(o),
@@ -155,6 +151,7 @@ BrandedUserSchema = new SimpleSchema({
     registered: fields.bool(o), // internal.registeredOrientation
   }), optional: true},
   _general: {type: new SimpleSchema({
+
     secondGroup: fields.bool(o), // internal.secondGroup
     whyNotTexting: fields.string(o), //internal.whyNotTexting
   }), optional: true},
