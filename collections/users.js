@@ -68,6 +68,10 @@ UserSchema = new SimpleSchema({
     type: String,
     optional: true
   },
+  "profile.userInitiatedSoftStop": {
+    type: Boolean,
+    optional: true
+  },
   "phonePending": {
     type: Boolean,
     optional: true
