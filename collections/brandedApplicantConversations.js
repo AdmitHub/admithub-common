@@ -12,5 +12,6 @@ BrandedApplicantConversations.attachSchema(new SimpleSchema({
   "messages.$.email": {type: String, optional: true},
   "messages.$.body": {type: String},
   "messages.$.unverified": {type: Boolean, optional: true},
-  "messages.$.auto": {type: Boolean, optional: true}
+  "messages.$.auto": {type: Boolean, optional: true},
+  "messages.$.logId": {type: String, optional: true}
 }));
