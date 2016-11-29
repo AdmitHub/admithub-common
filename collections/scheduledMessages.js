@@ -16,5 +16,6 @@ ScheduledMessages.attachSchema(new SimpleSchema({
     startDate: {type: Date, optional: true},
     endDate: {type: Date, optional: true},
     weekends: {type: Boolean, optional: true},
-    paused: {type: Boolean, optional: true}
+    paused: {type: Boolean, optional: true},
+    batchSize: {type: Number, optional: true}
 }));
