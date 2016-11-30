@@ -79,7 +79,8 @@ BrandedUserSchema = new SimpleSchema({
   textSetting:{type: new SimpleSchema ({
     canText: fields.bool(o),
     wrongNumber: fields.bool(o), // moved to user doc
-    newPhone: fields.phone_number(o)
+    newPhone: fields.phone_number(o),
+    twilioLookUpValid: fields.bool(o)
   }), optional: true},
   tests: {type: new SimpleSchema ({
     gpa: fields.number({decimal: true, optional: true}),
