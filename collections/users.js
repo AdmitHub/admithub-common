@@ -49,6 +49,9 @@ UserSchema = new SimpleSchema({
     type: String,
     optional: true
   },
+  "phone": { type: new SimpleSchema({
+    twilioLookUpValid: {type: Boolean, optional: true}
+  }),optional: true},
   "profile.phone": {
     type: String,
     min: 10,
@@ -66,10 +69,6 @@ UserSchema = new SimpleSchema({
   },
   "profile.previousPhone": {
     type: String,
-    optional: true
-  },
-  "profile.twilioLookUpValid": {
-    type: Boolean,
     optional: true
   },
   "phonePending": {
