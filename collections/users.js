@@ -50,7 +50,11 @@ UserSchema = new SimpleSchema({
     optional: true
   },
   "phone": { type: new SimpleSchema({
-    twilioLookUpValid: {type: Boolean, optional: true}
+    "wrongNumber": {type: Boolean, optional: true},
+    "twilioLookUpValid": {type: Boolean, optional: true},
+    "nonWorkingNumber": {type: Boolean, optional: true},
+    "nonWorkingNumberCode": {type: String, optional: true},
+    "previousPhone": {type: String, optional: true}
   }),optional: true},
   "profile.phone": {
     type: String,
@@ -65,10 +69,6 @@ UserSchema = new SimpleSchema({
       }
       return this.value;
     },
-    optional: true
-  },
-  "profile.previousPhone": {
-    type: String,
     optional: true
   },
   "phonePending": {
@@ -155,9 +155,6 @@ UserSchema = new SimpleSchema({
   "resumeWorkflow": {type: Boolean, optional: true},
 
   "abGroup": {type: Number, optional: true, max: 1, min: 0, decimal: true},
-  "nonWorkingNumber": {type: Boolean, optional: true},
-  "nonWorkingNumberCode": {type: String, optional: true},
-  "wrongNumber": {type: Boolean, optional: true},
   // For phoenix users (staff)
   "phoenixUser": {type: Boolean, optional: true, defaultValue: false},
   "presence": {type: Object, blackbox: true, optional: true},
