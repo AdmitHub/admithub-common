@@ -536,33 +536,27 @@ BrandedUserProfiles.attachSchema(BrandedUserSchema)
 
 
 BrandedUserProfiles.after.update(function(_id, selector, modifier, options) {
-  console.log("calling update brandedUserProfiles");
-  let brandedCollege;
-  let userId;
-  let brandedCollegeId = selector.college;
+  var userId;
+  var brandedCollegeId = selector.college;
   if (!brandedCollegeId) {
     return null;
   }
-  return BrandedColleges.findOne({_id: brandedCollegeId})
-  .then((insertedBrandedCollege)=> {
-    brandedCollege = insertedBrandedCollege;
-    if (!dotGet(selector, "test") && dotGet(options, "$set.phone") && selector.userId) {
-      let newPhone = dotGet(options, "$set.phone");
-      userId = selector.userId;
-      return Meteor.users.update({_id: userId}, {
-          $set: 
-            {
-            "profile.canText": true,
-            "profile.phone": newPhone
-            }
-      })
-      .then(() => {
-        if (dotGet(selector, "application.status") === "Prospect" ||dotGet(selector, "application.status") === "Suspect"  )
-          return Oli.initiate({userId: user._id, 
-            workflow: "introKnownProspectBot", 
-            messagingService: brandedCollege.messagingService,
-            transport: "twilio"  })
-      })
-    } 
-  })
+  var brandedCollege = BrandedColleges.findOne({_id: brandedCollegeId})
+  if (!dotGet(selector, "test") && dotGet(options, "$set.phone") && selector.userId) {
+    var newPhone = dotGet(options, "$set.phone");
+    userId = selector.userId;
+    Meteor.users.update({_id: userId}, {
+        $set: 
+          {
+          "profile.canText": true,
+          "profile.phone": newPhone
+          }
+    })
+    if (dotGet(selector, "application.status") === "Prospect" ||dotGet(selector, "application.status") === "Suspect"  ) {
+      return Oli.initiate({userId: user._id, 
+        workflow: "introKnownProspectBot", 
+        messagingService: brandedCollege.messagingService,
+        transport: "twilio"  })
+    }
+  } 
 });
