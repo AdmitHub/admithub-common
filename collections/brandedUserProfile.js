@@ -6,7 +6,7 @@ BrandedUserSchema = new SimpleSchema({
   crmId: fields.string({optional: false}), //gsu unique id
   created: fields.date(),
   collegeName: fields.string(o),
-  collegeId: fields.string(o),
+  college: fields.string(o),
   enrollmentId: fields.string(o), //pantherId for gsu
   schoolEmail: fields.email(o),
   entryYear: fields.number(o),
@@ -533,3 +533,30 @@ BrandedUserSchema = new SimpleSchema({
 
 BrandedUserProfiles = new Mongo.Collection('brandedUserProfiles');
 BrandedUserProfiles.attachSchema(BrandedUserSchema)
+
+
+BrandedUserProfiles.after.update(function(_id, selector, modifier, options) {
+  var userId;
+  var brandedCollegeId = selector.college;
+  if (!brandedCollegeId) {
+    return null;
+  }
+  var brandedCollege = BrandedColleges.findOne({_id: brandedCollegeId})
+  if (!dotGet(selector, "test") && dotGet(options, "$set.phone") && selector.userId) {
+    var newPhone = dotGet(options, "$set.phone");
+    userId = selector.userId;
+    Meteor.users.update({_id: userId}, {
+        $set: 
+          {
+          "profile.canText": true,
+          "profile.phone": newPhone
+          }
+    })
+    if (dotGet(selector, "application.status") === "Prospect" ||dotGet(selector, "application.status") === "Suspect"  ) {
+      return Oli.initiate({userId: user._id, 
+        workflow: "introKnownProspectBot", 
+        messagingService: brandedCollege.messagingService,
+        transport: "twilio"  })
+    }
+  } 
+});
