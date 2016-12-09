@@ -15,6 +15,7 @@ BrandedUserSchema = new SimpleSchema({
   permittedUser: fields.bool(o),
   email: fields.string(o),
   phone: fields.string(o),
+  changedNumber: fields.bool(o),
   name: {type: new SimpleSchema({
     first: fields.string(o),
     last: fields.string(o),
@@ -533,30 +534,3 @@ BrandedUserSchema = new SimpleSchema({
 
 BrandedUserProfiles = new Mongo.Collection('brandedUserProfiles');
 BrandedUserProfiles.attachSchema(BrandedUserSchema)
-
-
-BrandedUserProfiles.after.update(function(_id, selector, modifier, options) {
-  var userId;
-  var brandedCollegeId = selector.college;
-  if (!brandedCollegeId) {
-    return null;
-  }
-  var brandedCollege = BrandedColleges.findOne({_id: brandedCollegeId})
-  if (!dotGet(selector, "test") && dotGet(options, "$set.phone") && selector.userId) {
-    var newPhone = dotGet(options, "$set.phone");
-    userId = selector.userId;
-    Meteor.users.update({_id: userId}, {
-        $set: 
-          {
-          "profile.canText": true,
-          "profile.phone": newPhone
-          }
-    })
-    if (dotGet(selector, "application.status") === "Prospect" ||dotGet(selector, "application.status") === "Suspect"  ) {
-      return Oli.initiate({userId: user._id, 
-        workflow: "introKnownProspectBot", 
-        messagingService: brandedCollege.messagingService,
-        transport: "twilio"  })
-    }
-  } 
-});
