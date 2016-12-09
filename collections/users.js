@@ -194,7 +194,7 @@ Meteor.users.before.update(function(userId, doc, fieldNames, modifier, options) 
 });
 Meteor.users.after.update(function(userId, doc, fieldNames, modifier, options) {
   if (Meteor.isServer) {
-    // If we just changed the phone number, initiate phone confirmation.
+    //If we just changed the phone number, initiate phone confirmation.
     var currentPhone = dotGet(doc, "profile.phone");
     var previousPhone = dotGet(this.previous, "profile.phone");
     var cleanCurrent = currentPhone && fields.cleanPhone(currentPhone);
