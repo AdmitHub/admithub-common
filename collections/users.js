@@ -178,20 +178,7 @@ Meteor.users.before.insert(function(userId, doc) {
   return doc;
 });
 
-Meteor.users.before.update(function(userId, doc, fieldNames, modifier, options) {
-  // Set 'phonePending' if this update changes the phone number.
-  if (Meteor.isServer && modifier && modifier.$set) {
-    // flatten, so that we can check for both
-    //     {$set: {"profile.phone": <num>}}
-    // and {$set: {profile: {phone: <num>, ...}}}
-    var flatSet = dotFlatten(modifier.$set);
-    if (flatSet["profile.phone"] &&
-        (flatSet["profile.phone"] !== dotGet(doc, "profile.phone")) &&
-        (!modifier.$unset || !modifier.$unset.hasOwnProperty("phonePending"))) {
-      modifier.$set.phonePending = true;
-    }
-  }
-});
+
 Meteor.users.after.update(function(userId, doc, fieldNames, modifier, options) {
   if (Meteor.isServer) {
     //If we just changed the phone number, initiate phone confirmation.
