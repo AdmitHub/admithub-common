@@ -8,6 +8,7 @@ IntroducedMessages.attachSchema(new SimpleSchema({
   workflow: {type: String, optional: true},
   message: {type: String, optional: true},
   usersContacted: {type: Number, optional: true},
+  users: {type: [String], optional: true},
   note: {type: String, optional: true},
   scheduled: {type: Boolean, optional: true},
   userSearch: {type: Object, blackbox: true, optional: true}
