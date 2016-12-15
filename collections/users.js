@@ -54,7 +54,8 @@ UserSchema = new SimpleSchema({
     "twilioLookUpValid": {type: Boolean, optional: true},
     "nonWorkingNumber": {type: Boolean, optional: true},
     "nonWorkingNumberCode": {type: String, optional: true},
-    "previousPhone": {type: String, optional: true}
+    "previousPhone": {type: String, optional: true},
+    "passiveOptOut": {type: Boolean, optional: true}
   }),optional: true},
   "profile.phone": {
     type: String,
