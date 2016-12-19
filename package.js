@@ -65,6 +65,7 @@ Package.onUse(function(api) {
   api.addFiles('collections/workflows.js');
   api.addFiles('collections/twilioAccounts.js');
   api.addFiles('collections/brandedUserProfile.js');
+  api.addFiles('collections/workflowResponses.js');
   api.addFiles('server/collegesInMemory.js', 'server');
   api.addFiles('server/indexes.js', 'server');
   api.addFiles('server/methods.js', 'server');
@@ -114,6 +115,7 @@ Package.onUse(function(api) {
     'MessageTemplates',
     'WorkflowScripts',
     'TwilioAccounts',
-    'BrandedUserProfiles'
+    'BrandedUserProfiles',
+    'WorkflowResponses'
   ]);
 });
