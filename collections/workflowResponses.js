@@ -8,6 +8,7 @@ WorkflowResponses.attachSchema(new SimpleSchema({
   userId: fields.string(),
   workflow: fields.string(),
   step: fields.string(),
+  messagingService: fields.string(),
   response: {
     type: Object,
     blackbox: true
