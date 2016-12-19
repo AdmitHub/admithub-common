@@ -17,5 +17,6 @@ ScheduledMessages.attachSchema(new SimpleSchema({
     endDate: {type: Date, optional: true},
     weekends: {type: Boolean, optional: true},
     paused: {type: Boolean, optional: true},
-    batchSize: {type: Number, optional: true}
+    batchSize: {type: Number, optional: true},
+    allowCanTextFalse: {type: Boolean, optional: true} // override can text false limitation for opt in wf's
 }));
