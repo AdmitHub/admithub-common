@@ -475,6 +475,7 @@ var _metaFields = new SimpleSchema({
   "initialSurvey": {type: new SimpleSchema({
     "crushedThat": fields.bool(o),
     "finished": fields.bool(o),
+    "finished_at": fields.date(o),
     "evaluation": fields.string({allowedValues: ["Great", "Pretty good", "Meh", "Lame", "Beyond awful"], optional: true}),
     "evaluationRecommend": fields.string({max: 140, optional: true}),
     "podcastGuest": fields.bool(o),
@@ -483,51 +484,63 @@ var _metaFields = new SimpleSchema({
   }), optional: true},
   "inquiryCardBot": {type: new SimpleSchema({
     "skip": fields.bool(o),
-    "finished": fields.bool(o)
+    "finished": fields.bool(o),
+    "finished_at": fields.date(o),
   }), optional: true},
   "collegePreferencesBot": {type: new SimpleSchema({
     "skip": fields.bool(o),
+    "finished_at": fields.date(o),
     "finished": fields.bool(o)
   }), optional: true},
   "match": {type: new SimpleSchema({
     "skip": fields.bool(o),
+    "finished_at": fields.date(o),
     "finished": fields.bool(o)
   }), optional: true},
   "matchSupplemental": {type: new SimpleSchema({
     "skip": fields.bool(o),
+    "finished_at": fields.date(o),
     "finished": fields.bool(o)
   }), optional: true},
   "resumeBot": {type: new SimpleSchema({
     "skip": fields.bool(o),
+    "finished_at": fields.date(o),
     "finished": fields.bool(o)
   }), optional: true},
   "essayBot": {type: new SimpleSchema({
     "skip": fields.bool(o),
+    "finished_at": fields.date(o),
     "finished": fields.bool(o)
   }), optional: true},
   "questionBot": {type: new SimpleSchema({
     "skip": fields.bool(o),
+    "finished_at": fields.date(o),
     "finished": fields.bool(o)
   }), optional: true},
   "salesDemoInitialBot": {type: new SimpleSchema({
     "skip": fields.bool(o),
+    "finished_at": fields.date(o),
     "finished": fields.bool(o)
   }), optional: true},
   "salesDemoCronBot": {type: new SimpleSchema({
     "skip": fields.bool(o),
+    "finished_at": fields.date(o),
     "finished": fields.bool(o),
     "remindersSent": fields.number(o)
   }), optional: true},
   "fafsaGetReadyBot": {type: new SimpleSchema({
     "skip": fields.bool(o),
+    "finished_at": fields.date(o),
     "finished": fields.bool(o),
   }), optional: true},
   "fafsaCompletingBot": {type: new SimpleSchema({
     "skip": fields.bool(o),
+    "finished_at": fields.date(o),
     "finished": fields.bool(o),
   }), optional: true},
   "fafsaSarReviewBot": {type: new SimpleSchema({
     "skip": fields.bool(o),
+    "finished_at": fields.date(o),
     "finished": fields.bool(o),
   }), optional: true},
 });
@@ -595,7 +608,7 @@ CollegeProfileSchema = new SimpleSchema({
   "intentions": {type: _intentionSchema, optional: true},
   "recommendations": {type: _recommendationSchema, optional: true},
   "preferences": {type: _preferenceSchema, optional: true},
-  "meta": {type: _metaFields, optional: true},
+  "meta": {type: _metaFields, blackbox: true, optional: true},
   "modified": {type: Date, autoValue: function() { return new Date(); }},
   "created": fields.date(),
   "contactable": fields.bool({optional: true}),
