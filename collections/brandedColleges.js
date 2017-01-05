@@ -14,15 +14,16 @@ BrandedColleges.attachSchema(new SimpleSchema({
   collegeId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   facebookId: {type: Number, optional: true},
   animal: {type: String, optional: true}, // Panther
-  linkIntentToEnroll: {type: String, optional: true}, 
-  linkAcceptAid: {type: String, optional: true}, 
-  linkFinAid: {type: String, optional: true}, 
-  linkFafsa: {type: String, optional: true}, 
-  linkOrientationInfo: {type: String, optional: true}, 
-  linkOrientationChecklist: {type: String, optional: true}, 
-  linkTourSignUp: {type: String, optional: true}, 
-  linkVisitTips: {type: String, optional: true}, 
-  phoneFinAid: {type: String, optional: true}, 
+  linkIntentToEnroll: {type: String, optional: true},
+  linkAcceptAid: {type: String, optional: true},
+  linkFinAid: {type: String, optional: true},
+  linkFafsa: {type: String, optional: true},
+  linkOrientationInfo: {type: String, optional: true},
+  linkOrientationChecklist: {type: String, optional: true},
+  linkTourSignUp: {type: String, optional: true},
+  linkVisitTips: {type: String, optional: true},
+  phoneFinAid: {type: String, optional: true},
   filterOn: {type: Boolean, optional: true},
-  filterLink: {type: String, optional: true}
+  filterLink: {type: String, optional: true},
+  introKnownProspectBotPhoto: {type: String, optional: true, defaultValue: ""}
 }));
