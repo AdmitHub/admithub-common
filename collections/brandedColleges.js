@@ -14,6 +14,7 @@ BrandedColleges.attachSchema(new SimpleSchema({
   collegeId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   facebookId: {type: Number, optional: true},
   animal: {type: String, optional: true}, // Panther
+  linkAdmit: {type: String, optional: true},
   linkIntentToEnroll: {type: String, optional: true},
   linkAcceptAid: {type: String, optional: true},
   linkFinAid: {type: String, optional: true},
@@ -25,5 +26,6 @@ BrandedColleges.attachSchema(new SimpleSchema({
   phoneFinAid: {type: String, optional: true},
   filterOn: {type: Boolean, optional: true},
   filterLink: {type: String, optional: true},
-  introKnownProspectBotPhoto: {type: String, optional: true, defaultValue: ""}
+  introKnownProspectBotPhoto: {type: String, optional: true, defaultValue: ""},
+  hashtag: {type: String, optional: true} //include the hash
 }));
