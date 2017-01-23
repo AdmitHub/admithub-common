@@ -28,12 +28,5 @@ BrandedColleges.attachSchema(new SimpleSchema({
   name: {type: String},
   oliName: {type: String},
   phoneFinAid: {type: String, optional: true},
-<<<<<<< HEAD
   tuitionDueDate: {type: Date, optional: true}, //8 -15
-=======
-  filterOn: {type: Boolean, optional: true},
-  filterLink: {type: String, optional: true},
-  introKnownProspectBotPhoto: {type: String, optional: true, defaultValue: ""},
-  hashtag: {type: String, optional: true} //include the hash
->>>>>>> Add `linkAdmit`, `hashtag` properties to brandedCollege schema.
 }));
