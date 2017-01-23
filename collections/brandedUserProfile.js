@@ -6,7 +6,11 @@ BrandedUserSchema = new SimpleSchema({
   crmId: fields.string({optional: false}), //gsu unique id
   created: fields.date(),
   collegeName: fields.string(o),
+
   college: fields.string(o),
+
+  collegeId: fields.string(o),
+
   enrollmentId: fields.string(o), //pantherId for gsu
   schoolEmail: fields.email(o),
   entryYear: fields.number(o),

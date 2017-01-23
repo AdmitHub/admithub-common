@@ -12,6 +12,8 @@ Workflows.attachSchema(new SimpleSchema({
     type: Object,
     blackbox: true
   },
+  "createdAt": {type: Date, optional: true},
+  "updatedAt": {type: Date, optional: true},
   "sentToUsers": {type: Boolean, optional: true},
   "reminders": { type: Array, optional: true },
   "reminders.$": {
