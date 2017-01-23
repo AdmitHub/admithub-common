@@ -10,7 +10,7 @@ BrandedColleges.attachSchema(new SimpleSchema({
   facebookId: {type: Number, optional: true},
   filterLink: {type: String, optional: true},
   filterOn: {type: Boolean, optional: true},
-  hashtag: {type: String, optional: true} //include the hash
+  hashtag: {type: String, optional: true}, //include the hash
   intentDeadline: {type: Date, optional: true}, // june 1
   introKnownProspectBotPhoto: {type: String, optional: true, defaultValue: ""},
   linkAcceptAid: {type: String, optional: true},
