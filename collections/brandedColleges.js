@@ -22,8 +22,10 @@ BrandedColleges.attachSchema(new SimpleSchema({
   linkOrientationChecklist: {type: String, optional: true},
   linkTourSignUp: {type: String, optional: true},
   linkVisitTips: {type: String, optional: true},
+  linkAcceptanceWhatsNext: {type: String, optional: true},
   phoneFinAid: {type: String, optional: true},
   filterOn: {type: Boolean, optional: true},
   filterLink: {type: String, optional: true},
-  introKnownProspectBotPhoto: {type: String, optional: true, defaultValue: ""}
+  introKnownProspectBotPhoto: {type: String, optional: true, defaultValue: ""},
+  customHashTag: {type: String, optional: true, defaultValue: ""}
 }));
