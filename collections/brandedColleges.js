@@ -22,6 +22,7 @@ BrandedColleges.attachSchema(new SimpleSchema({
   linkOrientationInfo: {type: String, optional: true},
   linkTourSignUp: {type: String, optional: true},
   linkVisitTips: {type: String, optional: true},
+  mediaCongrats: {type: String, optional: true},
   messagingService: {type: String},
   messagingServiceSid: {type: String, optional: true},
   name: {type: String},
