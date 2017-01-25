@@ -12,6 +12,7 @@ Workflows.attachSchema(new SimpleSchema({
     type: Object,
     blackbox: true
   },
+  "expirationLength": {type: Number, optional: true},
   "createdAt": {type: Date, optional: true},
   "updatedAt": {type: Date, optional: true},
   "sentToUsers": {type: Boolean, optional: true},
