@@ -29,4 +29,5 @@ BrandedColleges.attachSchema(new SimpleSchema({
   oliName: {type: String},
   phoneFinAid: {type: String, optional: true},
   tuitionDueDate: {type: Date, optional: true}, //8 -15
+  linkAcceptanceWhatsNext: {type: String, optional: true}
 }));
