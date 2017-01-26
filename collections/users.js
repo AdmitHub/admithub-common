@@ -99,6 +99,14 @@ UserSchema = new SimpleSchema({
     optional: true,
     defaultValue: true
   },
+  "profile.firstOutgoing": { //marks our first message sent to user
+    type: Date,
+    optional: true
+  },
+  "profile.hasSent": { // indicates user has sent message to admithub
+    type: Boolean,
+    optional: true
+  },
   "profile.notifications": {
     type: String,
     optional: true
