@@ -1,16 +1,24 @@
 var o = {optional: true};
 
+GeorgiaSchema = {type: new SimpleSchema({
+  hopeAwardAmount: fields.string(o),
+  hopeAwardDate: fields.date(o),
+  hopeGSFAppSubmitted: fields.date(o),
+  successAcademy: {type: new SimpleSchema({
+    qualified: fields.bool(o),
+    appReceived: fields.bool(o),
+    accepted: fields.bool(o)
+  }), optional: true}
+}), optional: true}
+
 BrandedUserSchema = new SimpleSchema({
   userId: fields.string(),
   "_id": {optional: true, type: null},
   crmId: fields.string({optional: false}), //gsu unique id
   created: fields.date(),
   collegeName: fields.string(o),
-
   college: fields.string(o),
-
   collegeId: fields.string(o),
-
   enrollmentId: fields.string(o), //pantherId for gsu
   schoolEmail: fields.email(o),
   entryYear: fields.number(o),
@@ -20,6 +28,7 @@ BrandedUserSchema = new SimpleSchema({
   email: fields.string(o),
   phone: fields.string(o),
   changedNumber: fields.bool(o), // to indicate changed number through pheonix and from astronomer update
+  withdrawalReason: fields.string(o),
   name: {type: new SimpleSchema({
     first: fields.string(o),
     last: fields.string(o),
@@ -40,9 +49,12 @@ BrandedUserSchema = new SimpleSchema({
   }), optional: true},
   inStateStudent: fields.bool(o),
   application: {type: new SimpleSchema({
-    status: fields.status(o), 
+    status: fields.status(o),
     statusExtended: fields.string(o),
-    receivedHSTranscript: fields.bool(o)
+    receivedHSTranscript: fields.bool(o),
+    appCompleteDate: fields.date(o),
+    decisionDate: fields.date(o),
+    applicationType: fields.string(o)
   }), optional: true},
   profile: {type: new SimpleSchema({
     studentType: fields.student_type(o),
@@ -55,30 +67,47 @@ BrandedUserSchema = new SimpleSchema({
     hsGradYear: fields.expected_graduation_year(o),
     intendedMajor: fields.long_string(o),
     honors: fields.bool(o),
-    honorsProspect: fields.bool(o)
+    honorsProspect: fields.bool(o),
+    firstGen: fields.bool(o),
+    hsCode: fields.string(o),
+    intendedCollege: fields.string(o),
+    majorInterest: fields.string(o),
+    residency: fields.string(o)
+  }), optional: true},
+  tution: {type: new SimpleSchema({
+    paymentPlan: fields.bool(o)
   }), optional: true},
   finAid: {type: new SimpleSchema({
-    fafsaReceived: fields.bool(o), 
-    finAidComplete: fields.bool(o), 
+    fafsaReceived: fields.bool(o),
+    finAidComplete: fields.bool(o),
     fafsaComplete: fields.bool(o),
     finAidInterest: fields.bool(o),
     scholarshipAwarded: fields.bool(o),
     scholarshipAccepted: fields.bool(o),
-    missingEntryLoan: fields.bool(o),
-    missingPromissoryLoan: fields.bool(o),
     acceptedOfferInternal: fields.bool(o),
     offered: fields.bool(o),
+    entranceCounselingComplete: fields.bool(o),
+    mpnPerkinsComplete: fields.bool(o),
+    mpnStaffordPlusComplete: fields.bool(o),
+    acceptedFedLoan: fields.bool(o),
+    aidGap: fields.string(o),
+    fafsaVerificationFlagDate: fields.date(o),
+    fedLoanOffered: fields.bool(o),
+    pellAwardAmount: fields.string(o),
+    pellAwardDate: fields.date(o),
+    workstudyAmount: fields.string(o),
+    workstudtAwardDate: fields.date(o)
   }),optional: true},
   housing: {type: new SimpleSchema({
     onCampus: fields.bool(o),
     preferenceType: fields.preference_type(o),
-    depositPaid: fields.bool(o), 
-    depositDate: fields.date(o), 
+    depositPaid: fields.bool(o),
+    depositDate: fields.date(o),
   }),optional: true},
   orientation:{type: new SimpleSchema ({
-    needsToRsvp: fields.bool(o), 
-    attended: fields.bool(o), 
-    attendedDate: fields.date(o), 
+    needsToRsvp: fields.bool(o),
+    attended: fields.bool(o),
+    attendedDate: fields.date(o),
     registeredDate: fields.date(o)
   }),optional: true},
   textSetting:{type: new SimpleSchema ({
@@ -91,10 +120,10 @@ BrandedUserSchema = new SimpleSchema({
     maxGpa: fields.number({decimal: true, optional: true}),
     satComposite: fields.sat_composite_score(o),
     satMath: fields.sat_score(o),
-    satReading: fields.sat_score(o), 
-    satEssay: fields.sat_essay_score(o), 
-    satAnalysis: fields.sat_essay_score(o), 
-    satWriting: fields.sat_essay_score(o), 
+    satReading: fields.sat_score(o),
+    satEssay: fields.sat_essay_score(o),
+    satAnalysis: fields.sat_essay_score(o),
+    satWriting: fields.sat_essay_score(o),
     actComposite: fields.act_composite_score(o),
     actMath: fields.act_composite_score(o),
     actScience: fields.act_composite_score(o),
@@ -110,10 +139,11 @@ BrandedUserSchema = new SimpleSchema({
     crm: fields.number({min: 0, max: 5, optional: true}),
   }), optional: true},
   intent: {type: new SimpleSchema({
-    intendsToEnroll: fields.bool(o), 
-    intentReceivedDate: fields.date(o), 
+    intendsToEnroll: fields.bool(o),
+    intentReceivedDate: fields.date(o),
     counselorCanContact: fields.bool(o),
   }), optional: true},
+  georgia: GeorgiaSchema,
   _profile: {type: new SimpleSchema({
     description: fields.profile_description(o),
     parent: fields.bool(o),
@@ -160,12 +190,12 @@ BrandedUserSchema = new SimpleSchema({
     secondGroup: fields.bool(o), // internal.secondGroup
     whyNotTexting: fields.string(o), //internal.whyNotTexting
   }), optional: true},
-  _aidLastPush: {type: new SimpleSchema({ // all internal._aidLast 
-    planSubmitFafsa: fields.bool(o), // all internal._aidLast 
-    helpCompletingFafsa: fields.string(o), // all internal._aidLast 
-    planAttendOrientation: fields.bool(o), // all internal._aidLast 
+  _aidLastPush: {type: new SimpleSchema({ // all internal._aidLast
+    planSubmitFafsa: fields.bool(o), // all internal._aidLast
+    helpCompletingFafsa: fields.string(o), // all internal._aidLast
+    planAttendOrientation: fields.bool(o), // all internal._aidLast
     allSetHousing: fields.bool(o), // all internal._aidLast
-    unableToMakePayment: fields.bool(o) // all internal._aidLast 
+    unableToMakePayment: fields.bool(o) // all internal._aidLast
   }), optional: true},
   _finalStudySurveyBot: {type: new SimpleSchema({
     enrollmentHowHard: fields.string(o),
@@ -173,7 +203,7 @@ BrandedUserSchema = new SimpleSchema({
     helpfulInTransition: fields.long_string(o),
     recommendToFriend: fields.long_string(o),
     recommendToSchool: fields.long_string(o),
-    recommendImprovements: fields.long_string(o), 
+    recommendImprovements: fields.long_string(o),
     howToImprove: fields.long_string(o),
     whatElseCanIDo: fields.other_features(o),
     whatElseCanIDoExtended: fields.long_string(o),
@@ -198,26 +228,26 @@ BrandedUserSchema = new SimpleSchema({
     intendsToEnroll: fields.bool(o) // intent.intendsToEnroll /
   }), optional: true},
   _gather: {type: new SimpleSchema({
-    firstName: fields.string(o), 
-    lastName: fields.string(o), 
-    middleInitial: fields.string(o), 
-    email: fields.email(o), 
-    phone: fields.phone_number(o), 
-    dob: fields.date(o), 
+    firstName: fields.string(o),
+    lastName: fields.string(o),
+    middleInitial: fields.string(o),
+    email: fields.email(o),
+    phone: fields.phone_number(o),
+    dob: fields.date(o),
     hsName: fields.string(o),
     hsZip: fields.zip_code(o),
     hsGradYear: fields.expected_graduation_year(o),
     intendedMajor: fields.long_string(o),
-    zip: fields.zip_code(o), 
-    address: fields.string(o), 
+    zip: fields.zip_code(o),
+    address: fields.string(o),
     gpa: fields.number({decimal: true, optional: true}),
     maxGpa: fields.number({decimal: true, optional: true}),
     satComposite: fields.sat_composite_score(o),
     satMath: fields.sat_score(o),
-    satReading: fields.sat_score(o), 
-    satEssay: fields.sat_essay_score(o), 
-    satAnalysis: fields.sat_essay_score(o), 
-    satWriting: fields.sat_essay_score(o), 
+    satReading: fields.sat_score(o),
+    satEssay: fields.sat_essay_score(o),
+    satAnalysis: fields.sat_essay_score(o),
+    satWriting: fields.sat_essay_score(o),
     actComposite: fields.act_composite_score(o),
     actMath: fields.act_composite_score(o),
     actScience: fields.act_composite_score(o),
@@ -249,7 +279,7 @@ BrandedUserSchema = new SimpleSchema({
     blackbox: true,
     optional: true
   },
-  
+
   abGroup: {type: Number, optional: true, max: 1, min: 0, decimal: true},
   importSegmentLabels: {type: [String], optional: true, defaultValue: []}
 });
