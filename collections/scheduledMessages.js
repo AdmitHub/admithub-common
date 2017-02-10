@@ -1,6 +1,7 @@
 ScheduledMessages = new Mongo.Collection("scheduledMessages");
 ScheduledMessages.attachSchema(new SimpleSchema({
     _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
+    createdAt: {type: Date},
     query: {type: String, optional: true},
     collection: {type: String},
     messagingService: {type: String},
