@@ -10,13 +10,13 @@ BrandedColleges.attachSchema(new SimpleSchema({
   dateScholarship: {type: String, optional: true},
   emailPrefix: {type: String, optional: true},
   facebookId: {type: Number, optional: true},
-  filterLink: {type: String, optional: true},
   filterOn: {type: Boolean, optional: true},
   hashtag: {type: String, optional: true}, //include the hash
   intentDeadline: {type: Date, optional: true}, // june 1
   introKnownProspectBotPhoto: {type: String, optional: true, defaultValue: ""},
   linkAcceptAid: {type: String, optional: true},
   linkAdmit: {type: String, optional: true},
+  linkCounselors: {type: String, optional: true},
   linkIncompleteApplication: {type: String, optional: true},
   linkFafsa: {type: String, optional: true},
   linkFinAid: {type: String, optional: true},
