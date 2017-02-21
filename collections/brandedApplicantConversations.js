@@ -7,7 +7,7 @@ BrandedApplicantConversations.attachSchema(new SimpleSchema({
   messagingService: {type: String, optional: true},
   created: {type: Date, optional: true}, // additional createdAt date for ease of query in metabase
   messages: {type: [Object]},
-  handled: {type: Boolean, optional: true, default: false},
+  handled: {type: Boolean, optional: true, defaultValue: false},
   "messages.$.created": {type: Date},
   "messages.$.sender": {type: String, allowedValues: ["student", "college", "admithub"]},
   "messages.$.email": {type: String, optional: true},
