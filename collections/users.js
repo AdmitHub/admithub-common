@@ -115,6 +115,10 @@ UserSchema = new SimpleSchema({
     type: Boolean,
     optional: true
   },
+  "snapshotId": {
+    type: String,
+    optional: true
+  },
   "hardStopReason": {
     type: String,
     allowedValues: ["mistake", "oliTalksTooMuch", "notAStudent", "noHelp", "somethingElse"],
