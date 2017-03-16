@@ -27,7 +27,7 @@ BrandedUserSchema = new SimpleSchema({
   permittedUser: fields.bool(o),
   email: fields.string(o),
   phone: fields.string(o),
-  _previousPhone: {type: String, defaultValue: ""},
+  _previousPhone: fields.string(o),
   withdrawalReason: fields.string(o),
   name: {type: new SimpleSchema({
     first: fields.string(o),
