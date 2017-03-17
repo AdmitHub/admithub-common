@@ -27,7 +27,7 @@ BrandedUserSchema = new SimpleSchema({
   permittedUser: fields.bool(o),
   email: fields.string(o),
   phone: fields.string(o),
-  changedNumber: fields.bool(o), // to indicate changed number through pheonix and from astronomer update
+  _previousPhone: fields.string(o),
   withdrawalReason: fields.string(o),
   name: {type: new SimpleSchema({
     first: fields.string(o),
