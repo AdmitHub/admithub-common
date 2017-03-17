@@ -115,6 +115,10 @@ UserSchema = new SimpleSchema({
     type: Boolean,
     optional: true
   },
+  "snapshotId": {
+    type: String,
+    optional: true
+  },
   "hardStopReason": {
     type: String,
     allowedValues: ["mistake", "oliTalksTooMuch", "notAStudent", "noHelp", "somethingElse"],
@@ -159,7 +163,7 @@ UserSchema = new SimpleSchema({
   },
   "sharing": {type: Boolean, optional: true},
   "telescope": {type: Object, optional: true, blackbox: true},
-  "test": {type: Boolean, defaultValue: false}, // Debugging
+  "test": {type: Boolean, defaultValue: false, optional: true}, // Debugging
   "startInitialSurvey": {type: Boolean, optional: true},
   "resumeWorkflow": {type: Boolean, optional: true},
 
