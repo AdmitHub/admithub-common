@@ -65,69 +65,71 @@ CollegeOfficers.getBestOfficerEmail = function(officers, zip, topic) {
   //if we were provided an email, verify that it's in our database. If it is, use it
   // if not, continue on and do the normal matching
 
-  const trueZip = (zip && zip.length > 5) ? zip.slice(0, 5) : zip
-  var data = zip ? zcta.getCountyByZip(trueZip) || {} : {};
-  var state = data.state;
-  var county = data.county;
+  // const trueZip = (zip && zip.length > 5) ? zip.slice(0, 5) : zip
+  // var data = zip ? zcta.getCountyByZip(trueZip) || {} : {};
+  // var state = data.state;
+  // var county = data.county;
 
-  // 1. Construct a list of assns that match a topic, if given.
-  // 2. Construct a list of assns that match by location: county first; if
-  //    no assns are found, fall back to state.
-  // 3. Try to find an assn that intersects topic and state.  If none found,
-  //    drop the location constraint.
-  // 4. If there is still nothing that matches, go for general contact.
-  // 5. Otherwise undefined.
+  return "damien@admithub.com";
 
-  const sets = [];
-  // topic
-  if (topic) {
-    const topicMatch = _.filter(officers.associatedEmails, function (a) {
-      return _.contains(a.topics, topic);
-    });
+  // // 1. Construct a list of assns that match a topic, if given.
+  // // 2. Construct a list of assns that match by location: county first; if
+  // //    no assns are found, fall back to state.
+  // // 3. Try to find an assn that intersects topic and state.  If none found,
+  // //    drop the location constraint.
+  // // 4. If there is still nothing that matches, go for general contact.
+  // // 5. Otherwise undefined.
 
-    if (topicMatch.length) {
-      sets.push(topicMatch);
-    }
-  }
+  // const sets = [];
+  // // topic
+  // if (topic) {
+  //   const topicMatch = _.filter(officers.associatedEmails, function (a) {
+  //     return _.contains(a.topics, topic);
+  //   });
 
-  // location
-  if (county && state) {
-    const countyMatch = _.filter(officers.associatedEmails, function (a) {
-      return !!_.findWhere(a.counties, {state: state, county: county});
-    });
+  //   if (topicMatch.length) {
+  //     sets.push(topicMatch);
+  //   }
+  // }
 
-    if (countyMatch.length) {
-      sets.push(countyMatch);
-    } else {
-      const stateMatch = _.filter(officers.associatedEmails, function (a) {
-        return _.contains(a.states, state) && !_.findWhere(a.counties, {
-          state: state
-        });
-      });
-      if (stateMatch.length) {
-        sets.push(stateMatch);
-      }
-    }
-  }
+  // // location
+  // if (county && state) {
+  //   const countyMatch = _.filter(officers.associatedEmails, function (a) {
+  //     return !!_.findWhere(a.counties, {state: state, county: county});
+  //   });
 
-  while (sets.length) {
-    // Try to meet each of our criteria.
-    const intersection = _.intersection.apply(_, sets);
-    if (intersection.length) {
-      return intersection[0].email;
-    } else {
-      // We can't meet them all; so drop the right-most criterion, and try again.
-      sets.pop();
-    }
-  }
-  // Nothing matched -- look for general.
-  const general = _.find(officers.associatedEmails, function (a) {
-    return a.general
-  });
+  //   if (countyMatch.length) {
+  //     sets.push(countyMatch);
+  //   } else {
+  //     const stateMatch = _.filter(officers.associatedEmails, function (a) {
+  //       return _.contains(a.states, state) && !_.findWhere(a.counties, {
+  //         state: state
+  //       });
+  //     });
+  //     if (stateMatch.length) {
+  //       sets.push(stateMatch);
+  //     }
+  //   }
+  // }
 
-  if (general) {
-    return general.email;
-  }
+  // while (sets.length) {
+  //   // Try to meet each of our criteria.
+  //   const intersection = _.intersection.apply(_, sets);
+  //   if (intersection.length) {
+  //     return intersection[0].email;
+  //   } else {
+  //     // We can't meet them all; so drop the right-most criterion, and try again.
+  //     sets.pop();
+  //   }
+  // }
+  // // Nothing matched -- look for general.
+  // const general = _.find(officers.associatedEmails, function (a) {
+  //   return a.general
+  // });
 
-  return undefined;
+  // if (general) {
+  //   return general.email;
+  // }
+
+  // return undefined;
 };
