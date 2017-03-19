@@ -19,5 +19,13 @@ ScheduledMessages.attachSchema(new SimpleSchema({
     weekends: {type: Boolean, optional: true},
     paused: {type: Boolean, optional: true},
     batchSize: {type: Number, optional: true},
-    allowCanTextFalse: {type: Boolean, optional: true} // override can text false limitation for opt in wf's
+    allowCanTextFalse: {type: Boolean, optional: true}, // override can text false limitation for opt in wf's
+    completed: { type: Boolean, defaultValue: false},
+    started: { type: Boolean, optional: true },
+    sentDate: {type: Date, optional: true }, 
+    message: {type: String, optional: true},
+    users: {type: [String], optional: true},
+    note: {type: String, optional: true},
+    scheduled: {type: Boolean, optional: true},
+    userSearch: {type: Object, blackbox: true, optional: true}
 }));
