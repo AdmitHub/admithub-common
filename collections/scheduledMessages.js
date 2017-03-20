@@ -27,5 +27,6 @@ ScheduledMessages.attachSchema(new SimpleSchema({
     users: {type: [String], optional: true},
     note: {type: String, optional: true},
     scheduled: {type: Boolean, optional: true},
-    userSearch: {type: Object, blackbox: true, optional: true}
+    userSearch: {type: Object, blackbox: true, optional: true},
+    createdBy: { type: String, optional: true } // the phoenix user who created it
 }));
