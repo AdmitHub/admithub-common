@@ -177,7 +177,9 @@ BrandedUserSchema = new SimpleSchema({
     whyNoCollege: fields.string(o), //internal.whyNoCollege
     whyHere: fields.long_string(o), // internal.whyHere
     goingInstead: fields.long_string(o), // internal.goingInstead
-    howSolid: fields.string(o) //internal.howSolid
+    howSolid: fields.string(o), //internal.howSolid
+    secondChoiceSchool: fields.string(o),
+    secondChoiceState: fields.string(o)
   }), optional: true},
   _orientation: {type: new SimpleSchema({
     best: fields.string(o), // internal.orienation.best
