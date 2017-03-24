@@ -116,7 +116,7 @@ UserSchema = new SimpleSchema({
     optional: true
   },
   "snapshotId": {
-    type: String,
+    type: [String],
     optional: true
   },
   "hardStopReason": {
