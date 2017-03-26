@@ -164,7 +164,7 @@ UserSchema = new SimpleSchema({
   "sharing": {type: Boolean, optional: true},
   "telescope": {type: Object, optional: true, blackbox: true},
   "test": {type: Boolean, defaultValue: false, optional: true}, // Debugging
-  "testuser": {type: Boolean, optional: true},
+  "testUser": {type: Boolean, optional: true},
   "startInitialSurvey": {type: Boolean, optional: true},
   "resumeWorkflow": {type: Boolean, optional: true},
 
