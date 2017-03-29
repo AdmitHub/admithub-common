@@ -57,6 +57,10 @@ UserSchema = new SimpleSchema({
     "previousPhone": {type: String, optional: true},
     "passiveOptOut": {type: Boolean, optional: true}
   }),optional: true},
+  "snapshotReference": { type: new SimpleSchema({
+    id: {type: String, optional: true},
+    workflowName: {type: String, optional: true}
+  }), optional: true},
   "profile.phone": {
     type: String,
     min: 10,
@@ -113,10 +117,6 @@ UserSchema = new SimpleSchema({
   },
   "smsHardStopped": {
     type: Boolean,
-    optional: true
-  },
-  "snapshotId": {
-    type: [String],
     optional: true
   },
   "hardStopReason": {
