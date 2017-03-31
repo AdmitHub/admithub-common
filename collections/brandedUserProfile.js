@@ -170,7 +170,7 @@ BrandedUserSchema = new SimpleSchema({
       reasonCode: fields.number(o),
       secondChoiceSchool: fields.string(o),
       secondChoiceState: fields.string(o),
-    }), optional: true}
+    }), optional: true},
     date: fields.date(o), //internal.intentDate
     followUpIntent: fields.attending(o), // internal./followUpIntent
     goingInstead: fields.long_string(o), // internal.goingInstead
@@ -180,7 +180,7 @@ BrandedUserSchema = new SimpleSchema({
       firstChoiceSchool: fields.string(o),
       firstChoiceState: fields.string(o),
       reasonCode: fields.number(o),
-    }), optional: true}
+    }), optional: true},
     unsure: fields.bool(o), // internal.intentUnsure todo - mark this in unsure questions
     whyHere: fields.long_string(o), // internal.whyHere
     whyNoCollege: fields.string(o), //internal.whyNoCollege
