@@ -165,19 +165,29 @@ BrandedUserSchema = new SimpleSchema({
     bringCar: fields.bool(o), // _internal.needsParking
   }), optional: true},
   _intent: {type: new SimpleSchema({
-    intendsToEnroll: fields.bool(o),
-    whyUnsure: fields.string(o), //was internal.whyUnsure
-    whyUnsureExtended: fields.long_string(o), //was internal.whyUnsureExtended
-    whyNotAttending: fields.long_string(o), // internal.whyNotAttending
-    whyNotAttendingExtended: fields.long_string(o), //internal.whyNotAttendingExtended
+    alreadySubmitted: fields.bool(o), //new
+    coming: {type: new SimpleSchema({
+      reasonCode: fields.number(o),
+      secondChoiceSchool: fields.string(o),
+      secondChoiceState: fields.string(o),
+    }), optional: true},
     date: fields.date(o), //internal.intentDate
     followUpIntent: fields.attending(o), // internal./followUpIntent
-    unsure: fields.bool(o), // internal.intentUnsure todo - mark this in unsure questions
-    alreadySubmitted: fields.bool(o), //new
-    whyNoCollege: fields.string(o), //internal.whyNoCollege
-    whyHere: fields.long_string(o), // internal.whyHere
     goingInstead: fields.long_string(o), // internal.goingInstead
-    howSolid: fields.string(o) //internal.howSolid
+    howSolid: fields.string(o), //internal.howSolid
+    intendsToEnroll: fields.bool(o),
+    notComing: {type: new SimpleSchema({
+      firstChoiceSchool: fields.string(o),
+      firstChoiceState: fields.string(o),
+      reasonCode: fields.number(o),
+    }), optional: true},
+    unsure: fields.bool(o), // internal.intentUnsure todo - mark this in unsure questions
+    whyHere: fields.long_string(o), // internal.whyHere
+    whyNoCollege: fields.string(o), //internal.whyNoCollege
+    whyNotAttending: fields.long_string(o), // internal.whyNotAttending
+    whyNotAttendingExtended: fields.long_string(o), //internal.whyNotAttendingExtended
+    whyUnsure: fields.string(o), //was internal.whyUnsure
+    whyUnsureExtended: fields.long_string(o), //was internal.whyUnsureExtended
   }), optional: true},
   _orientation: {type: new SimpleSchema({
     best: fields.string(o), // internal.orienation.best
