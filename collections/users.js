@@ -179,7 +179,9 @@ UserSchema = new SimpleSchema({
 
   // For admithub users (students)
   "schools": {type: [String], optional: true, defaultValue: []},
-  "importSegmentLabels": {type: [String], optional: true, defaultValue: []}
+  "importSegmentLabels": {type: [String], optional: true, defaultValue: []},
+  "lastContacted": { type: Date, optional: true },
+  "lastMessageId": { type: String, optional: true }
 });
 
 Meteor.users.before.insert(function(userId, doc) {
