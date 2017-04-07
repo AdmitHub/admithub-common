@@ -39,3 +39,8 @@ if (Meteor.isServer) {
     }
   });
 }
+SmsLogs.after.insert((smsLogId, doc) => {
+  if(doc.body.length > 0 && doc.userId) {
+    return Users.update({_id: doc.userId }, { $set: { lastContacted: new Date(), lastMessageId: smsLogId } });
+  }
+});
