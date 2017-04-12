@@ -1,7 +1,7 @@
 SmsAnalytics = new Mongo.Collection("smslogAnalytics");
 SmsAnalytics.attachSchema(new SimpleSchema({
-  _id: { type: Object, blackbox: true },
-  date: { type: Date },
+  _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
+   date: { type: Date },
   week: {type: Number },
   year: { type: Number },
   messagingService: { type: String },
