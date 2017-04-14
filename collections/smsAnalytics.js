@@ -4,7 +4,7 @@ SmsAnalytics.attachSchema(new SimpleSchema({
    date: { type: Date },
   week: {type: Number },
   year: { type: Number },
-  messagingService: { type: String },
+  messagingService: { type: String, optional: true },
   sent: { type: Number },
   received: { type: Number },
   sentUnique: { type: Number, optional: true},
