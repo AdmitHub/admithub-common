@@ -1,4 +1,4 @@
-TwilioAccounts = new Mongo.Collection("twilioAccounts");
+TwilioAccounts = new Mongo.Collection('twilioAccounts')
 TwilioAccounts.attachSchema(new SimpleSchema({
   _id: {
     type: String,
@@ -11,4 +11,4 @@ TwilioAccounts.attachSchema(new SimpleSchema({
   authToken: {
     type: String
   }
-}));
+}))

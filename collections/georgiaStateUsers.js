@@ -1,12 +1,12 @@
-var o = {optional: true};
+var o = {optional: true}
 
 GeorgiaStateSchema = new SimpleSchema({
   userId: fields.string(),
-  "_id": {optional: true, type: null},
-  crmId: fields.string({optional: false}), //gsu unique id
+  '_id': {optional: true, type: null},
+  crmId: fields.string({optional: false}), // gsu unique id
   created: fields.date(),
   collegeName: fields.string(o),
-  enrollmentId: fields.string(o), //pantherId for gsu
+  enrollmentId: fields.string(o), // pantherId for gsu
   schoolEmail: fields.email(o),
   entryYear: fields.number(o),
   entryTerm: fields.string(o),
@@ -19,7 +19,7 @@ GeorgiaStateSchema = new SimpleSchema({
     last: fields.string(o),
     middleName: fields.string(o),
     full: fields.string(o),
-    nickName: fields.string(o),
+    nickName: fields.string(o)
   }), optional: true},
   dob: fields.date(o),
   location: {type: new SimpleSchema({
@@ -30,11 +30,11 @@ GeorgiaStateSchema = new SimpleSchema({
     county: fields.string(o),
     state: fields.state(o),
     zip: fields.zip_code(_.extend(o)),
-    country: fields.string(o),
+    country: fields.string(o)
   }), optional: true},
   inStateStudent: fields.bool(o),
   application: {type: new SimpleSchema({
-    status: fields.status(o), 
+    status: fields.status(o),
     statusExtended: fields.string(o),
     receivedHSTranscript: fields.bool(o)
   }), optional: true},
@@ -47,11 +47,11 @@ GeorgiaStateSchema = new SimpleSchema({
     hsName: fields.string(o),
     hsZip: fields.zip_code(o),
     hsGradYear: fields.expected_graduation_year(o),
-    intendedMajor: fields.long_string(o),
+    intendedMajor: fields.long_string(o)
   }), optional: true},
   finAid: {type: new SimpleSchema({
-    fafsaReceived: fields.bool(o), 
-    finAidComplete: fields.bool(o), 
+    fafsaReceived: fields.bool(o),
+    finAidComplete: fields.bool(o),
     fafsaComplete: fields.bool(o),
     finAidInterest: fields.bool(o),
     finAidInterestInternal: fields.bool(o),
@@ -60,36 +60,36 @@ GeorgiaStateSchema = new SimpleSchema({
     missingEntryLoan: fields.bool(o),
     missingPromissoryLoan: fields.bool(o),
     acceptedOfferInternal: fields.bool(o),
-    offered: fields.bool(o),
-  }),optional: true},
+    offered: fields.bool(o)
+  }), optional: true},
   housing: {type: new SimpleSchema({
     onCampus: fields.bool(o),
     preferenceType: fields.preference_type(o),
-    depositPaid: fields.bool(o), 
-    depositDate: fields.date(o), 
-    internalResponse: fields.string(o),
-  }),optional: true},
-  orientation:{type: new SimpleSchema ({
-    needsToRsvp: fields.bool(o), 
-    attended: fields.bool(o), 
-    attendedDate: fields.date(o), 
+    depositPaid: fields.bool(o),
+    depositDate: fields.date(o),
+    internalResponse: fields.string(o)
+  }), optional: true},
+  orientation: {type: new SimpleSchema({
+    needsToRsvp: fields.bool(o),
+    attended: fields.bool(o),
+    attendedDate: fields.date(o),
     registeredDate: fields.date(o),
     registeredYetInternal: fields.bool(o)
-  }),optional: true},
-  textSetting:{type: new SimpleSchema ({
+  }), optional: true},
+  textSetting: {type: new SimpleSchema({
     canText: fields.bool(o),
     wrongNumber: fields.bool(o), // moved to user doc
     newPhone: fields.phone_number(o)
   }), optional: true},
-  tests: {type: new SimpleSchema ({
+  tests: {type: new SimpleSchema({
     gpa: fields.number({decimal: true, optional: true}),
     maxGpa: fields.number({decimal: true, optional: true}),
     satComposite: fields.sat_composite_score(o),
     satMath: fields.sat_score(o),
-    satReading: fields.sat_score(o), 
-    satEssay: fields.sat_essay_score(o), 
-    satAnalysis: fields.sat_essay_score(o), 
-    satWriting: fields.sat_essay_score(o), 
+    satReading: fields.sat_score(o),
+    satEssay: fields.sat_essay_score(o),
+    satAnalysis: fields.sat_essay_score(o),
+    satWriting: fields.sat_essay_score(o),
     actComposite: fields.act_composite_score(o),
     actMath: fields.act_composite_score(o),
     actScience: fields.act_composite_score(o),
@@ -99,28 +99,28 @@ GeorgiaStateSchema = new SimpleSchema({
     actIdeasAnalysis: fields.act_composite_score(o),
     actDevAndSupport: fields.act_composite_score(o),
     actOrganization: fields.act_composite_score(o),
-    actLangaugeConvention: fields.act_composite_score(o),
-  }),optional: true},
+    actLangaugeConvention: fields.act_composite_score(o)
+  }), optional: true},
   interest: {type: new SimpleSchema({
     crm: fields.number({min: 0, max: 5, optional: true}),
-    admithub: fields.number({min: 0, max: 5, optional: true}),
+    admithub: fields.number({min: 0, max: 5, optional: true})
   }), optional: true},
   intent: {type: new SimpleSchema({
-    intendsToEnroll: fields.bool(o), 
+    intendsToEnroll: fields.bool(o),
     intendsToEnrollInternal: fields.bool(o),
-    intentReceivedDate: fields.date(o), 
+    intentReceivedDate: fields.date(o),
     whyNotAttending: fields.string(o),
     whyNotAttendingExtended: {type: String, max: 700, optional: true},
     whyUnsureExtended: {type: String, max: 700, optional: true},
     counselorCanContact: fields.bool(o),
     whyUnsure: fields.string(o),
     changedMind: fields.bool(o),
-    followUpInternal: fields.attending(o), // second time around asking intent
+    followUpInternal: fields.attending(o) // second time around asking intent
   }), optional: true},
   _profile: {type: new SimpleSchema({
     description: fields.profile_description(o),
     parent: fields.bool(o),
-    plannedApplication: fields.planned_application(o),
+    plannedApplication: fields.planned_application(o)
   }), optional: true},
   _internal: {type: new SimpleSchema({
     gapInAid: fields.bool(o),
@@ -147,7 +147,7 @@ GeorgiaStateSchema = new SimpleSchema({
     whyHere: fields.long_string(o),
     howSolid: fields.string(o),
     whyNoCollege: fields.string(o),
-    needHelpPaying: fields.bool(o),
+    needHelpPaying: fields.bool(o)
     // studentBelonging: {type: new SimpleSchema({
     //   excitementLevel: fields.number(o),
     //   intelligenceChangeable: fields.number(o),
@@ -205,7 +205,7 @@ GeorgiaStateSchema = new SimpleSchema({
     helpfulInTransition: fields.long_string(o),
     recommendToFriend: fields.long_string(o),
     recommendToSchool: fields.long_string(o),
-    recommendImprovements: fields.long_string(o), 
+    recommendImprovements: fields.long_string(o),
     howToImprove: fields.long_string(o),
     whatElseCanIDo: fields.other_features(o),
     whatElseCanIDoExtended: fields.long_string(o),
@@ -213,7 +213,7 @@ GeorgiaStateSchema = new SimpleSchema({
     whyNoResponse: fields.long_string(o),
     didYouRead: fields.bool(o),
     whyNoText: fields.long_string(o)
-  }),optional: true},
+  }), optional: true},
   supplemental: {type: new SimpleSchema({
     first: fields.string(o),
     second: fields.string(o),
@@ -246,10 +246,10 @@ GeorgiaStateSchema = new SimpleSchema({
     maxGpa: fields.number({decimal: true, optional: true}),
     satComposite: fields.sat_composite_score(o),
     satMath: fields.sat_score(o),
-    satReading: fields.sat_score(o), 
-    satEssay: fields.sat_essay_score(o), 
-    satAnalysis: fields.sat_essay_score(o), 
-    satWriting: fields.sat_essay_score(o), 
+    satReading: fields.sat_score(o),
+    satEssay: fields.sat_essay_score(o),
+    satAnalysis: fields.sat_essay_score(o),
+    satWriting: fields.sat_essay_score(o),
     actComposite: fields.act_composite_score(o),
     actMath: fields.act_composite_score(o),
     actScience: fields.act_composite_score(o),
@@ -259,7 +259,7 @@ GeorgiaStateSchema = new SimpleSchema({
     actIdeasAnalysis: fields.act_composite_score(o),
     actDevAndSupport: fields.act_composite_score(o),
     actOrganization: fields.act_composite_score(o),
-    actLangaugeConvention: fields.act_composite_score(o),
+    actLangaugeConvention: fields.act_composite_score(o)
   }), optional: true},
   _oneOff: {
     type: Object,
@@ -267,7 +267,7 @@ GeorgiaStateSchema = new SimpleSchema({
     optional: true
   },
   _responseBlackBox: {
-     type: Object,
+    type: Object,
     blackbox: true,
     optional: true
   },
@@ -281,11 +281,10 @@ GeorgiaStateSchema = new SimpleSchema({
     blackbox: true,
     optional: true
   },
-  
+
   abGroup: {type: Number, optional: true, max: 1, min: 0, decimal: true}
-});
+})
 
-GeorgiaStateUsers = new Mongo.Collection('georgiaStateUsers');
-GeorgiaStateUsers.attachSchema(GeorgiaStateSchema);
-
+GeorgiaStateUsers = new Mongo.Collection('georgiaStateUsers')
+GeorgiaStateUsers.attachSchema(GeorgiaStateSchema)
 

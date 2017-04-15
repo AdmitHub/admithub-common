@@ -1,4 +1,4 @@
-PendingEventReports = new Mongo.Collection("pendingeventreports");
+PendingEventReports = new Mongo.Collection('pendingeventreports')
 PendingEventReports.attachSchema(new SimpleSchema({
   collegeId: {
     type: String
@@ -9,4 +9,4 @@ PendingEventReports.attachSchema(new SimpleSchema({
   createdAt: {
     type: Date
   }
-}));
+}))

@@ -1,4 +1,4 @@
-UnverifiedEmailMessages = new Mongo.Collection("unverifiedEmailMessages");
+UnverifiedEmailMessages = new Mongo.Collection('unverifiedEmailMessages')
 UnverifiedEmailMessages.attachSchema(new SimpleSchema({
   _id: {
     type: String,
@@ -26,4 +26,4 @@ UnverifiedEmailMessages.attachSchema(new SimpleSchema({
     type: Date,
     optional: true
   }
-}));
+}))

@@ -1,4 +1,4 @@
-BrandedColleges = new Mongo.Collection("brandedcolleges");
+BrandedColleges = new Mongo.Collection('brandedcolleges')
 BrandedColleges.attachSchema(new SimpleSchema({
   _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   abbr: {type: String, optional: true}, // GSU
@@ -11,9 +11,9 @@ BrandedColleges.attachSchema(new SimpleSchema({
   emailPrefix: {type: String, optional: true},
   facebookId: {type: Number, optional: true},
   filterOn: {type: Boolean, optional: true},
-  hashtag: {type: String, optional: true}, //include the hash
+  hashtag: {type: String, optional: true}, // include the hash
   intentDeadline: {type: Date, optional: true}, // june 1
-  introKnownProspectBotPhoto: {type: String, optional: true, defaultValue: ""},
+  introKnownProspectBotPhoto: {type: String, optional: true, defaultValue: ''},
   linkAcceptAid: {type: String, optional: true},
   linkAdmit: {type: String, optional: true},
   linkCounselors: {type: String, optional: true},
@@ -32,6 +32,6 @@ BrandedColleges.attachSchema(new SimpleSchema({
   name: {type: String},
   oliName: {type: String},
   phoneFinAid: {type: String, optional: true},
-  tuitionDueDate: {type: Date, optional: true}, //8 -15
+  tuitionDueDate: {type: Date, optional: true}, // 8 -15
   disabledFeatures: {type: [String], defaultValue: []}
-}));
+}))
