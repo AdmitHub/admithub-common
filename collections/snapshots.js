@@ -1,4 +1,3 @@
-
 Snapshots = new Mongo.Collection("snapshots");
 Snapshots.attachSchema(new SimpleSchema({
    _id: {type: String, regEx: SimpleSchema.RegEx.Id},
