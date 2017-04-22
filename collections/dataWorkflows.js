@@ -1,7 +1,7 @@
 Dialogs = new Mongo.Collection('dataWorkflows')
 
 Dialogs.attachSchema(new SimpleSchema({
-  '_id': {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
+  '_id': {type: String, optional: true},
   'name': {type: String, optional: true},
   'humanName': {type: String, optional: true},
   'description': {type: String, optional: true},
@@ -16,12 +16,12 @@ Dialogs.attachSchema(new SimpleSchema({
 States = new Mongo.Collection('states')
 
 States.attachSchema(new SimpleSchema({
-  '_id': {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
+  '_id': {type: String, optional: true},
   'name': {type: String, optional: true},
   'promptType': {type: String, optional: false},
   'prompt': {type: String, optional: true},
   'skip': {type: Object, optional: true},
-  'parentDialogue': {type: String, optional: false},
+  'parentDialog': {type: String, optional: false},
   'nextState': {type: Object, blackbox: true}
 }))
 
