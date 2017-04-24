@@ -22,6 +22,18 @@ States.attachSchema(new SimpleSchema({
   'prompt': {type: String, optional: true},
   'skip': {type: Object, optional: true},
   'parentDialog': {type: String, optional: false},
-  'nextState': {type: Object, blackbox: true}
+  'nextState': {type: Object, blackbox: true},
+  'skip': {type: Object, blackbox: true, optional: true}
+}))
+
+MessageLogs = new Mongo.Collection('messageLogs')
+
+MessageLogs.attachSchema(new SimpleSchema({
+  '_id': {type: String},
+  'media': {type: String, optional: true},
+  'message': {type: String, optional: true},
+  'incoming': {type: Boolean, optional: true},
+  'userNumber': {type: String, optional: true},
+  'createdAt': {type: Date},
 }))
 

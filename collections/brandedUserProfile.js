@@ -292,7 +292,7 @@ BrandedUserSchema = new SimpleSchema({
     blackbox: true,
     optional: true
   },
-  _currentState: {type: String, optional: true},
+  _dialog: {type: Object, blackbox: true, optional: true},
   abGroup: {type: Number, optional: true, max: 1, min: 0, decimal: true},
   importSegmentLabels: {type: [String], optional: true, defaultValue: []}
 })
