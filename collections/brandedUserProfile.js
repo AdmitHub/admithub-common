@@ -272,6 +272,11 @@ BrandedUserSchema = new SimpleSchema({
     actOrganization: fields.act_composite_score(o),
     actLangaugeConvention: fields.act_composite_score(o)
   }), optional: true},
+  _contactSettings: {type: new SimpleSchema({
+    permittedUser: fields.bool(o),
+    contacted: fields.bool(o),
+    finished: fields.bool(o)
+  }), optional: true},
   _oneOff: {
     type: Object,
     blackbox: true,

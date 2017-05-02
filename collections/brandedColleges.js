@@ -33,5 +33,14 @@ BrandedColleges.attachSchema(new SimpleSchema({
   oliName: {type: String},
   phoneFinAid: {type: String, optional: true},
   tuitionDueDate: {type: Date, optional: true}, // 8 -15
-  disabledFeatures: {type: [String], defaultValue: []}
+  disabledFeatures: {type: [String], defaultValue: []},
+  dialogSettings: {type: new SimpleSchema({
+    unknownStudentDialogBotOn: {type: String, optional: true},
+    unknownStudentDialogBotOff: {type: String, optional: true},
+    knownNonContactedStudentDialog: {type: String, optional: true},
+    currentUserDialog: {type: String, optional: true},
+    botOffDialog: {type: String, optional: true},
+    botOffNoDialog: {type: Boolean, optional: true},
+    finishedConversationDialog: {type: String, optional: true}
+  }), optional: true}
 }))
