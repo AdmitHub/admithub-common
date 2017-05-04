@@ -57,6 +57,10 @@ UserSchema = new SimpleSchema({
     "previousPhone": {type: String, optional: true},
     "passiveOptOut": {type: Boolean, optional: true}
   }),optional: true},
+  "snapshotReference": { type: new SimpleSchema({
+    id: {type: String, optional: true},
+    workflowName: {type: String, optional: true}
+  }), optional: true},
   "profile.phone": {
     type: String,
     min: 10,
@@ -115,10 +119,6 @@ UserSchema = new SimpleSchema({
     type: Boolean,
     optional: true
   },
-  "snapshotId": {
-    type: String,
-    optional: true
-  },
   "hardStopReason": {
     type: String,
     allowedValues: ["mistake", "oliTalksTooMuch", "notAStudent", "noHelp", "somethingElse"],
@@ -164,6 +164,7 @@ UserSchema = new SimpleSchema({
   "sharing": {type: Boolean, optional: true},
   "telescope": {type: Object, optional: true, blackbox: true},
   "test": {type: Boolean, defaultValue: false, optional: true}, // Debugging
+  "testUser": {type: Boolean, optional: true},
   "startInitialSurvey": {type: Boolean, optional: true},
   "resumeWorkflow": {type: Boolean, optional: true},
 
@@ -178,7 +179,9 @@ UserSchema = new SimpleSchema({
 
   // For admithub users (students)
   "schools": {type: [String], optional: true, defaultValue: []},
-  "importSegmentLabels": {type: [String], optional: true, defaultValue: []}
+  "importSegmentLabels": {type: [String], optional: true, defaultValue: []},
+  "lastContacted": { type: Date, optional: true },
+  "lastMessageId": { type: String, optional: true }
 });
 
 Meteor.users.before.insert(function(userId, doc) {
