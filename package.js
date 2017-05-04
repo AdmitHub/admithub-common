@@ -68,6 +68,8 @@ Package.onUse(function(api) {
   api.addFiles('collections/workflowResponses.js');
   api.addFiles('collections/smsAnalytics.js');
   api.addFiles('collections/smsHeatmapAnalytics.js');
+  api.addFiles('collections/overallReachAnalytics.js');
+
   api.addFiles('server/collegesInMemory.js', 'server');
   api.addFiles('server/indexes.js', 'server');
   api.addFiles('server/methods.js', 'server');
@@ -120,6 +122,7 @@ Package.onUse(function(api) {
     'BrandedUserProfiles',
     'WorkflowResponses',
     'SmsHeatmapAnalytics',
-    'SmsAnalytics'
+    'SmsAnalytics',
+    'OverallReachAnalytics'
   ]);
 });
