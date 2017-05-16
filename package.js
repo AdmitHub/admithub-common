@@ -1,18 +1,17 @@
 Package.describe({
-  name: "admithub:admithub-common",
-  summary: "Common styles, templates, and libraries for AdmitHub sites",
-  version: "0.1.2",
-  git: "https://github.com/AdmitHub/admithub-common.git"
-});
+  name: 'admithub:admithub-common',
+  summary: 'Common styles, templates, and libraries for AdmitHub sites',
+  version: '0.1.2',
+  git: 'https://github.com/AdmitHub/admithub-common.git'
+})
 
 Npm.depends({
   'zipcodes': '1.1.1',
   'twilio': '2.1.0',
   'us-zcta-counties': '0.0.2'
-});
+})
 
-Package.onUse(function(api) {
-
+Package.onUse(function (api) {
   api.use([
     'accounts-base',
     'stylus',
@@ -25,9 +24,9 @@ Package.onUse(function(api) {
     'aldeed:autoform@5.5.1',
     'matb33:collection-hooks@0.8.0',
     'meteorhacks:npm'
-  ]);
+  ])
 
-  api.addFiles('lib/ui.js', 'client');
+  api.addFiles('lib/ui.js', 'client')
 
   api.addFiles('lib/_fields.js');
   api.addFiles('lib/helpers.js');
@@ -69,7 +68,6 @@ Package.onUse(function(api) {
   api.addFiles('collections/smsAnalytics.js');
   api.addFiles('collections/smsHeatmapAnalytics.js');
   api.addFiles('collections/overallReachAnalytics.js');
-
   api.addFiles('server/collegesInMemory.js', 'server');
   api.addFiles('server/indexes.js', 'server');
   api.addFiles('server/methods.js', 'server');
@@ -120,9 +118,15 @@ Package.onUse(function(api) {
     'WorkflowScripts',
     'TwilioAccounts',
     'BrandedUserProfiles',
+<<<<<<< HEAD
     'WorkflowResponses',
     'SmsHeatmapAnalytics',
     'SmsAnalytics',
     'OverallReachAnalytics'
   ]);
 });
+=======
+    'WorkflowResponses'
+  ])
+})
+>>>>>>> bcc7477766446a6d3d606f761e885490763fbef6

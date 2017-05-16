@@ -1,6 +1,6 @@
 Snapshots = new Mongo.Collection("snapshots");
 Snapshots.attachSchema(new SimpleSchema({
-   _id: {type: String, regEx: SimpleSchema.RegEx.Id},
+  _id: {type: String, regEx: SimpleSchema.RegEx.Id},
   createdAt: {type: Date},
   brandedUserProfile: {type: String, optional: true},
   body: {type: String, optional: true},
@@ -12,5 +12,5 @@ Snapshots.attachSchema(new SimpleSchema({
   url: {type: String, optional: true},
   user: {type: String, optional: true},
   userId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
-  workflow: {type: String, optional: true},
-}));
+  workflow: {type: String, optional: true}
+}))

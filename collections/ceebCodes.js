@@ -1,4 +1,4 @@
-CeebCodes = new Mongo.Collection("ceebcodes");
+CeebCodes = new Mongo.Collection('ceebcodes')
 CeebCodes.attachSchema(new SimpleSchema({
   _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   ceeb: {
@@ -13,19 +13,19 @@ CeebCodes.attachSchema(new SimpleSchema({
   highschool: {
     type: String
   }
-}));
+}))
 
-CeebCodes.findCeebCode = function(city, state, highschool) {
+CeebCodes.findCeebCode = function (city, state, highschool) {
   return CeebCodes.findOne({
     $text: {
-      $search: [state, city, highschool].join(" ")
+      $search: [state, city, highschool].join(' ')
     }
   }, {
     fields: {
-      score: {$meta: "textScore"}
+      score: {$meta: 'textScore'}
     },
     sort: {
-      score: {$meta: "textScore"}
+      score: {$meta: 'textScore'}
     }
-  });
-};
+  })
+}

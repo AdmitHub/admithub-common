@@ -1,4 +1,4 @@
-Testimonials = new Mongo.Collection("testimonials");
+Testimonials = new Mongo.Collection('testimonials')
 Testimonials.attachSchema(new SimpleSchema({
   quote: {
     type: String,
@@ -24,4 +24,4 @@ Testimonials.attachSchema(new SimpleSchema({
     label: 'Order',
     optional: false
   }
-}));
+}))

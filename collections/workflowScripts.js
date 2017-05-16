@@ -1,4 +1,4 @@
-WorkflowScripts = new Mongo.Collection("workflowScripts");
+WorkflowScripts = new Mongo.Collection('workflowScripts')
 WorkflowScripts.attachSchema(new SimpleSchema({
   workflow: {type: String},
   scripts: {type: [
@@ -14,4 +14,4 @@ WorkflowScripts.attachSchema(new SimpleSchema({
     })
   ]},
   description: {type: String}
-}));
+}))
