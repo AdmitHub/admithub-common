@@ -18,7 +18,7 @@ Package.onUse(function(api) {
     'stylus',
     'templating',
     'underscore',
-
+    'ecmascript',
     'admithub:dot-get@1.0.0',
     'aldeed:simple-schema@1.3.3',
     'aldeed:collection2@2.5.0',
