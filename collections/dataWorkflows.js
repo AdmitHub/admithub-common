@@ -22,8 +22,12 @@ States.attachSchema(new SimpleSchema({
   'prompt': {type: String, optional: true},
   'skip': {type: Object, optional: true},
   'parentDialog': {type: String, optional: false},
-  'nextState': {type: Object, blackbox: true},
-  'skip': {type: Object, blackbox: true, optional: true}
+  'nextStates': {type: Object, blackbox: true},
+  'skip': {type: Object, blackbox: true, optional: true},
+  'range': {type: new SimpleSchema({
+    min: {type: Number, optional: false},
+    max: {type: Number, optional: false}
+  }), optional: true}
 }))
 
 MessageLogs = new Mongo.Collection('messageLogs')
