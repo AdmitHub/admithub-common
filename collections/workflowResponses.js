@@ -9,7 +9,7 @@ WorkflowResponses.attachSchema(new SimpleSchema({
   workflow: fields.string(),
   step: fields.string(),
   messagingService: fields.string(),
-  scheduledMessageId: fields.string(),
+  scheduledMessageId: fields.string({optional: true}),
   response: {
     type: Object,
     blackbox: true
