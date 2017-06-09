@@ -4,4 +4,5 @@ OverallReachAnalytics.attachSchema(new SimpleSchema({
   messagingService: { type: String, optional: true },
   usersReached: { type: Number },
   date: { type: Date },
+  updatedAt: {type: Date}
 }))
