@@ -55,7 +55,8 @@ UserSchema = new SimpleSchema({
     "nonWorkingNumber": {type: Boolean, optional: true},
     "nonWorkingNumberCode": {type: String, optional: true},
     "previousPhone": {type: String, optional: true},
-    "passiveOptOut": {type: Boolean, optional: true}
+    "passiveOptOut": {type: Boolean, optional: true},
+    "carrier": {type: String, optional: true}
   }),optional: true},
   "snapshotReference": { type: new SimpleSchema({
     id: {type: String, optional: true},
