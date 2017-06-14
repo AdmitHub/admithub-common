@@ -23,5 +23,7 @@ Workflows.attachSchema(new SimpleSchema({
       "message": { type: String },
       "after": { type: Number }
     })
-  }
+  },
+  "inputContexts": { type: Array, optional: true, defaultValue: [] },
+  "inputContexts.$": { type: String, optional: true,}
 }));
