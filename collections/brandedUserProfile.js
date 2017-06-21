@@ -27,6 +27,7 @@ BrandedUserSchema = new SimpleSchema({
   permittedUser: fields.bool(o),
   email: fields.string(o),
   phone: fields.string(o),
+  _facebookId: fields.string(o),
   _phoneToCheck: fields.string(o),
   _knownUser: {type: Boolean, optional: true},
   withdrawalReason: fields.string(o),
