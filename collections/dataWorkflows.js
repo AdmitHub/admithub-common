@@ -36,7 +36,7 @@ MessageLogs.attachSchema(new SimpleSchema({
   '_id': {type: String},
   'media': {type: String, optional: true},
   'message': {type: String, optional: true},
-  'incoming': {type: Boolean, optional: true},
+  'type': {type: String, optional: true},
   'userNumber': {type: String, optional: true},
   'createdAt': {type: Date},
 }))
