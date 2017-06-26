@@ -300,7 +300,8 @@ BrandedUserSchema = new SimpleSchema({
   },
   _dialog: {type: Object, blackbox: true, optional: true},
   abGroup: {type: Number, optional: true, max: 1, min: 0, decimal: true},
-  importSegmentLabels: {type: [String], optional: true, defaultValue: []}
+  importSegmentLabels: {type: [String], optional: true, defaultValue: []},
+  _facebookId: {type: String, optional: true}
 })
 
 BrandedUserProfiles = new Mongo.Collection('brandedUserProfiles')

@@ -38,6 +38,7 @@ MessageLogs.attachSchema(new SimpleSchema({
   'message': {type: String, optional: true},
   'type': {type: String, optional: true},
   'userNumber': {type: String, optional: true},
+  'facebookId': {type: String, optional: true},
   'createdAt': {type: Date},
 }))
 
