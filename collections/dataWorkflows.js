@@ -11,6 +11,7 @@ Dialogs.attachSchema(new SimpleSchema({
   'sentToUsers': {type: Boolean, optional: true},
   'initialState': {type: String , optional: false},
   'states': {type: [String], optional: true},
+  'allowOpeningQuestion': {type: Boolean, optional: true}
 }))
 
 States = new Mongo.Collection('states')
@@ -42,3 +43,12 @@ MessageLogs.attachSchema(new SimpleSchema({
   'createdAt': {type: Date},
 }))
 
+Validations = new Mongo.Collection('validations')
+
+Validations.attachSchema(new SimpleSchema({
+  '_id': {type: String},
+  'validationNumber': {type: String},
+  'created': {type: Date},
+  'userId': {type: String},
+  'validated': {type: Boolean, optional: true}
+}))
