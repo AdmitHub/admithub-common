@@ -34,5 +34,16 @@ BrandedColleges.attachSchema(new SimpleSchema({
   promptFilter: {type: String, optional: true},
   phoneFinAid: {type: String, optional: true},
   tuitionDueDate: {type: Date, optional: true}, //8 -15
-  disabledFeatures: {type: [String], defaultValue: []}
+  disabledFeatures: {type: [String], defaultValue: []},
+  admissionsPhone: { type: String, optional: true },
+  admissionsAddress: { type: String, optional: true },
+  counselors: { type: [Object] },
+  'counselors.$.name': { type: String },
+  'counselors.$.phone': { type: String },
+  'counselors.$.expertise': { type: [String] },
+  'counselors.$.regions': { type: [String] },
+  departments: { type: [Object] },
+  'departments.$.name': { type: String },
+  'departments.$.phone': { type: String },
+  'departments.$.address': { type: String }
 }));
