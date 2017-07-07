@@ -27,6 +27,7 @@ CollegeOfficers.attachSchema(new SimpleSchema({
   },
   "associatedEmails.$.email": {type: String, optional: true},
   "associatedEmails.$.name": {type: String, optional: true},
+  "assocaitedEmails.$.office": {type: String, optional: true},
   "associatedEmails.$.general": {type: Boolean, optional: true},
   "associatedEmails.$.topics": {type: [String], optional: true},
   "associatedEmails.$.counties": {type: [Object], optional: true},
