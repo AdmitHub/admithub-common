@@ -1,6 +1,6 @@
 BrandedColleges = new Mongo.Collection('brandedcolleges')
 BrandedColleges.attachSchema(new SimpleSchema({
-  _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
+  _id: {type: String, optional: true},
   abbr: {type: String, optional: true}, // GSU
   aiSubject: {type: String},
   animal: {type: String, optional: true}, // Panther
