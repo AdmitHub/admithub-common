@@ -8,6 +8,7 @@ WorkflowResponses.attachSchema(new SimpleSchema({
   userId: fields.string(),
   workflow: fields.string(),
   step: fields.string(),
+  prompt: fields.string(),
   messagingService: fields.string(),
   scheduledMessageId: fields.string({optional: true}),
   response: {
