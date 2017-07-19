@@ -18,7 +18,7 @@ BrandedUserSchema = new SimpleSchema({
   created: fields.date(),
   collegeName: fields.string(o),
   college: fields.string(o),
-  collegeId: fields.string(o),
+  collegeId: fields.string({optional: false}),
   enrollmentId: fields.string(o), //pantherId for gsu
   schoolEmail: fields.email(o),
   entryYear: fields.number(o),
