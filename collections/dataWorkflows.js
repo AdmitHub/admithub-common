@@ -43,13 +43,3 @@ MessageLogs.attachSchema(new SimpleSchema({
   'facebookId': {type: String, optional: true},
   'createdAt': {type: Date},
 }))
-
-Validations = new Mongo.Collection('validations')
-
-Validations.attachSchema(new SimpleSchema({
-  '_id': {type: String},
-  'validationNumber': {type: String},
-  'created': {type: Date},
-  'userId': {type: String},
-  'validated': {type: Boolean, optional: true}
-}))
