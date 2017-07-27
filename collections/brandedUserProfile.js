@@ -301,7 +301,8 @@ BrandedUserSchema = new SimpleSchema({
   },
 
   abGroup: {type: Number, optional: true, max: 1, min: 0, decimal: true},
-  importSegmentLabels: {type: [String], optional: true, defaultValue: []}
+  importSegmentLabels: {type: [String], optional: true, defaultValue: []},
+  smsInfo: {type: Object, blackbox: true, optional: true, defaultValue: {}}
 });
 
 BrandedUserProfiles = new Mongo.Collection('brandedUserProfiles');
