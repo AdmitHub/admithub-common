@@ -41,6 +41,16 @@ if (Meteor.isServer) {
 }
 SmsLogs.after.insert((smsLogId, doc) => {
   if(doc.body && doc.body.length > 0 && doc.userId) {
-    return Meteor.users.update({_id: doc.userId }, { $set: { lastContacted: new Date(), lastMessageId: smsLogId } });
+
+    const college = BrandedColleges.findOne({messagingService: doc.messagingService});
+    if (college) BrandedUserProfiles.update({userId: doc.userId, collegeId: college._id}, {
+      $set: {
+        [doc.incoming ? 'smsInfo.lastIncomingMessageAt' : 'smsInfo.lastOutgoingMessageAt']: new Date(),
+        [doc.incoming ? 'smsInfo.lastIncomingMessageBody' : 'smsInfo.lastOutgoingMessageBody']: doc.body,
+        [doc.incoming ? 'smsInfo.lastIncomingMessageId' : 'smsInfo.lastOutgoingMessageId']: smsLogId,
+      }
+    });
+
+    Meteor.users.update({_id: doc.userId }, { $set: { lastContacted: new Date(), lastMessageId: smsLogId } });
   }
 });
