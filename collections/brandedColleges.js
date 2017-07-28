@@ -38,5 +38,6 @@ BrandedColleges.attachSchema(new SimpleSchema({
   phoneFinAid: {type: String, optional: true},
   tuitionDueDate: {type: Date, optional: true}, //8 -15
   disabledFeatures: {type: [String], defaultValue: []},
-  studentFieldMapping: {type: Object, blackbox: true, optional: true, defaultValue: {}}
+  studentFieldMapping: {type: Object, blackbox: true, optional: true, defaultValue: {}},
+  internalFieldMapping: {type: Object, blackbox: true, optional: true, defaultValue: {}}
 }));
