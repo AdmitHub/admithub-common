@@ -20,6 +20,7 @@ SmsLogs.attachSchema(new SimpleSchema({
   aiLog: {type: String, optional: true},
   error: {type: Boolean, defaultValue: false},
   source: {type: String, optional: true},
+  testUser: {type: Boolean, optional: true, defaultValue: false},
   transport: {type: String, allowedValues: ["web", "twilio", "facebook", "email"], optional: false},
   msgParts: {type: Number, optional: true}
 }));
@@ -39,6 +40,7 @@ if (Meteor.isServer) {
     }
   });
 }
+
 SmsLogs.after.insert((smsLogId, doc) => {
   if(doc.body && doc.body.length > 0 && doc.userId) {
 
@@ -58,4 +60,10 @@ SmsLogs.after.insert((smsLogId, doc) => {
 
     Meteor.users.update({_id: doc.userId }, { $set: { lastContacted: new Date(), lastMessageId: smsLogId } });
   }
+
+  const user = Meteor.users.findOne(doc.userId);
+  if (user && user.testUser) {
+    SmsLogs.update({_id: smsLogId}, {$set: {testUser: true}});
+  }
+
 });
