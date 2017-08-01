@@ -2,6 +2,7 @@ BrandedColleges = new Mongo.Collection("brandedcolleges");
 BrandedColleges.attachSchema(new SimpleSchema({
   _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   abbr: {type: String, optional: true}, // GSU
+  primaryBrandColor: {type: String, optional: true},
   aiSubject: {type: String},
   animal: {type: String, optional: true}, // Panther
   collection: {type: String, optional: true},
@@ -17,6 +18,8 @@ BrandedColleges.attachSchema(new SimpleSchema({
   linkAcceptAid: {type: String, optional: true},
   linkAdmit: {type: String, optional: true},
   linkCounselors: {type: String, optional: true},
+  counselors: {type: [Object], blackbox: true, optional: true, defaultValue: []},
+  departments: {type: [Object], blackbox: true, optional: true, defaultValue: []},
   linkIncompleteApplication: {type: String, optional: true},
   linkFafsa: {type: String, optional: true},
   linkFinAid: {type: String, optional: true},
@@ -34,5 +37,8 @@ BrandedColleges.attachSchema(new SimpleSchema({
   promptFilter: {type: String, optional: true},
   phoneFinAid: {type: String, optional: true},
   tuitionDueDate: {type: Date, optional: true}, //8 -15
-  disabledFeatures: {type: [String], defaultValue: []}
+  disabledFeatures: {type: [String], defaultValue: []},
+  studentFieldMapping: {type: Object, blackbox: true, optional: true, defaultValue: {}},
+  internalFieldMapping: {type: Object, blackbox: true, optional: true, defaultValue: {}},
+  csvTransformPipeline: {type: [String], optional: true, defaultValue: []}
 }));
