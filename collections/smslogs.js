@@ -44,61 +44,45 @@ if (Meteor.isServer) {
 SmsLogs.after.insert((insertingUserId, doc) => {
   const smsLogId = doc._id;
 
-  console.log('In SmsLogs.after.insert hook')
-  console.log('arguments:')
-  console.log(doc)
-  console.log(SmsLogs.findOne({_id: doc._id}))
-  console.log(doc.messagingService)
-  console.log('----')
-  
-  const user = Meteor.users.findOne(doc.userId);
-  if (user && user.testUser) {
-    SmsLogs.update({_id: smsLogId}, {$set: {testUser: true}});
-  }
-  
-  
-  
-  
+  // If the user is a test user, set the smslog as a test sms log
+  Meteor.users.findOne(doc.userId).then(user => {
+    console.log('found user')
+
+    if (user && user.testUser) {
+      console.log('(is test user)')
+
+      SmsLogs.update({_id: smsLogId}, {$set: {testUser: true}});
+      console.log('after update two')
+    }
+  })
+
+  // If this smsLog has a body and userId
   if(doc.body && doc.body.length > 0 && doc.userId) {
-    console.log('inside if statemet')
+    console.log('proper message')
     
+    BrandedColleges.findOne({messagingService: doc.messagingService}).then(college => {
+      if (!college) throw new Error('college-not-found');
+      console.log('found college')
+      console.log(college)
 
-    const college = BrandedColleges.findOne({messagingService: doc.messagingService});
-    if (!doc.messagingService || !college) throw new Error('BrandedCollege not found in SmsLogs.after.insert hook');
-    console.log('found college: ', college._id)
-    
-    console.log('bout to update')
-    console.log({userId: doc.userId, collegeId: college._id})
-    console.log({
-      $set: {
-        [doc.incoming ? 'smsInfo.lastIncomingMessageAt' : 'smsInfo.lastOutgoingMessageAt']: new Date(),
-        [doc.incoming ? 'smsInfo.lastIncomingMessageBody' : 'smsInfo.lastOutgoingMessageBody']: doc.body,
-        [doc.incoming ? 'smsInfo.lastIncomingMessageId' : 'smsInfo.lastOutgoingMessageId']: smsLogId,
-        'smsInfo.lastMessageAt': new Date(),
-        'smsInfo.lastMessageBody': doc.body,
-        'smsInfo.lastMessageId': smsLogId
-      }
+
+      BrandedUserProfiles.update({userId: doc.userId, collegeId: college._id}, {
+        $set: {
+          [doc.incoming ? 'smsInfo.lastIncomingMessageAt' : 'smsInfo.lastOutgoingMessageAt']: new Date(),
+          [doc.incoming ? 'smsInfo.lastIncomingMessageBody' : 'smsInfo.lastOutgoingMessageBody']: doc.body,
+          [doc.incoming ? 'smsInfo.lastIncomingMessageId' : 'smsInfo.lastOutgoingMessageId']: smsLogId,
+          'smsInfo.lastMessageAt': new Date(),
+          'smsInfo.lastMessageBody': doc.body,
+          'smsInfo.lastMessageId': smsLogId
+        }
+      });
+      console.log('after update 1')
+
     })
-    
-    
-    
-    BrandedUserProfiles.update({userId: doc.userId, collegeId: college._id}, {
-      $set: {
-        [doc.incoming ? 'smsInfo.lastIncomingMessageAt' : 'smsInfo.lastOutgoingMessageAt']: new Date(),
-        [doc.incoming ? 'smsInfo.lastIncomingMessageBody' : 'smsInfo.lastOutgoingMessageBody']: doc.body,
-        [doc.incoming ? 'smsInfo.lastIncomingMessageId' : 'smsInfo.lastOutgoingMessageId']: smsLogId,
-        'smsInfo.lastMessageAt': new Date(),
-        'smsInfo.lastMessageBody': doc.body,
-        'smsInfo.lastMessageId': smsLogId
-      }
-    });
-    console.log('past update 1')
 
-    console.log('bout to update user')
-
+    // TODO legacy. Remove when not needed - AR
     Meteor.users.update({_id: doc.userId }, { $set: { lastContacted: new Date(), lastMessageId: smsLogId } });
-    console.log('past update 2')
-
+    console.log('after update 2')
   }
 
 
