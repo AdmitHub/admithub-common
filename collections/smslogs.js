@@ -41,14 +41,20 @@ if (Meteor.isServer) {
   });
 }
 
-SmsLogs.after.insert((smsLogId, doc) => {
+SmsLogs.after.insert((insertingUserId, doc) => {
+  const smsLogId = doc._id;
+
   console.log('In SmsLogs.after.insert hook')
   console.log('arguments:')
-  console.log(smsLogId)
   console.log(doc)
+  console.log(SmsLogs.findOne({_id: doc._id}))
+  console.log(doc.messagingService)
   console.log('----')
   
-  
+  const user = Meteor.users.findOne(doc.userId);
+  if (user && user.testUser) {
+    SmsLogs.update({_id: smsLogId}, {$set: {testUser: true}});
+  }
   
   
   
@@ -58,7 +64,7 @@ SmsLogs.after.insert((smsLogId, doc) => {
     
 
     const college = BrandedColleges.findOne({messagingService: doc.messagingService});
-    if (!college) throw new Error('BrandedCollege not found in SmsLogs.after.insert hook');
+    if (!doc.messagingService || !college) throw new Error('BrandedCollege not found in SmsLogs.after.insert hook');
     console.log('found college: ', college._id)
     
     console.log('bout to update')
@@ -95,10 +101,6 @@ SmsLogs.after.insert((smsLogId, doc) => {
 
   }
 
-  const user = Meteor.users.findOne(doc.userId);
-  if (user && user.testUser) {
-    SmsLogs.update({_id: smsLogId}, {$set: {testUser: true}});
-    console.log('past update 3')
-  }
+
 
 });
