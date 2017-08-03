@@ -2,6 +2,7 @@ UserSchema = new SimpleSchema({
   "_id": fields.id({optional: true}),
   // Accounts username
   "username": fields.username({optional: true}),
+  "admitHubUser": {optional: false, type: Boolean, defaultValue: false},
   "modified": {type: Date, autoValue: function() { return new Date(); }},
   "slug": {
     type: String,
