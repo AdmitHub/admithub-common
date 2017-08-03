@@ -42,11 +42,40 @@ if (Meteor.isServer) {
 }
 
 SmsLogs.after.insert((smsLogId, doc) => {
+  console.log('In SmsLogs.after.insert hook')
+  console.log('arguments:')
+  console.log(smsLogId)
+  console.log(doc)
+  console.log('----')
+  
+  
+  
+  
+  
+  
   if(doc.body && doc.body.length > 0 && doc.userId) {
+    console.log('inside if statemet')
+    
 
     const college = BrandedColleges.findOne({messagingService: doc.messagingService});
     if (!college) throw new Error('BrandedCollege not found in SmsLogs.after.insert hook');
-
+    console.log('found college: ', college._id)
+    
+    console.log('bout to update')
+    console.log({userId: doc.userId, collegeId: college._id})
+    console.log({
+      $set: {
+        [doc.incoming ? 'smsInfo.lastIncomingMessageAt' : 'smsInfo.lastOutgoingMessageAt']: new Date(),
+        [doc.incoming ? 'smsInfo.lastIncomingMessageBody' : 'smsInfo.lastOutgoingMessageBody']: doc.body,
+        [doc.incoming ? 'smsInfo.lastIncomingMessageId' : 'smsInfo.lastOutgoingMessageId']: smsLogId,
+        'smsInfo.lastMessageAt': new Date(),
+        'smsInfo.lastMessageBody': doc.body,
+        'smsInfo.lastMessageId': smsLogId
+      }
+    })
+    
+    
+    
     BrandedUserProfiles.update({userId: doc.userId, collegeId: college._id}, {
       $set: {
         [doc.incoming ? 'smsInfo.lastIncomingMessageAt' : 'smsInfo.lastOutgoingMessageAt']: new Date(),
@@ -57,13 +86,19 @@ SmsLogs.after.insert((smsLogId, doc) => {
         'smsInfo.lastMessageId': smsLogId
       }
     });
+    console.log('past update 1')
+
+    console.log('bout to update user')
 
     Meteor.users.update({_id: doc.userId }, { $set: { lastContacted: new Date(), lastMessageId: smsLogId } });
+    console.log('past update 2')
+
   }
 
   const user = Meteor.users.findOne(doc.userId);
   if (user && user.testUser) {
     SmsLogs.update({_id: smsLogId}, {$set: {testUser: true}});
+    console.log('past update 3')
   }
 
 });
