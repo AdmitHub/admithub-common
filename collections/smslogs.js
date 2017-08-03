@@ -41,29 +41,34 @@ if (Meteor.isServer) {
   });
 }
 
-SmsLogs.after.insert((smsLogId, doc) => {
+SmsLogs.after.insert((insertingUserId, doc) => {
+  const smsLogId = doc._id;
+
+  // If the user is a test user, set the smslog as a test sms log
+  Meteor.users.findOne(doc.userId).then(user => {
+    if (user && user.testUser) {
+      SmsLogs.update({_id: smsLogId}, {$set: {testUser: true}});
+    }
+  })
+
+  // If this smsLog has a body and userId
   if(doc.body && doc.body.length > 0 && doc.userId) {
+    BrandedColleges.findOne({messagingService: doc.messagingService}).then(college => {
+      if (!college) throw new Error('college-not-found');
 
-    const college = BrandedColleges.findOne({messagingService: doc.messagingService});
-    if (!college) throw new Error('BrandedCollege not found in SmsLogs.after.insert hook');
+      BrandedUserProfiles.update({userId: doc.userId, collegeId: college._id}, {
+        $set: {
+          [doc.incoming ? 'smsInfo.lastIncomingMessageAt' : 'smsInfo.lastOutgoingMessageAt']: new Date(),
+          [doc.incoming ? 'smsInfo.lastIncomingMessageBody' : 'smsInfo.lastOutgoingMessageBody']: doc.body,
+          [doc.incoming ? 'smsInfo.lastIncomingMessageId' : 'smsInfo.lastOutgoingMessageId']: smsLogId,
+          'smsInfo.lastMessageAt': new Date(),
+          'smsInfo.lastMessageBody': doc.body,
+          'smsInfo.lastMessageId': smsLogId
+        }
+      });
+    })
 
-    BrandedUserProfiles.update({userId: doc.userId, collegeId: college._id}, {
-      $set: {
-        [doc.incoming ? 'smsInfo.lastIncomingMessageAt' : 'smsInfo.lastOutgoingMessageAt']: new Date(),
-        [doc.incoming ? 'smsInfo.lastIncomingMessageBody' : 'smsInfo.lastOutgoingMessageBody']: doc.body,
-        [doc.incoming ? 'smsInfo.lastIncomingMessageId' : 'smsInfo.lastOutgoingMessageId']: smsLogId,
-        'smsInfo.lastMessageAt': new Date(),
-        'smsInfo.lastMessageBody': doc.body,
-        'smsInfo.lastMessageId': smsLogId
-      }
-    });
-
+    // TODO legacy. Remove when not needed - AR
     Meteor.users.update({_id: doc.userId }, { $set: { lastContacted: new Date(), lastMessageId: smsLogId } });
   }
-
-  const user = Meteor.users.findOne(doc.userId);
-  if (user && user.testUser) {
-    SmsLogs.update({_id: smsLogId}, {$set: {testUser: true}});
-  }
-
 });
