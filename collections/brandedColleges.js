@@ -40,5 +40,6 @@ BrandedColleges.attachSchema(new SimpleSchema({
   disabledFeatures: {type: [String], defaultValue: []},
   studentFieldMapping: {type: Object, blackbox: true, optional: true, defaultValue: {}},
   internalFieldMapping: {type: Object, blackbox: true, optional: true, defaultValue: {}},
-  csvTransformPipeline: {type: [String], optional: true, defaultValue: []}
+  csvTransformPipeline: {type: [String], optional: true, defaultValue: []},
+  prependCounselorResponse: {type: String, optional: true} // prepends counselor response to emails e.g. Your officer replied to your question:
 }));
