@@ -53,7 +53,6 @@ SmsLogs.after.insert((insertingUserId, doc) => {
 
   // If this smsLog has a body and userId
   if(doc.body && doc.body.length > 0 && doc.userId) {
-      console.trace("============A trace")
       console.log("============the doc:\n", doc)
       console.log("================messagingService: ", doc.messagingService)
     BrandedColleges.findOne({messagingService: doc.messagingService}).then(college => {
