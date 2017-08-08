@@ -53,9 +53,10 @@ SmsLogs.after.insert((insertingUserId, doc) => {
 
   // If this smsLog has a body and userId
   if(doc.body && doc.body.length > 0 && doc.userId) {
+      console.trace("============A trace")
+      console.log("============the doc:\n", doc)
+      console.log("================messagingService: ", doc.messagingService)
     BrandedColleges.findOne({messagingService: doc.messagingService}).then(college => {
-      console.trace("============A trace:\n")
-      console.log("================messagingService: ", messagingService)
       if (!college) throw new Error('college-not-found');
 
       BrandedUserProfiles.update({userId: doc.userId, collegeId: college._id}, {
