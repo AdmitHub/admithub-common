@@ -1,8 +1,10 @@
 OverallReachAnalytics = new Mongo.Collection("overallReachAnalytics");
 OverallReachAnalytics.attachSchema(new SimpleSchema({
-  _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
-  messagingService: { type: String, optional: true },
-  usersReached: { type: Number },
-  date: { type: Date },
-  updatedAt: {type: Date}
-}))
+  _id: {type: String, regEx: SimpleSchema.RegEx.Id},
+  messagingService: { type: String },
+  createdAt: { type: Date },
+  weekNumber: { type: Number },
+  updatedAt: { type: Date },
+  uniqueUsersReached: { type: Number },
+  ignore: { type: Boolean, optional: true, defaultValue: false }
+}));
