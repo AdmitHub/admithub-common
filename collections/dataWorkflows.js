@@ -12,7 +12,8 @@ Dialogs.attachSchema(new SimpleSchema({
   'initialState': {type: String , optional: false},
   'states': {type: [String], optional: true},
   'allowOpeningQuestion': {type: Boolean, optional: true},
-  'expirationLength': {type: Number, optional: true}
+  'expirationLength': {type: Number, optional: true},
+  'reminders': {type: [Object], blackbox: true, optional: true}
 }))
 
 States = new Mongo.Collection('states')
@@ -26,6 +27,7 @@ States.attachSchema(new SimpleSchema({
   'parentDialog': {type: String, optional: false},
   'nextStates': {type: Object, blackbox: true},
   'skip': {type: Object, blackbox: true, optional: true},
+  'exitActions': {type: [Object], blackbox: true, optional: true},
   'range': {type: new SimpleSchema({
     min: {type: Number, optional: false},
     max: {type: Number, optional: false}
