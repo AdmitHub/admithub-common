@@ -50,7 +50,7 @@ BrandedUserSchema = new SimpleSchema({
   }), optional: true},
   inStateStudent: fields.bool(o),
   application: {type: new SimpleSchema({
-    status: fields.status(o),
+    status: fields.string(o),
     id: fields.string(o),
     decisionType: fields.string(o),
     missingDocuments: fields.bool(o),

@@ -29,5 +29,6 @@ ScheduledMessages.attachSchema(new SimpleSchema({
     scheduled: {type: Boolean, optional: true},
     userSearch: {type: Object, blackbox: true, optional: true},
     recipientLabel: {type: String, optional: true},
-    workflowHumanName: {type: String, optional: true}
+    workflowHumanName: {type: String, optional: true},
+    importReportId: {type: String, optional: true}
 }));
