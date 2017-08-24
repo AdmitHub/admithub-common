@@ -24,6 +24,7 @@ States.attachSchema(new SimpleSchema({
   'promptType': {type: String, optional: false},
   'prompt': {type: String, optional: true},
   'skip': {type: Object, optional: true},
+  'media': {type: String, optional: true},
   'parentDialog': {type: String, optional: false},
   'nextStates': {type: Object, blackbox: true},
   'skip': {type: Object, blackbox: true, optional: true},
