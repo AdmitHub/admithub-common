@@ -26,6 +26,7 @@ BrandedUserSchema = new SimpleSchema({
   studyGroupMember: fields.bool(o),
   permittedUser: fields.bool(o),
   email: fields.string(o),
+  facebookId: fields.string(o),
   phone: fields.string(o),
   _phoneToCheck: fields.string(o),
   knownUser: {optional: false, type: Boolean, defaultValue: true},
