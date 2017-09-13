@@ -10,7 +10,9 @@ SmsLogs.attachSchema(new SimpleSchema({
   to: {type: String, optional: true},
   from: {type: String, optional: true},
   body: {type: String, optional: true},
+  userNumber: {type: String, optional: true},
   mediaFiles: {type: [Object], optional: true},
+  facebookId: {type: String, optional: true},
   'mediaFiles.$.url': {type: String},
   'mediaFiles.$.contentType': {type: String, optional: true},
   'mediaFiles.$.deleted': {type: Boolean, defaultValue: false},
@@ -39,8 +41,9 @@ if (Meteor.isServer) {
     }
   })
 }
+
 SmsLogs.after.insert((smsLogId, doc) => {
-  if (doc.body.length > 0 && doc.userId) {
-    return Users.update({_id: doc.userId }, { $set: { lastContacted: new Date(), lastMessageId: smsLogId } })
+  if (doc.body && doc.body.length > 0 && doc.userId) {
+    return BrandedUserProfiles.update({_id: doc.userId }, { $set: { _lastContacted: new Date(), _lastMessageId: smsLogId } })
   }
 })
