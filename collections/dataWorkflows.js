@@ -34,17 +34,3 @@ States.attachSchema(new SimpleSchema({
     max: {type: Number, optional: false}
   }), optional: true}
 }))
-
-MessageLogs = new Mongo.Collection('messageLogs')
-
-MessageLogs.attachSchema(new SimpleSchema({
-  '_id': {type: String},
-  'media': {type: String, optional: true},
-  'body': {type: String, optional: true},
-  'incoming': {type: Boolean, optional: false},
-  'userNumber': {type: String, optional: true},
-  'facebookId': {type: String, optional: true},
-  'createdAt': {type: Date},
-  'userId': {type: String, optional: false},
-  'messagingService': {type: String, optional: false}
-}))
