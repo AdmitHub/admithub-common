@@ -23,7 +23,11 @@ States.attachSchema(new SimpleSchema({
   'name': {type: String, optional: true},
   'promptType': {type: String, optional: false},
   'prompt': {type: String, optional: true},
-  'skip': {type: Object, optional: true},
+  'skip': {type: new SimpleSchema({
+      'field': {type: String},
+      'value': {type: String}
+    }), optional: true
+  },
   'media': {type: String, optional: true},
   'parentDialog': {type: String, optional: false},
   'nextStates': {type: Object, blackbox: true},

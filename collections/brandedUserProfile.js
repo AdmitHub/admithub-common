@@ -279,7 +279,9 @@ BrandedUserSchema = new SimpleSchema({
   _contactSettings: {type: new SimpleSchema({
     permittedUser: fields.bool(o),
     contacted: fields.bool(o),
-    finished: fields.bool(o)
+    finished: fields.bool(o),
+    softStopped: fields.string(o),
+    canMessage: fields.bool(o)
   }), optional: true},
   _oneOff: {
     type: Object,
