@@ -44,6 +44,6 @@ if (Meteor.isServer) {
 
 SmsLogs.after.insert((smsLogId, doc) => {
   if (doc.body && doc.body.length > 0 && doc.userId) {
-    return BrandedUserProfiles.update({_id: doc.userId }, { $set: { _lastContacted: new Date(), _lastMessageId: smsLogId } })
+    return BrandedUserProfiles.update({_id: doc.userId }, { $set: { _lastContacted: new Date(), _lastMessageId: smsLogId, _lastTransport: doc.transport } })
   }
 })

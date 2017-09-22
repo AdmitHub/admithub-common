@@ -29,6 +29,7 @@ BrandedUserSchema = new SimpleSchema({
   phone: fields.string(o),
   _lastContacted: fields.date(o),
   _lastMessageId: fields.string(o),
+  _lastTransport: fields.string(o),
   _phoneToCheck: fields.string(o),
   _knownUser: {type: Boolean, optional: true},
   _validationWindowEnd: {type: Date, optional: true},
