@@ -1,9 +1,10 @@
 UserSchema = new SimpleSchema({
   '_id': fields.id({optional: true}),
   // Accounts username
-  'username': fields.username({optional: true}),
-  'modified': {type: Date, autoValue: function () { return new Date() }},
-  'slug': {
+  "username": fields.username({optional: true}),
+  "admitHubUser": {optional: false, type: Boolean, defaultValue: false},
+  "modified": {type: Date, autoValue: function() { return new Date(); }},
+  "slug": {
     type: String,
     unique: false,
     optional: true,
@@ -49,15 +50,16 @@ UserSchema = new SimpleSchema({
     type: String,
     optional: true
   },
-  'phone': { type: new SimpleSchema({
-    'wrongNumber': {type: Boolean, optional: true},
-    'twilioLookUpValid': {type: Boolean, optional: true},
-    'nonWorkingNumber': {type: Boolean, optional: true},
-    'nonWorkingNumberCode': {type: String, optional: true},
-    'previousPhone': {type: String, optional: true},
-    'passiveOptOut': {type: Boolean, optional: true}
-  }), optional: true},
-  'snapshotReference': { type: new SimpleSchema({
+  "phone": { type: new SimpleSchema({
+    "wrongNumber": {type: Boolean, optional: true},
+    "twilioLookUpValid": {type: Boolean, optional: true},
+    "nonWorkingNumber": {type: Boolean, optional: true},
+    "nonWorkingNumberCode": {type: String, optional: true},
+    "previousPhone": {type: String, optional: true},
+    "passiveOptOut": {type: Boolean, optional: true},
+    "carrier": {type: String, optional: true}
+  }),optional: true},
+  "snapshotReference": { type: new SimpleSchema({
     id: {type: String, optional: true},
     workflowName: {type: String, optional: true}
   }), optional: true},

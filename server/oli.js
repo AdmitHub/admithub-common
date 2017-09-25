@@ -33,6 +33,30 @@ Oli = {
       throw e
     }
   },
+  _callTokenEndpoint: function(method, endpoint, params) {
+    var authToken = dotGet(Meteor, 'settings.oliApiAuthToken');
+
+    var headers = {
+      'X-auth-token': authToken
+    }
+
+    var syncPost = Meteor.wrapAsync(HTTP.call);
+    try {
+      return syncPost('POST', endpoint, {
+        params: params,
+        headers: headers
+      });
+    }
+    catch (e) {
+      if (typeof logger !== "undefined") {
+        logger.error('Error calling ' + endpoint + ':\n  params: ', params,'\n',e);
+      } else {
+        console.log("Error calling " + endpoint + ":\n params: ", params,'\n',e);
+      }
+      throw e;
+    }
+  },
+
   // Parameter schema for ``Oli.initiate``
   initiateParams: new SimpleSchema({
     userId: {type: String, regEx: SimpleSchema.RegEx.Id},

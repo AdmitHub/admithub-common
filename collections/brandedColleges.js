@@ -2,6 +2,7 @@ BrandedColleges = new Mongo.Collection('brandedcolleges')
 BrandedColleges.attachSchema(new SimpleSchema({
   _id: {type: String, optional: true},
   abbr: {type: String, optional: true}, // GSU
+  primaryBrandColor: {type: String, optional: true},
   aiSubject: {type: String},
   animal: {type: String, optional: true}, // Panther
   collection: {type: String, optional: true},
@@ -17,6 +18,8 @@ BrandedColleges.attachSchema(new SimpleSchema({
   linkAcceptAid: {type: String, optional: true},
   linkAdmit: {type: String, optional: true},
   linkCounselors: {type: String, optional: true},
+  counselors: {type: [Object], blackbox: true, optional: true, defaultValue: []},
+  departments: {type: [Object], blackbox: true, optional: true, defaultValue: []},
   linkIncompleteApplication: {type: String, optional: true},
   linkFafsa: {type: String, optional: true},
   linkFinAid: {type: String, optional: true},
@@ -31,10 +34,10 @@ BrandedColleges.attachSchema(new SimpleSchema({
   messagingServiceSid: {type: String, optional: true},
   name: {type: String},
   oliName: {type: String},
+  promptFilter: {type: String, optional: true},
   phoneFinAid: {type: String, optional: true},
   tuitionDueDate: {type: Date, optional: true}, // 8 -15
   disabledFeatures: {type: [String], defaultValue: []},
-  requiresValidation: {type: Boolean, optional: true},
   dialogSettings: {type: new SimpleSchema({
     unknownStudentDialogBotOn: {type: String, optional: true},
     unknownStudentDialogBotOff: {type: String, optional: true},
@@ -43,5 +46,9 @@ BrandedColleges.attachSchema(new SimpleSchema({
     botOffDialog: {type: String, optional: true},
     botOffNoDialog: {type: Boolean, optional: true},
     finishedConversationDialog: {type: String, optional: true}
-  }), optional: true}
-}))
+  }), optional: true},
+  studentFieldMapping: {type: Object, blackbox: true, optional: true, defaultValue: {}},
+  internalFieldMapping: {type: Object, blackbox: true, optional: true, defaultValue: {}},
+  csvTransformPipeline: {type: [String], optional: true, defaultValue: []},
+  prependCounselorResponse: {type: String, optional: true} // prepends counselor response to emails e.g. Your officer replied to your question:
+}));

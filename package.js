@@ -17,7 +17,7 @@ Package.onUse(function (api) {
     'stylus',
     'templating',
     'underscore',
-
+    'ecmascript',
     'admithub:dot-get@1.0.0',
     'aldeed:simple-schema@1.3.3',
     'aldeed:collection2@2.5.0',
@@ -28,47 +28,52 @@ Package.onUse(function (api) {
 
   api.addFiles('lib/ui.js', 'client')
 
-  api.addFiles('lib/_fields.js')
-  api.addFiles('lib/helpers.js')
-  api.addFiles('lib/simpleSchema.js')
-  api.addFiles('collections/brandedApplicantConversations.js')
-  api.addFiles('collections/brandedColleges.js')
-  api.addFiles('collections/brandedCollegeApplicants.js')
-  api.addFiles('collections/ceebCodes.js')
-  api.addFiles('collections/collegeevents.js')
-  api.addFiles('collections/collegeOfficers.js')
-  api.addFiles('collections/colleges.js')
-  api.addFiles('collections/heartbeat.js')
-  api.addFiles('collections/highschools.js')
-  api.addFiles('collections/leads.js')
-  api.addFiles('collections/hsLeads.js')
-  api.addFiles('collections/matches.js')
-  api.addFiles('collections/pendingEventReports.js')
-  api.addFiles('collections/posts.js')
-  api.addFiles('collections/profile.js')
-  api.addFiles('collections/smslogs.js')
-  api.addFiles('collections/snapshots.js')
-  api.addFiles('collections/sponsors.js')
-  api.addFiles('collections/testimonials.js')
-  api.addFiles('collections/users.js')
-  api.addFiles('collections/highschoolConversations.js')
-  api.addFiles('collections/recentlyAsked.js')
-  api.addFiles('collections/unverifiedEmailMessages.js')
-  api.addFiles('collections/pendingOfficers.js')
-  api.addFiles('collections/demoBotProfile.js')
-  api.addFiles('collections/georgiaStateUsers.js')
-  api.addFiles('collections/scheduledMessages.js')
-  api.addFiles('collections/introducedMessages.js')
-  api.addFiles('collections/messageTemplates.js')
-  api.addFiles('collections/workflowScripts.js')
-  api.addFiles('collections/workflows.js')
-  api.addFiles('collections/twilioAccounts.js')
-  api.addFiles('collections/brandedUserProfile.js')
-  api.addFiles('collections/workflowResponses.js')
-  api.addFiles('server/collegesInMemory.js', 'server')
-  api.addFiles('server/indexes.js', 'server')
-  api.addFiles('server/methods.js', 'server')
-  api.addFiles('server/oli.js', 'server')
+  api.addFiles('lib/_fields.js');
+  api.addFiles('lib/helpers.js');
+  api.addFiles('lib/simpleSchema.js');
+  api.addFiles('collections/brandedApplicantConversations.js');
+  api.addFiles('collections/brandedColleges.js');
+  api.addFiles('collections/brandedCollegeApplicants.js');
+  api.addFiles('collections/ceebCodes.js');
+  api.addFiles('collections/collegeevents.js');
+  api.addFiles('collections/collegeOfficers.js');
+  api.addFiles('collections/colleges.js');
+  api.addFiles('collections/heartbeat.js');
+  api.addFiles('collections/highschools.js');
+  api.addFiles('collections/leads.js');
+  api.addFiles('collections/hsLeads.js');
+  api.addFiles('collections/matches.js');
+  api.addFiles('collections/pendingEventReports.js');
+  api.addFiles('collections/posts.js');
+  api.addFiles('collections/profile.js');
+  api.addFiles('collections/smslogs.js');
+  api.addFiles('collections/snapshots.js');
+  api.addFiles('collections/sponsors.js');
+  api.addFiles('collections/testimonials.js');
+  api.addFiles('collections/users.js');
+  api.addFiles('collections/highschoolConversations.js');
+  api.addFiles('collections/recentlyAsked.js');
+  api.addFiles('collections/unverifiedEmailMessages.js');
+  api.addFiles('collections/pendingOfficers.js');
+  api.addFiles('collections/demoBotProfile.js');
+  api.addFiles('collections/georgiaStateUsers.js');
+  api.addFiles('collections/scheduledMessages.js');
+  api.addFiles('collections/introducedMessages.js');
+  api.addFiles('collections/messageTemplates.js');
+  api.addFiles('collections/workflowScripts.js');
+  api.addFiles('collections/workflows.js');
+  api.addFiles('collections/twilioAccounts.js');
+  api.addFiles('collections/brandedUserProfile.js');
+  api.addFiles('collections/workflowResponses.js');
+  api.addFiles('collections/smsAnalytics.js');
+  api.addFiles('collections/smsHeatmapAnalytics.js');
+  api.addFiles('collections/overallReachAnalytics.js');
+
+  api.addFiles('server/collegesInMemory.js', 'server');
+  api.addFiles('server/indexes.js', 'server');
+  api.addFiles('server/methods.js', 'server');
+  api.addFiles('server/oli.js', 'server');
+
 
   api.export([
     'BrandedApplicantConversations',
@@ -115,6 +120,9 @@ Package.onUse(function (api) {
     'WorkflowScripts',
     'TwilioAccounts',
     'BrandedUserProfiles',
-    'WorkflowResponses'
-  ])
-})
+    'WorkflowResponses',
+    'SmsHeatmapAnalytics',
+    'SmsAnalytics',
+    'OverallReachAnalytics'
+  ]);
+});

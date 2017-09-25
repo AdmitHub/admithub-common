@@ -22,7 +22,8 @@ SmsLogs.attachSchema(new SimpleSchema({
   aiLog: {type: String, optional: true},
   error: {type: Boolean, defaultValue: false},
   source: {type: String, optional: true},
-  transport: {type: String, allowedValues: ['web', 'twilio', 'facebook', 'email'], optional: false},
+  testUser: {type: Boolean, optional: true, defaultValue: false},
+  transport: {type: String, allowedValues: ["web", "twilio", "facebook", "email"], optional: false},
   msgParts: {type: Number, optional: true}
 }))
 if (Meteor.isServer) {
@@ -42,8 +43,32 @@ if (Meteor.isServer) {
   })
 }
 
-SmsLogs.after.insert((smsLogId, doc) => {
-  if (doc.body && doc.body.length > 0 && doc.userId) {
-    return BrandedUserProfiles.update({_id: doc.userId }, { $set: { _lastContacted: new Date(), _lastMessageId: smsLogId, _lastTransport: doc.transport } })
+SmsLogs.after.insert((insertingUserId, doc) => {
+  const smsLogId = doc._id;
+
+  // If the user is a test user, set the smslog as a test sms log
+  BrandedUserProfiles.findOne(doc.userId).then(user => {
+    if (user && user.testUser) {
+      SmsLogs.update({_id: smsLogId}, {$set: {testUser: true}});
+    }
+  })
+
+  //If this smsLog has a body and userId
+  if(doc.body && doc.body.length > 0 && doc.userId && doc.messagingService !== 'oli') {
+    BrandedColleges.findOne({messagingService: doc.messagingService}).then(college => {
+      if (!college) throw new Error('college-not-found');
+
+      BrandedUserProfiles.update({userId: doc.userId, collegeId: college._id}, {
+        $set: {
+          [doc.incoming ? 'smsInfo.lastIncomingMessageAt' : 'smsInfo.lastOutgoingMessageAt']: new Date(),
+          [doc.incoming ? 'smsInfo.lastIncomingMessageBody' : 'smsInfo.lastOutgoingMessageBody']: doc.body,
+          [doc.incoming ? 'smsInfo.lastIncomingMessageId' : 'smsInfo.lastOutgoingMessageId']: smsLogId,
+          'smsInfo.lastMessageAt': new Date(),
+          'smsInfo.lastMessageBody': doc.body,
+          'smsInfo.lastMessageId': smsLogId
+        }
+      });
+    })
+
   }
 })
