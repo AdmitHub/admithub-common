@@ -33,7 +33,7 @@ BrandedUserSchema = new SimpleSchema({
   _lastMessageId: fields.string(o),
   _lastTransport: fields.string(o),
   _phoneToCheck: fields.string(o),
-  _knownUser: {type: Boolean, optional: true},
+  knownUser: {type: Boolean, optional: true},
   withdrawalReason: fields.string(o),
   name: {type: new SimpleSchema({
     first: fields.string(o),
