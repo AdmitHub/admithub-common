@@ -178,6 +178,7 @@ UserSchema = new SimpleSchema({
   "pinnedConversations": {type: [String], optional: true, defaultValue: []},
   "recentConversations": {type: [String], optional: true, defaultValue: []},
   "currentInstitution": {type: String, optional: true},
+  "lastLoginAt": {type: Date, optional: true},
 
   // For admithub users (students)
   "schools": {type: [String], optional: true, defaultValue: []},
