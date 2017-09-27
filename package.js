@@ -19,6 +19,7 @@ Package.onUse(function(api) {
     'templating',
     'underscore',
     'ecmascript',
+    'allow-deny@1.0.9',
     'admithub:dot-get@1.0.0',
     'aldeed:simple-schema@1.3.3',
     'aldeed:collection2@2.5.0',
