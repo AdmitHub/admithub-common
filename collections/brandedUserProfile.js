@@ -281,7 +281,9 @@ BrandedUserSchema = new SimpleSchema({
   _contactSettings: {type: new SimpleSchema({
     permittedUser: fields.bool(o),
     contacted: fields.bool(o),
-    finished: fields.bool(o)
+    finished: fields.bool(o),
+    generalOptIn: fields.bool(o),
+    canMessageGeneral: fields.bool(o) // TODO add
   }), optional: true},
   _oneOff: {
     type: Object,
