@@ -13,7 +13,8 @@ Dialogs.attachSchema(new SimpleSchema({
   'states': {type: [String], optional: true},
   'allowOpeningQuestion': {type: Boolean, optional: true},
   'expirationLength': {type: Number, optional: true},
-  'reminders': {type: [Object], blackbox: true, optional: true}
+  'reminders': {type: [Object], blackbox: true, optional: true},
+  'transition': {type: Boolean, defaultValue: true, optional: true}
 }))
 
 States = new Mongo.Collection('states')
