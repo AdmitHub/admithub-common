@@ -283,7 +283,10 @@ BrandedUserSchema = new SimpleSchema({
     contacted: fields.bool(o),
     finished: fields.bool(o),
     generalOptIn: fields.bool(o),
-    canMessageGeneral: fields.bool(o) // TODO add
+    canMessageGeneral: fields.bool(o), // TODO add
+    canText: fields.bool(o),
+    nonWorkingNumber: fields.bool(o),
+    nonWorkingNumberCode: fields.string(o)
   }), optional: true},
   _oneOff: {
     type: Object,
