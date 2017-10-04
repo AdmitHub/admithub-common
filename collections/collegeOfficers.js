@@ -11,8 +11,13 @@ CollegeOfficers.attachSchema(new SimpleSchema({
   // collegeID reference
   collegeId: {
     type: String,
-    regEx: SimpleSchema.RegEx.Id, unique: true,
+    unique: true,
     autoform: { placeholder: 'college _id' }
+  },
+  //Field change - new field referencing brandedCollegeId, replacing collegeId
+  institutionId: {
+    type: String,
+    optional: false
   },
   // userId references
   officers: {
@@ -25,15 +30,16 @@ CollegeOfficers.attachSchema(new SimpleSchema({
     type: [Object],
     optional: true
   },
-  'associatedEmails.$.email': {type: String, optional: true},
-  'associatedEmails.$.name': {type: String, optional: true},
-  'associatedEmails.$.general': {type: Boolean, optional: true},
-  'associatedEmails.$.topics': {type: [String], optional: true},
-  'associatedEmails.$.counties': {type: [Object], optional: true},
-  'associatedEmails.$.counties.$.state': fields.state({optional: true}),
-  'associatedEmails.$.counties.$.county': {type: String, optional: true},
-  'associatedEmails.$.mainFinAidContact': {type: Boolean, optional: true},
-  'associatedEmails.$.states': fields.state({optional: true, type: [String]}),
+  "associatedEmails.$.email": {type: String, optional: true},
+  "associatedEmails.$.name": {type: String, optional: true},
+  "assocaitedEmails.$.office": {type: String, optional: true},
+  "associatedEmails.$.general": {type: Boolean, optional: true},
+  "associatedEmails.$.topics": {type: [String], optional: true},
+  "associatedEmails.$.counties": {type: [Object], optional: true},
+  "associatedEmails.$.counties.$.state": fields.state({optional: true}),
+  "associatedEmails.$.counties.$.county": {type: String, optional: true},
+  "associatedEmails.$.mainFinAidContact": {type: Boolean, optional: true},
+  "associatedEmails.$.states": fields.state({optional: true, type: [String]}),
   blacklistedEmails: {
     type: [String],
     optional: true
@@ -41,29 +47,9 @@ CollegeOfficers.attachSchema(new SimpleSchema({
   introExclamation: {type: String, optional: true}
 }))
 
-//
-// Denormalize college partner status
-//
-var _setCollegePartnerStatus = function (doc, set) {
-  Colleges.update({_id: doc.collegeId}, {$set: {partner: set}})
-}
-CollegeOfficers.after.insert(function (userId, doc) {
-  _setCollegePartnerStatus(doc, true)
-})
-CollegeOfficers.after.update(function (userId, doc, fieldNames, modifier, options) {
-  if (this.previous.collegeId !== doc.collegeId) {
-    _setCollegePartnerStatus(this.previous, false)
-    _setCollegePartnerStatus(doc, true)
-  }
-}, {fetchPrevious: true})
-CollegeOfficers.after.remove(function (userId, doc) {
-  _setCollegePartnerStatus(doc, false)
-})
-
 CollegeOfficers.getBestOfficerEmail = function (officers, zip, topic) {
   // if we were provided an email, verify that it's in our database. If it is, use it
   // if not, continue on and do the normal matching
-
   const trueZip = (zip && zip.length > 5) ? zip.slice(0, 5) : zip
   var data = zip ? zcta.getCountyByZip(trueZip) || {} : {}
   var state = data.state
@@ -80,8 +66,8 @@ CollegeOfficers.getBestOfficerEmail = function (officers, zip, topic) {
   const sets = []
   // topic
   if (topic) {
-    const topicMatch = _.filter(officers.associatedEmails, function (a) {
-      return _.contains(a.topics, topic)
+    const topicMatch = underscore.filter(officers.associatedEmails, function (a) {
+      return underscore.contains(a.topics, topic)
     })
 
     if (topicMatch.length) {
@@ -91,15 +77,15 @@ CollegeOfficers.getBestOfficerEmail = function (officers, zip, topic) {
 
   // location
   if (county && state) {
-    const countyMatch = _.filter(officers.associatedEmails, function (a) {
-      return !!_.findWhere(a.counties, {state: state, county: county})
+    const countyMatch = underscore.filter(officers.associatedEmails, function (a) {
+      return !!underscore.find(a.counties, {state: state, county: county})
     })
 
     if (countyMatch.length) {
       sets.push(countyMatch)
     } else {
-      const stateMatch = _.filter(officers.associatedEmails, function (a) {
-        return _.contains(a.states, state) && !_.findWhere(a.counties, {
+      const stateMatch = underscore.filter(officers.associatedEmails, function (a) {
+        return underscore.includes(a.states, state) && !underscore.findWhere(a.counties, {
           state: state
         })
       })
@@ -120,7 +106,7 @@ CollegeOfficers.getBestOfficerEmail = function (officers, zip, topic) {
     }
   }
   // Nothing matched -- look for general.
-  const general = _.find(officers.associatedEmails, function (a) {
+  const general = underscore.find(officers.associatedEmails, function (a) {
     return a.general
   })
 

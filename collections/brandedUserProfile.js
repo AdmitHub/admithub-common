@@ -18,20 +18,22 @@ BrandedUserSchema = new SimpleSchema({
   created: fields.date(),
   collegeName: fields.string(o),
   college: fields.string(o),
-  collegeId: fields.string(o),
-  enrollmentId: fields.string(o), // pantherId for gsu
+  collegeId: fields.string({optional: false}),
+  enrollmentId: fields.string(o), //pantherId for gsu
   schoolEmail: fields.email(o),
   entryYear: fields.number(o),
   entryTerm: fields.string(o),
   studyGroupMember: fields.bool(o),
   permittedUser: fields.bool(o),
   email: fields.string(o),
+  facebookId: fields.string(o),
+  facebookOptIn: fields.bool(o),
   phone: fields.string(o),
   _lastContacted: fields.date(o),
   _lastMessageId: fields.string(o),
+  _lastTransport: fields.string(o),
   _phoneToCheck: fields.string(o),
-  _knownUser: {type: Boolean, optional: true},
-  _validationWindowEnd: {type: Date, optional: true},
+  knownUser: {type: Boolean, optional: true},
   withdrawalReason: fields.string(o),
   name: {type: new SimpleSchema({
     first: fields.string(o),
@@ -53,7 +55,7 @@ BrandedUserSchema = new SimpleSchema({
   }), optional: true},
   inStateStudent: fields.bool(o),
   application: {type: new SimpleSchema({
-    status: fields.status(o),
+    status: fields.string(o),
     id: fields.string(o),
     decisionType: fields.string(o),
     missingDocuments: fields.bool(o),
@@ -281,7 +283,12 @@ BrandedUserSchema = new SimpleSchema({
     contacted: fields.bool(o),
     finished: fields.bool(o),
     softStopped: fields.string(o),
-    canMessage: fields.bool(o)
+    canMessage: fields.bool(o),
+    generalOptIn: fields.bool(o),
+    canMessageGeneral: fields.bool(o), // TODO add
+    canText: fields.bool(o),
+    nonWorkingNumber: fields.bool(o),
+    nonWorkingNumberCode: fields.string(o)
   }), optional: true},
   _oneOff: {
     type: Object,
@@ -307,8 +314,15 @@ BrandedUserSchema = new SimpleSchema({
   abGroup: {type: Number, optional: true, max: 1, min: 0, decimal: true},
   importSegmentLabels: {type: [String], optional: true, defaultValue: []},
   _facebookId: {type: String, optional: true},
-  _dialogStack: {type: [Object], blackbox: true, optional: true}
-})
+  _dialogStack: {type: [Object], blackbox: true, optional: true},
+  importData: {
+    type: Object,
+    blackbox: true,
+    defaultValue: {},
+    optional: true
+  },
+  smsInfo: {type: Object, blackbox: true, optional: true, defaultValue: {}}
+});
 
 BrandedUserProfiles = new Mongo.Collection('brandedUserProfiles')
 BrandedUserProfiles.attachSchema(BrandedUserSchema)
