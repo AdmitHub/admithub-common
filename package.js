@@ -6,9 +6,10 @@ Package.describe({
 });
 
 Npm.depends({
-  'zipcodes': '1.1.1',
+  'aws-sdk': '2.125.0',
   'twilio': '2.1.0',
-  'us-zcta-counties': '0.0.2'
+  'us-zcta-counties': '0.0.2',
+  'zipcodes': '1.1.1'
 });
 
 Package.onUse(function(api) {
