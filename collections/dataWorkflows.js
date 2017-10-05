@@ -23,7 +23,6 @@ States.attachSchema(new SimpleSchema({
   'name': {type: String, optional: true},
   'promptType': {type: String, optional: false},
   'prompt': {type: String, optional: true},
-  'skip': {type: Object, optional: true},
   'media': {type: String, optional: true},
   'parentDialog': {type: String, optional: false},
   'nextStates': {type: Object, blackbox: true},
@@ -32,5 +31,7 @@ States.attachSchema(new SimpleSchema({
   'range': {type: new SimpleSchema({
     min: {type: Number, optional: false},
     max: {type: Number, optional: false}
-  }), optional: true}
+  }), optional: true},
+  'multipleChoices': {type: [String], optional: true}
+
 }))
