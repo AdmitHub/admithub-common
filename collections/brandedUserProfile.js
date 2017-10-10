@@ -282,8 +282,6 @@ BrandedUserSchema = new SimpleSchema({
     permittedUser: fields.bool(o),
     contacted: fields.bool(o),
     finished: fields.bool(o),
-    softStopped: fields.string(o),
-    canMessage: fields.bool(o),
     generalOptIn: fields.bool(o),
     canMessageGeneral: fields.bool(o), // TODO add
     canText: fields.bool(o),
