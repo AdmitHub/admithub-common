@@ -31,6 +31,7 @@ States.attachSchema(new SimpleSchema({
   'media': {type: String, optional: true},
   'parentDialog': {type: String, optional: false},
   'nextStates': {type: Object, blackbox: true},
+  'enterActions': {type: [Object], blackbox: true, optional: true},
   'exitActions': {type: [Object], blackbox: true, optional: true},
   'range': {type: new SimpleSchema({
     min: {type: Number, optional: false},
