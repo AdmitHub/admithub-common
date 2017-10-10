@@ -35,5 +35,9 @@ States.attachSchema(new SimpleSchema({
   'range': {type: new SimpleSchema({
     min: {type: Number, optional: false},
     max: {type: Number, optional: false}
-  }), optional: true}
+  }), optional: true},
+  'multipleChoices': {type: [new SimpleSchema({
+    prompt: {type: String, optional: false}
+  })], optional: true}
+
 }))
