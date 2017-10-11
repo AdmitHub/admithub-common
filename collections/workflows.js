@@ -26,5 +26,6 @@ Workflows.attachSchema(new SimpleSchema({
     })
   },
   "inputContexts": { type: Array, optional: true, defaultValue: [] },
-  "inputContexts.$": { type: String, optional: true,}
+  "inputContexts.$": { type: String, optional: true,},
+  "automaticIntroduction": { type: Boolean, optional: true}
 }));
