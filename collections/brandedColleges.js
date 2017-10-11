@@ -41,5 +41,8 @@ BrandedColleges.attachSchema(new SimpleSchema({
   studentFieldMapping: {type: Object, blackbox: true, optional: true, defaultValue: {}},
   internalFieldMapping: {type: Object, blackbox: true, optional: true, defaultValue: {}},
   csvTransformPipeline: {type: [String], optional: true, defaultValue: []},
-  prependCounselorResponse: {type: String, optional: true} // prepends counselor response to emails e.g. Your officer replied to your question:
+  prependCounselorResponse: {type: String, optional: true}, // prepends counselor response to emails e.g. Your officer replied to your question:
+  dialogSettings: {type: new SimpleSchema({
+    createAndIntroDialog: {type: String, optional: true}
+  }), optional: true}
 }));
