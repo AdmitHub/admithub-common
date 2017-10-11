@@ -4,6 +4,7 @@ OverallReachAnalytics.attachSchema(new SimpleSchema({
   messagingService: { type: String },
   createdAt: { type: Date },
   weekNumber: { type: Number },
+  year: { type: Number, optional: true },
   updatedAt: { type: Date },
   uniqueUsersReached: { type: Number },
   ignore: { type: Boolean, optional: true, defaultValue: false }
