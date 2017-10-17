@@ -1,4 +1,4 @@
-Dialogs = new Mongo.Collection('dataWorkflows')
+Dialogs = new Mongo.Collection('dialogs')
 
 Dialogs.attachSchema(new SimpleSchema({
   '_id': {type: String, optional: true},
@@ -16,9 +16,9 @@ Dialogs.attachSchema(new SimpleSchema({
   'reminders': {type: [Object], blackbox: true, optional: true}
 }))
 
-States = new Mongo.Collection('states')
+DialogStates = new Mongo.Collection('dialogStates')
 
-States.attachSchema(new SimpleSchema({
+DialogStates.attachSchema(new SimpleSchema({
   '_id': {type: String, optional: true},
   'name': {type: String, optional: true},
   'promptType': {type: String, optional: false},
