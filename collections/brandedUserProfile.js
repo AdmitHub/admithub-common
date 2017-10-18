@@ -33,6 +33,7 @@ BrandedUserSchema = new SimpleSchema({
   _lastMessageId: fields.string(o),
   _lastTransport: fields.string(o),
   _phoneToCheck: fields.string(o),
+  _previousPhone: fields.string(o),
   knownUser: {type: Boolean, optional: true},
   withdrawalReason: fields.string(o),
   name: {type: new SimpleSchema({
@@ -279,14 +280,15 @@ BrandedUserSchema = new SimpleSchema({
     actLangaugeConvention: fields.act_composite_score(o)
   }), optional: true},
   _contactSettings: {type: new SimpleSchema({
-    permittedUser: fields.bool(o),
+    canMessageGeneral: fields.bool(o),
+    canText: fields.bool(o),
     contacted: fields.bool(o),
     finished: fields.bool(o),
     generalOptIn: fields.bool(o),
-    canMessageGeneral: fields.bool(o), // TODO add
-    canText: fields.bool(o),
     nonWorkingNumber: fields.bool(o),
-    nonWorkingNumberCode: fields.string(o)
+    nonWorkingNumberCode: fields.string(o),
+    permittedUser: fields.bool(o),
+    wrongNumber: fields.bool(o)
   }), optional: true},
   _oneOff: {
     type: Object,
