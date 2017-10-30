@@ -37,7 +37,8 @@ BrandedColleges.attachSchema(new SimpleSchema({
   promptFilter: {type: String, optional: true},
   phoneFinAid: {type: String, optional: true},
   tuitionDueDate: {type: Date, optional: true}, //8 -15
-  disabledFeatures: {type: [String], defaultValue: []},
+  disabledFeatures: {type: [String], defaultValue: [], optional: true},
+  enabledFeatures: {type: [String], defaultValue: [], optional: true},
   studentFieldMapping: {type: Object, blackbox: true, optional: true, defaultValue: {}},
   internalFieldMapping: {type: Object, blackbox: true, optional: true, defaultValue: {}},
   csvTransformPipeline: {type: [String], optional: true, defaultValue: []},
