@@ -61,8 +61,9 @@ Oli = {
   // Parameter schema for ``Oli.initiate``
   initiateParams: new SimpleSchema({
     userId: {type: String, regEx: SimpleSchema.RegEx.Id},
-    // FIXME: remove transport once oli doesn't epend on it.
+    //senderId is to record the user that does the initiating in Mascot
     senderId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
+    // FIXME: remove transport once oli doesn't epend on it.
     transport: {type: String, allowedValues: ["twilio", "web"], optional: true},
     body: {type: String, optional: true},
     media: {type: String, regEx: SimpleSchema.RegEx.Url, optional: true},
