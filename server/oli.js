@@ -62,6 +62,7 @@ Oli = {
   initiateParams: new SimpleSchema({
     userId: {type: String, regEx: SimpleSchema.RegEx.Id},
     // FIXME: remove transport once oli doesn't epend on it.
+    senderId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
     transport: {type: String, allowedValues: ["twilio", "web"], optional: true},
     body: {type: String, optional: true},
     media: {type: String, regEx: SimpleSchema.RegEx.Url, optional: true},
