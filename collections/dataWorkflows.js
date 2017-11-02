@@ -24,8 +24,7 @@ DialogStates.attachSchema(new SimpleSchema({
   'promptType': {type: String, optional: false},
   'prompt': {type: String, optional: true},
   'skip': {type: new SimpleSchema({
-      'field': {type: String},
-      'value': {type: String}
+      'query': {type: String}
     }), optional: true
   },
   'media': {type: String, optional: true},
