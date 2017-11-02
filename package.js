@@ -1,19 +1,25 @@
 Package.describe({
-  name: "admithub:admithub-common",
-  summary: "Common styles, templates, and libraries for AdmitHub sites",
-  version: "0.1.2",
-  git: "https://github.com/AdmitHub/admithub-common.git"
-});
+  name: 'admithub:admithub-common',
+  summary: 'Common styles, templates, and libraries for AdmitHub sites',
+  version: '0.1.2',
+  git: 'https://github.com/AdmitHub/admithub-common.git'
+})
 
 Npm.depends({
   'aws-sdk': '2.125.0',
   'twilio': '2.1.0',
+<<<<<<< HEAD
   'us-zcta-counties': '0.0.2',
   'zipcodes': '1.1.1'
 });
 
 Package.onUse(function(api) {
+=======
+  'us-zcta-counties': '0.0.2'
+})
+>>>>>>> neolith_update_392f324
 
+Package.onUse(function (api) {
   api.use([
     'accounts-base',
     'stylus',
@@ -27,9 +33,9 @@ Package.onUse(function(api) {
     'aldeed:autoform@5.5.1',
     'matb33:collection-hooks@0.8.0',
     'meteorhacks:npm'
-  ]);
+  ])
 
-  api.addFiles('lib/ui.js', 'client');
+  api.addFiles('lib/ui.js', 'client')
 
   api.addFiles('lib/_fields.js');
   api.addFiles('lib/helpers.js');
@@ -76,6 +82,7 @@ Package.onUse(function(api) {
   api.addFiles('server/indexes.js', 'server');
   api.addFiles('server/methods.js', 'server');
   api.addFiles('server/oli.js', 'server');
+
 
   api.export([
     'BrandedApplicantConversations',

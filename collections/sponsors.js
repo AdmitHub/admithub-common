@@ -1,4 +1,4 @@
-Sponsors = new Mongo.Collection("sponsors");
+Sponsors = new Mongo.Collection('sponsors')
 Sponsors.attachSchema(new SimpleSchema({
   name: {
     type: String,
@@ -31,4 +31,4 @@ Sponsors.attachSchema(new SimpleSchema({
       allowedValues: ['www.admithub.com', 'college.admithub.com']
     }
   }
-}));
+}))

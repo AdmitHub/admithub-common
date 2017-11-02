@@ -2,36 +2,35 @@
  * Oli API
  */
 Oli = {
-  getTwilioSignature: function(authToken, url, params) {
-    Object.keys(params).sort().forEach(function(key, i) {
-      url = url + key + params[key];
-    });
+  getTwilioSignature: function (authToken, url, params) {
+    Object.keys(params).sort().forEach(function (key, i) {
+      url = url + key + params[key]
+    })
     return Npm.require('crypto').createHmac('sha1', authToken)
                                 .update(new Buffer(url, 'utf-8'))
-                                .digest('Base64');
+                                .digest('Base64')
   },
-  _callEndpoint: function(method, endpoint, params) {
-    var authToken = dotGet(Meteor, 'settings.twilio.authToken');
+  _callEndpoint: function (method, endpoint, params) {
+    var authToken = dotGet(Meteor, 'settings.twilio.authToken')
 
     var headers = {
       'X-Twilio-Signature': Oli.getTwilioSignature(
         authToken, endpoint, params)
-    };
+    }
 
-    var syncPost = Meteor.wrapAsync(HTTP.call);
+    var syncPost = Meteor.wrapAsync(HTTP.call)
     try {
       return syncPost('POST', endpoint, {
         params: params,
         headers: headers
-      });
-    }
-    catch (e) {
-      if (typeof logger !== "undefined") {
-        logger.error('Error calling ' + endpoint + ':\n  params: ', params,'\n',e);
+      })
+    } catch (e) {
+      if (typeof logger !== 'undefined') {
+        logger.error('Error calling ' + endpoint + ':\n  params: ', params, '\n', e)
       } else {
-        console.log("Error calling " + endpoint + ":\n params: ", params,'\n',e);
+        console.log('Error calling ' + endpoint + ':\n params: ', params, '\n', e)
       }
-      throw e;
+      throw e
     }
   },
   _callTokenEndpoint: function(method, endpoint, params) {
@@ -62,7 +61,7 @@ Oli = {
   initiateParams: new SimpleSchema({
     userId: {type: String, regEx: SimpleSchema.RegEx.Id},
     // FIXME: remove transport once oli doesn't epend on it.
-    transport: {type: String, allowedValues: ["twilio", "web"], optional: true},
+    transport: {type: String, allowedValues: ['twilio', 'web'], optional: true},
     body: {type: String, optional: true},
     media: {type: String, regEx: SimpleSchema.RegEx.Url, optional: true},
     workflow: {type: String, optional: true},
@@ -79,19 +78,19 @@ Oli = {
    * @param {Object} params - Parameters as defined in ``Oli.initiateParmas``
    * schema.
    */
-  initiate: function(params) {
-    check(params, Oli.initiateParams);
+  initiate: function (params) {
+    check(params, Oli.initiateParams)
     params.workflowOptions = params.workflowOptions && JSON.stringify(
       params.workflowOptions
-    );
+    )
     if (!params.workflowOptions) {
-      delete params.workflowOptions;
+      delete params.workflowOptions
     }
     return Oli._callEndpoint(
       'POST',
       dotGet(Meteor, 'settings.oli.initiate'),
       params
-    );
+    )
   },
   // parameter schema for ``Oli.handleWebMessage``
   handleWebMessageParams: new SimpleSchema({
@@ -106,19 +105,19 @@ Oli = {
    * @param {Object} params - Parameters as defined in
    * ``Oli.handleWebMessageParams`` schema
    */
-  handleWebMessage: function(params) {
-    check(params, Oli.handleWebMessageParams);
+  handleWebMessage: function (params) {
+    check(params, Oli.handleWebMessageParams)
     params.workflowOptions = params.workflowOptions && JSON.stringify(
       params.workflowOptions
-    );
+    )
     if (!params.workflowOptions) {
-      delete params.workflowOptions;
+      delete params.workflowOptions
     }
     return Oli._callEndpoint(
       'POST',
       dotGet(Meteor, 'settings.oli.handleWebMessage'),
       params
-    );
+    )
   },
   // parameter schema for ``Oli.coldSMS``
   coldSmsParams: new SimpleSchema({
@@ -135,18 +134,18 @@ Oli = {
    * Fire off an SMS to Oli, bypassing any usual workflow processing.
    * @param {Object} params - Parameters as defined in ``coldSmsParams`` schema
    */
-  coldSMS: function(params) {
-    check(params, Oli.coldSmsParams);
+  coldSMS: function (params) {
+    check(params, Oli.coldSmsParams)
     params.workflowOptions = params.workflowOptions && JSON.stringify(
       params.workflowOptions
-    );
+    )
     if (!params.workflowOptions) {
-      delete params.workflowOptions;
+      delete params.workflowOptions
     }
     return Oli._callEndpoint('POST',
       dotGet(Meteor, 'settings.oli.coldSMS'),
       params
-    );
+    )
   },
   // parameter schema for ``Oli.officerChat``
   officerChatParams: new SimpleSchema({
@@ -158,12 +157,12 @@ Oli = {
    * Send a message from a college officer to a student
    * @param {Object} params - Parameters as defined in ``officerChatParams`` schema
    */
-  officerChat: function(params) {
-    check(params, Oli.officerChatParams);
+  officerChat: function (params) {
+    check(params, Oli.officerChatParams)
     return Oli._callEndpoint('POST',
       dotGet(Meteor, 'settings.oli.officerChat'),
       params
-    );
+    )
   },
   // parameter schema for ``Oli.appendMatchMessage``
   appendMatchMessageParams: new SimpleSchema({
@@ -171,19 +170,19 @@ Oli = {
     collegeId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
     highschoolId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
     message: {type: String},
-    sender: {type: String, allowedValues: ["student", "highschool", "college", "admithub"]},
+    sender: {type: String, allowedValues: ['student', 'highschool', 'college', 'admithub']},
     onlyIfEmpty: {type: Boolean, optional: true}
   }),
   /**
    * Send a message from a student to a officer/highschool
    * @param {Object} params - Parameters as defined in ``appendMatchMessageParams`` schema
    */
-  appendMatchMessage: function(params) {
-    check(params, Oli.appendMatchMessageParams);
+  appendMatchMessage: function (params) {
+    check(params, Oli.appendMatchMessageParams)
     return Oli._callEndpoint('POST',
       dotGet(Meteor, 'settings.oli.appendMatchMessage'),
       params
-    );
+    )
   },
   // parameter schema for ``Oli.forwardToCollege``
   forwardToCollegeParams: new SimpleSchema({
@@ -198,40 +197,40 @@ Oli = {
    * Forwards a student message to a college
    * @param {Object} params - Parameters as defined in ``forwardToCollegeParams`` schema
    */
-  forwardToCollege: function(params) {
-    check(params, Oli.forwardToCollegeParams);
+  forwardToCollege: function (params) {
+    check(params, Oli.forwardToCollegeParams)
     return Oli._callEndpoint('POST',
       dotGet(Meteor, 'settings.oli.forwardToCollege'),
       params
-    );
+    )
   },
   /**
    * Express middleware to authenticate requests using twilio's authentication
    * strategy. See https://www.twilio.com/docs/security
    */
-  authenticateTwilio: function(req, res, next) {
-    var twilio = Meteor.npmRequire('twilio');
+  authenticateTwilio: function (req, res, next) {
+    var twilio = Meteor.npmRequire('twilio')
     var valid = twilio.validateRequest(
-      dotGet(Meteor, "settings.twilio.authToken") || '1234',
-      dotGet(req, "headers.x-twilio-signature"),
+      dotGet(Meteor, 'settings.twilio.authToken') || '1234',
+      dotGet(req, 'headers.x-twilio-signature'),
       Meteor.absoluteUrl(req.url.substring(1)), // strip leading "/"
       req.body
-    );
+    )
 
     if (valid) {
-      next();
+      next()
     } else {
       if (Meteor.isDevelopment) {
-        if (typeof logger !== "undefined") {
-          logger.error("Twilio auth failed; but allowing anyway, because isDevelopment is true");
+        if (typeof logger !== 'undefined') {
+          logger.error('Twilio auth failed; but allowing anyway, because isDevelopment is true')
         } else {
-          console.error("Twilio auth failed; but allowing anyway, because isDevelopment is true");
+          console.error('Twilio auth failed; but allowing anyway, because isDevelopment is true')
         }
-        next();
+        next()
       } else {
-        res.writeHead(401, {"Content-Type": "text/plain"});
-        res.end("Authentication failed");
+        res.writeHead(401, {'Content-Type': 'text/plain'})
+        res.end('Authentication failed')
       }
     }
-  },
-};
+  }
+}

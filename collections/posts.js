@@ -1,20 +1,20 @@
-// The Posts collection is owned 
+// The Posts collection is owned
 try {
-  TelescopePosts = new Mongo.Collection("posts");
+  TelescopePosts = new Mongo.Collection('posts')
 } catch (e) {
-  TelescopePosts = {};
+  TelescopePosts = {}
 }
-TelescopePosts.getCollection = function() {
-  if (typeof Posts !== "undefined") {
-    return Posts;
+TelescopePosts.getCollection = function () {
+  if (typeof Posts !== 'undefined') {
+    return Posts
   }
-  return TelescopePosts;
+  return TelescopePosts
 }
 
-TelescopePosts.STATUS_PENDING=1;
-TelescopePosts.STATUS_APPROVED=2;
-TelescopePosts.STATUS_REJECTED=3;
-TelescopePosts.findMostSimilarPost = function(question) {
+TelescopePosts.STATUS_PENDING = 1
+TelescopePosts.STATUS_APPROVED = 2
+TelescopePosts.STATUS_REJECTED = 3
+TelescopePosts.findMostSimilarPost = function (question) {
   return TelescopePosts.getCollection().findOne({
     $text: {
       $search: question
@@ -22,11 +22,11 @@ TelescopePosts.findMostSimilarPost = function(question) {
     status: TelescopePosts.STATUS_APPROVED
   }, {
     fields: {
-      score: {$meta: "textScore"}
+      score: {$meta: 'textScore'}
     },
     sort: {
-      score: {$meta: "textScore"}
+      score: {$meta: 'textScore'}
     }
-  });
-};
+  })
+}
 

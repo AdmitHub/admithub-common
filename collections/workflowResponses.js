@@ -1,4 +1,4 @@
-WorkflowResponses = new Mongo.Collection("workflowResponses");
+WorkflowResponses = new Mongo.Collection('workflowResponses')
 WorkflowResponses.attachSchema(new SimpleSchema({
   _id: {
     type: String,
@@ -16,5 +16,5 @@ WorkflowResponses.attachSchema(new SimpleSchema({
   },
   created: {
     type: Date
-  },
-}));
+  }
+}))

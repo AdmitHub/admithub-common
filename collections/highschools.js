@@ -1,4 +1,4 @@
-Highschools = new Mongo.Collection("highschools");
+Highschools = new Mongo.Collection('highschools')
 Highschools.attachSchema(new SimpleSchema({
   // userId reference
   _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
@@ -9,7 +9,7 @@ Highschools.attachSchema(new SimpleSchema({
     type: [String],
     regEx: SimpleSchema.RegEx.Id,
     optional: true,
-    autoform: {placeholder: "<user id>"},
+    autoform: {placeholder: '<user id>'},
     custom: SimpleSchema.validators.uniqueArray
   },
   students: {
@@ -21,29 +21,29 @@ Highschools.attachSchema(new SimpleSchema({
     type: [String],
     optional: true,
     unique: true,
-    custom: function() {
+    custom: function () {
       if (Meteor.isServer && this.isSet) {
-        var joined = (this.value || []).map(function(atname) {
-          return atname.trim();
-        }).join("|");
+        var joined = (this.value || []).map(function (atname) {
+          return atname.trim()
+        }).join('|')
         if (Colleges.findOne({
           atname: {
-            $regex: "^"+joined+"$",
-            $options: "i"
+            $regex: '^' + joined + '$',
+            $options: 'i'
           }
         })) {
-          return "atnameTaken";
+          return 'atnameTaken'
         }
       }
     }
   }
-}));
+}))
 
-Highschools.findFromAtname = function(atname) {
+Highschools.findFromAtname = function (atname) {
   if (!atname) {
-    return null;
+    return null
   }
   return Highschools.findOne({
-    atname: {$regex: "^"+quoteRe(atname.trim()) + "$", $options: "i"}
-  });
-};
+    atname: {$regex: '^' + quoteRe(atname.trim()) + '$', $options: 'i'}
+  })
+}
