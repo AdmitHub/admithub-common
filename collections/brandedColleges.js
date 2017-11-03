@@ -13,6 +13,7 @@ BrandedColleges.attachSchema(new SimpleSchema({
   facebookId: {type: Number, optional: true},
   filterOn: {type: Boolean, optional: true},
   hashtag: {type: String, optional: true}, // include the hash
+  hash: {type: String, optional: true}, //for validation, in the event the college uses the `createAndIntro` endpoint
   intentDeadline: {type: Date, optional: true}, // june 1
   introKnownProspectBotPhoto: {type: String, optional: true, defaultValue: ''},
   linkAcceptAid: {type: String, optional: true},
