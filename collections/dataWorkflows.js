@@ -38,6 +38,6 @@ DialogStates.attachSchema(new SimpleSchema({
   }), optional: true},
   'multipleChoices': {type: [new SimpleSchema({
     prompt: {type: String, optional: false}
-  })], optional: true}
-
+  })], optional: true},
+  'pauseTime': {type: Number, optional: true}
 }))
