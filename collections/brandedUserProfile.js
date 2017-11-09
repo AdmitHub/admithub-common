@@ -188,6 +188,7 @@ BrandedUserSchema = new SimpleSchema({
   }), optional: true},
   _contactSettings: {type: new SimpleSchema({
     canMessageGeneral: fields.bool(o),
+    canMessageFacebook: fields.bool(o),
     canText: fields.bool(o),
     contacted: fields.bool(o),
     finished: fields.bool(o),
