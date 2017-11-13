@@ -10,10 +10,7 @@ BrandedColleges.attachSchema(new SimpleSchema({
   dateAccepted: {type: String, optional: true},
   dateScholarship: {type: String, optional: true},
   emailPrefix: {type: String, optional: true},
-  facebook: {type: new SimpleSchema({
-    id: {type: String, optional: false},
-    accessToken: {type: String, optional: false}
-  }), optional: true},
+  facebookId: {type: String, optional: true},
   filterOn: {type: Boolean, optional: true},
   hashtag: {type: String, optional: true}, // include the hash
   intentDeadline: {type: Date, optional: true}, // june 1
