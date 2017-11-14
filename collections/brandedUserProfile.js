@@ -310,7 +310,7 @@ BrandedUserSchema = new SimpleSchema({
   _parking: {type: new SimpleSchema({
     bringCar: fields.bool(o) // _internal.needsParking
   }), optional: true},
-  _phoneToCheck: fields.string(o),
+  _phone: fields.string(o),
   _previousPhone: fields.string(o),
   _profile: {type: new SimpleSchema({
     description: fields.profile_description(o),
