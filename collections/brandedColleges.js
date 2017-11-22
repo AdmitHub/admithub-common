@@ -7,19 +7,32 @@ BrandedColleges.attachSchema(new SimpleSchema({
   animal: {type: String, optional: true}, // Panther
   collection: {type: String, optional: true},
   collegeId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
+  counselors: {type: [Object], blackbox: true, optional: true, defaultValue: []},
+  createAndIntroDialog: {type: String, optional: true},
+  csvTransformPipeline: {type: [String], optional: true, defaultValue: []},
   dateAccepted: {type: String, optional: true},
   dateScholarship: {type: String, optional: true},
+  departments: {type: [Object], blackbox: true, optional: true, defaultValue: []},
+  dialogSettings: {type: new SimpleSchema({
+    botOffDialog: {type: String, optional: true},
+    botOffNoDialog: {type: Boolean, optional: true},
+    finishedConversationDialog: {type: String, optional: true},
+    knownNonContactedStudentDialog: {type: String, optional: true},
+    unknownStudentDialogBotOn: {type: String, optional: true},
+    unknownStudentDialogBotOff: {type: String, optional: true},
+  }), optional: true},
+  disabledFeatures: {type: [String], defaultValue: []},
   emailPrefix: {type: String, optional: true},
   facebookId: {type: String, optional: true},
   filterOn: {type: Boolean, optional: true},
   hashtag: {type: String, optional: true}, // include the hash
+  infoGatheringBot: {type: String, optional: true}, //dialog that follows up on initial conversation in open bots
   intentDeadline: {type: Date, optional: true}, // june 1
+  internalFieldMapping: {type: Object, blackbox: true, optional: true, defaultValue: {}},
   introKnownProspectBotPhoto: {type: String, optional: true, defaultValue: ''},
   linkAcceptAid: {type: String, optional: true},
   linkAdmit: {type: String, optional: true},
   linkCounselors: {type: String, optional: true},
-  counselors: {type: [Object], blackbox: true, optional: true, defaultValue: []},
-  departments: {type: [Object], blackbox: true, optional: true, defaultValue: []},
   linkIncompleteApplication: {type: String, optional: true},
   linkFafsa: {type: String, optional: true},
   linkFinAid: {type: String, optional: true},
@@ -34,22 +47,9 @@ BrandedColleges.attachSchema(new SimpleSchema({
   messagingServiceSid: {type: String, optional: true},
   name: {type: String},
   oliName: {type: String},
+  prependCounselorResponse: {type: String, optional: true}, // prepends counselor response to emails e.g. Your officer replied to your question:
   promptFilter: {type: String, optional: true},
   phoneFinAid: {type: String, optional: true},
-  tuitionDueDate: {type: Date, optional: true}, // 8 -15
-  disabledFeatures: {type: [String], defaultValue: []},
-  dialogSettings: {type: new SimpleSchema({
-    unknownStudentDialogBotOn: {type: String, optional: true},
-    unknownStudentDialogBotOff: {type: String, optional: true},
-    knownNonContactedStudentDialog: {type: String, optional: true},
-    currentUserDialog: {type: String, optional: true},
-    botOffDialog: {type: String, optional: true},
-    botOffNoDialog: {type: Boolean, optional: true},
-    finishedConversationDialog: {type: String, optional: true}
-  }), optional: true},
   studentFieldMapping: {type: Object, blackbox: true, optional: true, defaultValue: {}},
-  internalFieldMapping: {type: Object, blackbox: true, optional: true, defaultValue: {}},
-  csvTransformPipeline: {type: [String], optional: true, defaultValue: []},
-  createAndIntroDialog: {type: String, optional: true},
-  prependCounselorResponse: {type: String, optional: true} // prepends counselor response to emails e.g. Your officer replied to your question:
+  tuitionDueDate: {type: Date, optional: true} // 8 -15
 }));
