@@ -3,6 +3,7 @@ SmsLogs.attachSchema(new SimpleSchema({
   _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   createdAt: {type: Date},
   incoming: {type: Boolean, defaultValue: false},
+  senderId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   inReplyTo: {type: String, optional: true},
   messageSid: {type: String, optional: true},
   smsSid: {type: String, optional: true},
