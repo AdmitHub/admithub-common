@@ -47,6 +47,7 @@ BrandedColleges.attachSchema(new SimpleSchema({
     botOffNoDialog: {type: Boolean, optional: true},
     finishedConversationDialog: {type: String, optional: true}
   }), optional: true},
+  enabledFeatures: {type: [String], defaultValue: [], optional: true},
   studentFieldMapping: {type: Object, blackbox: true, optional: true, defaultValue: {}},
   internalFieldMapping: {type: Object, blackbox: true, optional: true, defaultValue: {}},
   csvTransformPipeline: {type: [String], optional: true, defaultValue: []},
