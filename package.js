@@ -76,6 +76,7 @@ Package.onUse(function(api) {
   api.addFiles('server/indexes.js', 'server');
   api.addFiles('server/methods.js', 'server');
   api.addFiles('server/oli.js', 'server');
+  api.addFiles('server/neolith.js', 'server');
 
   api.export([
     'BrandedApplicantConversations',
@@ -101,6 +102,7 @@ Package.onUse(function(api) {
     'HsLeads',
     'Matches',
     'Oli',
+    'Neolith',
     'PendingEventReports',
     'TelescopePosts',
     'quoteRe',
