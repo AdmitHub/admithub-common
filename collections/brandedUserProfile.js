@@ -196,7 +196,10 @@ BrandedUserSchema = new SimpleSchema({
     nonWorkingNumber: fields.bool(o),
     nonWorkingNumberCode: fields.string(o),
     permittedUser: fields.bool(o),
-    wrongNumber: fields.bool(o)
+    wrongNumber: fields.bool(o),
+    twilioLookUpValid: fields.bool(o),
+    passiveOptOut: fields.bool(o),
+    carrier: fields.string(o)
   }), optional: true},
   _custom: {
     type: Object,
