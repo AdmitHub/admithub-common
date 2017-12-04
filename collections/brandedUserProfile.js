@@ -16,6 +16,7 @@ BrandedUserSchema = new SimpleSchema({
   userId: fields.string(),
   crmId: fields.string({optional: false}), // gsu unique id
   abGroup: {type: Number, optional: true, max: 1, min: 0, decimal: true},
+  testUser: {type: Boolean, optional: true, defaultValue: false},
   application: {type: new SimpleSchema({
     status: fields.string(o),
     id: fields.string(o),
@@ -200,7 +201,7 @@ BrandedUserSchema = new SimpleSchema({
     twilioLookUpValid: fields.bool(o),
     passiveOptOut: fields.bool(o),
     carrier: fields.string(o)
-  }), optional: true},
+  }), optional: true, defaultValue: {}},
   _custom: {
     type: Object,
     blackbox: true,
