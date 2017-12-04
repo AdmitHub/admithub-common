@@ -83,6 +83,7 @@ BrandedUserSchema = new SimpleSchema({
     crm: fields.number({min: 0, max: 5, optional: true})
   }), optional: true},
   knownUser: {type: Boolean, optional: true},
+  _testUser: {type: Boolean, optional: true},
   lastIntegrationDate: fields.date(o),
   location: {type: new SimpleSchema({
     address1: fields.address(o),
