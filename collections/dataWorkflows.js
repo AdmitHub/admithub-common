@@ -14,7 +14,7 @@ Dialogs.attachSchema(new SimpleSchema({
   'allowOpeningQuestion': {type: Boolean, optional: true},
   'expirationLength': {type: Number, optional: true},
   'reminders': {type: [Object], blackbox: true, optional: true},
-  'converted'; {type: Boolean optional: true} //a flag to show that the dialog was converted from a data workflow by script
+  'converted': {type: Boolean, optional: true} //a flag to show that the dialog was converted from a data workflow by script
 }))
 
 DialogStates = new Mongo.Collection('dialogStates')
