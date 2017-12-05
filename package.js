@@ -39,6 +39,7 @@ Package.onUse(function (api) {
   api.addFiles('collections/collegeevents.js');
   api.addFiles('collections/collegeOfficers.js');
   api.addFiles('collections/colleges.js');
+  api.addFiles('collections/dataWorkflows.js');
   api.addFiles('collections/heartbeat.js');
   api.addFiles('collections/highschools.js');
   api.addFiles('collections/leads.js');
@@ -92,6 +93,8 @@ Package.onUse(function (api) {
     'CollegesInMemory',
     'CollegeSchema',
     'Colleges',
+    'Dialogs',
+    'DialogStates',
     'fields',
     'formatPhone',
     'Heartbeats',
