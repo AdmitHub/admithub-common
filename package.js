@@ -1,9 +1,9 @@
 Package.describe({
-  name: "admithub:admithub-common",
-  summary: "Common styles, templates, and libraries for AdmitHub sites",
-  version: "0.1.2",
-  git: "https://github.com/AdmitHub/admithub-common.git"
-});
+  name: 'admithub:admithub-common',
+  summary: 'Common styles, templates, and libraries for AdmitHub sites',
+  version: '0.1.2',
+  git: 'https://github.com/AdmitHub/admithub-common.git'
+})
 
 Npm.depends({
   'aws-sdk': '2.125.0',
@@ -12,24 +12,22 @@ Npm.depends({
   'zipcodes': '1.1.1'
 });
 
-Package.onUse(function(api) {
-
+Package.onUse(function (api) {
   api.use([
     'accounts-base',
     'stylus',
     'templating',
     'underscore',
     'ecmascript',
-    'allow-deny@1.0.9',
     'admithub:dot-get@1.0.0',
     'aldeed:simple-schema@1.3.3',
     'aldeed:collection2@2.5.0',
     'aldeed:autoform@5.5.1',
     'matb33:collection-hooks@0.8.0',
     'meteorhacks:npm'
-  ]);
+  ])
 
-  api.addFiles('lib/ui.js', 'client');
+  api.addFiles('lib/ui.js', 'client')
 
   api.addFiles('lib/_fields.js');
   api.addFiles('lib/helpers.js');
@@ -41,6 +39,7 @@ Package.onUse(function(api) {
   api.addFiles('collections/collegeevents.js');
   api.addFiles('collections/collegeOfficers.js');
   api.addFiles('collections/colleges.js');
+  api.addFiles('collections/dataWorkflows.js');
   api.addFiles('collections/heartbeat.js');
   api.addFiles('collections/highschools.js');
   api.addFiles('collections/leads.js');
@@ -76,6 +75,8 @@ Package.onUse(function(api) {
   api.addFiles('server/indexes.js', 'server');
   api.addFiles('server/methods.js', 'server');
   api.addFiles('server/oli.js', 'server');
+  api.addFiles('server/neolith.js', 'server');
+
 
   api.export([
     'BrandedApplicantConversations',
@@ -92,6 +93,8 @@ Package.onUse(function(api) {
     'CollegesInMemory',
     'CollegeSchema',
     'Colleges',
+    'Dialogs',
+    'DialogStates',
     'fields',
     'formatPhone',
     'Heartbeats',
@@ -101,6 +104,7 @@ Package.onUse(function(api) {
     'HsLeads',
     'Matches',
     'Oli',
+    'Neolith',
     'PendingEventReports',
     'TelescopePosts',
     'quoteRe',

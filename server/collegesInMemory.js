@@ -1,4 +1,4 @@
-CollegesInMemory = {};
+CollegesInMemory = {}
 if (Meteor.isServer) {
   Meteor.startup(function() {
     if (Meteor.settings.noCollegeCache) return;

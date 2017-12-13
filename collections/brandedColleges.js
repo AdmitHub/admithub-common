@@ -1,6 +1,6 @@
-BrandedColleges = new Mongo.Collection("brandedcolleges");
+BrandedColleges = new Mongo.Collection('brandedcolleges')
 BrandedColleges.attachSchema(new SimpleSchema({
-  _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
+  _id: {type: String, optional: true},
   abbr: {type: String, optional: true}, // GSU
   primaryBrandColor: {type: String, optional: true},
   aiSubject: {type: String},
@@ -10,11 +10,12 @@ BrandedColleges.attachSchema(new SimpleSchema({
   dateAccepted: {type: String, optional: true},
   dateScholarship: {type: String, optional: true},
   emailPrefix: {type: String, optional: true},
-  facebookId: {type: Number, optional: true},
+  facebookId: {type: String, optional: true},
   filterOn: {type: Boolean, optional: true},
-  hashtag: {type: String, optional: true}, //include the hash
+  hashtag: {type: String, optional: true}, // include the hash
+  infoGatheringBot: {type: String, optional: true}, //dialog scheduled after the initial dialog in an open bot
   intentDeadline: {type: Date, optional: true}, // june 1
-  introKnownProspectBotPhoto: {type: String, optional: true, defaultValue: ""},
+  introKnownProspectBotPhoto: {type: String, optional: true, defaultValue: ''},
   linkAcceptAid: {type: String, optional: true},
   linkAdmit: {type: String, optional: true},
   linkCounselors: {type: String, optional: true},
@@ -36,14 +37,20 @@ BrandedColleges.attachSchema(new SimpleSchema({
   oliName: {type: String},
   promptFilter: {type: String, optional: true},
   phoneFinAid: {type: String, optional: true},
-  tuitionDueDate: {type: Date, optional: true}, //8 -15
-  disabledFeatures: {type: [String], defaultValue: [], optional: true},
+  tuitionDueDate: {type: Date, optional: true}, // 8 -15
+  disabledFeatures: {type: [String], defaultValue: []},
+  dialogSettings: {type: new SimpleSchema({
+    unknownStudentDialogBotOn: {type: String, optional: true},
+    unknownStudentDialogBotOff: {type: String, optional: true},
+    knownNonContactedStudentDialog: {type: String, optional: true},
+    botOffDialog: {type: String, optional: true},
+    createAndIntroDialog: {type: String, optional: true},
+    botOffNoDialog: {type: Boolean, optional: true},
+    finishedConversationDialog: {type: String, optional: true}
+  }), optional: true},
   enabledFeatures: {type: [String], defaultValue: [], optional: true},
   studentFieldMapping: {type: Object, blackbox: true, optional: true, defaultValue: {}},
   internalFieldMapping: {type: Object, blackbox: true, optional: true, defaultValue: {}},
   csvTransformPipeline: {type: [String], optional: true, defaultValue: []},
-  prependCounselorResponse: {type: String, optional: true}, // prepends counselor response to emails e.g. Your officer replied to your question:
-  dialogSettings: {type: new SimpleSchema({
-    createAndIntroDialog: {type: String, optional: true}
-  }), optional: true}
+  prependCounselorResponse: {type: String, optional: true} // prepends counselor response to emails e.g. Your officer replied to your question:
 }));

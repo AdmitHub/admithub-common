@@ -1,4 +1,4 @@
-PendingOfficers = new Mongo.Collection("pendingOfficers");
+PendingOfficers = new Mongo.Collection('pendingOfficers')
 PendingOfficers.attachSchema(new SimpleSchema({
   _id: {
     type: String,
@@ -20,4 +20,4 @@ PendingOfficers.attachSchema(new SimpleSchema({
     type: Date,
     optional: true
   }
-}));
+}))

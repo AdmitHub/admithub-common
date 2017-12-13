@@ -1,22 +1,22 @@
-CollegeEvents = new Mongo.Collection("collegeevents");
+CollegeEvents = new Mongo.Collection('collegeevents')
 
 CollegeEvents.attachSchema(new SimpleSchema({
   _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   organizers: {
-    type: [String], 
-    regEx: SimpleSchema.RegEx.Id, 
+    type: [String],
+    regEx: SimpleSchema.RegEx.Id,
     optional: true
   },
   subscribers: {
     type: [Object],
     optional: true
   },
-  "subscribers.$.userId": {
+  'subscribers.$.userId': {
     type: String,
     regEx: SimpleSchema.RegEx.Id,
     optional: true
   },
-  "subscribers.$.collegeId": {
+  'subscribers.$.collegeId': {
     type: String,
     regEx: SimpleSchema.RegEx.Id,
     optional: true
@@ -26,11 +26,11 @@ CollegeEvents.attachSchema(new SimpleSchema({
   },
   start: {
     type: Date,
-    autoform: {type: "datetime"}
+    autoform: {type: 'datetime'}
   },
   stop: {
     type: Date,
-    autoform: {type: "datetime"}
+    autoform: {type: 'datetime'}
   },
   location: {
     type: String,
@@ -46,7 +46,7 @@ CollegeEvents.attachSchema(new SimpleSchema({
     regEx: /\w+/
   },
   when: {
-    label: "Optional \"when\" description (\"So you want to attend ${name} on ${when}...\")",
+    label: 'Optional "when" description ("So you want to attend ${name} on ${when}...")',
     type: String,
     optional: true
   },
@@ -54,18 +54,18 @@ CollegeEvents.attachSchema(new SimpleSchema({
     type: [Object],
     optional: true
   },
-  "attendees.$.userId": {
+  'attendees.$.userId': {
     type: String,
     regEx: SimpleSchema.RegEx.Id,
     optional: true
   },
-  "attendees.$.createdAt": {
+  'attendees.$.createdAt': {
     type: Date,
     optional: true
   },
-  "attendees.$.remindersSent": {
+  'attendees.$.remindersSent': {
     type: Object,
     optional: true,
     blackbox: true
   }
-}));
+}))

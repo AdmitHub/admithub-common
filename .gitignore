@@ -2,3 +2,5 @@
 .DS_Store
 
 .meteor/local
+
+aws-conf.json
