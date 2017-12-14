@@ -88,6 +88,24 @@ Neolith = {
     );
   },
 
+  deleteScheduledMessageParams: new SimpleSchema({
+    scheduledMessageId: {type: String}
+  }),
+  /**
+   * Cancel a scheduledMessage
+   *
+   * @param {Object} params - Parameters as defined in ``Neolith.deleteScheduledMessage``
+   */
+  deleteScheduledMessage: function(params) {
+    check(params, Neolith.deleteScheduledMessageParams);
+
+    return Neolith._callEndpoint(
+      'POST',
+      dotGet(Meteor, 'settings.neolith.deleteScheduledMessage'),
+      params
+    );
+  },
+
   /**
    * Schedule a scheduledMessage
    *
