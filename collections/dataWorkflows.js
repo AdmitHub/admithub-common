@@ -14,7 +14,11 @@ Dialogs.attachSchema(new SimpleSchema({
   'allowOpeningQuestion': {type: Boolean, optional: true},
   'expirationLength': {type: Number, optional: true},
   'reminders': {type: [Object], blackbox: true, optional: true},
-  'converted': {type: Boolean, optional: true} //a flag to show that the dialog was converted from a data workflow by script
+  'converted': {type: Boolean, optional: true}, //a flag to show that the dialog was converted from a data workflow by script
+  'metadata': {type: new SimpleSchema({
+    'createdBy': {type: String, optional: false},
+    'createdVia': {type: String, optional: false}
+  }), optional: true}
 }))
 
 DialogStates = new Mongo.Collection('dialogStates')
@@ -40,5 +44,8 @@ DialogStates.attachSchema(new SimpleSchema({
   'multipleChoices': {type: [new SimpleSchema({
     prompt: {type: String, optional: false}
   })], optional: true},
-  'pauseTime': {type: Number, optional: true}
+  'pauseTime': {type: Number, optional: true},
+  'converted': {type: String, optional: true},
+  'createdAt': {type: Date, optional: true},
+  'updatedAt': {type: Date, optional: true}
 }))
