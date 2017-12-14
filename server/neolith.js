@@ -69,6 +69,7 @@ Neolith = {
     dialogId: {type: String},
     query: {type: String},
     recipientLabel: {type: String, optional: true},
+    workflowHumanName: {type: String, optional: true},
     selectedCalendar: {type: String, optional: true},
     importReportId: {type: String, optional: true}
   }),
