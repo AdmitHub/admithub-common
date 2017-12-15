@@ -8,6 +8,7 @@ Dialogs.attachSchema(new SimpleSchema({
   'messagingService': {type: String, optional: true},
   'createdAt': {type: Date, optional: true},
   'updatedAt': {type: Date, optional: true},
+  'hidden': {type: Boolean, optional: true},
   'sentToUsers': {type: Boolean, optional: true},
   'initialState': {type: String , optional: false},
   'states': {type: [String], optional: true},
