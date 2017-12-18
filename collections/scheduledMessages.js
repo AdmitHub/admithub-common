@@ -1,11 +1,11 @@
 ScheduledMessages = new Mongo.Collection('scheduledMessages')
 ScheduledMessages.attachSchema(new SimpleSchema({
     _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
+    collection: {type: String},
     createdAt: {type: Date},
     scheduledAt: {type: Date},
     allowCanTextFalse: {type: Boolean, optional: true}, // override can text false limitation for opt in wf's
     batchSize: {type: Number, optional: true},
-    collection: {type: String},
     completed: {type: Boolean, defaultValue: false},
     context: {type: String, optional: true},
     endDate: {type: Date, optional: true},
