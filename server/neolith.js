@@ -71,7 +71,9 @@ Neolith = {
     recipientLabel: {type: String, optional: true},
     workflowHumanName: {type: String, optional: true},
     selectedCalendar: {type: String, optional: true},
-    importReportId: {type: String, optional: true}
+    importReportId: {type: String, optional: true},
+    test: {type: Boolean, optional: true},
+    hidden: {type: Boolean, optional: true}
   }),
   /**
    * Schedule a scheduledMessage
