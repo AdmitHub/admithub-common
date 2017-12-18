@@ -10,7 +10,7 @@ ScheduledMessages.attachSchema(new SimpleSchema({
     context: {type: String, optional: true},
     endDate: {type: Date, optional: true},
     hidden: {type: Boolean, optional: true},
-    importReportId: {type: String, optional: true}
+    importReportId: {type: String, optional: true},
     message: {type: String, optional: true},
     messagingService: {type: String},
     note: {type: String, optional: true},
@@ -29,5 +29,5 @@ ScheduledMessages.attachSchema(new SimpleSchema({
     userSearch: {type: Object, blackbox: true, optional: true},
     weekends: {type: Boolean, optional: true},
     workflow: {type: String, optional: true},
-    workflowHumanName: {type: String, optional: true},
+    workflowHumanName: {type: String, optional: true}
 }));
