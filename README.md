@@ -6,7 +6,7 @@ Common styles, templates, and library functions and classes for AdmitHub apps
 ### BrandedApplicantConversations
 Records the history of email exchanges between student user and instution.
 Fields:
-  - `applicantId` Type: String. Required. **Deprecated**. It was some kind of special identifier of the student; it is now identical to the `userId` -- i.e., it is the `_id` of the `brandedUserProfile` document of the relevant student user. I think it is non-functional. (To do: eliminate this.)
+  - `applicantId` Type: String. Required. **Deprecated**. This was the `_id` on the `brandedApplicants` document corresponding to the user. it is now identical to the `userId` -- i.e., it is the `_id` of the `brandedUserProfile` document of the relevant student user. I think it is non-functional. (To do: eliminate this.)
   - `messages`: Type: \[Object\]. Required. An array containing object that record information about the messages exchanges between the student user and the institution. Subfields:
     - `body` Type: String. Required. The text of the message.
     - `created` Type: Date. Required. Date the message was created. (To do: change name to `createdAt`.)
@@ -20,6 +20,9 @@ Fields:
   - `handled` Type: Boolean. Optional. Default value: `false`. Indicates if the user interaction has been handled to completion or not (It think). Toggled in the UI. Used to filter messages that appear in the UI. (To do: make this required.)
   - `messagingService`: Type: String. Optional. The `messagingService` field on the relevant institutions `brandedUserProfile` document. (To do: make this required. And see `brandedCollegeId`.)
   - `userId`: Type: String. Optional. The `_id` of the `brandedUserProfile` document of the relevant student user. (To do: make this required.)
+
+### BrandedCollegeApplicants
+**Deprecated**
 
 ### BrandedColleges
 Documents containing details about partner institutions.
