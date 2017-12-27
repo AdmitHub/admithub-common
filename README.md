@@ -81,54 +81,60 @@ Fields:
 
 ### BrandedUserProfile
   User document for student users.
-  - `crmId` type: String. Required. Identifier used specifically by gsu. (To do: make this optional.)
+  - `collegeId` Type: String. Required. Value of `_id` field on the `BrandedCollege` document of the institution associated with the student.
+  - `crmId` type: String. Required. Identifier used specifically by GSU. (To do: make this optional.)
   - `userId` Type: String. Required. **Deprecated**. `_id` on the `user` document corresponding to the `brandedUserProfile`. There is no such document now; the `user`schema is reserved for Phoenix and Mascot users. This field is now identical to the `_id` field. (To do: get rid of this.)
+  - `created` Type: Date. Required. Date of creation of the user document. (To do: make this `createdAt` (or change the convention on other documents.))
   - `abGroup` Type: Number. Optional. Real number between 0 and 1, chosen at random; used for A/B testing. (To do: make this required.)
-  - `application` Type: Object. Optional. Record information about the status of a user's application. This was added with Georgia State specifically in mind, and the subfields reflect the way Georgia State records information about their applicants. (To do: determine if we want to keep this field on the `brandedUserProfile` document, given it's specificty to GSU. If not, think about where to keep existing data, if we need to keep it anywhere.) Subfields:
+  - `application` Type: Object. Optional. Record information about the status of a user's application. Subfields:
     - `id` Type: String. Optional. Id used by institution to record the application information.
-    - `status` Type: String. Optional. This is not enforced, but intended values are, in chronological order of progression, "Suspect", "Prospect", "Applicant: Incomplete", "Applicant: Complete", "Applicant: Success Academy", "Applicant: Defer", "Applicant: Denied", "Applicant: Withdrawn", "Admit", "Confirmed", "Enrolled". (To do: enforce this.)
+    - `appCompleteDate` Type: Date. Optional. Date the application was completed, if it was.
+    - `applicationType` Type: String. Optional. Unclear meaning; no existing document has this field. (To do: see if this is still wanted, if not, get rid of it.)
+    - `decisionDate` Type: Date. Optional. Date the institution made a decision about enrollment, if it did.
     - `decisionType` Type: String. Optional. Not enforced, but intended values are "Early Action" and "Regular Decision" (perhaps others, but that's all I could find.) (To do: enforce.)
-    missingDocuments: fields.bool(o),
-    statusExtended: fields.string(o),
-    receivedHSTranscript: fields.bool(o),
-    appCompleteDate: fields.date(o),
-    decisionDate: fields.date(o),
-    applicationType: fields.string(o)
-  }), optional: true},
-  created: fields.date(),
-  collegeName: fields.string(o),
-  college: fields.string(o),
-  collegeId: fields.string({optional: false}),
-  dob: fields.date(o),
-  email: fields.string(o),
-  enrollmentId: fields.string(o), //pantherId for gsu
-  entryTerm: fields.string(o),
-  entryYear: fields.number(o),
-  facebookId: fields.string(o),
-  facebookOptIn: fields.bool(o),
-  finAid: {type: new SimpleSchema({
-    fafsaReceived: fields.bool(o),
-    finAidComplete: fields.bool(o),
-    fafsaComplete: fields.bool(o),
-    finAidInterest: fields.bool(o),
-    scholarshipAwarded: fields.bool(o),
-    scholarshipAccepted: fields.bool(o),
-    acceptedOfferInternal: fields.bool(o),
-    offered: fields.bool(o),
-    entranceCounselingComplete: fields.bool(o),
-    mpnPerkinsComplete: fields.bool(o),
-    mpnStaffordPlusComplete: fields.bool(o),
-    acceptedFedLoan: fields.bool(o),
-    aidGap: fields.string(o),
-    fafsaVerificationFlagDate: fields.date(o),
-    fedLoanOffered: fields.bool(o),
-    pellAwardAmount: fields.string(o),
-    pellAwardDate: fields.date(o),
-    workstudyAmount: fields.string(o),
-    workstudtAwardDate: fields.date(o)
-  }), optional: true},
-  georgia: GeorgiaSchema,
-  housing: {type: new SimpleSchema({
+    - `missingDocuments` Type: Boolean. Optional. Indicates if the student's application is missing any documents.
+    - `receivedHSTranscript` Type: Boolean. Optional. Indicates if the institution has received the student's high school transcript.
+    - `status` Type: String. Optional. This is not enforced, but intended values are, in chronological order of progression, "Suspect", "Prospect", "Applicant: Incomplete", "Applicant: Complete", "Applicant: Success Academy" (this is Georgia State specific), "Applicant: Defer", "Applicant: Denied", "Applicant: Withdrawn", "Admit", "Confirmed", "Enrolled". (To do: enforce this.)
+    - `statusExtended` Type: String. Optional. Records further notes (further to the `status` field) on the status of the application. Example: `"Accept: Final No Letter"`.
+  - `college` Type: String. Optional. Unclear intended usage; I think this is a duplicate field of `collegeName` or `collegeId`. No current document has this field. (To do: determine if this is needed, if not, get rid of it.)
+  - `collegeName`: Type: String. Optional. Name of the institution associated with the student.
+  - `dob`: Type: Date. Optional. Date of birth of the student.
+  - `email`: Type: String. Optional. Email address of the student. (To do: enforce email-address syntax.)
+  - `enrollmentId`: Type: String. Optional. Not totally clear; has some specific meaning for GSU (their "panther Id").
+  - `entryTerm` Type: String. Optional. Term of student's enrollment in the institution. (To do: enforce intended values -- things like `Fall`, `Spring`).
+  - `entryYear` Type: Number. Optional. Year of student's enrollment
+  - `facebookId` Type: String. Optional. Facebook id of student.
+  - `facebookOptIn` Type: Boolean. Optional. Indicates if student has opted in to receiving push messages on facebook. (To do: think about whether we should nest facebook related fields as sub-fields.
+  - `finAid` Type: Object. Optional. Records information about the student's finanical aid status. Sub-fields:
+    - `acceptedFedLoan` Type: Boolean. Optional. Indicates if the student has accepted a federal loan.
+    - `acceptedOfferInternal` Type: Boolean. Optional. Unclear intended usage. No existing document has this field. (To do: determine if this is needed; if not get rid of it.)
+    - `aidGap` Type: String. Optional. Unclear intended usage. No existing document has a non-null value for this field. (To do: determine if this is needed. If not, get rid of it.)
+    - `entranceCounselingComplete` Type: Boolean. Optional. *I think* it's meant to indicate if the finanical aid office has counseled the student on their optionas.
+    - `fafsaComplete` Type: Boolean. Optional. Indicates if the student's fafsa application is complete. (To do: determine if both this and `fafsaReceived` are needed.)
+    - `fafsaReceived` Type: Boolean. Optional. Indicates if the student's fafsa application has been received.
+    - `fafsaVerificationFlagDate`: Type: Date. Optional. I'm not sure what this is about; presumably something to do with the fafsa application process.
+    - `fedLoanOffered` Type: Boolean. Optional. Indicates if a federal loan has been offered to the student.
+    - `finAidComplete` Type: Boolean. Optional. Indicates if the student's application for insitutional finanical aid is complete.
+    - `finAidInterest` Type: Boolean. Optional. Indicates if the student has expressed interest in receiving financial aid.
+    - `offered`: Type: Boolean. Optional. Unclear intended usage. It's compatible with having `scholarshipAwarded: false`. (To do: determine what this is supposed to mean.)
+    - `mpnPerkinsComplete` Type: Boolean. Optional. Indicates if the student has completed an application for the Federal Perkins Loan Master Promissory Note.
+    - `mpnStaffordPlusComplete`. Type: Boolean. Optional. Indicates if the student has completed an application for the Stafford or PLUS federal loan.
+    - `pellAwardAmount` TypeL String. Optional. I think this is supposed to indicate the amount of money the government granted the student with a Pell Grant, but there are no current documents with non-null values for this field.
+    - `pellAwardDate` Type: Date. Optional. I *think* the date on which the government awarded the student a Pell Grant.
+    - `scholarshipAccepted` Type: Boolean. Optional. Indicates if the student has accepted a scholarship from the institution.
+    - `scholarshipAwarded` Type: Boolean. Optional. Indicates if the institution has awarded the student a scholarship.
+    - `workstudyAmount` Type: String. Optional. I think it is supposed to indicate the amoutn of money the students gets via the Federal Work Study program.
+    - `workstudtAwardDate` Type: Date. Optional. Presumably the date on thich the Student was accepted into the Work Study program. (To do: correct the typo.)
+  - `georgia` Type: Object. Optional. Set of Georgia State-specific fields. Subfields:
+    - `hopeAwardAmount` Type: String. Optional. Presumably the amount of money GSU awarded the student with a HOPE scholarship.
+    - `hopeAwardDate` Type: Date. Optional. Date on which GSU awarded the student a HOPE scholarship.
+    - `hopeGSFAppSubmitted` Type: Date. Optional. Unclear; something to do with a Georgia based scholarsip called `GSF` and Georgia State University's own HOPE scholarship.
+    - `successAcademy`: Type: Object. Optional. Contains information about the student's relationship to GSU's Success Academy. Subfields:
+      - `accepted` Type: Boolean. Optional. Indicates if the Success Academy accepted the student's application.
+      - `appReceived` Type: Boolean. Optional. Indicates if GSU has received an application to the Success Academy from the student.
+      - `qualified` Type: Boolean. Optional. Indicates if the student is qualified to enroll in the Success Academy.
+      
+housing: {type: new SimpleSchema({
     onCampus: fields.bool(o),
     preferenceType: fields.preference_type(o),
     depositPaid: fields.bool(o),
