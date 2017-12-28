@@ -172,26 +172,25 @@ Fields:
    - `needsToRsvp` Type: Boolean. Optional. *I think* this indicates whether the student still needs to RSVP to the orientation invitation. (To do: give this a clearer name.)
    - `registeredDate` Type: Date. Optional. Date at which the student registered to attend orientation.
  - `permittedUser` Type: Boolean. Optional. Indicates if the user is permitted to interact with the bot.
- - `phone` fields.string(o),
-  presumedState: {type: new SimpleSchema({
-    fafsaReceived: fields.bool(o), // finAid.fafsaReceived /
-    finAidComplete: fields.bool(o), // finAid.finAidComplete /
-    housingDepositPaid: fields.bool(o), // housing.depositPaid /
-    orientationAttendedDate: fields.date(o), // orientation.attendedDate /
-    orientationNeedsToRsvp: fields.bool(o), // orientation.needsToRsvp /
-    intendsToEnroll: fields.bool(o) // intent.intendsToEnroll /
-  }), optional: true}, 
-  profile: {type: new SimpleSchema({
-    studentType: fields.student_type(o),
-    studentCategory: fields.student_category(o),
-    citizenVerified: fields.bool(o),
-    immunizationHold: fields.bool(o),
-    emergencyContactHold: fields.bool(o),
-    hsName: fields.string(o),
-    hsZip: fields.zip_code(o),
-    hsGradYear: fields.expected_graduation_year(o),
-    intendedMajor: fields.long_string(o),
-    honors: fields.bool(o),
+ - `phone` Type: String. Optional. The field to which astronomer writes phone information. Not to be confused with the `_phone` field.
+ - `presumedState` Type: Object. Optional. Not clear what is supposed to unite all the information in this field. (To do, figure out what this is about. Possibly get rid of it.) Subfields:
+   - `fafsaReceived` Type: Boolean. Optional. The same information as recorded in `finAid.fafsaReceived`.
+   - `finAidComplete` Type: Boolean. Optional. The same information as recorded in `finAid.findAidComplete`.
+   - `housingDepositPaid` Type: Boolean. Optional. The same information as recorded in `housing.depositPaid`.
+   - `orientationAttendedDate` Type: Date. Optional. The same information as recorded in `orientation.attendedDate`.
+   - `orientationNeedsToRsvp` Type: Boolean. Optional. The same information as recorded in `orientation.needsToRsvp`.
+   - `intendsToEnroll` Type: Boolean. Optional. The same information as recorded in `intent.intendsToEnroll`.
+ - `profile`: Type: Object. Optional. Unclear what unifies the information in here. (To do: if there isn't a good reason not to, record as much of this information in other fields as possible. If feasible, remove field entirely.) Subfields:
+   - `citizenVerified` Type: Boolean. Optional. Indicates that the citizenship of the student has been verified.
+   - `emergencyContactHold` Type: Boolean. Optional.
+   - `immunizationHold` Type: Boolean. Optional. Not entirely clear -- something to do with immunization?
+   - `studentCategory` Type: String. Optional. Allowed values: 'prospect', 'applicant', 'admit', 'enrolled', 'dropout', 'alumni'. Some of this information is duplicated in `application.status`, but that might be ok. (To do: determine if this is ok.)
+   - `studentType` Type: String. Optional. Allowed fields: 'Freshman', 'Dual Enrollment', 'Non-Degree', 'Non-Traditional', 'Postbaccalaureate', 'Transfer', 'Transient', 'Unknown', 'Continuing or Returning', 'Intl Exchange Student', 'Joint Enrollment', 'Program for Excellence', 'GSU-62'. Some of these allowed values are specific to GSU. Some of these allowed values are not on any existing document.
+   - `hsName` Type: String. Optional. Name of the student's highschool.
+   - `hsZip` Type: String. optiona. Student's highschool's zip code. (To do: enforce zip-code syntax.)
+   - `hsGradYear` Type: Number. Allowed values: year number 70 years before present to 30 years after present.
+   - `intendedMajor` Type: String. Optional. Strictly, max of 3000 characters, but whatever. Major the student intends to pursue.
+   - `honors` Type: Boolean. Optional. I presume this indicates whether the student got some kind of honours.
     hsCode: fields.string(o),
     intendedCollege: fields.string(o),
     majorInterest: fields.string(o),
