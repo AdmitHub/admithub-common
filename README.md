@@ -183,60 +183,52 @@ Fields:
  - `profile`: Type: Object. Optional. Unclear what unifies the information in here. (To do: if there isn't a good reason not to, record as much of this information in other fields as possible. If feasible, remove field entirely.) Subfields:
    - `citizenVerified` Type: Boolean. Optional. Indicates that the citizenship of the student has been verified.
    - `emergencyContactHold` Type: Boolean. Optional.
+   - `firstGen` Type: Boolean. Optional.
+   - `honors` Type: Boolean. Optional. I presume this indicates whether the student got some kind of honours.
+   - `honorsProspect` Type: Boolean. Optional. I don't know; something to do with being a prosect for some kind of honours.
+   - `hsCode` Type: String. Optional. Some kind of code for the student's highschool.
+   - `hsGradYear` Type: Number. Allowed values: year number 70 years before present to 30 years after present.
+   - `hsName` Type: String. Optional. Name of the student's highschool.
+   - `hsZip` Type: String. Optional. Student's highschool's zip code. (To do: enforce zip-code syntax.)
    - `immunizationHold` Type: Boolean. Optional. Not entirely clear -- something to do with immunization?
+   - `intendedCollege` Type: String. Optional. I guess the college the student intends to attend. No current document has a non-null value for this field. (To do: maybe get rid of it.)
+   - `intendedMajor` Type: String. Optional. Strictly, max of 3000 characters, but whatever. Major the student intends to pursue.
+   - `majorInterest` Type: String. Optional. I guess the major the student is interested in. No current document has a non-null value for this field. (To do: maybe get rid of it.)
+   - `residency` Type: String. Options. Residency status of the student. No current document has thie field. (To do: get rid of it.)
    - `studentCategory` Type: String. Optional. Allowed values: 'prospect', 'applicant', 'admit', 'enrolled', 'dropout', 'alumni'. Some of this information is duplicated in `application.status`, but that might be ok. (To do: determine if this is ok.)
    - `studentType` Type: String. Optional. Allowed fields: 'Freshman', 'Dual Enrollment', 'Non-Degree', 'Non-Traditional', 'Postbaccalaureate', 'Transfer', 'Transient', 'Unknown', 'Continuing or Returning', 'Intl Exchange Student', 'Joint Enrollment', 'Program for Excellence', 'GSU-62'. Some of these allowed values are specific to GSU. Some of these allowed values are not on any existing document.
-   - `hsName` Type: String. Optional. Name of the student's highschool.
-   - `hsZip` Type: String. optiona. Student's highschool's zip code. (To do: enforce zip-code syntax.)
-   - `hsGradYear` Type: Number. Allowed values: year number 70 years before present to 30 years after present.
-   - `intendedMajor` Type: String. Optional. Strictly, max of 3000 characters, but whatever. Major the student intends to pursue.
-   - `honors` Type: Boolean. Optional. I presume this indicates whether the student got some kind of honours.
-    hsCode: fields.string(o),
-    intendedCollege: fields.string(o),
-    majorInterest: fields.string(o),
-    residency: fields.string(o),
-    honorsProspect: fields.bool(o),
-    firstGen: fields.bool(o)
-  }), optional: true},
-  smsInfo: {type: Object, blackbox: true, optional: true, defaultValue: {}},
-  schoolEmail: fields.email(o),
-  studyGroupMember: fields.bool(o),
-  supplemental: {type: new SimpleSchema({
-    first: fields.string(o),
-    second: fields.string(o),
-    third: fields.string(o),
-    fourth: fields.string(o),
-    fifth: fields.string(o)
-  }), optional: true},
-  tests: {type: new SimpleSchema({
-    gpa: fields.number({decimal: true, optional: true}),
-    maxGpa: fields.number({decimal: true, optional: true}),
-    satComposite: fields.sat_composite_score(o),
-    satMath: fields.sat_score(o),
-    satReading: fields.sat_score(o),
-    satEssay: fields.sat_essay_score(o),
-    satAnalysis: fields.sat_essay_score(o),
-    satWriting: fields.sat_essay_score(o),
-    actComposite: fields.act_composite_score(o),
-    actMath: fields.act_composite_score(o),
-    actScience: fields.act_composite_score(o),
-    actEnglish: fields.act_composite_score(o),
-    actReading: fields.act_composite_score(o),
-    actWriting: fields.act_composite_score(o),
-    actIdeasAnalysis: fields.act_composite_score(o),
-    actDevAndSupport: fields.act_composite_score(o),
-    actOrganization: fields.act_composite_score(o),
-    actLangaugeConvention: fields.act_composite_score(o)
-  }), optional: true},
-  textSetting: {type: new SimpleSchema({
-    canText: fields.bool(o),
-    wrongNumber: fields.bool(o), // moved to user doc
-    newPhone: fields.phone_number(o)
-  }), optional: true},
-  tuiton: {type: new SimpleSchema({
-    paymentPlan: fields.bool(o)
-  }), optional: true},
-  withdrawalReason: fields.string(o),
+ - `smsInfo` Type: Object. Optional. Default value: empty object. Blackbox. Information about the last message exchange with the student. (To do: make this required.)
+ - `schoolEmail` Type: String. Regex constrint: SimpleSchema.RegEx.Email. Student's institution-related email.
+ - `studyGroupMember` Type: Boolean. Optional. Indicates if the student is a part of a study, like the one we did on summer melt.
+ - `supplemental` Type: Object. Optional. Seems totally useless. No current document has this field. (To do: get rid of this.)
+   - `first` Type: String. Optional. Useless.
+   - `second` Type: String. Optional. Useless.
+   - `third` Type: String. Optional. Useless.
+   - `fourth` Type: String. Optional. Useless.
+   - `fifth` Type: String. Optional. Useless.
+ - `tests` Type: Object. Optional. Contains information about the students results on various standardised tests.
+   - `actEnglish` fields.act_composite_score(o),
+   - `actComposite` Type: Number. Min: 1, max: 36. Composite ACT score.
+   - `actDevAndSupport` Type: Number. Min: 1, max: 36. Some other ACT score. Dev and support?
+   - `actIdeasAnalysis` Type: Number Min: 1, max: 36. ACT ideas analysis score.
+   - `actLangaugeConvention` Type: Number. Min: 1, max: 36. ACT score of some kind.
+   - `actMath` Type: Number. Min: 1, max: 36. ACT math score.
+   - `actOrganization` Type: Number. Min: 1, max: 36. Another ACT score of some kind. What *is* the ACT anyway.
+   - `actReading` Type: Number. Min: 1, max: 36. ACT reading score.
+   - `actScience` Type: Number. Min: 1, max: 36. ACT science score.
+   - `actWriting` Type: Number. Min: 1, max: 36. ACT writing score.
+   - `gpa` Type: Number (decimals allowed). Optional. Grade point average.
+   - `maxGpa` Type: Number (decimals allowed). Optional. Maximum grade point average.
+   - `satAnalysis` Type: Number. Min: 2, max: 12. SAT analysis score.
+   - `satEssay` Type: Number. Min: 2, max: 12. SAT essay score.
+   - `satComposite` Type: Number. Min: 600, max: 2400. Optional. SAT composite score.
+   - `satMath` Type: Number. Min: 200, max: 800. Optional. SAT math score.
+   - `satReading` Type: Number. Min: 200, max: 800. SAT reading comprehension score.
+   - `satWriting` Type: Number. Min: 2, max: 12. SAT writing score. (Is this different to the two above SAT scores?)
+ - `textSetting` Type: Object. Optional. **Deprecated**. We use `_contactSettings` now.
+ - `tuiton` Type: Object. Optional. (To do: unless there's a reason not to, get rid of this.) Has exactly one subfield:
+   - `paymentPlan`: Type: Boolean. Optional. No current document has a non-null value.
+ - `withdrawalReason` Type: String. Optional. Reason the student withrew, presumably. No current document has a non-null value. (To do: get rid of this.)
   _aidLastPush: {type: new SimpleSchema({ // all internal._aidLast
     planSubmitFafsa: fields.bool(o), // all internal._aidLast
     helpCompletingFafsa: fields.string(o), // all internal._aidLast
