@@ -85,7 +85,6 @@ Fields:
   - `crmId` type: String. Required. Identifier used specifically by GSU. (To do: make this optional.)
   - `userId` Type: String. Required. **Deprecated**. `_id` on the `user` document corresponding to the `brandedUserProfile`. There is no such document now; the `user`schema is reserved for Phoenix and Mascot users. This field is now identical to the `_id` field. (To do: get rid of this.)
   - `created` Type: Date. Required. Date of creation of the user document. (To do: make this `createdAt` (or change the convention on other documents.))
-  - `_testUser` Type: Boolean. Optional. Indicates that this is a test user.
   - `abGroup` Type: Number. Optional. Real number between 0 and 1, chosen at random; used for A/B testing. (To do: make this required.)
   - `application` Type: Object. Optional. Record information about the status of a user's application. Subfields:
     - `id` Type: String. Optional. Id used by institution to record the application information.
@@ -148,7 +147,7 @@ Fields:
     - `counselorCanContact` Type: Boolean. Optional. Indicates if it is ok for a counselor to initiate contact with the student; I'm not sure how this is determined.
  - `interest` Object. Optional. Unclear what the intended usage is here. Has exactly one subfield:
    - `crm` Type: Number. Optional. Allowed values: `1` through `5`. I don't know what this means. (To do: figure out if this is needed. If not get rid of it. Also: figure out why this isn't on the top level; if there isn't a reason, move it.)
- - `knownUser` Type: Boolean. Optional. Indicates the user is known to the system. The only users who will not have `knownUser: true` are users that are communicating with the bot cold. It is possible to be `knownUser: true` before any communication occurs if, for example, the student data was imported.
+ - `knownUser` Type: Boolean. Optional. Indicates the user is known to the system. The only users who will not have `knownUser: true` are users that are communicating with the bot cold. It is possible to be `knownUser: true` before any communication occurs if, for example, the student data was imported. (To do: move this to a subfield of `_contactSettings`.)
  - `lastIntegrationDate` Type: Date. Optional. Indicates the last date on which user data was integrated into the system via Astronomer. (To do: determine if all astronomer-related stuff should be subfields of the one field.)
  - `location`: Type: Object. Optional. *I think* this is the contact address of the student. Subfields:
    - `address1` Type: String. Optional. First line of an address.
@@ -171,7 +170,7 @@ Fields:
    - `attendedDate` Type: Date. Optional. Date at which the student attended orientation.
    - `needsToRsvp` Type: Boolean. Optional. *I think* this indicates whether the student still needs to RSVP to the orientation invitation. (To do: give this a clearer name.)
    - `registeredDate` Type: Date. Optional. Date at which the student registered to attend orientation.
- - `permittedUser` Type: Boolean. Optional. Indicates if the user is permitted to interact with the bot.
+ - `permittedUser` **Deprecated**. We use the subfield of `_contactSettings` now. (To do: get rid of this.)
  - `phone` Type: String. Optional. The field to which astronomer writes phone information. Not to be confused with the `_phone` field.
  - `presumedState` Type: Object. Optional. Not clear what is supposed to unite all the information in this field. (To do, figure out what this is about. Possibly get rid of it.) Subfields:
    - `fafsaReceived` Type: Boolean. Optional. The same information as recorded in `finAid.fafsaReceived`.
@@ -227,30 +226,29 @@ Fields:
    - `satWriting` Type: Number. Min: 2, max: 12. SAT writing score. (Is this different to the two above SAT scores?)
  - `textSetting` Type: Object. Optional. **Deprecated**. We use `_contactSettings` now.
  - `tuiton` Type: Object. Optional. (To do: unless there's a reason not to, get rid of this.) Has exactly one subfield:
-   - `paymentPlan`: Type: Boolean. Optional. No current document has a non-null value.
+   - `paymentPlan` Type: Boolean. Optional. No current document has a non-null value.
  - `withdrawalReason` Type: String. Optional. Reason the student withrew, presumably. No current document has a non-null value. (To do: get rid of this.)
-  _aidLastPush: {type: new SimpleSchema({ // all internal._aidLast
-    planSubmitFafsa: fields.bool(o), // all internal._aidLast
-    helpCompletingFafsa: fields.string(o), // all internal._aidLast
-    planAttendOrientation: fields.bool(o), // all internal._aidLast
-    allSetHousing: fields.bool(o), // all internal._aidLast
-    unableToMakePayment: fields.bool(o) // all internal._aidLast
-  }), optional: true},
-  _contactSettings: {type: new SimpleSchema({
-    canMessageGeneral: fields.bool(o),
-    canMessageFacebook: fields.bool(o),
-    canText: fields.bool(o),
-    contacted: fields.bool(o),
-    finished: fields.bool(o),
-    generalOptIn: fields.bool(o),
-    nonWorkingNumber: fields.bool(o),
-    nonWorkingNumberCode: fields.string(o),
-    permittedUser: fields.bool(o),
-    wrongNumber: fields.bool(o),
-    twilioLookUpValid: fields.bool(o),
-    passiveOptOut: fields.bool(o),
-    carrier: fields.string(o)
-  }), optional: true},
+ - `_testUser` Type: Boolean. Optional. Indicates that this is a test user.
+ - `_aidLastPush` Type: Object. Optional. I think this contains responses to a particular dialog. (To do: confirm that this is so, if it is, get rid of it.) Subfields are all states to which the user responds:
+   - `planSubmitFafsa` Type: Boolean. Optional.
+   - `helpCompletingFafsa` Type: Boolean. Optional.
+   - `planAttendOrientation` Type: Boolean. Optional.
+   - `allSetHousing` Type: Boolean. Optional.
+   - `unableToMakePayment` Type: Boolean. Optional.
+ - `_contactSettings` Type: Object. Optional. Contains information about the user that helps determine large-scale bot behaviour. (To do: make this required.) Subfields:
+    - `canMessageGeneral` Type: Boolean. Optional. `canMessageGeneral` is false when, for any reason, we may not send messages via any transport to the user.
+    - `canMessageFacebook` Type: Boolean. Optional. Indicates if we may send facebook messages to the user.
+    - `canText` Type: Boolean. Optional. Currently playing the role envisioned for `canMessageGeneral`. Should, eventuall, be confined to the sms transport. (To do: make it so.)
+    - `carrier` Type: String. Optional. Indicates which carrier the user's phone uses. (To do: restrict possible values.)
+    - `contacted` Type: Boolean. Optional. Indicates if the bot has sent the user a message before. (To do: make this required.)
+    - `finished` Type: Boolean. Optional. Indicates we are finished with out dealings with this user. (To do: determine if this is necessary, given the other fields. If not, get rid of it, and change the name to make the user case more obvious.)
+    - `generalOptIn` Type: Boolean. Optional. 
+    - `nonWorkingNumber` Type: Boolean. Optional. Indicates the phone number we have for the user doesn't work.
+    - `nonWorkingNumberCode` Type: Boolean. Optional. Don't know what this is about. No existing document has this subfield. (To do: see about getting rid of this.)
+    - `passiveOptOut` Type: Boolean. Optional. Indicates that user has failed to opt in when an opt in was required, and should be treated as having opted out.
+    - `permittedUser`Type: Boolean. Optional. Indicates if the user is permitted to interact with the bot. (To do: make this required.)
+    - `twilioLookUpValid`. Type: Boolean. Optional. Don't know. No existing document has this subfield. (To do: see about getting rid of this.) 
+    - `wrongNumber` Type: Boolean. Optional. Indicates if the number we have for the user is not in fact theirs.
   _custom: {
     type: Object,
     blackbox: true,
