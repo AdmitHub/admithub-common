@@ -85,6 +85,7 @@ Fields:
   - `crmId` type: String. Required. Identifier used specifically by GSU. (To do: make this optional.)
   - `userId` Type: String. Required. **Deprecated**. `_id` on the `user` document corresponding to the `brandedUserProfile`. There is no such document now; the `user`schema is reserved for Phoenix and Mascot users. This field is now identical to the `_id` field. (To do: get rid of this.)
   - `created` Type: Date. Required. Date of creation of the user document. (To do: make this `createdAt` (or change the convention on other documents.))
+  - `_testUser` Type: Boolean. Optional. Indicates that this is a test user.
   - `abGroup` Type: Number. Optional. Real number between 0 and 1, chosen at random; used for A/B testing. (To do: make this required.)
   - `application` Type: Object. Optional. Record information about the status of a user's application. Subfields:
     - `id` Type: String. Optional. Id used by institution to record the application information.
@@ -133,62 +134,45 @@ Fields:
       - `accepted` Type: Boolean. Optional. Indicates if the Success Academy accepted the student's application.
       - `appReceived` Type: Boolean. Optional. Indicates if GSU has received an application to the Success Academy from the student.
       - `qualified` Type: Boolean. Optional. Indicates if the student is qualified to enroll in the Success Academy.
-      
-housing: {type: new SimpleSchema({
-    onCampus: fields.bool(o),
-    preferenceType: fields.preference_type(o),
-    depositPaid: fields.bool(o),
-    depositDate: fields.date(o)
-  }), optional: true},
-  importData: {
-    type: Object,
-    blackbox: true,
-    defaultValue: {},
-    optional: true
-  },
-  importSegmentLabels: {type: [String], optional: true, defaultValue: []},
-  inStateStudent: fields.bool(o),
-  intent: {type: new SimpleSchema({
-    intendsToEnroll: fields.bool(o),
-    intentReceivedDate: fields.date(o),
-    counselorCanContact: fields.bool(o)
-  }), optional: true},
-  interest: {type: new SimpleSchema({
-    crm: fields.number({min: 0, max: 5, optional: true})
-  }), optional: true},
-  knownUser: {type: Boolean, optional: true},
-  _testUser: {type: Boolean, optional: true},
-  lastIntegrationDate: fields.date(o),
-  location: {type: new SimpleSchema({
-    address1: fields.address(o),
-    address2: fields.address(o),
-    address3: fields.address(o),
-    city: fields.string(o),
-    county: fields.string(o),
-    state: fields.state(o),
-    zip: fields.zip_code(_.extend(o)),
-    country: fields.string(o)
-  }), optional: true},
-  meta: {
-    type: Object,
-    blackbox: true,
-    optional: true
-  },
-  name: {type: new SimpleSchema({
-    first: fields.string(o),
-    last: fields.string(o),
-    middleName: fields.string(o),
-    full: fields.string(o),
-    nickName: fields.string(o)
-  }), optional: true},
-  orientation: {type: new SimpleSchema({
-    needsToRsvp: fields.bool(o),
-    attended: fields.bool(o),
-    attendedDate: fields.date(o),
-    registeredDate: fields.date(o)
-  }), optional: true},
-  permittedUser: fields.bool(o),
-  phone: fields.string(o),
+  - `housing`: Type: Object. Optional. Contains information about the student's accomodation. Subfields:
+    - `depositDate` Type: Date. Optional. Unclear if this is intended to be the sate the deposit must be payed *by* or the date it in fact was paid *on*. (To do: determine the intended usage of this field.)
+    - `depositPaid` Type: Boolean. Optional. Indicates whether or not a student has paid a deposit for their housing.
+    - `onCampus` Type: Boolean. Optional. Indicates student lives on campus.
+    - `preferenceType` Type: String. Optional. Allowed values: 'Residence hall', 'Off-campus', 'Parents', 'Married housing', 'Fraternity/Sorority'. Indicates the preffered living arrangment of the student.
+  - `importData` Type: Object. Optional. Default value: empty object. Black-box. Used by astronomer and the brookline user creation endpoint for any unmapped data. (To do: determine if there is any need for this default value.)
+  - `importSegmentLabels` Type: \[String\]. Optional. Default value: empty array. List of labels used to identify a batch of students imported on a single occasion. For each time the student is imported, there is a string in the `importSegmentLabels` array, and vice-versa.
+  - `inStateStudent` Type: Boolean. Optional. Indicates if the student counts as "in-state" for the purposes of enrollment and tuition.
+  - `intent` Type: Object. Optional. Contains information concerning a propsective students intent to enroll. Subfields:
+    - `intentReceivedDate`Type: Date. Optional. Indicates date at which the institution received some kind of formal statement of intent to enroll from the student.
+    - `intendsToEnroll` Type: Boolean. Optional. Indicates whether or not the student intends to enroll (presumably as indicated in the aforementioned formal way.)
+    - `counselorCanContact` Type: Boolean. Optional. Indicates if it is ok for a counselor to initiate contact with the student; I'm not sure how this is determined.
+ - `interest` Object. Optional. Unclear what the intended usage is here. Has exactly one subfield:
+   - `crm` Type: Number. Optional. Allowed values: `1` through `5`. I don't know what this means. (To do: figure out if this is needed. If not get rid of it. Also: figure out why this isn't on the top level; if there isn't a reason, move it.)
+ - `knownUser` Type: Boolean. Optional. Indicates the user is known to the system. The only users who will not have `knownUser: true` are users that are communicating with the bot cold. It is possible to be `knownUser: true` before any communication occurs if, for example, the student data was imported.
+ - `lastIntegrationDate` Type: Date. Optional. Indicates the last date on which user data was integrated into the system via Astronomer. (To do: determine if all astronomer-related stuff should be subfields of the one field.)
+ - `location`: Type: Object. Optional. *I think* this is the contact address of the student. Subfields:
+   - `address1` Type: String. Optional. First line of an address.
+   - `address2` Type: String. Optional. Second line of the address, if there is one.
+   - `address3` Type: String. Optional. Third line of the address, if there is one.
+   - `city` Type: String. Optional. City part of the address.
+   - `country` Type: String. Optional. Country of the address.
+   - `county` Type: String. Optional. County part of the address, if there is one.
+   - `state` Type: String. Optional. Regex constraint: `/^A[LKSZRAEP]|C[AOT]|D[EC]|F[LM]|G[AU]|HI|I[ADLN]|K[SY]|LA|M[ADEHINOPST]|N[CDEHJMVY]|O[HKR]|P[ARW]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY]$/`. State.
+   - `zip` Type: String. Optional. Zip code. (To do: consider changing the name if we're intending to use this for non-U.S. addresses.)
+ - `meta` Type: Object. Optional. Black box. Contains a bunch of information recording the history of user interaction with the system. (To do: un-black-box this.)
+ - `name` Type: Object. Optional. Contains information about the student's name. Subfields.
+   - `first` Type: String. Optional. First name.
+   - `last` Type: String. Optional. Last name.
+   - `middleName` Type: String. Optional. Middle name.
+   - `full` Type: String. Optional. Full name.
+   - `nickName` Type: String. Optional. Nick name.
+ - `orientation`Type: Object. Optional. Contains information about the students intention to attend orientation.
+   - `attended` Type: Boolean. Optional. Indicates whether the student attended orientation or not.
+   - `attendedDate` Type: Date. Optional. Date at which the student attended orientation.
+   - `needsToRsvp` Type: Boolean. Optional. *I think* this indicates whether the student still needs to RSVP to the orientation invitation. (To do: give this a clearer name.)
+   - `registeredDate` Type: Date. Optional. Date at which the student registered to attend orientation.
+ - `permittedUser` Type: Boolean. Optional. Indicates if the user is permitted to interact with the bot.
+ - `phone` fields.string(o),
   presumedState: {type: new SimpleSchema({
     fafsaReceived: fields.bool(o), // finAid.fafsaReceived /
     finAidComplete: fields.bool(o), // finAid.finAidComplete /
