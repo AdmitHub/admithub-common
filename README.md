@@ -196,7 +196,7 @@ Fields:
    - `residency` Type: String. Options. Residency status of the student. No current document has thie field. (To do: get rid of it.)
    - `studentCategory` Type: String. Optional. Allowed values: 'prospect', 'applicant', 'admit', 'enrolled', 'dropout', 'alumni'. Some of this information is duplicated in `application.status`, but that might be ok. (To do: determine if this is ok.)
    - `studentType` Type: String. Optional. Allowed fields: 'Freshman', 'Dual Enrollment', 'Non-Degree', 'Non-Traditional', 'Postbaccalaureate', 'Transfer', 'Transient', 'Unknown', 'Continuing or Returning', 'Intl Exchange Student', 'Joint Enrollment', 'Program for Excellence', 'GSU-62'. Some of these allowed values are specific to GSU. Some of these allowed values are not on any existing document.
- - `smsInfo` Type: Object. Optional. Default value: empty object. Blackbox. Information about the last message exchange with the student. (To do: make this required.)
+ - `smsInfo` Type: Object. Optional. Default value: empty object. Blackbox. Information about the last message exchange with the student. (To do: get rid of this in favour of the field that includes `_lastMessageId` and `_lastTransport` as subfields.)
  - `schoolEmail` Type: String. Regex constrint: SimpleSchema.RegEx.Email. Student's institution-related email.
  - `studyGroupMember` Type: Boolean. Optional. Indicates if the student is a part of a study, like the one we did on summer melt.
  - `supplemental` Type: Object. Optional. Seems totally useless. No current document has this field. (To do: get rid of this.)
@@ -249,137 +249,108 @@ Fields:
     - `permittedUser`Type: Boolean. Optional. Indicates if the user is permitted to interact with the bot. (To do: make this required.)
     - `twilioLookUpValid`. Type: Boolean. Optional. Don't know. No existing document has this subfield. (To do: see about getting rid of this.) 
     - `wrongNumber` Type: Boolean. Optional. Indicates if the number we have for the user is not in fact theirs.
-  _custom: {
-    type: Object,
-    blackbox: true,
-    optional: true
-  },
-  _dialog: {type: Object, blackbox: true, optional: true},
-  _dialogStack: {type: [Object], blackbox: true, optional: true},
-  _facebookId: {type: String, optional: true},
-  _finAid: {type: new SimpleSchema({
-    finAidInterest: fields.bool(o),
-    gapInAid: fields.bool(o), // _internal.gapInAid
-    needHelpPaying: fields.bool(o) // _internal.needHelpPaying
-  }), optional: true},
-  _finalStudySurveyBot: {type: new SimpleSchema({
-    enrollmentHowHard: fields.string(o),
-    textHowHelpful: fields.string(o),
-    helpfulInTransition: fields.long_string(o),
-    recommendToFriend: fields.long_string(o),
-    recommendToSchool: fields.long_string(o),
-    recommendImprovements: fields.long_string(o),
-    howToImprove: fields.long_string(o),
-    whatElseCanIDo: fields.other_features(o),
-    whatElseCanIDoExtended: fields.long_string(o),
-    didYouRead: fields.bool(o),
-    whyNoResponse: fields.long_string(o),
-    didYouRead: fields.bool(o),
-    whyNoText: fields.long_string(o)
-  }), optional: true},
-  _gather: {type: new SimpleSchema({
-    firstName: fields.string(o),
-    lastName: fields.string(o),
-    middleInitial: fields.string(o),
-    email: fields.email(o),
-    phone: fields.phone_number(o),
-    dob: fields.date(o),
-    hsName: fields.string(o),
-    hsZip: fields.zip_code(o),
-    hsGradYear: fields.expected_graduation_year(o),
-    intendedMajor: fields.long_string(o),
-    zip: fields.zip_code(o),
-    address: fields.string(o),
-    gpa: fields.number({decimal: true, optional: true}),
-    maxGpa: fields.number({decimal: true, optional: true}),
-    satComposite: fields.sat_composite_score(o),
-    satMath: fields.sat_score(o),
-    satReading: fields.sat_score(o),
-    satEssay: fields.sat_essay_score(o),
-    satAnalysis: fields.sat_essay_score(o),
-    satWriting: fields.sat_essay_score(o),
-    actComposite: fields.act_composite_score(o),
-    actMath: fields.act_composite_score(o),
-    actScience: fields.act_composite_score(o),
-    actEnglish: fields.act_composite_score(o),
-    actReading: fields.act_composite_score(o),
-    actWriting: fields.act_composite_score(o),
-    actIdeasAnalysis: fields.act_composite_score(o),
-    actDevAndSupport: fields.act_composite_score(o),
-    actOrganization: fields.act_composite_score(o),
-    actLangaugeConvention: fields.act_composite_score(o)
-  }), optional: true},
-  _general: {type: new SimpleSchema({
-    secondGroup: fields.bool(o), // internal.secondGroup
-    whyNotTexting: fields.string(o) // internal.whyNotTexting
-  }), optional: true},
-  _housing: {type: new SimpleSchema({
-    intention: fields.string(o) // _internal.housingResponse
-  }), optional: true},
-  _intent: {type: new SimpleSchema({
-    alreadySubmitted: fields.bool(o), // new
-    coming: {type: new SimpleSchema({
-      reasonCode: fields.number(o),
-      secondChoiceSchool: fields.string(o),
-      secondChoiceState: fields.string(o)
-    }), optional: true},
-    date: fields.date(o), // internal.intentDate
-    followUpIntent: fields.attending(o), // internal./followUpIntent
-    goingInstead: fields.long_string(o), // internal.goingInstead
-    howSolid: fields.string(o), // internal.howSolid
-    intendsToEnroll: fields.bool(o),
-    notComing: {type: new SimpleSchema({
-      firstChoiceSchool: fields.string(o),
-      firstChoiceState: fields.string(o),
-      reasonCode: fields.number(o)
-    }), optional: true},
-    unsure: fields.bool(o), // internal.intentUnsure todo - mark this in unsure questions
-    whyHere: fields.long_string(o), // internal.whyHere
-    whyNoCollege: fields.string(o), // internal.whyNoCollege
-    whyNotAttending: fields.long_string(o), // internal.whyNotAttending
-    whyNotAttendingExtended: fields.long_string(o), // internal.whyNotAttendingExtended
-    whyUnsure: fields.string(o), // was internal.whyUnsure
-    whyUnsureExtended: fields.long_string(o) // was internal.whyUnsureExtended
-  }), optional: true},
-  _lastContacted: fields.date(o),
-  _lastMessageId: fields.string(o),
-  _lastTransport: fields.string(o),
-  _oneOff: {
-    type: Object,
-    blackbox: true,
-    optional: true
-  },
-  _orientation: {type: new SimpleSchema({
-    best: fields.string(o), // internal.orienation.best
-    experience: fields.string(o), // internal.orientation.experience.best
-    experienceExtended: fields.long_string(o), // internal.orientation.experienceExtended.best
-    stoodOut: fields.long_string(o), // internal.orientation.stoodOut
-    improvement: fields.long_string(o), // internal.orientation.improvement
-    willYouAttend: fields.string(o), // internal.orientation.willYouAttend
-    registered: fields.bool(o) // internal.registeredOrientation
-  }), optional: true},
-  _parking: {type: new SimpleSchema({
-    bringCar: fields.bool(o) // _internal.needsParking
-  }), optional: true},
-  _phone: fields.string(o),
-  _previousPhone: fields.string(o),
-  _profile: {type: new SimpleSchema({
-    description: fields.profile_description(o),
-    parent: fields.bool(o),
-    plannedApplication: fields.planned_application(o),
-    setCanTextFalse: fields.bool(o)
-  }), optional: true},
-  _responseBlackBox: {
-    type: Object,
-    blackbox: true,
-    optional: true
-  }
+ - `_custom`: Type: Object. Optional. Blackbox. Unclear intended usage; examples in the data seem to hold things that are best stored elsewhere. (To do: see about eliminating this.)
+ - `_dialog` Type: Object. Optional. Blackbox. Stores information about the user's current position within a dialog. (To do: un-black-box this. Make it required.)
+ - `_dialogStack` Type: \[Object\. Optional. Blackbox. When a dialog is interrupted by a second dialog, the first goes onto this stack, so the system can return to it, in the correct state, after the second is finished. (To do: un-black-box this. Make it required.)
+ - `_facebookId` Type: String. Optional. User's facebook id.
+ - `_finAid` Type: Object. Optional. A less interesting duplicate of `finAid`; presumably this exists to distinguish fields Astronomer writes to from something we use. (To do: find a better solution to astronomer writes; de-duplicate fields. In any case, consolidate this and `finAid`.) Subfields:
+   - `finAidInterest` Type: Boolean. Optional. See `finAid.finAidInterest`
+   - `gapInAid`. Type: Boolean. Optional. See `finAid.aidGap`
+   - `needHelpPaying` Type: Boolean. Optional. A new one. I assume this indicates if the student needs help paying their tuition.
+ - `_finalStudySurveyBot` Type: Object. Optional. A field tied to a specific dialog. These should not exist. (To do: get rid of it.) Subfields are all have the name of a state in the dialog; values are responses. Subfields:
+   - `enrollmentHowHard` Type: String. Optional.
+   - `textHowHelpful` Type: String. Optional.
+   - `helpfulInTransition` Type: String Optional.
+   - `recommendToFriend` Type: String. Optional.
+   - `recommendToSchool` Type: String Optional.
+   - `recommendImprovements` Type: String. Optional.
+   - `howToImprove` Type: String. Optional.
+   - `whatElseCanIDo` Type: \[String\]. Optional. Allowed values: 'Buying textbooks', 'Travel planning', 'Finding internships', 'Health and wellness', 'Banking and budgeting', 'Pizza delivery', 'Study support', 'Campus info', 'Something else'.
+   - `whatElseCanIDoExtended`: Type: String. Optional.
+   - `didYouRead` Type: Boolean. Optional.
+   - `whyNoResponse` Type: String. Optional.
+   - `didYouRead` Type: Boolean. Optional.
+   - `whyNoText` Type: String. Optional.
+ - `_gather` Type: Object. Optional. THere is exactly one existing document that has this field; it appears to only duplicate information that is contained elsewhere. I speculate that it was tied to a particular dialog. (To do: get rid of this.) Subfield information is self-explanatory. Subfields:
+   - `actComposite` Type: Number. Must be between 1 and 36. Optional.
+   - `actDevAndSupport` Type: Number. Must be between 1 and 36. Optional.
+   - `actEnglish` Type: Number. Must be between 1 and 36. Optional.
+   - `actIdeasAnalysis`: Number. Must be between 1 and 36. Optional.
+   - `actLangaugeConvention` Number. Must be between 1 and 36. Optional.
+   - `actMath` Type: Number. Must be between 1 and 36. Optional.
+   - `actOrganization` Type: Number. Must be between 1 and 36. Optional.
+   - `actReading` Type: Number. Must be between 1 and 36. Optional.
+   - `actScience` Type: Number. Must be between 1 and 36. Optional.
+   - `actWriting` Type: NUmber. Must be between 1 and 36. Optional.
+   - `address` Type: String. Optional.
+   - `dob` Type: Date. Optional.
+   - `email` Type: String. Optional. Regex constraint: SimpleSchema.RegEx.Email.
+   - `firstName` Type: String. Optional.
+   - `gpa` Type: Number (decimals allowed). Optional.
+   - `hsGradYear` Type: Number. Must be year between 70 years before and 30 years after current year.
+   - `hsName` Type: String. Optional.
+   - `hsZip` Type: String. Must be between 1 and 30 characters long.
+   - `intendedMajor` Type: String. Optional.
+   - `lastName` Type: String. Optional.
+   - `maxGpa` Type: Number (decimals allowed). Optional.
+   - `middleInitial` Type: String. Optional. fields.string(o),
+   - `phone` Type: String. Must be 10 digits. Optional.
+   - `satAnalysis` Type: Number. Must be between 2 and 12. Optional.
+   - `satComposite` Type: Number. Must be between 600 and 2400. Optional.
+   - `satEssay` Type: Number. Must be between 2 and 12. Optional.
+   - `satMath` Type: Number. Must be between 200 and 800. Optional.
+   - `satReading` Type: Number. Must be between 200 and 800. Optional.
+   - `satWriting` Type: Number. Must be between 2 and 12. Optional.
+   - `zip` Type: String. Must be between 1 and 30 characters long.
+ - `_general` Type: Object. Optional. I don't know where this information comes from. (To do: see about getting rid of this.) Subfields:
+   - `secondGroup` Type: Boolean. Optional. Don't know.
+   - `whyNotTexting` Type: String. Optional. I guess this is the reason a student isn't texting the bot.
+ - `_housing` Type: Object. Optional. Less interesting duplicate of `housing`. (To do: see `_finAid`.) One subfield:
+   - `intention` Type: String. Optional. Presumably something to do with the student's intentions regarding their housing.
+ - `_intent` Type: Object. Larger version of `intent`. (To do: consolidate this and `intent.`) Suspect it's tied to a particular dialog. Subfields:
+   - `alreadySubmitted` Type: Boolean. Optional. Indicates if the students intent-to-enroll form has been submitted.
+   - `coming` Type: Object. Optional. Contains information concerning the student's reason for coming, and their second choice.
+     - `reasonCode` Type: Number. Optional. A numeric code indicating the reason the student is coming. I think this is GSU specific.
+     - `secondChoiceSchool` Type: String. Optional. Name of the student's second preference.
+     - `secondChoiceState` Type: String. Optional. State of the student's second preference.
+   - `date` Type: Date. Optional. *I think* the date the student submitted the intent-to-enroll form.
+   - `followUpIntent` Type: String. Optional. Allowed values: 'attending', 'not attending', 'unsure', 'already submitted'. Presumably the student's response to some question about their intent.
+   - `goingInstead` Type: String. Optional. Other institution the student will attend.
+   - `howSolid` Type: String. Optional. Indication of how confident the student is they will enroll in the institution (I think).
+   - `intendsToEnroll` Type: Boolean. Indicates whether the student intends to enroll at the relevant institution.
+   - `notComing`: Type: Object. Optional. Dual of `coming`. Subfields:
+     - `firstChoiceSchool` Type: String. Optional. Name of the student's first choice for college.
+     - `firstChoiceState` Type: String. Optional. State where the student's first-choice college is.
+   - `unsure` Type: Boolean. Optional. Indicates the student is unsure about their enrollment intentions.
+   - `whyHere` Type: String. Optional. I think this is a free-form answer to the question of why the student wants to enroll in the relevant institution.
+   - `whyNoCollege` Type: String. Optional. A free-form answer to the question of why the student doesn't intend to enroll in any college.
+   - `whyNotAttending`: Type: String. Optional. The reason the student isn't attending the relevant isnstition. Presumably in more pithy form than...
+   - `whyNotAttendingExtended` Type String. Optional. As above, but with more detail. Do we really need both of these?
+   - `whyUnsure` Type: String. Optional. The reason the student is unsure about their intent to enroll. Short version of:
+   - `whyUnsureExtended` Type: String. Optional. As above, but long. Again, seems otiose.
+ - `_lastContacted` Type: Date. Optional. Date of last message from the bot. (To do: put this in a `_lastMessage` subfield, or something like that.)
+ - `_lastMessageId` Type: String. Optional. `_id` of the `smslogs` document associated with the last message between the user and the bot. (To do: see `_lastContacted`.)
+ - `_lastTransport` Type: String. Optional. Transport of the last message between the user and the bot. (To do: see `_lastContacted`.)
+ - `_oneOff` Type: Object. Optional. Black box. Place for storing random things that need to be recorded and used once by the system. (To do: find a way to get rid of this. Short of that, delete it from all documents regularly.)
+ - `_orientation` Type: Object. Optional. Duplicate of `orientation`. Contains information about the students attendance of and experience in orientation. (To do: consolidate this with `orientation`.) Subfields:
+   - `best` Type: String. Optional. Student's report of what the best thing about orientation was.
+   - `experience` Type: String. Optional. How the student rates their orientation experience.
+   - `experienceExtended` Type: String. Optional. More comments on the student's orientation experience.
+   - `improvement` Type: String. Optional. Student's answer to the question of what about orientation could be improved.
+   - `stoodOut` Type: String. Optional. Student's answer to the question of what stood out about their orientation experience.
+   - `registered`. Type: Boolean. Optional. Indicates if the student has registered to attend orientation.
+   - `willYouAttend` Type: String. Optional. Student's answer to the question of whether they will attend orientation. There is exactly one document that has this field.
+ - ` _parking` Type: Object. Optional. Information about parking, I guess.  One subfield.{type: new SimpleSchema({
+   - `bringCar` Type: Boolean. Optional. Indicates that the student is bringing a car to campus, and need parking. (To do: move this out of nesting.)
+ - `_phone` Type: String. Optional. The phone number we text to communicate with the student.
+ - `_previousPhone` Type: String. Optional. The previous phone number of the student, if they've changed `_phone` values. This is used by the `updateNumber` cron.
+ - `_profile` Type: Object. Optional. A duplicate of `profile`, equally mysterious what unifies the subfields (maybe it's used on the frontend)? (To do: consolidate with `profile`, if it is kept.) Subfields:
+   - `description` Type: String. Optional. Allowed values: 'current student', 'transfer', 'senior', 'junior', 'soph or younger', 'parent', 'other', 'prospective.
+   - `parent` Type: Boolean. Indicates the user is a parent of a student. Not a single document has this field.
+   - `plannedApplication` Type: String. Allowed values: 'now', 'this year', 'not applying'.
+   - `setCanTextFalse`. Type: Boolean. Optional. Unclear usage.
+ - `_responseBlackBox` Type: Object. Optional. Black box. **Deprecated**. We now keep this information in the `meta` field (though, should we?)
 });
-
-BrandedUserProfiles = new Mongo.Collection('brandedUserProfiles')
-BrandedUserProfiles.attachSchema(BrandedUserSchema)
-
-
 
 ## Monitoring and Metrics examples
 
