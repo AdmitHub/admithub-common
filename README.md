@@ -350,7 +350,40 @@ Fields:
    - `plannedApplication` Type: String. Allowed values: 'now', 'this year', 'not applying'.
    - `setCanTextFalse`. Type: Boolean. Optional. Unclear usage.
  - `_responseBlackBox` Type: Object. Optional. Black box. **Deprecated**. We now keep this information in the `meta` field (though, should we?)
-});
+
+### CeebCodes
+**Deprecated**. Was used in `inquiryCardBot`. The document pair highchools to some kind of code.
+
+### CollegeOfficers
+ - `institutionId` Type: String. Required. Despite being required, no existing `collegeOfficers` document has one (indicating that we create these non-programmatically). (To do: get rid of this.)
+ - `collegeId` Type: String. Optional. `_id` field of the associated `BrandedColleges` document. This is a change; pre NeOliTh, this referenced the `_id` field on the `College` document. (To do: make this required.)
+
+  officers: {
+    type: [String],
+    regEx: SimpleSchema.RegEx.Id, optional: true,
+    autoform: { placeholder: 'user _id' },
+    custom: SimpleSchema.validators.uniqueArray
+  },
+  associatedEmails: {
+    type: [Object],
+    optional: true
+  },
+  "associatedEmails.$.email": {type: String, optional: true},
+  "associatedEmails.$.name": {type: String, optional: true},
+  "associatedEmails.$.office": {type: String, optional: true},
+  "associatedEmails.$.general": {type: Boolean, optional: true},
+  "associatedEmails.$.topics": {type: [String], optional: true},
+  "associatedEmails.$.counties": {type: [Object], optional: true},
+  "associatedEmails.$.counties.$.state": fields.state({optional: true}),
+  "associatedEmails.$.counties.$.county": {type: String, optional: true},
+  "associatedEmails.$.mainFinAidContact": {type: Boolean, optional: true},
+  "associatedEmails.$.states": fields.state({optional: true, type: [String]}),
+  blacklistedEmails: {
+    type: [String],
+    optional: true
+  },
+  introExclamation: {type: String, optional: true}
+}))
 
 ## Monitoring and Metrics examples
 
