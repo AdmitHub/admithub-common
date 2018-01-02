@@ -356,34 +356,21 @@ Fields:
 
 ### CollegeOfficers
  - `institutionId` Type: String. Required. Despite being required, no existing `collegeOfficers` document has one (indicating that we create these non-programmatically). (To do: get rid of this.)
+ - `blacklistedEmails` Type: \[String\]. Optional. I think this is for email addresses that from which we don't want to forward messages. But no current document has this field, and it is not functional in NeOliTh code. (To do: find out if this is functional on the front end. If not, get rid of it.
  - `collegeId` Type: String. Optional. `_id` field of the associated `BrandedColleges` document. This is a change; pre NeOliTh, this referenced the `_id` field on the `College` document. (To do: make this required.)
-
-  officers: {
-    type: [String],
-    regEx: SimpleSchema.RegEx.Id, optional: true,
-    autoform: { placeholder: 'user _id' },
-    custom: SimpleSchema.validators.uniqueArray
-  },
-  associatedEmails: {
-    type: [Object],
-    optional: true
-  },
-  "associatedEmails.$.email": {type: String, optional: true},
-  "associatedEmails.$.name": {type: String, optional: true},
-  "associatedEmails.$.office": {type: String, optional: true},
-  "associatedEmails.$.general": {type: Boolean, optional: true},
-  "associatedEmails.$.topics": {type: [String], optional: true},
-  "associatedEmails.$.counties": {type: [Object], optional: true},
-  "associatedEmails.$.counties.$.state": fields.state({optional: true}),
-  "associatedEmails.$.counties.$.county": {type: String, optional: true},
-  "associatedEmails.$.mainFinAidContact": {type: Boolean, optional: true},
-  "associatedEmails.$.states": fields.state({optional: true, type: [String]}),
-  blacklistedEmails: {
-    type: [String],
-    optional: true
-  },
-  introExclamation: {type: String, optional: true}
-}))
+ - `officers` Type: \[String\]. Optional Regex constraint: SimpleSchema.RegEx.Id. Each item in the array must be unique. A list of officer ids, though it is completely unclear what documents these ids are referencing. Most (but not all) existing documents have an empty array as the value of their `officer` field. I don't think there is anywhere this is functional in out code. (To do: get rid of this.)
+ - `associatedEmails` Type: \[Object\]. Optional. Each object contains information on a particular email association with the `collegeId` institution, including the kinds of topics that messages to that email address should be about. Subfields:
+   - `counties` Type: \[Object\]. Optional. Each object contains information about a particular place such that inquiries related to that place should be forwarded to the associated email address. Subfields:
+     - `county` Type: String. Optional. A county in a U.S. state.
+     - `state` Type: String. Optional. Must be a standard U.S. state code.
+   - `email` Type: String. Optional. The email address itself.
+   - `general` Type: Boolean. Optional. Indicates whether or not the email address is one to which emails of all topics should be forwarded if there isn't a more specific email address covering the relevant topic. I believe the frontend requires that this field exist to function correctly. (To do: either remove the front end dependence on this field, or make it required.)
+ - `introExclamation` Type: String. Optional. I think this is something that was, at one time, supposed to appear at the beginning of email from this instution to users. But it is not functional in NeOliTh code, and I think use is now fulfilled in other ways. (To do: see about getting rid of this.)
+   - `mainFinAidContact` **Deprecated** We now use either the `topics` field or the `office` field to indicate this information; no existing document has this field. (To do: get rid of this.)
+   - `name` Type: String. Optional. The name of the person associated with the email address, if there is one.
+   - `office` Type: String. Optional. The name of the office associated with the emails address, if there is one. Examples of values include `Advising Services` and `Admissions`.
+   - `states` Type: \[String\]. Optional. Must be a standard U.S. state code. States such that the associated email address covers inquiries from that state. (To do: merge this and counties.)
+   - `topics` Type: \[String\]. Optional. The email address handles messages about the listed topics.
 
 ## Monitoring and Metrics examples
 
