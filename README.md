@@ -355,6 +355,7 @@ Fields:
 **Deprecated**. Was used in `inquiryCardBot`. The document pair highchools to some kind of code.
 
 ### CollegeOfficers
+Contains information concerning points of contact at client institutions. Fields:
  - `institutionId` Type: String. Required. Despite being required, no existing `collegeOfficers` document has one (indicating that we create these non-programmatically). (To do: get rid of this.)
  - `blacklistedEmails` Type: \[String\]. Optional. I think this is for email addresses that from which we don't want to forward messages. But no current document has this field, and it is not functional in NeOliTh code. (To do: find out if this is functional on the front end. If not, get rid of it.
  - `collegeId` Type: String. Optional. `_id` field of the associated `BrandedColleges` document. This is a change; pre NeOliTh, this referenced the `_id` field on the `College` document. (To do: make this required.)
@@ -371,6 +372,34 @@ Fields:
    - `office` Type: String. Optional. The name of the office associated with the emails address, if there is one. Examples of values include `Advising Services` and `Admissions`.
    - `states` Type: \[String\]. Optional. Must be a standard U.S. state code. States such that the associated email address covers inquiries from that state. (To do: merge this and counties.)
    - `topics` Type: \[String\]. Optional. The email address handles messages about the listed topics.
+   
+### CollegeEvents
+**Deprecated**. Contains information about events prospective students might be interested in attending; was functional back when AdmitHub matched soliciting students to instutitions.
+
+### Colleges
+**Deprecated**. Contains information about many, many colleges in the United States. Perhaps valuabel information -- I'm sure it wasn't easy to compile. But we don't use it. It should be put in an archive somewhere.
+
+### Dialogs
+A document defining the general properties of a specific, scripted interaction with users. Fields:
+  - `initialState` Type: String. Required. The `_id` of the `DialogState` document corresponding to the first state of this dialog. (To do: enforce simple-schema id syntax of value.)
+  - `converted` Type: Boolean. Optional. Indictes that the dialog was converted from an old workflow by script. (To do: establish that there is no sepcial problem with these workflows, then get rid of this field, if there is no reason to keep it.)
+  - `createdAt` Type: Date. Optional. Date at which the dialog was created. (To do: make this required.)
+  - `description` Type: String. Optional. Description of the dialog. Used for display on the front end, and for humans to comprehend what is going on. (To do: make this required.)
+  - `expirationLength`: Type: Number. Optional. The number of hours after which the dialog expires, and it's `_id` is removed as a value from all `brandedUserProfile` documents `dialog` and `dialogStack` fields.
+  - `hidden` Type: Boolean. Optional. Indicates whether or not the dialog should appear in the front end display. Should be `false` for systems-type dialogs, like the default `softStop` dialog. (To do: make this required.)
+  - `humanName` Type: String. Optional. Name of dialog, friendly to humans. Used in front-end for display. (To do: make `name` serve this purpose, then get rid of this.)
+  - `metaData` Type: Object. Optional. Contains meta information about the dialog.(To do: see about making this required.) Subfields:
+    - `createdBy` Type: String. Required. Indicates the front-end user (or maybe admithub peon?) that created this.
+    - `createdVia` Type: String. Required. Indicates the front-end platform on which the dialog was created. (To do: enforce allowed values: `Phoenix`, `Mascot`. 
+  - `messagingService` Type: String. Optional. The messaging service associated with this dialog. We use `*` to denote a general dialog, used by all messaging services. (To do: make this required.)
+  - `name` Type: String. Optional. Name of dialog, intended for coding use. In NeOliTh, this field is not functional. (To do: make the values of this field the current `humanName` values. Then make this required.)
+  - `reminders` Type: \[Object\]. Optional. Black box. A list of objects, each of ehich describe a reminder associated with the dialog, in the order in which they should be sent out. (To do: un black box this. Long term: think about making these their own document, like `DialogStates`.
+  - `states` Type: \[String\]. Optional. A list of all `_id`s of `DialogStates` associated with this dialog. Not functional in code. (To do: either make this required or get rid of it. Probably the former.)
+  - `sentToUsers` Type: Boolean. Optional. Indicates that this dialog has been intitated to users. (To do: check exact conditions under which this should be true; if a dialog is never scheduled via the endpoint, but still interacts with users, should it be true?)
+  - `updatedAt` Type: Date. Optional. Date at which the dialog was modified, if it was.
+
+  
+
 
 ## Monitoring and Metrics examples
 
