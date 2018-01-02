@@ -421,7 +421,52 @@ Contains information about specific states in the associated dialogs state-graph
     - `query`: Type: String. Required. A stringified version of the mongodb query performed on the `brandedUserProfile` document to determine if the state should be skipped. A positive result means that the state should be skipped. (To do: check that we really do need this after all.)
   - `updatedAt` Type: Date. Optional. Date at which the document was updated.
 
+### DemoBotProfile
 
+I think these are intended to record information on users who we pick up using the sales demo bot. Unclear if we intend to keep using this schema. There are no current `DemoBotProfile` documents, and no reference to them in the code. (To do: get confirmation that these will be used, or not.)
+
+### GeorgiaStateSchema
+**Deprecated** Has been integrated into `brandedUserProfiles`. (To do: consider seperating institution documents again.)
+
+### Heartbeats
+**Deprecated** Appears to have been intended for use to monitor app health with some heartbeat service. We use and AWS metric for this purpose now, without appealing to any schema.
+
+### HighschoolConversations
+**Deprecated** Appears to be intended to record email exchanges between highschool students and college officers.
+
+### Highschools
+**Deprecated** Information on individual highschools. Perhaps this is valuable information, but we don't use it.
+
+### HsLeads
+**Deprecated** Recorded information on highschool students interested in being involved in the services AdmtiHub provided in the olden days.
+
+### IntroducedMessages
+**Deprecated**. Was used by the front end for something; no longer.
+
+### Leads
+**Deprecated** The last of these documents to be created was in 2016.
+
+### Matches
+**Deprecated** Used as part of the defunt student-to-school matching feature.
+
+### MessageTemplates
+Used in the old workflow editor, on the front end, to allow users to choose variable values in templates. This may need to be altered to accommodate the new dialogs. Fields:
+  - `description` Type: String. Required. Description of what the variable ranges over.
+  - `label` Type: String. Required. Human friendly name for the variable, used in display (I think).
+  - `value` Type: String. Required. String value of the variable as used in the template.
+
+### OverallReachAnalytics
+Records information about the number of users reached by our messages, by week. Fields:
+  - `createdAt` Type: Date. Required. Date the document was created.
+  - `messagingService` Type: String. Required. The analytics are indexed to a messaging service, and reported on that messaging service's Mascot interface.
+  - `uniqueUsersReached` Type: Number. Required. Number of unique users that got a message (I think) from the relevant messaging service.
+  - `updatedAt` Type: Date. Required. Last time the document was updated. (To do: find out if we need this. These document are created programmatically once a week, and never again altered, right?)
+  - `weekNumber` Type: Number. Required. Used to indicate the week, out of 52, of the year for which the information is recorded. (To do: enforce minimum and maxomum value.)
+  - `year` Type: Number. Required. The year of the recorded information. (To do: enforce year syntax.)
+  - `ignore` Type: Boolean. Optional. Not currently functional, but with a view to perhaps needing it for UI purposes. Currently all documents that have this field are `ignore: false`.
+  
+
+### Pending
 
 ## Monitoring and Metrics examples
 
