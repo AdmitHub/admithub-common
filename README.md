@@ -465,8 +465,14 @@ Records information about the number of users reached by our messages, by week. 
   - `year` Type: Number. Required. The year of the recorded information. (To do: enforce year syntax.)
   - `ignore` Type: Boolean. Optional. Not currently functional, but with a view to perhaps needing it for UI purposes. Currently all documents that have this field are `ignore: false`.
   
+### PendingEventReport
+**Deprecated** There are no existing `pendingEventReport` documents.
 
-### Pending
+### Pending Officers
+**Deprecated** Some old school functionality I don't understand.
+
+### TelescopPosts
+**Deprecated** The stock Meteor `Posts` collection with some added functions.
 
 ## Monitoring and Metrics examples
 
