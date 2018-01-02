@@ -385,7 +385,7 @@ A document defining the general properties of a specific, scripted interaction w
   - `converted` Type: Boolean. Optional. Indictes that the dialog was converted from an old workflow by script. (To do: establish that there is no sepcial problem with these workflows, then get rid of this field, if there is no reason to keep it.)
   - `createdAt` Type: Date. Optional. Date at which the dialog was created. (To do: make this required.)
   - `description` Type: String. Optional. Description of the dialog. Used for display on the front end, and for humans to comprehend what is going on. (To do: make this required.)
-  - `expirationLength`: Type: Number. Optional. The number of hours after which the dialog expires, and it's `_id` is removed as a value from all `brandedUserProfile` documents `dialog` and `dialogStack` fields.
+  - `expirationLength`: Type: Number. Optional. The number of days after which the dialog expires, and it's `_id` is removed as a value from all `brandedUserProfile` documents `dialog` and `dialogStack` fields.
   - `hidden` Type: Boolean. Optional. Indicates whether or not the dialog should appear in the front end display. Should be `false` for systems-type dialogs, like the default `softStop` dialog. (To do: make this required.)
   - `humanName` Type: String. Optional. Name of dialog, friendly to humans. Used in front-end for display. (To do: make `name` serve this purpose, then get rid of this.)
   - `metaData` Type: Object. Optional. Contains meta information about the dialog.(To do: see about making this required.) Subfields:
@@ -398,7 +398,29 @@ A document defining the general properties of a specific, scripted interaction w
   - `sentToUsers` Type: Boolean. Optional. Indicates that this dialog has been intitated to users. (To do: check exact conditions under which this should be true; if a dialog is never scheduled via the endpoint, but still interacts with users, should it be true?)
   - `updatedAt` Type: Date. Optional. Date at which the dialog was modified, if it was.
 
-  
+### DialogStates
+
+Contains information about specific states in the associated dialogs state-graph. A user moves through the dialog by traersing a path through the graph. These graphs will usually be trees, but need not be. Fields:
+  - `nextStates` Type: Object. Required. Black box. Indicates the successor states to the current state, and provides information about which state to go to next. (To do: un-black-box this.)
+  - `parentDialog` Type: String. Required. The `_id` of the `Dialog` document associated with this state. (To do: enforce simple-schema id syntax.)
+  - `promptType` Type: String. Required. The type of reponse, if any, the state expects from the user. (To do: enforce allowed values: `Number`, `Open`, `Auto` and `Boolean`. Change name to `type`.)
+  - `converted` Type: String. Optional. Indicates that the state was converted from an old-style workflow by script. (To do: determine that these aren't problematic, and then get rid of this field if there isn't a reason to keep it. Also, this field should be a Boolean.)
+  - `createdAt` Type: Date. Optional. Date at which the state was created. (To do: make this required.)
+  - `enterActions` Type: \[Object\]. Optional. Black box. List of objects indicating which of a specified list of actions the system should take (in order) when the dialog enters this state. (To do: un-black-box this.)
+  - `exitActions`Type: \[Object\]. Optional. Black box. Like `enterActions`, except the actions should be taken when the dialog exits this state. (To do: un-black-box this.)
+  - `media` Type: String. Optional. The url of a media file that should be sent as part of the state's prompt.
+  - `multipleChoices` Type: \[Object\]. Optional. Used, optionally, by `Number`-type states. Contains information about the options to be listed (in order) as possible responses to the state's prompt. Only one subfield, but we anticipate adding more. Subfield:
+    - `prompt` Type: String. Required. The text of the listed response option.
+  - `name` Type: String. Optional. A human-friendly name for the state. (To do: make this required.)
+  - `openingAiResponseState` Type: Boolean. Optional. Indicates the state is of a special kind: it is a response to a question that initiates the dialog, when such a question is allowed.
+  - `pauseTime` Type: Number. Optional. Used, optionally, by `Auto`-type states. The time in seconds after which the dialog should move automatically to the next state. If this field does not exist, the dialog will transition out of an `Auto` state after the default time of 16 seconds for twilio-transport messages, and the default time of 2 seconds for other transports.
+  - `range` Type: Object. Optional, but required for the well-functioning of `Number`-type states; indicates the range of acceptable numeric responses to the state's prompt. Subfields:
+    - `min` Type: Number. Required. The minimum valid response.
+    - `max` Type: Number. Required. The maximum valid response.
+  - `skip` Type: Object. Optional. Contains information about when this state should be skipped. Contains single subfield (To do: see about moving the subfield to the top level and getting rid of this.) Subfield:
+    - `query`: Type: String. Required. A stringified version of the mongodb query performed on the `brandedUserProfile` document to determine if the state should be skipped. A positive result means that the state should be skipped. (To do: check that we really do need this after all.)
+  - `updatedAt` Type: Date. Optional. Date at which the document was updated.
+
 
 
 ## Monitoring and Metrics examples
