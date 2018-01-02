@@ -14,11 +14,6 @@ CollegeOfficers.attachSchema(new SimpleSchema({
     unique: true,
     autoform: { placeholder: 'college _id' }
   },
-  //Field change - new field referencing brandedCollegeId, replacing collegeId
-  institutionId: {
-    type: String,
-    optional: false
-  },
   // userId references
   officers: {
     type: [String],
@@ -35,6 +30,7 @@ CollegeOfficers.attachSchema(new SimpleSchema({
   "associatedEmails.$.office": {type: String, optional: true},
   "associatedEmails.$.general": {type: Boolean, optional: true},
   "associatedEmails.$.topics": {type: [String], optional: true},
+  "associatedEmails.$.sensitiveTopics": {type: [String], optional: true},
   "associatedEmails.$.counties": {type: [Object], optional: true},
   "associatedEmails.$.counties.$.state": fields.state({optional: true}),
   "associatedEmails.$.counties.$.county": {type: String, optional: true},
