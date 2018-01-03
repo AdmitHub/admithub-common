@@ -30,7 +30,7 @@ CollegeOfficers.attachSchema(new SimpleSchema({
   "associatedEmails.$.office": {type: String, optional: true},
   "associatedEmails.$.general": {type: Boolean, optional: true},
   "associatedEmails.$.topics": {type: [String], optional: true},
-  "associatedEmails.$.sensitiveTopics": {type: [String], optional: true},
+  "associatedEmails.$.forwardedTopics": {type: [String], optional: true},
   "associatedEmails.$.counties": {type: [Object], optional: true},
   "associatedEmails.$.counties.$.state": fields.state({optional: true}),
   "associatedEmails.$.counties.$.county": {type: String, optional: true},
