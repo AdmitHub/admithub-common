@@ -358,7 +358,7 @@ Fields:
 Contains information concerning points of contact at client institutions. Fields:
  - `institutionId` Type: String. Required. Despite being required, no existing `collegeOfficers` document has one (indicating that we create these non-programmatically). (To do: get rid of this.)
  - `blacklistedEmails` Type: \[String\]. Optional. I think this is for email addresses that from which we don't want to forward messages. But no current document has this field, and it is not functional in NeOliTh code. (To do: find out if this is functional on the front end. If not, get rid of it.
- - `collegeId` Type: String. Optional. `_id` field of the associated `BrandedColleges` document. This is a change; pre NeOliTh, this referenced the `_id` field on the `College` document. (To do: make this required.)
+ - `collegeId` Type: String. Optional. `_id` field of the associated `BrandedColleges` document. This is a change; pre NeOliTh, this referenced the `_id` field on the `College` document. (To do: make this required, and unqiue.)
  - `officers` Type: \[String\]. Optional Regex constraint: SimpleSchema.RegEx.Id. Each item in the array must be unique. A list of officer ids, though it is completely unclear what documents these ids are referencing. Most (but not all) existing documents have an empty array as the value of their `officer` field. I don't think there is anywhere this is functional in out code. (To do: get rid of this.)
  - `associatedEmails` Type: \[Object\]. Optional. Each object contains information on a particular email association with the `collegeId` institution, including the kinds of topics that messages to that email address should be about. Subfields:
    - `counties` Type: \[Object\]. Optional. Each object contains information about a particular place such that inquiries related to that place should be forwarded to the associated email address. Subfields:
@@ -471,7 +471,7 @@ Records information about the number of users reached by our messages, by week. 
 ### PendingOfficers
 **Deprecated** Some old school functionality I don't understand.
 
-### TelescopPosts
+### TelescopePosts
 **Deprecated** The stock Meteor `Posts` collection with some added functions. We don't have anywhere people post any more.
 
 ### Profiles
@@ -513,7 +513,7 @@ A message recording information about campaigns scheduled to be initiated to stu
   - `workflowHumanName` Type: String. Optional. The `humanName` value of the `dialog` document corresponding to the campaign being sent. (To do: if we make the recommended changes to the `humanName` field, change the name of this field too.)
 
 ### SmsAnalytics
-Records information about our texting load, created daily, indexed by messaging service. Fields:
+Records information about our texting load, created daily, optionally by messaging service. Fields:
   - `date` Type: Date. Required. The date of the day whose information is recorded in the document.
   - `sent` Type: Number. Required. The number of texts sent during the `date`.
   - `received` Type: Number. Required. The number of texts received during the `date`.
@@ -522,7 +522,17 @@ Records information about our texting load, created daily, indexed by messaging 
   - `messagingService`. Type: String. Optional. The messaging service of the texts, if the information concerns a specific messaging service.
   - `sentUnique` Type: Number. Optional. Number of unique users sent a message during the `date`. (To do: make this required, unless there's some good reason it's not.)
   - `receivedUnique` TypeL Number. Optional. Number of unqiue users from which we received a message during the `date`. (To do: see `sentUnique`.)
-  
+
+### SmsHeatmapAnalytics
+Information intended to be used in a display of texting activity by region, and optionally by messaging service.. The information is indexed by area code. (To do: find out if this should have Date-type fields.) Fields:
+  - `areaCode` Type: String. Required. The area code relevant to the information recorded here. (To do: find out if we should we enforce that this be unique.)
+  - `total` Type: Number. Required. The total number of texts received from the `areaCode`.
+  - `unique` Type: Number. Required. The total number of unqiue users that sent a text from the `areaCode`.
+  - `messagingService` Type: String. Optional. The `messagingService` value of the `brandedCollege` document corresponding to the institution for which the information is relevant, if there is one.
+
+### SmsLogs
+A record of each incoming and outgoing message. (To do: change name.) Fields:
+  - 
 
 
 
