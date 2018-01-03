@@ -468,11 +468,63 @@ Records information about the number of users reached by our messages, by week. 
 ### PendingEventReport
 **Deprecated** There are no existing `pendingEventReport` documents.
 
-### Pending Officers
+### PendingOfficers
 **Deprecated** Some old school functionality I don't understand.
 
 ### TelescopPosts
-**Deprecated** The stock Meteor `Posts` collection with some added functions.
+**Deprecated** The stock Meteor `Posts` collection with some added functions. We don't have anywhere people post any more.
+
+### Profiles
+**Deprecated** Some old kind of profile document, for highschool users of the forum, I think.
+
+### RecentlyAsked
+**Deprecated** Related to the defunct forum.
+
+### ScheduledMessages
+A message recording information about campaigns scheduled to be initiated to student users. All outgoing campaigns have a corresponding `scheduledMessages` document. The front end uses this for display purposes, among other things. Fields:
+  - `collection` Type: String. Required. The relevant collection of the users sent the message. We're using only one collection these days, so this isn't needed, but I think we should consider seperating users by messaging service again.
+  - `completed` Type: Boolean. Required. Default value: `false`. Set to `true` when the message has been sent to all intended users.
+  - `createdAt` Type: Date. Required. The date the document was created.
+  - `messagingService` Type: String. Required. The messaging service over which the message was sent.
+  - `scheduledAt` Type: Date. Required. The date the message is scheduled to be sent to users.
+  - `allowCanTextFalse` Type: Boolean. Optional. If `true`, the outgoing message will override `canText: false` settings for users.
+  - `batchSize` Type: Number. Optional. I think this is supposed to be the number of users sent the message at a time (users are seperated into batches for sending purposes), but no current document has this field, and it is non-functional in the code (which uses a value of 5). (To do: confirm intended usage, then either make functional in the code or get rid of this.)
+  - `context` Type: String. Optional. Unclear intended usage. No current document has this field. (To do: see about getting rid of this.)
+  - `endDate` Type: Date. Optional. Unclear intended usage. No current document has this field. (To do: see about getting rid of this.)
+  - `hidden` Type: Boolean. Optional. If this is `true`, the scheduled message is not displayed on the front end.
+  - `importReportId` Type: String. Optional. The `_id` field of an `importReport` document corresponding to the import of the users targeted by the message, if there is such a report (I think).
+  - `message` Type: String. Optional. Unclear where this is being set. The text of a message -- maybe only one-off messages? (To do: figure this out.)
+  - `note` **Deprecated** Type: String. Optional. Some kind of extra information added to the document. Last time this was set was 16th of December, 2016. (To do: get rid of this.)
+  - `onGoing` **Deprecated** Type: Boolean. Optional. Unclear intended usage; no current document has this field.
+  - `paused` **Deprecated** Type: Boolean. Optional. I think this was supposed to indicate the message was paused half way; that's not something we can do in the current system. No current document has this field.
+  - `query` Type: String. Optional. A stringified version of the mongo query used to choose the users that get sent the dialog. (To do: make this required.)
+  - `recipientLabel` Type: String. Optional. The label used for the import corresponding to the target users, if there is one.
+  - `scheduled` Type: Boolean. Optional. I think this is supposed to indicate that the campaign has, indeed, been scheduled, which does not make a lot of sense since the existence of the document indicates that. It is non-functional in the code. (To do: get rid of this.)
+  - `sent` Type: Boolean. Optional. Indicates the campaign corresponding to the document has been sent.
+  - `sentDate` Type: Boolean. Optional. The date at which the campaign was in fact sent. Should be very son after `scheduledAt`, unless something strange has happened.
+  - `startDate` **Deprecated** Type: Date. Optional. Hard to think of a use for this not already covered in other fields. No existing document has this field. (To do: get rid of it.)
+  - `started` Type: Boolean. Optional. Indicates the process of sending the campaign out has started.
+  - `test` Type: Boolean. Optional. Indicates this is a test campaign, not intended to be sent to real users.
+  - `users` Type: \[String\]. Optional. The value of the `_id` field of the `brandedUserProfile` documents of the users intended to receive the campaign. (To do: make this required, possibly make it a number or get rid of it. This is a lot of data to store on each document, and should be recoverable from the `query` value.)
+  - `usersContacted` Type: Number. Optional. Number of users who have thus far in fact been sent the campaign.
+  - `userSearch` **Deprecated**. I think this was intended to play the role of `query`. No current document has this field.
+  - `weekends` Type: Boolean. Optional. I think this is intended to indicate that it is ok to send the campiagn on a weekend. There are no current documents with this field, and it's not functional in the code. (To do: see about making this functional.)
+  - `workflow` Type: String. Optional. The `_id` of the `dialog` document corresponding to the campaign being sent. (To do: change the name. Make this required.)
+  - `workflowHumanName` Type: String. Optional. The `humanName` value of the `dialog` document corresponding to the campaign being sent. (To do: if we make the recommended changes to the `humanName` field, change the name of this field too.)
+
+### SmsAnalytics
+Records information about our texting load, created daily, indexed by messaging service. Fields:
+  - `date` Type: Date. Required. The date of the day whose information is recorded in the document.
+  - `sent` Type: Number. Required. The number of texts sent during the `date`.
+  - `received` Type: Number. Required. The number of texts received during the `date`.
+  - `week` Type: Number. Required. The week, out of 52, in which the `date` day occured.
+  - `year`. Type: Number. Required. The year in which the `date` day occured.
+  - `messagingService`. Type: String. Optional. The messaging service of the texts, if the information concerns a specific messaging service.
+  - `sentUnique` Type: Number. Optional. Number of unique users sent a message during the `date`. (To do: make this required, unless there's some good reason it's not.)
+  - `receivedUnique` TypeL Number. Optional. Number of unqiue users from which we received a message during the `date`. (To do: see `sentUnique`.)
+  
+
+
 
 ## Monitoring and Metrics examples
 
