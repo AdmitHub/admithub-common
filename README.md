@@ -365,13 +365,14 @@ Contains information concerning points of contact at client institutions. Fields
      - `state` Type: String. Optional. Must be a standard U.S. state code.
    - `email` Type: String. Optional. The email address itself.
    - `general` Type: Boolean. Optional. Indicates whether or not the email address is one to which emails of all topics should be forwarded if there isn't a more specific email address covering the relevant topic. I believe the frontend requires that this field exist to function correctly. (To do: either remove the front end dependence on this field, or make it required.)
+  - `forwardedTopics` Type: \[String\]. Optional. These are the stringified versions of values of `_id` fields from `understanding` documents (in the Holocene database). When a response with such an understanding id is returned after a call to Holocene, it triggers an auto-forwarded email; if that `_id` is in this array, then the email will be sent to the `email` address.
  - `introExclamation` Type: String. Optional. I think this is something that was, at one time, supposed to appear at the beginning of email from this instution to users. But it is not functional in NeOliTh code, and I think use is now fulfilled in other ways. (To do: see about getting rid of this.)
  - `mainFinAidContact` **Deprecated** We now use either the `topics` field or the `office` field to indicate this information; no existing document has this field. (To do: get rid of this.)
  - `name` Type: String. Optional. The name of the person associated with the email address, if there is one.
  - `office` Type: String. Optional. The name of the office associated with the emails address, if there is one. Examples of values include `Advising Services` and `Admissions`.
  - `states` Type: \[String\]. Optional. Must be a standard U.S. state code. States such that the associated email address covers inquiries from that state. (To do: merge this and counties.)
- - `topics` Type: \[String\]. Optional. The email address handles messages about the listed topics.
- - `forwardedTopics` Type: \[String\]. Optional. The email address handles questions or statements, which will be autoforded, that are related the listed understanding _id's.
+ - `topics` Type: \[String\]. Optional. The email address handles messages about the listed topics. These are displayed in the UI.
+
    
 ### CollegeEvents
 **Deprecated**. Contains information about events prospective students might be interested in attending; was functional back when AdmitHub matched soliciting students to instutitions.
