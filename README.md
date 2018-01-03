@@ -532,7 +532,9 @@ Information intended to be used in a display of texting activity by region, and 
 
 ### SmsLogs
 A record of each incoming and outgoing message. (To do: change name.) Fields:
-  - 
+  - `createdAt` Type: Date. Required. Date the document was created.
+  - `incoming` Type: Boolean. Indicates if the message was incoming or outgoing. `false` value indicates the message was outgoing.
+  - `senderId` Type: String. Optional. Regex constraint: SimpleSchema.RegEx.Id. `_id` of the `brandedUserProfile` document of the
 
 
 
