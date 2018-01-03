@@ -356,7 +356,6 @@ Fields:
 
 ### CollegeOfficers
 Contains information concerning points of contact at client institutions. Fields:
- - `institutionId` Type: String. Required. Despite being required, no existing `collegeOfficers` document has one (indicating that we create these non-programmatically). (To do: get rid of this.)
  - `blacklistedEmails` Type: \[String\]. Optional. I think this is for email addresses that from which we don't want to forward messages. But no current document has this field, and it is not functional in NeOliTh code. (To do: find out if this is functional on the front end. If not, get rid of it.
  - `collegeId` Type: String. Optional. `_id` field of the associated `BrandedColleges` document. This is a change; pre NeOliTh, this referenced the `_id` field on the `College` document. (To do: make this required, and unqiue.)
  - `officers` Type: \[String\]. Optional Regex constraint: SimpleSchema.RegEx.Id. Each item in the array must be unique. A list of officer ids, though it is completely unclear what documents these ids are referencing. Most (but not all) existing documents have an empty array as the value of their `officer` field. I don't think there is anywhere this is functional in out code. (To do: get rid of this.)
@@ -372,6 +371,7 @@ Contains information concerning points of contact at client institutions. Fields
    - `office` Type: String. Optional. The name of the office associated with the emails address, if there is one. Examples of values include `Advising Services` and `Admissions`.
    - `states` Type: \[String\]. Optional. Must be a standard U.S. state code. States such that the associated email address covers inquiries from that state. (To do: merge this and counties.)
    - `topics` Type: \[String\]. Optional. The email address handles messages about the listed topics.
+   - `forwardedTopics` Type: \[String\]. Optional. The email address handles questions or statements, which will be autoforded, that are related the listed understanding _id's.
    
 ### CollegeEvents
 **Deprecated**. Contains information about events prospective students might be interested in attending; was functional back when AdmitHub matched soliciting students to instutitions.
