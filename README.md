@@ -534,8 +534,19 @@ Information intended to be used in a display of texting activity by region, and 
 ### SmsLogs
 A record of each incoming and outgoing message. (To do: change name.) Fields:
   - `createdAt` Type: Date. Required. Date the document was created.
-  - `incoming` Type: Boolean. Indicates if the message was incoming or outgoing. `false` value indicates the message was outgoing.
-  - `senderId` Type: String. Optional. Regex constraint: SimpleSchema.RegEx.Id. `_id` of the `brandedUserProfile` document of the
+  - `incoming` Type: Boolean. Required. Default value: `false`. Indicates if the message was incoming or outgoing. `false` value indicates the message was outgoing.
+  - `accountSid` Type: String. Optional.
+  - `body` Type: String. Optional. The text of the message. (To do: make this required once we get rid of the the phantom messages related to the `inReplyTo` field.)
+  - `from` Type: String. Optional. The phone number the message was sent from. (Can be one of our twilio numbers, I think.) I think we're not using this anymore. (To do: confirm we're not using it, and possibly get rid of it.)
+  - `inReplyTo` Type: String. Optional. The `_id` of the `smsLog` document that this message is in reply to. For legacy, front-end related reasons, every outgoing message must have an `inReplyTo` field, with the `_id` of an actual document. This requires us to create phantom incoming messages every time we initiate a conversation, or have more than one message outgoing in a row. This should be changed as soon as possible.
+  - `mediaFiles` Type: \[Object\]. Optional. Items in the array contain information about media files attached to the relevant message. Subfields:
+    - `url` Type: String. Required. The url where the media file is stored.
+    - `contentType` Type: String. Optional. The type of media. (To do: enforce limited range of 
+  - `messageSid` Type: String. Optional. 
+  - `senderId` Type: String. Optional. Regex constraint: SimpleSchema.RegEx.Id. `_id` of the `user` document corresponding to the Phoenix or Mascot user who sent the message, if there is one. This field also appears on incoming messages -- unclear what that means.
+  - `smsSid` Type: String. Optional.
+  - `to` Type: String. Optional. The phone number of the message was sent to. I think we're not using this. (To do: confirm, and get rid of it.)
+  - `userNumber` Type: String. Optional. The phone number of the relevant user. THis seems to be performing the function of both `from` and `to`.
 
 
 
