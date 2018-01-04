@@ -534,22 +534,90 @@ Information intended to be used in a display of texting activity by region, and 
 ### SmsLogs
 A record of each incoming and outgoing message. (To do: change name.) Fields:
   - `createdAt` Type: Date. Required. Date the document was created.
+  - `error` Type: Boolean. Required. Default value: `false`. Supposedly indicates if there was an error during the receiving or sending of the message, but there is not a single log with an `error: true` value. I don't think this is functional in the code. (To do: make it functional or get rid of it.)
   - `incoming` Type: Boolean. Required. Default value: `false`. Indicates if the message was incoming or outgoing. `false` value indicates the message was outgoing.
-  - `accountSid` Type: String. Optional.
+  - `transport` Type: String. Required. Allowed values: `web`, `twilio`, `facebook`, `email`. Indicates the transport of the message. (To do: remove `web` from allowed values, unless I'm missing something.)
+  - `aiLog` Type: String. Optional. The stringified vesrion of the `_id` value of the `queryLog` document, over in the Holocene database, corresponding to this message. The presence of this field indicates that the message originates from Holocene.
+  - `accountSid` Type: String. Optional. I speculate that this, `messageSid` and `smsSid` are all twilio related, but they aren't used for anything at the moment. (To do: see about getting rid of theses.)
   - `body` Type: String. Optional. The text of the message. (To do: make this required once we get rid of the the phantom messages related to the `inReplyTo` field.)
+  - `facebookId` Type: String. Optional. The facebook id of the user messaged. Will only exist when the message was sent on the facebook transport.
   - `from` Type: String. Optional. The phone number the message was sent from. (Can be one of our twilio numbers, I think.) I think we're not using this anymore. (To do: confirm we're not using it, and possibly get rid of it.)
   - `inReplyTo` Type: String. Optional. The `_id` of the `smsLog` document that this message is in reply to. For legacy, front-end related reasons, every outgoing message must have an `inReplyTo` field, with the `_id` of an actual document. This requires us to create phantom incoming messages every time we initiate a conversation, or have more than one message outgoing in a row. This should be changed as soon as possible.
   - `mediaFiles` Type: \[Object\]. Optional. Items in the array contain information about media files attached to the relevant message. Subfields:
+    - `deleted` Type: Boolean. Required. Default value: `false`. This was part of an enforcement we used to do in Oli, that we are not currently doing in NeOliTh. If a message is sent with more than one media file, or a non-image media-file, we used to delete the (extra) file(s), and this field would be set to `true`. (To do: find out if we should be enforcing this in NeOliTh.)
     - `url` Type: String. Required. The url where the media file is stored.
-    - `contentType` Type: String. Optional. The type of media. (To do: enforce limited range of 
+    - `contentType` Type: String. Optional. The type of media. (To do: enforce limited range of allowed values.)
   - `messageSid` Type: String. Optional. 
+  - `messagingService` Type: String. Optional. The value of the `messagingService` field on the `brandedCollege` document of the relevant institution. (To do: make this required.)
+  - `msgParts` Type: Number. Optional. Number of parts the message was split up into, by twilio. (They do that if the message is long.) This should only appear on logs with `transport: twilio`.
   - `senderId` Type: String. Optional. Regex constraint: SimpleSchema.RegEx.Id. `_id` of the `user` document corresponding to the Phoenix or Mascot user who sent the message, if there is one. This field also appears on incoming messages -- unclear what that means.
   - `smsSid` Type: String. Optional.
+  - `source` Type: String. Optional. Indicates the source of the message. Currently, there are exactly three logs such that their `source` value us not either `none specified` or `triage`. The other values are `mascot/conversation` and `conversation`. (To do: make a list of allowed values, and enforce. Possibly make required, depending on what is on that list.)
+  - `testUser` Type: Boolean. Optional. Default value: `false`. Indicates that this message was to or from a test user. I think this field has *not* being set since the change to NeOliTh. (To do: set this in NeOliTh. Also: either make it required or remove default value.)
   - `to` Type: String. Optional. The phone number of the message was sent to. I think we're not using this. (To do: confirm, and get rid of it.)
-  - `userNumber` Type: String. Optional. The phone number of the relevant user. THis seems to be performing the function of both `from` and `to`.
+  - `userId` Type: String. Optional. `_id` field of the `brandedUserProfile` document associated with the messag(ing/ed) student. (To do: make this required.)
+  - `userNumber` Type: String. Optional. The phone number of the relevant user, if the message was sent via the twilio transport. This seems to be performing the function of both `from` and `to`, currently.
+  - `workflow` Type: String. Optional. Name of workflow this message was a part of. Not currently being used. (To do: change this to `dialog`, make it equal the `_id` field of the relevant dialog, and make it required, if we are indeed handling all messaging via dialogs.)
 
+### Snapshots
+Snapshots of an interaction involving an error; records information about the user, the institution, the smslogs, and other things. Sounds nice, but we never used this, and they aren't made any more in NeOliTh. (To do: determine if we want to bring this back. I think not.)
 
+### Sponsors
+**Deprecated**. Used to play a role in the website.
 
+### Testimonials
+**Deprecated**. Same deal as `sponsors`.
+
+### TwilioAccounts
+**Deprecated** Not sure exactly how these worked, but we don't use them now; the collection doesn't exist in the database.
+
+### UnverifiedEmailMessages
+**Deprecated** There are exactly three of these documents in the database; I'm pretty sure they aren't used for anything. (To do: see if there's some connection with the `unverified` parameter used in the email code, for the pruposes of code archaeology.)
+
+### Users
+Originally was for everyone, has since been repurposed as the documents for phoenix and mascot users. Fields:
+  - `admithubUser` Type: Boolean. Required. Default value: `false`. Indicates the user is part of our glorious company, and entitled to the prviliges becoming of such a position.
+  - `createdAt` Type: Date. Required. Autovalue set on document creation (as all of these created-at type fields should be).
+  - `data` **Deprecated** Telescope related.
+  - `profile` Type: Object. Required. Black box. Autovalue set as empty object. Unclear what conceptually groups the subfields of this field. (To do: un-nest the subfields and get rid of this. Make the empty object a default value, rather than autosetting it.) Some defined subfields:
+    - `canText` **Deprecated** See below.
+    - `facebookId` **Deprecated** This is no longer relevant to `user` documents; we have them over in `brandedUserProfile` documents.
+    - `firstOutgoing` Records te first outgong message sent to a user. Probably confusing to have this now, given the new meanin of the `user` document; if anything, it should record the first outgoing message *from* the user. No longer functional in NeOliTh anyhow. (To do: confirm we don't want to use this for something; if so, use it, if not, get rid of it.)
+    - `hasSent` Type: Boolean. Optional. Oli set this to true when we got incoming from the user. This is no longer an apporpriate use, given the current meaning of the `user` document. (To do: see `firstOutgoing`.)
+    - `notifications` **Deprecated** See `tags`.
+    - `phone` **Deprecated** See `facebookId`.
+    - `subscriptions` **Deprecated** From a time users could subscribe to reports AdmitHub generated. 
+    - `tags` **Deprecated** A mystery field that only Scott Burke has.
+  - `referralCode` Type: String. Required. Autofilled to be a Meteor uuid. Pretty sure we don't use this for anything. (To do: confirm, then probably get rid of it.)
+  - `votes` Type: Object. Required. Autovalue is an empty object. Unclear intended usage; every existing document has an empty object as value. (To do: see about getting rid of this.)
+  - `abGroup` Type: Number. Optional. Decimal between 0 and 1. Used to seperate groups for A/B testing. (To do: see about making this required.)
+  - `email_hash` Type: String. Optional. Presumably some security measure. There are exactly two documents with this field. (To do: see if we want to use this for real, and if not get rid of it.)
+  - `emails` Type: \[Object\]. Optional. Default value: empty array (set in a ridiculously indirect way). Contains information about the user's email addresses. Subfields:
+    - `address` Type: String. Optional. Regex constraint: SimpleSchema.RegEx.Email. The address itself.
+    - `smsVerifyCode` Type: String. Optional. Used in Oli times to verify email addresses; no longer functional. (To do: either restore this functionality or get rid of this field.)
+    - `verified` Type: Boolean. Optional. Set to `true` when the user clicks a sign-up link (and probably also reset-passowrd link).
+  - `hardStopReason` **Deprecated** No existing document has this; I think a "hard stop" in this context means something that doesn't existi any more.
+  - `hardStopToken` **Deprecated** See above. 
+  - `phoenixUser` Type: Boolean. Optional. Indicates the user uses Phoenix, the second best front-end application at AdmitHub. (To do: make corresponding `mascotUser` field.)
+  - `phone` **Deprecated**. No longer relevant to `user` documents; we have the required informaiton in `brandedUserProfile` documents.
+  - `phonePending` **Deprecated** No longer functional in NeOliTh code, and no existing document has this.
+  - `presence` Type: Object. Optional. Black box. Contains information about what part of the app the user is currently active in. (To do: un-black-box this.)
+  - `resumeWorkflow` **Deprecated** If I am guessing correctly, this information now belongs on the `brandedUserProfile` document. No existing `user` document has this field.
+  - `referralCredits` **Deprecated** We used to have some kind of referral scheme.
+  - `roles` Type: Object. Optional. Black box. Specifies the user's privileges, by institution. (To do: un-black-box this. Make it required.)
+  - `services` Type: Object. Optional. Black box. Contains user's authorisation information, including information about passwords and session tokens. (To do: un-black-box this.)
+  - `sharing` Type: Boolean. Optional. No existing document has this field. (To do: see about getting rid of this.)
+  - `slug` Type: String. Optional. Autoset to `slugify([username])`, if `username` exists; otherwise set to `slugify([_id])`. `telescope.slug` is set to be the same value as this. Used in certain urls, I'm guessing.
+  - `smsHardStopped` **Deprecated** No longer belongs on the `user` document.
+  - `snapshotReference` **Deprecated** Used as part of a feature that preserved the earlier state of test users; now defunct.
+  - `startInitialSurvey` **Deprecated** I think this field no longer makes sense to have on this document, given it's new meaning. No curren document has this field.
+  - `status` Type: Object. Optional. Black box. Contains information about user's overall state in the app, currently -- whether they are online, and whether they are idle, for instance. (To do: un-black-box this.)
+  - `telescope` **Deprecated** We don't user telescope any more.
+  - `test` Type: Boolean. Optional. Unclear how this differs form `testUser`. (To do: either give this a clearer name which makes a distinct function obvious, or get rid of either this or `testUser`.)
+  - `testUser` Type: Boolean. Optional. Indicates this is a test user. (To do: see `test`.)
+  - `username` Type: String. Optional. Must be between 3 and 15 alphanumeric characters. Apparently we use `emails` for the same purpose as this now, but Anthony thinks it's worth keeping `username`.
+  - `workflow` **Deprecated** This infromation now belongs on the `brandedUserProfile` document.
+  
 ## Monitoring and Metrics examples
 
 ```
