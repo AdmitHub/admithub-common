@@ -400,7 +400,6 @@ A document defining the general properties of a specific, scripted interaction w
   - `updatedAt` Type: Date. Optional. Date at which the dialog was modified, if it was.
 
 ### DialogStates
-
 Contains information about specific states in the associated dialogs state-graph. A user moves through the dialog by traersing a path through the graph. These graphs will usually be trees, but need not be. Fields:
   - `nextStates` Type: Object. Required. Black box. Indicates the successor states to the current state, and provides information about which state to go to next. (To do: un-black-box this.)
   - `parentDialog` Type: String. Required. The `_id` of the `Dialog` document associated with this state. (To do: enforce simple-schema id syntax.)
@@ -423,7 +422,6 @@ Contains information about specific states in the associated dialogs state-graph
   - `updatedAt` Type: Date. Optional. Date at which the document was updated.
 
 ### DemoBotProfile
-
 I think these are intended to record information on users who we pick up using the sales demo bot. Unclear if we intend to keep using this schema. There are no current `DemoBotProfile` documents, and no reference to them in the code. (To do: get confirmation that these will be used, or not.)
 
 ### GeorgiaStateSchema
@@ -591,6 +589,7 @@ Originally was for everyone, has since been repurposed as the documents for phoe
   - `referralCode` Type: String. Required. Autofilled to be a Meteor uuid. Pretty sure we don't use this for anything. (To do: confirm, then probably get rid of it.)
   - `votes` Type: Object. Required. Autovalue is an empty object. Unclear intended usage; every existing document has an empty object as value. (To do: see about getting rid of this.)
   - `abGroup` Type: Number. Optional. Decimal between 0 and 1. Used to seperate groups for A/B testing. (To do: see about making this required.)
+  - `currentInstitution` Type: String. Optional. The `_id` value of the `brandedCollege` document corresponding to the institution view a Phoenix user is currently looking at. (To do: figure out if we need another field for Mascot.)
   - `email_hash` Type: String. Optional. Presumably some security measure. There are exactly two documents with this field. (To do: see if we want to use this for real, and if not get rid of it.)
   - `emails` Type: \[Object\]. Optional. Default value: empty array (set in a ridiculously indirect way). Contains information about the user's email addresses. Subfields:
     - `address` Type: String. Optional. Regex constraint: SimpleSchema.RegEx.Email. The address itself.
@@ -598,13 +597,19 @@ Originally was for everyone, has since been repurposed as the documents for phoe
     - `verified` Type: Boolean. Optional. Set to `true` when the user clicks a sign-up link (and probably also reset-passowrd link).
   - `hardStopReason` **Deprecated** No existing document has this; I think a "hard stop" in this context means something that doesn't existi any more.
   - `hardStopToken` **Deprecated** See above. 
+  - `importedSegmentLabels` **Deprecated** No longer relevant, given the new meaning of `user` documents.
+  - `lastContacted` **Deprecated** See above.
+  - `lastMessageId` **Deprecated** See above above.
   - `phoenixUser` Type: Boolean. Optional. Indicates the user uses Phoenix, the second best front-end application at AdmitHub. (To do: make corresponding `mascotUser` field.)
   - `phone` **Deprecated**. No longer relevant to `user` documents; we have the required informaiton in `brandedUserProfile` documents.
   - `phonePending` **Deprecated** No longer functional in NeOliTh code, and no existing document has this.
+  - `pinnedConversations`Type: \[String\]
   - `presence` Type: Object. Optional. Black box. Contains information about what part of the app the user is currently active in. (To do: un-black-box this.)
+  - `recentConverstaions`
   - `resumeWorkflow` **Deprecated** If I am guessing correctly, this information now belongs on the `brandedUserProfile` document. No existing `user` document has this field.
   - `referralCredits` **Deprecated** We used to have some kind of referral scheme.
   - `roles` Type: Object. Optional. Black box. Specifies the user's privileges, by institution. (To do: un-black-box this. Make it required.)
+  - `schools` **Deprecated** No longer relevant, given new meaning of `user` document.
   - `services` Type: Object. Optional. Black box. Contains user's authorisation information, including information about passwords and session tokens. (To do: un-black-box this.)
   - `sharing` Type: Boolean. Optional. No existing document has this field. (To do: see about getting rid of this.)
   - `slug` Type: String. Optional. Autoset to `slugify([username])`, if `username` exists; otherwise set to `slugify([_id])`. `telescope.slug` is set to be the same value as this. Used in certain urls, I'm guessing.
@@ -618,6 +623,16 @@ Originally was for everyone, has since been repurposed as the documents for phoe
   - `username` Type: String. Optional. Must be between 3 and 15 alphanumeric characters. Apparently we use `emails` for the same purpose as this now, but Anthony thinks it's worth keeping `username`.
   - `workflow` **Deprecated** This infromation now belongs on the `brandedUserProfile` document.
   
+### WorkflowResponses
+Records user responses to dialog prompt. Fields:
+  - `created` Type: Date. Required. The date the document was created.
+  - `messagingService` Type: String. Required. The `messagingService` value of the `brandedCollege` doccument of the relevant institution.
+  - `response` Type Object. Required. Black box. Contains information about the prompt and the response. (To do: un-black-box this.)
+  - `scheduledMessageId` Type: String. Required. The `_id` value of the `scheduledMessage` document corresponding to the campaign to which the student is responding.
+  - `step` Type: String. Required. The `_id` value of the `dialogState` document of the state to which this a response.
+  - `userId` Type: String. Required. The `_id` value of the `brandedUserProfile` document of the relevant user.
+  - `workflow` Type: String. Required. The `_id` value of the `dialog` document of the relevant dialog.
+
 ## Monitoring and Metrics examples
 
 ```
