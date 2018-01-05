@@ -603,7 +603,7 @@ Originally was for everyone, has since been repurposed as the documents for phoe
   - `phoenixUser` Type: Boolean. Optional. Indicates the user uses Phoenix, the second best front-end application at AdmitHub. (To do: make corresponding `mascotUser` field.)
   - `phone` **Deprecated**. No longer relevant to `user` documents; we have the required informaiton in `brandedUserProfile` documents.
   - `phonePending` **Deprecated** No longer functional in NeOliTh code, and no existing document has this.
-  - `pinnedConversations`Type: \[String\]
+  - `pinnedConversations` Type: \[String\]. Optional. Default value: empty array. Each item is an `_id` value of the `brandedUserProfile` document of the student user who's converation is pinned by the Phoenix user of this `user` document.
   - `presence` Type: Object. Optional. Black box. Contains information about what part of the app the user is currently active in. (To do: un-black-box this.)
   - `recentConverstaions`
   - `resumeWorkflow` **Deprecated** If I am guessing correctly, this information now belongs on the `brandedUserProfile` document. No existing `user` document has this field.
@@ -632,6 +632,18 @@ Records user responses to dialog prompt. Fields:
   - `step` Type: String. Required. The `_id` value of the `dialogState` document of the state to which this a response.
   - `userId` Type: String. Required. The `_id` value of the `brandedUserProfile` document of the relevant user.
   - `workflow` Type: String. Required. The `_id` value of the `dialog` document of the relevant dialog.
+
+### WorkflowScripts
+Used to display details of the old-school workflows to users. Unclear if this has a future in the dialog era. (To do: figure out if it does.) Fields:
+  - `description` Type: String. Required. A description of the dialog; appears in the UI.
+  - `scripts` Type: \[Object\]. Required. Contains the display information by possible path through the dialog. Subfields:
+    - `description` Type: String. Required. A description of the dialog path.
+    - `exchanges` Type: \[Object\]. Required. Contains information by state in the path. Subfields:
+      - `response` Type: String. Optional. The student response required to continue on the relevant path, if there is one.
+      - `step` Type: String. Required. The `name` (or preferrably `_id` in the dialog era) of the `dialogState` in the path.
+    - `name` Type: String. Required. A name for the dialog path.
+  - `workflow` Type: String. Required. The `_id` value of the `dialog` document of the relevant dialog.
+  
 
 ## Monitoring and Metrics examples
 
