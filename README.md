@@ -643,7 +643,9 @@ Used to display details of the old-school workflows to users. Unclear if this ha
       - `step` Type: String. Required. The `name` (or preferrably `_id` in the dialog era) of the `dialogState` in the path.
     - `name` Type: String. Required. A name for the dialog path.
   - `workflow` Type: String. Required. The `_id` value of the `dialog` document of the relevant dialog.
-  
+
+### Workflows
+**Deprecated** Now we use dialogs.
 
 ## Monitoring and Metrics examples
 
