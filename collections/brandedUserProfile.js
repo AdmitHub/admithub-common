@@ -194,6 +194,7 @@ BrandedUserSchema = new SimpleSchema({
     contacted: fields.bool(o),
     finished: fields.bool(o),
     generalOptIn: fields.bool(o),
+    nonWorkingFacebookId: fields.bool(o),
     nonWorkingNumber: fields.bool(o),
     nonWorkingNumberCode: fields.string(o),
     permittedUser: fields.bool(o),
