@@ -1,7 +1,7 @@
 # admithub-common
 Common styles, templates, and library functions and classes for AdmitHub apps
 
-## Schema
+## Schemata
 
 ### BrandedApplicantConversations
 Records the history of email exchanges between student user and instution.
