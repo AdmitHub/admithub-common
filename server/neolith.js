@@ -65,15 +65,15 @@ Neolith = {
 
   // Parameter schema for ``Neolith.initiate``
   scheduleMessageParams: new SimpleSchema({
-    time: {type: String, optional: true},
-    dialogId: {type: String},
+    dialogId: {type: String, regEx: SimpleSchema.RegEx.Id},
     query: {type: String},
-    recipientLabel: {type: String, optional: true},
-    workflowHumanName: {type: String, optional: true},
-    selectedCalendar: {type: String, optional: true},
-    importReportId: {type: String, optional: true},
-    test: {type: Boolean, optional: true},
     hidden: {type: Boolean, optional: true}
+    importReportId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
+    recipientLabel: {type: String, optional: true},
+    selectedCalendar: {type: String, optional: true},
+    test: {type: Boolean, optional: true},
+    time: {type: String, optional: true},
+    workflowHumanName: {type: String, optional: true}
   }),
   /**
    * Schedule a scheduledMessage
