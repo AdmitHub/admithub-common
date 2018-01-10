@@ -68,12 +68,12 @@ Neolith = {
   scheduleMessageParams: new SimpleSchema({
     dialogId: fields.id(),
     query: fields.string(),
-    hidden: fields.bool(o)
+    hidden: fields.bool(o),
     importReportId: fields.id(o),
-    recipientLabel: fields.string(o)
-    selectedCalendar: fields.string(o)
-    test: fields.bool(o)
-    time: fields.string(o)
+    recipientLabel: fields.string(o),
+    selectedCalendar: fields.string(o),
+    test: fields.bool(o),
+    time: fields.string(o),
     workflowHumanName: fields.string(o)
   }),
   /**
@@ -115,8 +115,8 @@ Neolith = {
    * @param {Object} params - Parameters as defined in ``Neolith.scheduleMessage``
    */
   sendSingleMessageParams: new SimpleSchema({
-    body: fields.long_string()
-    senderId: fields.id()
+    body: fields.long_string(),
+    senderId: fields.id(),
     source: fields.string(),
     userId: fields.id(),
   }),
