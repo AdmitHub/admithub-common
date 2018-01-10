@@ -100,9 +100,7 @@ Neolith = {
    * @param {Object} params - Parameters as defined in ``Neolith.deleteScheduledMessage``
    */
   deleteScheduledMessage: function(params) {
-    console.log("checking delete scheduled params")
     check(params, Neolith.deleteScheduledMessageParams);
-    console.log("checked delete schedule params")
 
     return Neolith._callEndpoint(
       'POST',
