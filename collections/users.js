@@ -33,17 +33,17 @@ UserSchema = new SimpleSchema({
       // Ensure the profile object is present.
       if (!this.isSet) {
         if (this.isInsert) {
-          return {}
+          return {};
         } else if (this.isUpsert) {
-          return {$setOnInsert: {}}
+          return {$setOnInsert: {}};
         }
       } else if (this.value.phone) {
         // Cleaning for phone values. This only gets called for
         // ``$set: {profile: {phone: ...}}``.  We need to duplicate this
         // in the ``$set: {"profile.phone": ...}`` below.
-        this.value.phone = fields.cleanPhone(this.value.phone)
+        this.value.phone = fields.cleanPhone(this.value.phone);
       }
-      return this.value
+      return this.value;
     }
   },
   'profile.facebookId': {
@@ -72,9 +72,9 @@ UserSchema = new SimpleSchema({
         // Cleaning for phone values. This only gets called for
         // ``$set: {"profile.phone": ...}``. We need to duplicate this
         // ``$set: {profile: {phone: ...}}`` above.
-        return fields.cleanPhone(this.value)
+        return fields.cleanPhone(this.value);
       }
-      return this.value
+      return this.value;
     },
     optional: true
   },
@@ -136,7 +136,7 @@ UserSchema = new SimpleSchema({
   'referralCode': {
     type: String,
     autoValue: fields.insertOnlyValue(function () {
-      return Meteor.uuid()
+      return Meteor.uuid();
     })
   },
   'referralCredits': {type: [Object], optional: true},
@@ -153,14 +153,14 @@ UserSchema = new SimpleSchema({
     type: Object,
     blackbox: true,
     autoValue: fields.callableDefaultValue(function () {
-      return {}
+      return {};
     })
   },
   'votes': {
     type: Object,
     blackbox: true,
     autoValue: fields.callableDefaultValue(function () {
-      return {}
+      return {};
     })
   },
   'sharing': {type: Boolean, optional: true},
@@ -183,8 +183,9 @@ UserSchema = new SimpleSchema({
   'schools': {type: [String], optional: true, defaultValue: []},
   'importSegmentLabels': {type: [String], optional: true, defaultValue: []},
   'lastContacted': { type: Date, optional: true },
-  'lastMessageId': { type: String, optional: true }
-})
+  'lastMessageId': { type: String, optional: true },
+  'lastLoginAt': { type: Date, optional: true }
+});
 
 Meteor.users.before.insert(function (userId, doc) {
   if (!doc.slug) {
