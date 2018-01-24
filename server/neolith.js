@@ -11,6 +11,11 @@ Neolith = {
 
     var syncPost = Meteor.wrapAsync(HTTP.call);
     try {
+      console.log('Calling endpoint');
+      console.log('Url: ', endpoint);
+      console.log('Headers: ', headers);
+      console.log('Params: ', params);
+
       return syncPost('POST', endpoint, {
         data: params,
         headers: headers
