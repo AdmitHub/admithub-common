@@ -74,7 +74,6 @@ Package.onUse(function (api) {
   api.addFiles('server/collegesInMemory.js', 'server');
   api.addFiles('server/indexes.js', 'server');
   api.addFiles('server/methods.js', 'server');
-  api.addFiles('server/oli.js', 'server');
   api.addFiles('server/neolith.js', 'server');
 
 
