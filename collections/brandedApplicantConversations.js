@@ -8,11 +8,12 @@ BrandedApplicantConversations.attachSchema(new SimpleSchema({
   created: {type: Date, optional: true}, // additional createdAt date for ease of query in metabase
   messages: {type: [Object]},
   handled: {type: Boolean, optional: true, defaultValue: false},
-  'messages.$.created': {type: Date},
-  'messages.$.sender': {type: String, allowedValues: ['student', 'college', 'admithub']},
-  'messages.$.email': {type: String, optional: true},
   'messages.$.body': {type: String},
-  'messages.$.unverified': {type: Boolean, optional: true},
+  'messages.$.created': {type: Date},
   'messages.$.auto': {type: Boolean, optional: true},
-  'messages.$.logId': {type: String, optional: true}
+  'messages.$.email': {type: String, optional: true},
+  'messages.$.queryLogId': {type: String, optional: true}
+  'messages.$.sender': {type: String, allowedValues: ['student', 'college', 'admithub']},
+  'messages.$.smsLogId': {type: String, optional: true},
+  'messages.$.unverified': {type: Boolean, optional: true},
 }))
