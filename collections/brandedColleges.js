@@ -1,7 +1,7 @@
 BrandedColleges = new Mongo.Collection('brandedcolleges')
 BrandedColleges.attachSchema(new SimpleSchema({
   _id: {type: String, optional: true},
-  emailDomain: {type: String},
+  emailDomains: {type: [String]},
   abbr: {type: String, optional: true}, // GSU
   primaryBrandColor: {type: String, optional: true},
   aiSubject: {type: String},
