@@ -59,7 +59,7 @@ SmsLogs.after.insert((insertingUserId, doc) => {
     BrandedColleges.findOne({messagingService: doc.messagingService}).then(college => {
       if (!college) throw new Error('college-not-found');
 
-      BrandedUserProfiles.update({userId: doc.userId, collegeId: college._id}, {
+      BrandedUserProfiles.update({_id: doc.userId, collegeId: college._id}, {
         $set: {
           [doc.incoming ? 'smsInfo.lastIncomingMessageAt' : 'smsInfo.lastOutgoingMessageAt']: new Date(),
           [doc.incoming ? 'smsInfo.lastIncomingMessageBody' : 'smsInfo.lastOutgoingMessageBody']: doc.body,
