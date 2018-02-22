@@ -12,8 +12,8 @@ BrandedApplicantConversations.attachSchema(new SimpleSchema({
   'messages.$.created': {type: Date},
   'messages.$.auto': {type: Boolean, optional: true},
   'messages.$.email': {type: String, optional: true},
-  'messages.$.queryLogId': {type: String, optional: true}
+  'messages.$.queryLogId': {type: String, optional: true},
   'messages.$.sender': {type: String, allowedValues: ['student', 'college', 'admithub']},
   'messages.$.smsLogId': {type: String, optional: true},
-  'messages.$.unverified': {type: Boolean, optional: true},
+  'messages.$.unverified': {type: Boolean, optional: true}
 }))
