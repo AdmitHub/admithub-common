@@ -101,7 +101,8 @@ Neolith = {
   forwardToCollegeParams: new SimpleSchema({
     messagingService: {type: String},
     userId: {type: String},
-    logId: {type: String},
+    smsLogId: {type: String},
+    queryLogId: {type: String},
     prefix: {type: String},
     question: {type: String},
     email: {type: String}
