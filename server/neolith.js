@@ -102,7 +102,7 @@ Neolith = {
     messagingService: {type: String},
     userId: {type: String},
     smsLogId: {type: String},
-    queryLogId: {type: String},
+    queryLogId: {type: String, optional: true},
     prefix: {type: String},
     question: {type: String},
     email: {type: String}
