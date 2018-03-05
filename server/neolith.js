@@ -1,3 +1,4 @@
+const o = {optional: true}
 /**
  * Neolith API
  */
@@ -33,15 +34,15 @@ Neolith = {
 
   // Parameter schema for ``Neolith.initiate``
   scheduleMessageParams: new SimpleSchema({
-    time: {type: String, optional: true},
-    dialogId: {type: String},
-    query: {type: String},
-    recipientLabel: {type: String, optional: true},
-    workflowHumanName: {type: String, optional: true},
-    selectedCalendar: {type: String, optional: true},
-    importReportId: {type: String, optional: true},
-    test: {type: Boolean, optional: true},
-    hidden: {type: Boolean, optional: true}
+    dialogId: fields.id(),
+    query: fields.string(),
+    hidden: fields.bool(o),
+    importReportId: fields.id(o),
+    recipientLabel: fields.string(o),
+    selectedCalendar: fields.string(o),
+    test: fields.bool(o),
+    time: fields.string(o),
+    workflowHumanName: fields.string(o)
   }),
   /**
    * Schedule a scheduledMessage
@@ -59,7 +60,7 @@ Neolith = {
   },
 
   deleteScheduledMessageParams: new SimpleSchema({
-    scheduledMessageId: {type: String}
+    scheduledMessageId: fields.id()
   }),
   /**
    * Cancel a scheduledMessage
@@ -82,11 +83,12 @@ Neolith = {
    * @param {Object} params - Parameters as defined in ``Neolith.scheduleMessage``
    */
   sendSingleMessageParams: new SimpleSchema({
-    userId: {type: String},
-    source: {type: String},
-    senderId: {type: String},
-    body: {type: String}
+    body: fields.long_string(),
+    senderId: fields.id(),
+    source: fields.string(),
+    userId: fields.id(),
   }),
+
   sendSingleMessage: function(params) {
     check(params, Neolith.sendSingleMessageParams);
 
@@ -99,12 +101,12 @@ Neolith = {
 
   // parameter schema for ``Neolith.forwardToCollege``
   forwardToCollegeParams: new SimpleSchema({
-    messagingService: {type: String},
-    userId: {type: String},
-    logId: {type: String},
-    prefix: {type: String},
-    question: {type: String},
-    email: {type: String}
+    messagingService: fields.string(),
+    userId: fields.id(),
+    logId: fields.id(),
+    prefix: fields.string(),
+    question: fields.string(),
+    email: fields.email()
   }),
   /**
    * Forwards a student message to a college
