@@ -17,7 +17,7 @@ SmsLogs.attachSchema(new SimpleSchema({
   messageSid: {type: String, optional: true},
   messagingService: {type: String, optional: true},
   msgParts: {type: Number, optional: true},
-  scheduleMessageId: {type: String, regeEx: SimpleSchema.RegEx.Id, optional: true},
+  scheduleMessageId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   senderId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   smsSid: {type: String, optional: true},
   source: {type: String, optional: true},
