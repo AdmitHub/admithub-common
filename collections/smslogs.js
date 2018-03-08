@@ -6,7 +6,7 @@ SmsLogs.attachSchema(new SimpleSchema({
   incoming: {type: Boolean, defaultValue: false},
   accountSid: {type: String, optional: true},
   body: {type: String, optional: true},
-  dialogId: {type: String, regEx: SimpleSchema.RegEx.Id optional: true}
+  dialogId: {type: String, optional: true},
   error: {type: Boolean, defaultValue: false},
   facebookId: {type: String, optional: true},
   from: {type: String, optional: true},
@@ -26,7 +26,7 @@ SmsLogs.attachSchema(new SimpleSchema({
   to: {type: String, optional: true},
   transport: {type: String, allowedValues: ["web", "twilio", "facebook", "email"], optional: false},
   userNumber: {type: String, optional: true},
-  userId: {type: String, optional: true},
+  userId: {type: String, optional: true}
 }))
 if (Meteor.isServer) {
   SmsLogs.allow({
