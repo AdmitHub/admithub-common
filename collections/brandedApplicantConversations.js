@@ -1,4 +1,4 @@
-BrandedApplicantConversations = new Mongo.Collection('brandedapplicantconversations')
+BrandedApplicantConversations = new Mongo.Collection('brandedapplicantconversations');
 BrandedApplicantConversations.attachSchema(new SimpleSchema({
   _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   applicantId: {type: String}, // this could very well be a Mongo-style ID
@@ -12,8 +12,7 @@ BrandedApplicantConversations.attachSchema(new SimpleSchema({
   'messages.$.created': {type: Date},
   'messages.$.auto': {type: Boolean, optional: true},
   'messages.$.email': {type: String, optional: true},
-  'messages.$.queryLogId': {type: String, optional: true},
+  'messages.$.logId': {type: String, optional: true},
   'messages.$.sender': {type: String, allowedValues: ['student', 'college', 'admithub']},
-  'messages.$.smsLogId': {type: String, optional: true},
   'messages.$.unverified': {type: Boolean, optional: true}
-}))
+}));
