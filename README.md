@@ -13,7 +13,7 @@ Fields:
     - `sender` Type: String. Required. Allowed values: `student`, `college`, `admithub`. Indicates the source of the message.
     - `auto` Type: Boolean. Optional. Indicates whether the email was auto-generated becaue of the topic returned by Holocene. (To do: make this required.)
     - `email` Type: String. Optional. The email address at the institution to which the email was sent, or from which it was received. (To do: make this required.)
-    - `logId` Type: String. Optional. According to a comment in the code, this is non-functional; I speculate that it is intended to record the ai-log associated with an auto-generated email. (To do: either make this functional or get rid of it.)
+    - `logId` Type: String. Optional. Currently in transition -- the intended usage is that this be the `_id` of the `smsLog` document associated with the incoming or outgoing message.
     - `unverified` Type: Boolean. Optional. Set as `true` on all emails received at the `/api/receiveEmail` endpoint. That includes all emails from an institution that respond to an auto-generated or triager-generated email. This is used to filter those messages that get sent as part of the body of an email forwarded to an institution. (To do: verify this is desired behaviour. If not, get rid of it.)
   - `brandedCollegeId`: Type: String. Optional. The `_id` of the `brandedCollege` document of the relevant institution. (To do: make this required, until we merge the `_id` and `messagingService` fields of the `brandedCollege` document, then either get rid of this one or `messaginService`.)
   - `created`: Type: Date. Optional. The date the document was created. (To do: change name to `createdAt` if this name isn't necessary for metabase. (A comment suggests it *is* necessary for metabase.) Make required.)
@@ -25,10 +25,11 @@ Fields:
 **Deprecated**. Some kind of pre `brandedUserProfile` user document.
 
 ### BrandedColleges
-Documents containing details about partner institutions.
+Documents containing details about partner institutions. `messagingService` and `messagingServiceSid` values must be unique (or empty).
 Fields:
  - `aiSubject` Type: String. Required. A string used as part of the input contexts passed to Holocene calls.
  - `disabledFeatures` Type: \[String\]. Required. Default value: empty array. Front-end uses this to determine what opt-out features the insitution dis not have access to. (To do: see `enabledFeatures`.)
+ - `emailDomains` Type: \[String\]. Required. The system will accept emails, for the relevant messaging service, from any address that has a domain name that appears in this array. The system will not accept any other emails.
  - `messagingService`: Type: String. Required. Name of the messaging service of the institution. (To do: make only one of this and `_id` exist.)
  - `name` Type: String. Required. Full name of the institution.
  - `oliName` Type: String. Required. Name of the bot personality. (To do: consider changing name. Though maybe we want to keep it for nostalgia resons.)
@@ -78,9 +79,10 @@ Fields:
  - `promptFilter` Type: String. Optional. Apparently I added this, but I have no idea why, and it seems to be completely unfunctional. (To do; get rid of it.)
  - `studentFieldMapping` Type: Object. Optional. Default value: empty object. Blackbox. 
  - `tuitionDueDate` Type: Date. Optional. Date by which stuent tuition is due. (To do, see `dateAccepted`.)
+ - `voiceMail` Type: String. Optional. Message spoken (poorly) when the user calls the relevant phone number. The system uses a default message when this field is absent.
 
 ### BrandedUserProfile
-  User document for student users.
+  User document for student users. `collegeId`-`_phone` and `collegeId`-`_facebookId` pairs must be unique.
   - `collegeId` Type: String. Required. Value of `_id` field on the `BrandedCollege` document of the institution associated with the student.
   - `crmId` type: String. Required. Identifier used specifically by GSU. (To do: make this optional.)
   - `userId` Type: String. Required. **Deprecated**. `_id` on the `user` document corresponding to the `brandedUserProfile`. There is no such document now; the `user`schema is reserved for Phoenix and Mascot users. This field is now identical to the `_id` field. (To do: get rid of this.)
@@ -242,7 +244,8 @@ Fields:
     - `carrier` Type: String. Optional. Indicates which carrier the user's phone uses. (To do: restrict possible values.)
     - `contacted` Type: Boolean. Optional. Indicates if the bot has sent the user a message before. (To do: make this required.)
     - `finished` Type: Boolean. Optional. Indicates we are finished with out dealings with this user. (To do: determine if this is necessary, given the other fields. If not, get rid of it, and change the name to make the user case more obvious.)
-    - `generalOptIn` Type: Boolean. Optional. 
+    - `generalOptIn` Type: Boolean. Optional. I don't know what this is. (To do: figure it out.)
+    - `nonWorkingFacebookId` Type: Boolean. Optional. Indicates the facebook id we have for the user doesn't work.
     - `nonWorkingNumber` Type: Boolean. Optional. Indicates the phone number we have for the user doesn't work.
     - `nonWorkingNumberCode` Type: Boolean. Optional. Don't know what this is about. No existing document has this subfield. (To do: see about getting rid of this.)
     - `passiveOptOut` Type: Boolean. Optional. Indicates that user has failed to opt in when an opt in was required, and should be treated as having opted out.
@@ -538,6 +541,7 @@ A record of each incoming and outgoing message. (To do: change name.) Fields:
   - `aiLog` Type: String. Optional. The stringified vesrion of the `_id` value of the `queryLog` document, over in the Holocene database, corresponding to this message. The presence of this field indicates that the message originates from Holocene.
   - `accountSid` Type: String. Optional. I speculate that this, `messageSid` and `smsSid` are all twilio related, but they aren't used for anything at the moment. (To do: see about getting rid of theses.)
   - `body` Type: String. Optional. The text of the message. (To do: make this required once we get rid of the the phantom messages related to the `inReplyTo` field.)
+  - `dialogId` Type: String. Optional. The `_id` of the `dialog` document of the dialog that the user was in when they sent this message, if it is incoming, or of the dialog that this message is a part of, if it is outgoing.
   - `facebookId` Type: String. Optional. The facebook id of the user messaged. Will only exist when the message was sent on the facebook transport.
   - `from` Type: String. Optional. The phone number the message was sent from. (Can be one of our twilio numbers, I think.) I think we're not using this anymore. (To do: confirm we're not using it, and possibly get rid of it.)
   - `inReplyTo` Type: String. Optional. The `_id` of the `smsLog` document that this message is in reply to. For legacy, front-end related reasons, every outgoing message must have an `inReplyTo` field, with the `_id` of an actual document. This requires us to create phantom incoming messages every time we initiate a conversation, or have more than one message outgoing in a row. This should be changed as soon as possible.
@@ -548,6 +552,7 @@ A record of each incoming and outgoing message. (To do: change name.) Fields:
   - `messageSid` Type: String. Optional. 
   - `messagingService` Type: String. Optional. The value of the `messagingService` field on the `brandedCollege` document of the relevant institution. (To do: make this required.)
   - `msgParts` Type: Number. Optional. Number of parts the message was split up into, by twilio. (They do that if the message is long.) This should only appear on logs with `transport: twilio`.
+  - `scheduledMessageId` Type: String. Optional. Regex constraint: SimpleSchema.RegEx.Id. The `_id` of the `scheduledMessage` document associated with the scheduling of the interaction that this message is a part of (if there is such a document).
   - `senderId` Type: String. Optional. Regex constraint: SimpleSchema.RegEx.Id. `_id` of the `user` document corresponding to the Phoenix or Mascot user who sent the message, if there is one. This field also appears on incoming messages -- unclear what that means.
   - `smsSid` Type: String. Optional.
   - `source` Type: String. Optional. Indicates the source of the message. Currently, there are exactly three logs such that their `source` value us not either `none specified` or `triage`. The other values are `mascot/conversation` and `conversation`. (To do: make a list of allowed values, and enforce. Possibly make required, depending on what is on that list.)
@@ -600,6 +605,7 @@ Originally was for everyone, has since been repurposed as the documents for phoe
   - `importedSegmentLabels` **Deprecated** No longer relevant, given the new meaning of `user` documents.
   - `lastContacted` **Deprecated** See above.
   - `lastMessageId` **Deprecated** See above above.
+  - `lastLoginAt` Type: Date. Optional. Date the user last logged in to one of the front-end apps.
   - `phoenixUser` Type: Boolean. Optional. Indicates the user uses Phoenix, the second best front-end application at AdmitHub. (To do: make corresponding `mascotUser` field.)
   - `phone` **Deprecated**. No longer relevant to `user` documents; we have the required informaiton in `brandedUserProfile` documents.
   - `phonePending` **Deprecated** No longer functional in NeOliTh code, and no existing document has this.
