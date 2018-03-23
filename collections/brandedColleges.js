@@ -49,6 +49,7 @@ BrandedColleges.attachSchema(new SimpleSchema({
   messagingServiceSid: {type: String, optional: true},
   name: {type: String},
   oliName: {type: String},
+  passwordConstraints: {type: [Object], optional: true, defaultValue: []},
   phoneFinAid: {type: String, optional: true},
   prependCounselorResponse: {type: String, optional: true}, // prepends counselor response to emails e.g. Your officer replied to your question:
   promptFilter: {type: String, optional: true},
