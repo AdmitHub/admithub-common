@@ -2,9 +2,14 @@ SmsLogs = new Mongo.Collection('smslogs')
 SmsLogs.attachSchema(new SimpleSchema({
   _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   createdAt: {type: Date},
+  'errorMessage': {type: Boolean, defaultValue: false}
   events: {type: [Object]},
   'events.$.type': {type: String},
-  'events.$.errorMessage': {type: String, optional: true}
+  'events.$.errorData': {type: Object, optional: true},
+  'events.$.errorData.message': {type: String},
+  'events.$.errorData.status': {type: Number, optonal: true},
+  'events.$.errorData.twilioCode': {type: Number, optional: true},
+  'events.$.replyId': {type: String, optional: true},
   incoming: {type: Boolean, defaultValue: false},
   transport: {type: String, allowedValues: ["web", "twilio", "facebook", "email"], optional: false},
   aiLog: {type: String, optional: true},
@@ -29,7 +34,7 @@ SmsLogs.attachSchema(new SimpleSchema({
   to: {type: String, optional: true},
   twilioSid: {type: String, optional: true},
   userNumber: {type: String, optional: true},
-  userId: {type: String, optional: true}
+  userId: {type: String, optional: true},
 }))
 if (Meteor.isServer) {
   SmsLogs.allow({
