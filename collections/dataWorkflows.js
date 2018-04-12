@@ -15,6 +15,7 @@ Dialogs.attachSchema(new SimpleSchema({
   'expirationLength': {type: Number, optional: true},
   'reminders': {type: [Object], blackbox: true, optional: true},
   'converted': {type: Boolean, optional: true}, //a flag to show that the dialog was converted from a data workflow by script
+  'isIntro': {type: Boolean, optional: true, defaultValue: false},
   'metadata': {type: new SimpleSchema({
     'createdBy': {type: String, optional: false},
     'createdVia': {type: String, optional: false}
