@@ -2,7 +2,6 @@ SmsLogs = new Mongo.Collection('smslogs')
 SmsLogs.attachSchema(new SimpleSchema({
   _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   createdAt: {type: Date},
-  'errorMessage': {type: Boolean, defaultValue: false},
   events: {type: [Object]},
   'events.$.type': {type: String},
   'events.$.errorData': {type: Object, optional: true},
