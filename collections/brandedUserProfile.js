@@ -336,6 +336,6 @@ BrandedUserProfiles.attachSchema(BrandedUserSchema)
 
 BrandedUserProfiles.before.update((userId, doc, fieldNames, modifier) => {
   if (modifier.$set && modifier.$set['_contactSettings.canText'] !== undefined) {
-    modifier.$set['_contactSettings.canTextLastModified'] = new Date(Date.now())
+    modifier.$set['_contactSettings.canTextLastModified'] = new Date()
   }
 })
