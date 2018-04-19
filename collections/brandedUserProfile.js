@@ -191,6 +191,7 @@ BrandedUserSchema = new SimpleSchema({
     canMessageGeneral: fields.bool(o),
     canMessageFacebook: fields.bool(o),
     canText: fields.bool(o),
+    canTextLastModified: fields.date(o),
     contacted: fields.bool(o),
     finished: fields.bool(o),
     generalOptIn: fields.bool(o),
@@ -332,3 +333,9 @@ BrandedUserSchema = new SimpleSchema({
 
 BrandedUserProfiles = new Mongo.Collection('brandedUserProfiles')
 BrandedUserProfiles.attachSchema(BrandedUserSchema)
+
+BrandedUserProfiles.before.update((userId, doc, fieldNames, modifier) => {
+  if (modifier.$set && modifier.$set['_contactSettings.canText'] !== undefined) {
+    modifier.$set['_contactSettings.canTextLastModified'] = new Date()
+  }
+})
