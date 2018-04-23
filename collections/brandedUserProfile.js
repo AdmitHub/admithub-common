@@ -197,7 +197,7 @@ BrandedUserSchema = new SimpleSchema({
     generalOptIn: fields.bool(o),
     nonWorkingFacebookId: fields.bool(o),
     nonWorkingNumber: fields.bool(o),
-    nonWorkingNumberCode: fields.string(o),
+    nonWorkingNumberCode: fields.number(o),
     permittedUser: fields.bool(o),
     wrongNumber: fields.bool(o),
     twilioLookUpValid: fields.bool(o),
