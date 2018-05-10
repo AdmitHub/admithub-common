@@ -202,7 +202,8 @@ BrandedUserSchema = new SimpleSchema({
     wrongNumber: fields.bool(o),
     twilioLookUpValid: fields.bool(o),
     passiveOptOut: fields.bool(o),
-    carrier: fields.string(o)
+    carrier: fields.string(o),
+    control: fields.bool(o)
   }), optional: true},
   _custom: {
     type: Object,
