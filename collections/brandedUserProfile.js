@@ -31,6 +31,7 @@ BrandedUserSchema = new SimpleSchema({
   collegeName: fields.string(o),
   college: fields.string(o),
   collegeId: fields.string({optional: false}),
+  control: fields.bool(o),
   dob: fields.date(o),
   email: fields.string(o),
   enrollmentId: fields.string(o), //pantherId for gsu
@@ -202,8 +203,7 @@ BrandedUserSchema = new SimpleSchema({
     wrongNumber: fields.bool(o),
     twilioLookUpValid: fields.bool(o),
     passiveOptOut: fields.bool(o),
-    carrier: fields.string(o),
-    control: fields.bool(o)
+    carrier: fields.string(o)
   }), optional: true},
   _custom: {
     type: Object,
