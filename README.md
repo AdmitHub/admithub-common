@@ -411,6 +411,8 @@ Contains information about specific states in the associated dialogs state-graph
   - `createdAt` Type: Date. Optional. Date at which the state was created. (To do: make this required.)
   - `enterActions` Type: \[Object\]. Optional. Black box. List of objects indicating which of a specified list of actions the system should take (in order) when the dialog enters this state. (To do: un-black-box this.)
   - `exitActions`Type: \[Object\]. Optional. Black box. Like `enterActions`, except the actions should be taken when the dialog exits this state. (To do: un-black-box this.)
+  - Any action can be performed as either an enter or exit action. The full list of actions are: `cancelCronJob`, `changeNumber`, `endSoftStop`, `save`, `sendEmail`, `scheduleJob` and `setPassiveOptOut`.
+The poorly named `scheduleJob` can be used to schedule a `startDialog` or `sendMessage` (intended for sending one off messages).
   - `media` Type: String. Optional. The url of a media file that should be sent as part of the state's prompt.
   - `multipleChoices` Type: \[Object\]. Optional. Used, optionally, by `Number`-type states. Contains information about the options to be listed (in order) as possible responses to the state's prompt. Only one subfield, but we anticipate adding more. Subfield:
     - `prompt` Type: String. Required. The text of the listed response option.
