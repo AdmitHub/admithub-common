@@ -1,6 +1,11 @@
 # admithub-common
 Common styles, templates, and library functions and classes for AdmitHub apps
 
+# Adding a New Collection
+
+When adding a new collection, be sure to update `api.export` and `api.addFiles` in
+`packages/admithub-common/package.js` so that it is available to Mascot.
+
 ## Schemata
 
 ### BrandedApplicantConversations
@@ -77,7 +82,7 @@ Fields:
  - `prependCounselorResponse`: Type: String. Optional. Prepends counselor response to emails, e.g. "Your officer replied to your question...". Not currently functional. (To do: make this functional. Have a default, so it's not required.)
  - `primaryBrandColor` Type: String. Optional. Primary colour representing the institution.
  - `promptFilter` Type: String. Optional. Apparently I added this, but I have no idea why, and it seems to be completely unfunctional. (To do; get rid of it.)
- - `studentFieldMapping` Type: Object. Optional. Default value: empty object. Blackbox. 
+ - `studentFieldMapping` Type: Object. Optional. Default value: empty object. Blackbox.
  - `tuitionDueDate` Type: Date. Optional. Date by which stuent tuition is due. (To do, see `dateAccepted`.)
  - `voiceMail` Type: String. Optional. Message spoken (poorly) when the user calls the relevant phone number. The system uses a default message when this field is absent.
 
@@ -250,7 +255,7 @@ Fields:
     - `nonWorkingNumberCode` Type: Boolean. Optional. Don't know what this is about. No existing document has this subfield. (To do: see about getting rid of this.)
     - `passiveOptOut` Type: Boolean. Optional. Indicates that user has failed to opt in when an opt in was required, and should be treated as having opted out.
     - `permittedUser`Type: Boolean. Optional. Indicates if the user is permitted to interact with the bot. (To do: make this required.)
-    - `twilioLookUpValid`. Type: Boolean. Optional. Don't know. No existing document has this subfield. (To do: see about getting rid of this.) 
+    - `twilioLookUpValid`. Type: Boolean. Optional. Don't know. No existing document has this subfield. (To do: see about getting rid of this.)
     - `wrongNumber` Type: Boolean. Optional. Indicates if the number we have for the user is not in fact theirs.
  - `_custom`: Type: Object. Optional. Blackbox. Unclear intended usage; examples in the data seem to hold things that are best stored elsewhere. (To do: see about eliminating this.)
  - `_dialog` Type: Object. Optional. Blackbox. Stores information about the user's current position within a dialog. (To do: un-black-box this. Make it required.)
@@ -376,7 +381,7 @@ Contains information concerning points of contact at client institutions. Fields
  - `states` Type: \[String\]. Optional. Must be a standard U.S. state code. States such that the associated email address covers inquiries from that state. (To do: merge this and counties.)
  - `topics` Type: \[String\]. Optional. The email address handles messages about the listed topics. These are displayed in the UI.
 
-   
+
 ### CollegeEvents
 **Deprecated**. Contains information about events prospective students might be interested in attending; was functional back when AdmitHub matched soliciting students to instutitions.
 
@@ -394,7 +399,7 @@ A document defining the general properties of a specific, scripted interaction w
   - `humanName` Type: String. Optional. Name of dialog, friendly to humans. Used in front-end for display. (To do: make `name` serve this purpose, then get rid of this.)
   - `metaData` Type: Object. Optional. Contains meta information about the dialog.(To do: see about making this required.) Subfields:
     - `createdBy` Type: String. Required. Indicates the front-end user (or maybe admithub peon?) that created this.
-    - `createdVia` Type: String. Required. Indicates the front-end platform on which the dialog was created. (To do: enforce allowed values: `Phoenix`, `Mascot`. 
+    - `createdVia` Type: String. Required. Indicates the front-end platform on which the dialog was created. (To do: enforce allowed values: `Phoenix`, `Mascot`.
   - `messagingService` Type: String. Optional. The messaging service associated with this dialog. We use `*` to denote a general dialog, used by all messaging services. (To do: make this required.)
   - `name` Type: String. Optional. Name of dialog, intended for coding use. In NeOliTh, this field is not functional. (To do: make the values of this field the current `humanName` values. Then make this required.)
   - `reminders` Type: \[Object\]. Optional. Black box. A list of objects, each of ehich describe a reminder associated with the dialog, in the order in which they should be sent out. (To do: un black box this. Long term: think about making these their own document, like `DialogStates`.
@@ -468,7 +473,7 @@ Records information about the number of users reached by our messages, by week. 
   - `weekNumber` Type: Number. Required. Used to indicate the week, out of 52, of the year for which the information is recorded. (To do: enforce minimum and maxomum value.)
   - `year` Type: Number. Required. The year of the recorded information. (To do: enforce year syntax.)
   - `ignore` Type: Boolean. Optional. Not currently functional, but with a view to perhaps needing it for UI purposes. Currently all documents that have this field are `ignore: false`.
-  
+
 ### PendingEventReport
 **Deprecated** There are no existing `pendingEventReport` documents.
 
@@ -551,7 +556,7 @@ A record of each incoming and outgoing message. (To do: change name.) Fields:
     - `deleted` Type: Boolean. Required. Default value: `false`. This was part of an enforcement we used to do in Oli, that we are not currently doing in NeOliTh. If a message is sent with more than one media file, or a non-image media-file, we used to delete the (extra) file(s), and this field would be set to `true`. (To do: find out if we should be enforcing this in NeOliTh.)
     - `url` Type: String. Required. The url where the media file is stored.
     - `contentType` Type: String. Optional. The type of media. (To do: enforce limited range of allowed values.)
-  - `messageSid` Type: String. Optional. 
+  - `messageSid` Type: String. Optional.
   - `messagingService` Type: String. Optional. The value of the `messagingService` field on the `brandedCollege` document of the relevant institution. (To do: make this required.)
   - `msgParts` Type: Number. Optional. Number of parts the message was split up into, by twilio. (They do that if the message is long.) This should only appear on logs with `transport: twilio`.
   - `scheduledMessageId` Type: String. Optional. Regex constraint: SimpleSchema.RegEx.Id. The `_id` of the `scheduledMessage` document associated with the scheduling of the interaction that this message is a part of (if there is such a document).
@@ -591,7 +596,7 @@ Originally was for everyone, has since been repurposed as the documents for phoe
     - `hasSent` Type: Boolean. Optional. Oli set this to true when we got incoming from the user. This is no longer an apporpriate use, given the current meaning of the `user` document. (To do: see `firstOutgoing`.)
     - `notifications` **Deprecated** See `tags`.
     - `phone` **Deprecated** See `facebookId`.
-    - `subscriptions` **Deprecated** From a time users could subscribe to reports AdmitHub generated. 
+    - `subscriptions` **Deprecated** From a time users could subscribe to reports AdmitHub generated.
     - `tags` **Deprecated** A mystery field that only Scott Burke has.
   - `referralCode` Type: String. Required. Autofilled to be a Meteor uuid. Pretty sure we don't use this for anything. (To do: confirm, then probably get rid of it.)
   - `votes` Type: Object. Required. Autovalue is an empty object. Unclear intended usage; every existing document has an empty object as value. (To do: see about getting rid of this.)
@@ -603,7 +608,7 @@ Originally was for everyone, has since been repurposed as the documents for phoe
     - `smsVerifyCode` Type: String. Optional. Used in Oli times to verify email addresses; no longer functional. (To do: either restore this functionality or get rid of this field.)
     - `verified` Type: Boolean. Optional. Set to `true` when the user clicks a sign-up link (and probably also reset-passowrd link).
   - `hardStopReason` **Deprecated** No existing document has this; I think a "hard stop" in this context means something that doesn't existi any more.
-  - `hardStopToken` **Deprecated** See above. 
+  - `hardStopToken` **Deprecated** See above.
   - `importedSegmentLabels` **Deprecated** No longer relevant, given the new meaning of `user` documents.
   - `lastContacted` **Deprecated** See above.
   - `lastMessageId` **Deprecated** See above above.
@@ -630,7 +635,7 @@ Originally was for everyone, has since been repurposed as the documents for phoe
   - `testUser` Type: Boolean. Optional. Indicates this is a test user. (To do: see `test`.)
   - `username` Type: String. Optional. Must be between 3 and 15 alphanumeric characters. Apparently we use `emails` for the same purpose as this now, but Anthony thinks it's worth keeping `username`.
   - `workflow` **Deprecated** This infromation now belongs on the `brandedUserProfile` document.
-  
+
 ### WorkflowResponses
 Records user responses to dialog prompt. Fields:
   - `created` Type: Date. Required. The date the document was created.
