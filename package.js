@@ -67,6 +67,7 @@ Package.onUse(function (api) {
   api.addFiles('collections/twilioAccounts.js');
   api.addFiles('collections/brandedUserProfile.js');
   api.addFiles('collections/SavedQuery.js');
+  api.addFiles('collections/CollegeUserDataFields.js');
   api.addFiles('collections/workflowResponses.js');
   api.addFiles('collections/smsAnalytics.js');
   api.addFiles('collections/smsHeatmapAnalytics.js');
@@ -114,6 +115,7 @@ Package.onUse(function (api) {
     'Snapshots',
     'Sponsors',
     'SavedQuery',
+    'CollegeUserDataFields',
     'Testimonials',
     'UnverifiedEmailMessages',
     'PendingOfficers',
