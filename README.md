@@ -394,7 +394,7 @@ A document defining the general properties of a specific, scripted interaction w
   - `converted` Type: Boolean. Optional. Indictes that the dialog was converted from an old workflow by script. (To do: establish that there is no sepcial problem with these workflows, then get rid of this field, if there is no reason to keep it.)
   - `createdAt` Type: Date. Optional. Date at which the dialog was created. (To do: make this required.)
   - `description` Type: String. Optional. Description of the dialog. Used for display on the front end, and for humans to comprehend what is going on. (To do: make this required.)
-  - `expirationLength`: Type: Number. Optional. The number of days after which the dialog expires, and it's `_id` is removed as a value from all `brandedUserProfile` documents `dialog` and `dialogStack` fields.
+  - `expirationLength`: Type: Number. Optional. The number of minutes after which the dialog expires, and it's `_id` is removed as a value from all `brandedUserProfile` documents `dialog` and `dialogStack` fields.
   - `hidden` Type: Boolean. Optional. Indicates whether or not the dialog should appear in the front end display. Should be `false` for systems-type dialogs, like the default `softStop` dialog. (To do: make this required.)
   - `humanName` Type: String. Optional. Name of dialog, friendly to humans. Used in front-end for display. (To do: make `name` serve this purpose, then get rid of this.)
   - `metaData` Type: Object. Optional. Contains meta information about the dialog.(To do: see about making this required.) Subfields:
