@@ -12,6 +12,9 @@ SavedQuery.attachSchema(new SimpleSchema({
   query: {
     type: String,
   },
+  userQuery: {
+    type: String,
+  },
   name: {
     type: String,
   },
@@ -20,5 +23,8 @@ SavedQuery.attachSchema(new SimpleSchema({
   },
   createdAt: {
     type: Date,
+  },
+  createdBy: {
+    type: String,
   },
 }));
