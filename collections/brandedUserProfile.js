@@ -142,6 +142,7 @@ BrandedUserSchema = new SimpleSchema({
     honorsProspect: fields.bool(o),
     firstGen: fields.bool(o)
   }), optional: true},
+  scholarBot: {type: Object, blackbox: true, optional: true},
   smsInfo: {type: Object, blackbox: true, optional: true, defaultValue: {}},
   schoolEmail: fields.email(o),
   studyGroupMember: fields.bool(o),
@@ -198,7 +199,7 @@ BrandedUserSchema = new SimpleSchema({
     generalOptIn: fields.bool(o),
     nonWorkingFacebookId: fields.bool(o),
     nonWorkingNumber: fields.bool(o),
-    nonWorkingNumberCode: fields.number(o),
+    twilioCode: fields.number(o),
     permittedUser: fields.bool(o),
     wrongNumber: fields.bool(o),
     twilioLookUpValid: fields.bool(o),
