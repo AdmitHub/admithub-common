@@ -15,6 +15,9 @@ SavedQuery.attachSchema(new SimpleSchema({
   userQuery: {
     type: String,
   },
+  humanizedQuery: {
+    type: String,
+  },
   name: {
     type: String,
   },
