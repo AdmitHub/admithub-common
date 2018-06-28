@@ -6,6 +6,7 @@ SmsLogs.attachSchema(new SimpleSchema({
   incoming: {type: Boolean, defaultValue: false},
   accountSid: {type: String, optional: true},
   body: {type: String, optional: true},
+  blocked: {type: Boolean, optional: true},
   dialogId: {type: String, optional: true},
   dialogStateId: {type: String, optional: true},
   error: {type: Boolean, defaultValue: false},
