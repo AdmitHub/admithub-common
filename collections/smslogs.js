@@ -6,11 +6,11 @@ SmsLogs.attachSchema(new SimpleSchema({
   incoming: {type: Boolean, defaultValue: false},
   accountSid: {type: String, optional: true},
   body: {type: String, optional: true},
-  blocked: {type: Boolean, optional: true},
   dialogId: {type: String, optional: true},
   dialogStateId: {type: String, optional: true},
   error: {type: Boolean, defaultValue: false},
   facebookId: {type: String, optional: true},
+  failed: {type: Boolean, optional: true},
   from: {type: String, optional: true},
   inReplyTo: {type: String, optional: true},
   mediaFiles: {type: [Object], optional: true},
@@ -27,6 +27,7 @@ SmsLogs.attachSchema(new SimpleSchema({
   testUser: {type: Boolean, optional: true, defaultValue: false},
   to: {type: String, optional: true},
   transport: {type: String, allowedValues: ["web", "twilio", "facebook", "email"], optional: false},
+  twilioErrorCode: {type: Number, optional: true},
   userNumber: {type: String, optional: true},
   userId: {type: String, optional: true}
 }))
