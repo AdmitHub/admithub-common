@@ -164,7 +164,7 @@ Fields:
    - `country` Type: String. Optional. Country of the address.
    - `county` Type: String. Optional. County part of the address, if there is one.
    - `state` Type: String. Optional. Regex constraint: `/^A[LKSZRAEP]|C[AOT]|D[EC]|F[LM]|G[AU]|HI|I[ADLN]|K[SY]|LA|M[ADEHINOPST]|N[CDEHJMVY]|O[HKR]|P[ARW]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY]$/`. State.
-   - `zip` Type: String. Optional. Zip code. (To do: consider changing the name if we're intending to use this for non-U.S. addresses.)
+   - `zip` Type: String. Optional. Zip code. (To do: consider changing the name if we're intending to use this for non-U.S. addresses.) This is the field used for zipcode/county counselor mapping.
  - `meta` Type: Object. Optional. Black box. Contains a bunch of information recording the history of user interaction with the system. (To do: un-black-box this.)
  - `name` Type: Object. Optional. Contains information about the student's name. Subfields.
    - `first` Type: String. Optional. First name.
