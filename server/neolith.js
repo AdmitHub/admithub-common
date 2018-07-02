@@ -46,6 +46,24 @@ Neolith = {
   },
 
   /**
+   * Change the segment label defining the recipients of a scheduledMessage
+   *
+   * @param {Object} params - Parameters as defined in ``Neolith.deleteScheduledMessage``
+   */
+  changeScheduledMessageRecipientLabelParams: new SimpleSchema({
+    scheduledMessageId: {type: String},
+    newRecipientLabel: {type: String},
+  }),
+  changeScheduledMessageRecipientLabel: function(params) {
+    check(params, this.changeScheduledMessageRecipientLabelParams);
+    return _callTokenEndpoint(
+      'POST',
+      dotGet(Meteor, 'settings.neolith.changeScheduledMessageRecipientLabel'),
+      params
+    );
+  },
+
+  /**
    * Schedule a scheduledMessage
    *
    * @param {Object} params - Parameters as defined in ``Neolith.scheduleMessage``
