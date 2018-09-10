@@ -23,10 +23,11 @@ SmsLogs.attachSchema(new SimpleSchema({
   scheduledMessageId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   senderId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   smsSid: {type: String, optional: true},
+  sqsId: {type: String, optional: true}, // The AWS-SQS id associated with the message.
   source: {type: String, optional: true},
   testUser: {type: Boolean, optional: true, defaultValue: false},
   to: {type: String, optional: true},
-  transport: {type: String, allowedValues: ["web", "twilio", "facebook", "email"], optional: false},
+  transport: {type: String, allowedValues: ['web', 'twilio', 'facebook', 'email'], optional: false},
   twilioErrorCode: {type: Number, optional: true},
   userNumber: {type: String, optional: true},
   userId: {type: String, optional: true}
@@ -49,19 +50,19 @@ if (Meteor.isServer) {
 }
 
 SmsLogs.after.insert((insertingUserId, doc) => {
-  const smsLogId = doc._id;
+  const smsLogId = doc._id
 
   // If the user is a test user, set the smslog as a test sms log
   BrandedUserProfiles.findOne(doc.userId).then(user => {
     if (user && user.testUser) {
-      SmsLogs.update({_id: smsLogId}, {$set: {testUser: true}});
+      SmsLogs.update({_id: smsLogId}, {$set: {testUser: true}})
     }
   })
 
-  //If this smsLog has a body and userId
-  if(doc.body && doc.body.length > 0 && doc.userId && doc.messagingService !== 'oli') {
+  // If this smsLog has a body and userId
+  if (doc.body && doc.body.length > 0 && doc.userId && doc.messagingService !== 'oli') {
     BrandedColleges.findOne({messagingService: doc.messagingService}).then(college => {
-      if (!college) throw new Error('college-not-found');
+      if (!college) throw new Error('college-not-found')
 
       BrandedUserProfiles.update({_id: doc.userId, collegeId: college._id}, {
         $set: {
@@ -72,8 +73,7 @@ SmsLogs.after.insert((insertingUserId, doc) => {
           'smsInfo.lastMessageBody': doc.body,
           'smsInfo.lastMessageId': smsLogId
         }
-      });
+      })
     })
-
   }
 })
