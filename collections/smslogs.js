@@ -2,6 +2,7 @@ SmsLogs = new Mongo.Collection('smslogs')
 SmsLogs.attachSchema(new SimpleSchema({
   _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   createdAt: {type: Date},
+  transport: {type: String, allowedValues: ['web', 'twilio', 'facebook', 'email'], optional: false},
   aiLog: {type: String, optional: true},
   incoming: {type: Boolean, defaultValue: false},
   accountSid: {type: String, optional: true},
@@ -23,11 +24,10 @@ SmsLogs.attachSchema(new SimpleSchema({
   scheduledMessageId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   senderId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   smsSid: {type: String, optional: true},
-  sqsId: {type: String, optional: true}, // The AWS-SQS id associated with the message.
   source: {type: String, optional: true},
+  sqsId: {type: String, optional: true}, // The AWS-SQS id associated with the message.
   testUser: {type: Boolean, optional: true, defaultValue: false},
   to: {type: String, optional: true},
-  transport: {type: String, allowedValues: ['web', 'twilio', 'facebook', 'email'], optional: false},
   twilioErrorCode: {type: Number, optional: true},
   userNumber: {type: String, optional: true},
   userId: {type: String, optional: true}
