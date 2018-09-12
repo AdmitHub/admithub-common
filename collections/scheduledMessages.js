@@ -5,7 +5,6 @@ ScheduledMessages.attachSchema(new SimpleSchema({
   createdAt: {type: Date},
   messagingService: {type: String},
   scheduledAt: {type: Date},
-  targetedUsers: {type: [String]},
   allowCanTextFalse: {type: Boolean, optional: true}, // override can text false limitation for opt in wf's
   batchSize: {type: Number, optional: true},
   completed: {type: Boolean, defaultValue: false},
@@ -16,6 +15,7 @@ ScheduledMessages.attachSchema(new SimpleSchema({
   isIntro: {type: Boolean, optional: true, defaultValue: false},
   importReportId: {type: String, optional: true},
   message: {type: String, optional: true},
+  messagedUsers: {type: Object, blackbox: true, defaultValue: {}},
   note: {type: String, optional: true},
   onGoing: {type: Boolean, optional: true},
   optOutUsers: {type: [String], optional: true},
