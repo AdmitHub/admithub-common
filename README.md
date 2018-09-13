@@ -252,7 +252,8 @@ Fields:
     - `generalOptIn` Type: Boolean. Optional. I don't know what this is. (To do: figure it out.)
     - `nonWorkingFacebookId` Type: Boolean. Optional. Indicates the facebook id we have for the user doesn't work.
     - `nonWorkingNumber` Type: Boolean. Optional. Indicates the phone number we have for the user doesn't work.
-    - `nonWorkingNumberCode` Type: Boolean. Optional. Don't know what this is about. No existing document has this subfield. (To do: see about getting rid of this.)
+    - `nonWorkingNumberCode` Type: Number. Optional. Don't know what this is about.
+    - `twilioCode` Type: Number. Optional. Perhaps overlaps with nonWorkingNumberCode?
     - `passiveOptOut` Type: Boolean. Optional. Indicates that user has failed to opt in when an opt in was required, and should be treated as having opted out.
     - `permittedUser`Type: Boolean. Optional. Indicates if the user is permitted to interact with the bot. (To do: make this required.)
     - `twilioLookUpValid`. Type: Boolean. Optional. Don't know. No existing document has this subfield. (To do: see about getting rid of this.)
