@@ -36,3 +36,30 @@ ScheduledMessages.attachSchema(new SimpleSchema({
   workflow: {type: String, optional: true},
   workflowHumanName: {type: String, optional: true}
 }))
+
+const trackerCounterPairs = {
+  'messagedUsers': 'messagedUsersCount',
+  'optOutUsers': 'optOutUsersCount',
+  'deliveryFailureUsers': 'deliveryFailureCount'
+}
+
+const trackerFields = Object.keys(trackerCounterPairs)
+
+const getTrackerFields = (updateObject) => trackerFields.filter(
+  (fieldName) => Object.keys(updateObject).reduce(
+    (acc, current) => acc || RegExp(`^${fieldName}`).test(current),
+    false
+  )
+)
+
+ScheduledMessages.before.update((id, doc, fieldNames, modifier) => {
+  const setObject = modifier.$set || {}
+  const unsetObject = modifier.$unset || {}
+  const trackerSets = getTrackerFields(setObject)
+  const trackerUnsets = getTrackerFields(unsetObject)
+  const incObject = {}
+  trackerSets.forEach((trackerField) => { incObject[trackerCounterPairs[trackerField]] = 1 })
+  trackerUnsets.forEach((trackerField) => { incObject[trackerCounterPairs[trackerField]] = -1 })
+  // Note that the above code assumes that any given tracker field will either be set once
+  if (!_.isEmpty(incObject)) modifier.$inc = incObject
+})
