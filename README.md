@@ -105,6 +105,7 @@ Fields:
     - `statusExtended` Type: String. Optional. Records further notes (further to the `status` field) on the status of the application. Example: `"Accept: Final No Letter"`.
   - `college` Type: String. Optional. Unclear intended usage; I think this is a duplicate field of `collegeName` or `collegeId`. No current document has this field. (To do: determine if this is needed, if not, get rid of it.)
   - `collegeName`: Type: String. Optional. Name of the institution associated with the student.
+  - `control`: Type: Boolean. Optional. Used to label students in the control group of an RCT. This is strictly for tracking purposes, it does not have any consequences for user behavior. `_contactSettings.permittedUser` is the mechanism by which control groups are prevented from engaging with a bot.
   - `dob`: Type: Date. Optional. Date of birth of the student.
   - `email`: Type: String. Optional. Email address of the student. (To do: enforce email-address syntax.)
   - `enrollmentId`: Type: String. Optional. Not totally clear; has some specific meaning for GSU (their "panther Id").
