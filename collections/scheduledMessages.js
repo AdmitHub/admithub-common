@@ -28,6 +28,8 @@ ScheduledMessages.attachSchema(new SimpleSchema({
   startDate: {type: Date, optional: true},
   started: {type: Boolean, optional: true},
   test: {type: Boolean, optional: true},
+  users: {type: [String], optional: true},
+  usersContacted: {type: Number, optional: true},
   userSearch: {type: Object, blackbox: true, optional: true},
   weekends: {type: Boolean, optional: true},
   workflow: {type: String, optional: true},
