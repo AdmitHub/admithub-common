@@ -494,7 +494,15 @@ A message recording information about campaigns scheduled to be initiated to stu
   - `collection` Type: String. Required. The relevant collection of the users sent the message. We're using only one collection these days, so this isn't needed, but I think we should consider seperating users by messaging service again.
   - `completed` Type: Boolean. Required. Default value: `false`. Set to `true` when the message has been sent to all intended users.
   - `createdAt` Type: Date. Required. The date the document was created.
+  - `deliveryFailureUsers` Type: \[String\]. Required. Default value: `[]`. Elements of the array are ids of `brandedUserProfile` documents. If an id is in there, it means that Twilio has reported that at least one message failed to get delivered to the corresponding contact. An id can be in only one of `deliveryFailureUsers`, `messagedUsers` and `optOutUsers` at a time.
+  - `messagedUsers` Type: \[String\]. Required. Default value: `[]`. Elements of the array are ids of `brandedUserProfile` documents. If an id is in there, the corresponding contact has received at least one message in the scheduled campaign, and thus far Twilio has not indicated any messages failed to get delivered.  An id can be in only one of `deliveryFailureUsers`, `messagedUsers` and `optOutUsers` at a time.
   - `messagingService` Type: String. Required. The messaging service over which the message was sent.
+  - `optOutUsers` Type: \[String\]. Required. Default value: `[]`. Elements of the array are ids of `brandedUserProfile` documents. If an id is in there, then the corresponding contact was targeted by the scheduled campaign, but they won't get any messages, because one of the following conditions held when the campaign was first sent:
+    1. The contact was soft-stopped (i.e., their `_dialog._id` value is `defaultSoftStop`).
+    2. The contact's `_contactSettings.canText` value was `false` (which can happen for lots of reasons).
+    3. The relevant bot is closed, and the contact was not `_contactSettings.permittedUser: true` OR the bot is open, and the contact was `_contactSettings.permittedUser: false`.
+    
+    An id can be in only one of `deliveryFailureUsers`, `messagedUsers` and `optOutUsers` at a time.
   - `scheduledAt` Type: Date. Required. The date the message is scheduled to be sent to users.
   - `allowCanTextFalse` Type: Boolean. Optional. If `true`, the outgoing message will override `canText: false` settings for users.
   - `batchSize` Type: Number. Optional. I think this is supposed to be the number of users sent the message at a time (users are seperated into batches for sending purposes), but no current document has this field, and it is non-functional in the code (which uses a value of 5). (To do: confirm intended usage, then either make functional in the code or get rid of this.)
@@ -514,8 +522,8 @@ A message recording information about campaigns scheduled to be initiated to stu
   - `startDate` **Deprecated** Type: Date. Optional. Hard to think of a use for this not already covered in other fields. No existing document has this field. (To do: get rid of it.)
   - `started` Type: Boolean. Optional. Indicates the process of sending the campaign out has started.
   - `test` Type: Boolean. Optional. Indicates this is a test campaign, not intended to be sent to real users.
-  - `users` Type: \[String\]. Optional. The value of the `_id` field of the `brandedUserProfile` documents of the users intended to receive the campaign. (To do: make this required, possibly make it a number or get rid of it. This is a lot of data to store on each document, and should be recoverable from the `query` value.)
-  - `usersContacted` Type: Number. Optional. Number of users who have thus far in fact been sent the campaign.
+  - `users` **Deprecated** Type: \[String\]. Optional. The value of the `_id` field of the `brandedUserProfile` documents of the users intended to receive the campaign, supposedly. Not super reliable: a better source of data is the combination of `messagedUsers`, `optOutUsers` and `deliveryFailureUsers`.
+  - `usersContacted` **Deprecated** Type: Number. Optional. Number of users who have thus far in fact been sent the campaign, roughly. Not super accurate; use the combination of `messagedUsers`, `optOutUsers` and `deliveryFailureUsers` instead.
   - `userSearch` **Deprecated**. I think this was intended to play the role of `query`. No current document has this field.
   - `weekends` Type: Boolean. Optional. I think this is intended to indicate that it is ok to send the campiagn on a weekend. There are no current documents with this field, and it's not functional in the code. (To do: see about making this functional.)
   - `workflow` Type: String. Optional. The `_id` of the `dialog` document corresponding to the campaign being sent. (To do: change the name. Make this required.)
