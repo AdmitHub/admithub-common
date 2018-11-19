@@ -80,7 +80,7 @@ Fields:
  - `mediaCongrats` Type: String. Optional. Media used in dialog congratulation student on acceptance. (To do: see `dateAccepted`.)
  - `mediaMascot` Type: String. Optional. Media of the instutions mascot.
  - `messagingServiceSid` Type: String. Optional. A string used by Twilio to identify the messaging service of the institution.
- - `messagingType` Type: \[String\].  Optional. The type of messaging service used by the bot: SMS, FB, Whatsapp, etc.
+ - `messagingType` Type: \[String\].  Optional. The channel type used by the bot: SMS, FB, Whatsapp, etc.
  - `phoneFinAid` Type: String. Optional. Phone number to call at institution to learn about financial aid. (To do: see `dateAccepted`.)
  - `prependCounselorResponse`: Type: String. Optional. Prepends counselor response to emails, e.g. "Your officer replied to your question...". Not currently functional. (To do: make this functional. Have a default, so it's not required.)
  - `primaryBrandColor` Type: String. Optional. Primary colour representing the institution.
