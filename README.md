@@ -40,6 +40,7 @@ Fields:
  - `oliName` Type: String. Required. Name of the bot personality. (To do: consider changing name. Though maybe we want to keep it for nostalgia resons.)
  - `abbr` Type: String. Optional. Abbreviated form of the institution's name.
  - `animal` Type: String. Optional. The species (or whatever) of the institution's mascot.
+ - `botType` Type: \[String\]. Optional. The type of bot: enrollment, retention, grad, alumni, etc.
  - `collection` **Deprecated** Type: String. Optional. The collection of user documents associated with the institution. (To do: get rid of this, unless we decide we do want to use seperate collections after all.)
  - `collegeId` **Deprecated** Type: String. Optional. Regex: Simple-schema style id. What used to be the id of the institution in the `college` documents. (To do: get rid of this.)
  - `counselors` Type: \[Object\]. Optional. Default value: empty array. Blackbox. *I think* a list of counselors. If so, this is **deprecated**. (To do: confirm usage, and probably get rid of it. Also, no need for default value. Also, eliminate black boxes, if possible.)
@@ -61,6 +62,7 @@ Fields:
  - `filterOn` Type: Boolean. Optional. The field that distinguished open bots (value `false`) from closed bots (value `true`). (To do: move this to `dialogSettings`. Make required.)
  - `hashtag` Type: String. Optional. The hashtag used for social media campaigns. (To do: see `dateAccepted`.)
  - `infoGatheringBot` Type: String. Optional. Dialog scheduled after the initial dialog in an open bot. (To do: move this to `dialogSettings`.
+ - `institutionType` Type: String. Optional. Type of institution: Regional public, small private, community college, partnership, etc.
  - `intentDeadline` Type: Date. Optional. Deadline by which students must fill intent-to-enroll paperwork. (To do: see `dateAccepted`.)
  - `internalFieldMapping`: Type: Object. Optional. Default value: empty object. Blackbox. Maps csv column headings to fields on our documents. (To do: un-black-box. Either make required or take away default value.)
  - `introKnownProspectBotPhoto` Type: String. Optional. Default value: empty string. Url of a photo used in the (not currently existing) `introKnownProspectBot` dialog. (To do: see `dateAccepted`. Also, there's no reason to have a default value here for an optional field.)
@@ -78,6 +80,7 @@ Fields:
  - `mediaCongrats` Type: String. Optional. Media used in dialog congratulation student on acceptance. (To do: see `dateAccepted`.)
  - `mediaMascot` Type: String. Optional. Media of the instutions mascot.
  - `messagingServiceSid` Type: String. Optional. A string used by Twilio to identify the messaging service of the institution.
+ - `messagingType` Type: \[String\].  Optional. The channel type used by the bot: SMS, FB, Whatsapp, etc.
  - `phoneFinAid` Type: String. Optional. Phone number to call at institution to learn about financial aid. (To do: see `dateAccepted`.)
  - `prependCounselorResponse`: Type: String. Optional. Prepends counselor response to emails, e.g. "Your officer replied to your question...". Not currently functional. (To do: make this functional. Have a default, so it's not required.)
  - `primaryBrandColor` Type: String. Optional. Primary colour representing the institution.
