@@ -7,6 +7,7 @@ BrandedColleges.attachSchema(new SimpleSchema({
   primaryBrandColor: {type: String, optional: true},
   aiSubject: {type: String},
   animal: {type: String, optional: true}, // Panther
+  askInternet: {type: Boolean, optional: true}, // AH-352
   botType: {type: [String], optional: true}, // for analysis; see AH-264
   collection: {type: String, optional: true},
   collegeId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
@@ -16,22 +17,25 @@ BrandedColleges.attachSchema(new SimpleSchema({
   dateAccepted: {type: String, optional: true},
   dateScholarship: {type: String, optional: true},
   departments: {type: [Object], blackbox: true, optional: true, defaultValue: []},
-  dialogSettings: {type: new SimpleSchema({
-    unknownStudentDialogBotOn: {type: String, optional: true},
-    unknownStudentDialogBotOff: {type: String, optional: true},
-    knownNonContactedStudentDialog: {type: String, optional: true},
-    botOffDialog: {type: String, optional: true},
-    createAndIntroDialog: {type: String, optional: true},
-    botOffNoDialog: {type: Boolean, optional: true},
-    finishedConversationDialog: {type: String, optional: true}
-  }), optional: true},
+  dialogSettings: {
+    type: new SimpleSchema({
+      unknownStudentDialogBotOn: {type: String, optional: true},
+      unknownStudentDialogBotOff: {type: String, optional: true},
+      knownNonContactedStudentDialog: {type: String, optional: true},
+      botOffDialog: {type: String, optional: true},
+      createAndIntroDialog: {type: String, optional: true},
+      botOffNoDialog: {type: Boolean, optional: true},
+      finishedConversationDialog: {type: String, optional: true}
+    }),
+    optional: true
+  },
   disabledFeatures: {type: [String], defaultValue: []},
   emailPrefix: {type: String, optional: true},
   enabledFeatures: {type: [String], defaultValue: [], optional: true},
   facebookId: {type: String, optional: true},
   filterOn: {type: Boolean, optional: true},
   hashtag: {type: String, optional: true}, // include the hash
-  infoGatheringBot: {type: String, optional: true}, //dialog scheduled after the initial dialog in an open bot
+  infoGatheringBot: {type: String, optional: true}, // dialog scheduled after the initial dialog in an open bot
   institutionType: {type: String, optional: true}, // for analysis; see AH-264
   intentDeadline: {type: Date, optional: true}, // june 1
   internalFieldMapping: {type: Object, blackbox: true, optional: true, defaultValue: {}},
@@ -59,5 +63,5 @@ BrandedColleges.attachSchema(new SimpleSchema({
   promptFilter: {type: String, optional: true},
   studentFieldMapping: {type: Object, blackbox: true, optional: true, defaultValue: {}},
   tuitionDueDate: {type: Date, optional: true}, // 8 -15
-  voiceMail: {type: String, optional: true} //Message spoken (poorly) when the user calls the relevant phone number. The system uses a default message when this field is absent.
-}));
+  voiceMail: {type: String, optional: true} // Message spoken (poorly) when the user calls the relevant phone number. The system uses a default message when this field is absent.
+}))
