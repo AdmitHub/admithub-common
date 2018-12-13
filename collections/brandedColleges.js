@@ -7,7 +7,8 @@ BrandedColleges.attachSchema(new SimpleSchema({
   primaryBrandColor: {type: String, optional: true},
   aiSubject: {type: String},
   animal: {type: String, optional: true}, // Panther
-  askInternet: {type: Boolean, optional: true},
+  askInternet: {type: Boolean, optional: true}, // AH-352
+  botType: {type: [String], optional: true}, // for analysis; see AH-264
   collection: {type: String, optional: true},
   collegeId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   counselors: {type: [Object], blackbox: true, optional: true, defaultValue: []},
@@ -35,6 +36,7 @@ BrandedColleges.attachSchema(new SimpleSchema({
   filterOn: {type: Boolean, optional: true},
   hashtag: {type: String, optional: true}, // include the hash
   infoGatheringBot: {type: String, optional: true}, // dialog scheduled after the initial dialog in an open bot
+  institutionType: {type: String, optional: true}, // for analysis; see AH-264
   intentDeadline: {type: Date, optional: true}, // june 1
   internalFieldMapping: {type: Object, blackbox: true, optional: true, defaultValue: {}},
   introKnownProspectBotPhoto: {type: String, optional: true, defaultValue: ''},
@@ -52,6 +54,7 @@ BrandedColleges.attachSchema(new SimpleSchema({
   mediaCongrats: {type: String, optional: true},
   mediaMascot: {type: String, optional: true},
   messagingServiceSid: {type: String, optional: true},
+  messagingType: {type: [String], optional: true}, // for analysis; see AH-264
   name: {type: String},
   oliName: {type: String},
   passwordConstraints: {type: [Object], optional: true, defaultValue: []},

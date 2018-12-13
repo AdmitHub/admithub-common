@@ -28,7 +28,7 @@ DialogStates.attachSchema(new SimpleSchema({
   '_id': {type: String, optional: true},
   'name': {type: String, optional: true},
   'promptType': {type: String, optional: false},
-  'prompt': {type: String, optional: true},
+  'prompt': {type: String, optional: false, defaultValue: ''},
   'skip': {type: new SimpleSchema({
       'query': {type: String}
     }), optional: true

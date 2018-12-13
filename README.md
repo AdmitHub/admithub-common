@@ -40,6 +40,7 @@ Fields:
  - `oliName` Type: String. Required. Name of the bot personality. (To do: consider changing name. Though maybe we want to keep it for nostalgia resons.)
  - `abbr` Type: String. Optional. Abbreviated form of the institution's name.
  - `animal` Type: String. Optional. The species (or whatever) of the institution's mascot.
+ - `botType` Type: \[String\]. Optional. The type of bot: enrollment, retention, grad, alumni, etc.
  - `collection` **Deprecated** Type: String. Optional. The collection of user documents associated with the institution. (To do: get rid of this, unless we decide we do want to use seperate collections after all.)
  - `collegeId` **Deprecated** Type: String. Optional. Regex: Simple-schema style id. What used to be the id of the institution in the `college` documents. (To do: get rid of this.)
  - `counselors` Type: \[Object\]. Optional. Default value: empty array. Blackbox. *I think* a list of counselors. If so, this is **deprecated**. (To do: confirm usage, and probably get rid of it. Also, no need for default value. Also, eliminate black boxes, if possible.)
@@ -61,6 +62,7 @@ Fields:
  - `filterOn` Type: Boolean. Optional. The field that distinguished open bots (value `false`) from closed bots (value `true`). (To do: move this to `dialogSettings`. Make required.)
  - `hashtag` Type: String. Optional. The hashtag used for social media campaigns. (To do: see `dateAccepted`.)
  - `infoGatheringBot` Type: String. Optional. Dialog scheduled after the initial dialog in an open bot. (To do: move this to `dialogSettings`.
+ - `institutionType` Type: String. Optional. Type of institution: Regional public, small private, community college, partnership, etc.
  - `intentDeadline` Type: Date. Optional. Deadline by which students must fill intent-to-enroll paperwork. (To do: see `dateAccepted`.)
  - `internalFieldMapping`: Type: Object. Optional. Default value: empty object. Blackbox. Maps csv column headings to fields on our documents. (To do: un-black-box. Either make required or take away default value.)
  - `introKnownProspectBotPhoto` Type: String. Optional. Default value: empty string. Url of a photo used in the (not currently existing) `introKnownProspectBot` dialog. (To do: see `dateAccepted`. Also, there's no reason to have a default value here for an optional field.)
@@ -78,6 +80,7 @@ Fields:
  - `mediaCongrats` Type: String. Optional. Media used in dialog congratulation student on acceptance. (To do: see `dateAccepted`.)
  - `mediaMascot` Type: String. Optional. Media of the instutions mascot.
  - `messagingServiceSid` Type: String. Optional. A string used by Twilio to identify the messaging service of the institution.
+ - `messagingType` Type: \[String\].  Optional. The channel type used by the bot: SMS, FB, Whatsapp, etc.
  - `phoneFinAid` Type: String. Optional. Phone number to call at institution to learn about financial aid. (To do: see `dateAccepted`.)
  - `prependCounselorResponse`: Type: String. Optional. Prepends counselor response to emails, e.g. "Your officer replied to your question...". Not currently functional. (To do: make this functional. Have a default, so it's not required.)
  - `primaryBrandColor` Type: String. Optional. Primary colour representing the institution.
@@ -494,7 +497,15 @@ A message recording information about campaigns scheduled to be initiated to stu
   - `collection` Type: String. Required. The relevant collection of the users sent the message. We're using only one collection these days, so this isn't needed, but I think we should consider seperating users by messaging service again.
   - `completed` Type: Boolean. Required. Default value: `false`. Set to `true` when the message has been sent to all intended users.
   - `createdAt` Type: Date. Required. The date the document was created.
+  - `deliveryFailureUsers` Type: \[String\]. Required. Default value: `[]`. Elements of the array are ids of `brandedUserProfile` documents. If an id is in there, it means that Twilio has reported that at least one message failed to get delivered to the corresponding contact. An id can be in only one of `deliveryFailureUsers`, `messagedUsers` and `optOutUsers` at a time.
+  - `messagedUsers` Type: \[String\]. Required. Default value: `[]`. Elements of the array are ids of `brandedUserProfile` documents. If an id is in there, the corresponding contact has received at least one message in the scheduled campaign, and thus far Twilio has not indicated any messages failed to get delivered.  An id can be in only one of `deliveryFailureUsers`, `messagedUsers` and `optOutUsers` at a time.
   - `messagingService` Type: String. Required. The messaging service over which the message was sent.
+  - `optOutUsers` Type: \[String\]. Required. Default value: `[]`. Elements of the array are ids of `brandedUserProfile` documents. If an id is in there, then the corresponding contact was targeted by the scheduled campaign, but they won't get any messages, because one of the following conditions held when the campaign was first sent:
+    1. The contact was soft-stopped (i.e., their `_dialog._id` value is `defaultSoftStop`).
+    2. The contact's `_contactSettings.canText` value was `false` (which can happen for lots of reasons).
+    3. The relevant bot is closed, and the contact was not `_contactSettings.permittedUser: true` OR the bot is open, and the contact was `_contactSettings.permittedUser: false`.
+    
+    An id can be in only one of `deliveryFailureUsers`, `messagedUsers` and `optOutUsers` at a time.
   - `scheduledAt` Type: Date. Required. The date the message is scheduled to be sent to users.
   - `allowCanTextFalse` Type: Boolean. Optional. If `true`, the outgoing message will override `canText: false` settings for users.
   - `batchSize` Type: Number. Optional. I think this is supposed to be the number of users sent the message at a time (users are seperated into batches for sending purposes), but no current document has this field, and it is non-functional in the code (which uses a value of 5). (To do: confirm intended usage, then either make functional in the code or get rid of this.)
@@ -514,8 +525,8 @@ A message recording information about campaigns scheduled to be initiated to stu
   - `startDate` **Deprecated** Type: Date. Optional. Hard to think of a use for this not already covered in other fields. No existing document has this field. (To do: get rid of it.)
   - `started` Type: Boolean. Optional. Indicates the process of sending the campaign out has started.
   - `test` Type: Boolean. Optional. Indicates this is a test campaign, not intended to be sent to real users.
-  - `users` Type: \[String\]. Optional. The value of the `_id` field of the `brandedUserProfile` documents of the users intended to receive the campaign. (To do: make this required, possibly make it a number or get rid of it. This is a lot of data to store on each document, and should be recoverable from the `query` value.)
-  - `usersContacted` Type: Number. Optional. Number of users who have thus far in fact been sent the campaign.
+  - `users` **Deprecated** Type: \[String\]. Optional. The value of the `_id` field of the `brandedUserProfile` documents of the users intended to receive the campaign, supposedly. Not super reliable: a better source of data is the combination of `messagedUsers`, `optOutUsers` and `deliveryFailureUsers`.
+  - `usersContacted` **Deprecated** Type: Number. Optional. Number of users who have thus far in fact been sent the campaign, roughly. Not super accurate; use the combination of `messagedUsers`, `optOutUsers` and `deliveryFailureUsers` instead.
   - `userSearch` **Deprecated**. I think this was intended to play the role of `query`. No current document has this field.
   - `weekends` Type: Boolean. Optional. I think this is intended to indicate that it is ok to send the campiagn on a weekend. There are no current documents with this field, and it's not functional in the code. (To do: see about making this functional.)
   - `workflow` Type: String. Optional. The `_id` of the `dialog` document corresponding to the campaign being sent. (To do: change the name. Make this required.)
