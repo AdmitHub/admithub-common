@@ -2,19 +2,14 @@
   "name": "admithub-common",
   "version": "1.0.0",
   "description": "Common styles, templates, and library functions and classes for AdmitHub apps",
-  "main": "package.js",
   "directories": {
-    "lib": "lib"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lib": "lib",
+    "collections": "collections"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AdmitHub/admithub-common.git"
   },
-  "author": "",
-  "license": "COMMERCIAL",
   "bugs": {
     "url": "https://github.com/AdmitHub/admithub-common/issues"
   },
