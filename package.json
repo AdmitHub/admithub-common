@@ -1,0 +1,17 @@
+{
+  "name": "admithub-common",
+  "version": "1.0.0",
+  "description": "Common styles, templates, and library functions and classes for AdmitHub apps",
+  "directories": {
+    "lib": "lib",
+    "collections": "collections"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdmitHub/admithub-common.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AdmitHub/admithub-common/issues"
+  },
+  "homepage": "https://github.com/AdmitHub/admithub-common#readme"
+}
