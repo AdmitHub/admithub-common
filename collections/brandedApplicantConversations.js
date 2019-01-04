@@ -9,6 +9,7 @@ BrandedApplicantConversations.attachSchema(new SimpleSchema({
   messages: {type: [Object]},
   handled: {type: Boolean, optional: true, defaultValue: false},
   'messages.$.body': {type: String},
+  'messages.$.prefix': {type: String},
   'messages.$.created': {type: Date},
   'messages.$.auto': {type: Boolean, optional: true},
   'messages.$.email': {type: String, optional: true},
