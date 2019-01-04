@@ -14,6 +14,7 @@ Fields:
   - `applicantId` Type: String. Required. **Deprecated**. This was the `_id` on the `brandedApplicants` document corresponding to the user. it is now identical to the `userId` -- i.e., it is the `_id` of the `brandedUserProfile` document of the relevant student user. I think it is non-functional. (To do: eliminate this.)
   - `messages`: Type: \[Object\]. Required. An array containing object that record information about the messages exchanges between the student user and the institution. Subfields:
     - `body` Type: String. Required. The text of the message.
+    - `prefix` Type: String. Optional. For escalation e-mails, the text of the introductory message added by the Phoenix/Mascot user or sensitive-topic auto-escalator.
     - `created` Type: Date. Required. Date the message was created. (To do: change name to `createdAt`.)
     - `sender` Type: String. Required. Allowed values: `student`, `college`, `admithub`. Indicates the source of the message.
     - `auto` Type: Boolean. Optional. Indicates whether the email was auto-generated becaue of the topic returned by Holocene. (To do: make this required.)
