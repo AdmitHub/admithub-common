@@ -194,6 +194,7 @@ BrandedUserSchema = new SimpleSchema({
     canMessageFacebook: fields.bool(o),
     canText: fields.bool(o),
     canTextLastModified: fields.date(o),
+    softStopLastEntered: fields.date(o),
     contacted: fields.bool(o),
     finished: fields.bool(o),
     generalOptIn: fields.bool(o),
@@ -340,4 +341,11 @@ BrandedUserProfiles.before.update((userId, doc, fieldNames, modifier) => {
   if (modifier.$set && modifier.$set['_contactSettings.canText'] !== undefined) {
     modifier.$set['_contactSettings.canTextLastModified'] = new Date()
   }
-})
+});
+
+BrandedUserProfiles.after.update((userId, newDoc) => {
+  const oldDoc = this.previous;
+  if ((dotGet(oldDoc, '_dialog._id') !== 'defaultSoftStop') && (dotGet(newDoc, '_dialog._id') === 'defaultSoftStop')) {
+    BrandedUserProfiles.direct.update({_id: newDoc._id}, {$set: {'_contactSettings.softStopLastEntered': new Date()}})
+  }
+});
