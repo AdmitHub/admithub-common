@@ -1,3 +1,5 @@
+const _ = require('lodash')
+
 var o = {optional: true}
 
 GeorgiaSchema = {type: new SimpleSchema({
@@ -8,8 +10,10 @@ GeorgiaSchema = {type: new SimpleSchema({
     qualified: fields.bool(o),
     appReceived: fields.bool(o),
     accepted: fields.bool(o)
-  }), optional: true}
-}), optional: true}
+  }),
+  optional: true}
+}),
+optional: true}
 
 BrandedUserSchema = new SimpleSchema({
   '_id': {optional: true, type: null},
@@ -26,7 +30,8 @@ BrandedUserSchema = new SimpleSchema({
     appCompleteDate: fields.date(o),
     decisionDate: fields.date(o),
     applicationType: fields.string(o)
-  }), optional: true},
+  }),
+  optional: true},
   created: fields.date(),
   collegeName: fields.string(o),
   college: fields.string(o),
@@ -34,7 +39,7 @@ BrandedUserSchema = new SimpleSchema({
   control: fields.bool(o),
   dob: fields.date(o),
   email: fields.string(o),
-  enrollmentId: fields.string(o), //pantherId for gsu
+  enrollmentId: fields.string(o), // pantherId for gsu
   entryTerm: fields.string(o),
   entryYear: fields.number(o),
   facebookId: fields.string(o),
@@ -59,14 +64,16 @@ BrandedUserSchema = new SimpleSchema({
     pellAwardDate: fields.date(o),
     workstudyAmount: fields.string(o),
     workstudtAwardDate: fields.date(o)
-  }), optional: true},
+  }),
+  optional: true},
   georgia: GeorgiaSchema,
   housing: {type: new SimpleSchema({
     onCampus: fields.bool(o),
     preferenceType: fields.preference_type(o),
     depositPaid: fields.bool(o),
     depositDate: fields.date(o)
-  }), optional: true},
+  }),
+  optional: true},
   importData: {
     type: Object,
     blackbox: true,
@@ -79,10 +86,12 @@ BrandedUserSchema = new SimpleSchema({
     intendsToEnroll: fields.bool(o),
     intentReceivedDate: fields.date(o),
     counselorCanContact: fields.bool(o)
-  }), optional: true},
+  }),
+  optional: true},
   interest: {type: new SimpleSchema({
     crm: fields.number({min: 0, max: 5, optional: true})
-  }), optional: true},
+  }),
+  optional: true},
   knownUser: {type: Boolean, optional: true},
   _testUser: {type: Boolean, optional: true},
   lastIntegrationDate: fields.date(o),
@@ -95,7 +104,8 @@ BrandedUserSchema = new SimpleSchema({
     state: fields.state(o),
     zip: fields.zip_code(_.extend(o)),
     country: fields.string(o)
-  }), optional: true},
+  }),
+  optional: true},
   meta: {
     type: Object,
     blackbox: true,
@@ -107,13 +117,15 @@ BrandedUserSchema = new SimpleSchema({
     middleName: fields.string(o),
     full: fields.string(o),
     nickName: fields.string(o)
-  }), optional: true},
+  }),
+  optional: true},
   orientation: {type: new SimpleSchema({
     needsToRsvp: fields.bool(o),
     attended: fields.bool(o),
     attendedDate: fields.date(o),
     registeredDate: fields.date(o)
-  }), optional: true},
+  }),
+  optional: true},
   permittedUser: fields.bool(o),
   phone: fields.string(o),
   presumedState: {type: new SimpleSchema({
@@ -123,7 +135,8 @@ BrandedUserSchema = new SimpleSchema({
     orientationAttendedDate: fields.date(o), // orientation.attendedDate /
     orientationNeedsToRsvp: fields.bool(o), // orientation.needsToRsvp /
     intendsToEnroll: fields.bool(o) // intent.intendsToEnroll /
-  }), optional: true}, 
+  }),
+  optional: true},
   profile: {type: new SimpleSchema({
     studentType: fields.student_type(o),
     studentCategory: fields.student_category(o),
@@ -141,7 +154,8 @@ BrandedUserSchema = new SimpleSchema({
     residency: fields.string(o),
     honorsProspect: fields.bool(o),
     firstGen: fields.bool(o)
-  }), optional: true},
+  }),
+  optional: true},
   scholarBot: {type: Object, blackbox: true, optional: true},
   smsInfo: {type: Object, blackbox: true, optional: true, defaultValue: {}},
   schoolEmail: fields.email(o),
@@ -152,7 +166,8 @@ BrandedUserSchema = new SimpleSchema({
     third: fields.string(o),
     fourth: fields.string(o),
     fifth: fields.string(o)
-  }), optional: true},
+  }),
+  optional: true},
   tests: {type: new SimpleSchema({
     gpa: fields.number({decimal: true, optional: true}),
     maxGpa: fields.number({decimal: true, optional: true}),
@@ -172,15 +187,18 @@ BrandedUserSchema = new SimpleSchema({
     actDevAndSupport: fields.act_composite_score(o),
     actOrganization: fields.act_composite_score(o),
     actLangaugeConvention: fields.act_composite_score(o)
-  }), optional: true},
+  }),
+  optional: true},
   textSetting: {type: new SimpleSchema({
     canText: fields.bool(o),
     wrongNumber: fields.bool(o), // moved to user doc
     newPhone: fields.phone_number(o)
-  }), optional: true},
+  }),
+  optional: true},
   tuiton: {type: new SimpleSchema({
     paymentPlan: fields.bool(o)
-  }), optional: true},
+  }),
+  optional: true},
   withdrawalReason: fields.string(o),
   _aidLastPush: {type: new SimpleSchema({ // all internal._aidLast
     planSubmitFafsa: fields.bool(o), // all internal._aidLast
@@ -188,7 +206,8 @@ BrandedUserSchema = new SimpleSchema({
     planAttendOrientation: fields.bool(o), // all internal._aidLast
     allSetHousing: fields.bool(o), // all internal._aidLast
     unableToMakePayment: fields.bool(o) // all internal._aidLast
-  }), optional: true},
+  }),
+  optional: true},
   _contactSettings: {type: new SimpleSchema({
     canMessageGeneral: fields.bool(o),
     canMessageFacebook: fields.bool(o),
@@ -206,7 +225,8 @@ BrandedUserSchema = new SimpleSchema({
     twilioLookUpValid: fields.bool(o),
     passiveOptOut: fields.bool(o),
     carrier: fields.string(o)
-  }), optional: true},
+  }),
+  optional: true},
   _custom: {
     type: Object,
     blackbox: true,
@@ -219,7 +239,8 @@ BrandedUserSchema = new SimpleSchema({
     finAidInterest: fields.bool(o),
     gapInAid: fields.bool(o), // _internal.gapInAid
     needHelpPaying: fields.bool(o) // _internal.needHelpPaying
-  }), optional: true},
+  }),
+  optional: true},
   _finalStudySurveyBot: {type: new SimpleSchema({
     enrollmentHowHard: fields.string(o),
     textHowHelpful: fields.string(o),
@@ -234,7 +255,8 @@ BrandedUserSchema = new SimpleSchema({
     whyNoResponse: fields.long_string(o),
     didYouRead: fields.bool(o),
     whyNoText: fields.long_string(o)
-  }), optional: true},
+  }),
+  optional: true},
   _gather: {type: new SimpleSchema({
     firstName: fields.string(o),
     lastName: fields.string(o),
@@ -266,21 +288,25 @@ BrandedUserSchema = new SimpleSchema({
     actDevAndSupport: fields.act_composite_score(o),
     actOrganization: fields.act_composite_score(o),
     actLangaugeConvention: fields.act_composite_score(o)
-  }), optional: true},
+  }),
+  optional: true},
   _general: {type: new SimpleSchema({
     secondGroup: fields.bool(o), // internal.secondGroup
     whyNotTexting: fields.string(o) // internal.whyNotTexting
-  }), optional: true},
+  }),
+  optional: true},
   _housing: {type: new SimpleSchema({
     intention: fields.string(o) // _internal.housingResponse
-  }), optional: true},
+  }),
+  optional: true},
   _intent: {type: new SimpleSchema({
     alreadySubmitted: fields.bool(o), // new
     coming: {type: new SimpleSchema({
       reasonCode: fields.number(o),
       secondChoiceSchool: fields.string(o),
       secondChoiceState: fields.string(o)
-    }), optional: true},
+    }),
+    optional: true},
     date: fields.date(o), // internal.intentDate
     followUpIntent: fields.attending(o), // internal./followUpIntent
     goingInstead: fields.long_string(o), // internal.goingInstead
@@ -290,7 +316,8 @@ BrandedUserSchema = new SimpleSchema({
       firstChoiceSchool: fields.string(o),
       firstChoiceState: fields.string(o),
       reasonCode: fields.number(o)
-    }), optional: true},
+    }),
+    optional: true},
     unsure: fields.bool(o), // internal.intentUnsure todo - mark this in unsure questions
     whyHere: fields.long_string(o), // internal.whyHere
     whyNoCollege: fields.string(o), // internal.whyNoCollege
@@ -298,7 +325,8 @@ BrandedUserSchema = new SimpleSchema({
     whyNotAttendingExtended: fields.long_string(o), // internal.whyNotAttendingExtended
     whyUnsure: fields.string(o), // was internal.whyUnsure
     whyUnsureExtended: fields.long_string(o) // was internal.whyUnsureExtended
-  }), optional: true},
+  }),
+  optional: true},
   _lastContacted: fields.date(o),
   _lastMessageId: fields.string(o),
   _lastTransport: fields.string(o),
@@ -315,10 +343,12 @@ BrandedUserSchema = new SimpleSchema({
     improvement: fields.long_string(o), // internal.orientation.improvement
     willYouAttend: fields.string(o), // internal.orientation.willYouAttend
     registered: fields.bool(o) // internal.registeredOrientation
-  }), optional: true},
+  }),
+  optional: true},
   _parking: {type: new SimpleSchema({
     bringCar: fields.bool(o) // _internal.needsParking
-  }), optional: true},
+  }),
+  optional: true},
   _phone: fields.string(o),
   _previousPhone: fields.string(o),
   _profile: {type: new SimpleSchema({
@@ -326,13 +356,14 @@ BrandedUserSchema = new SimpleSchema({
     parent: fields.bool(o),
     plannedApplication: fields.planned_application(o),
     setCanTextFalse: fields.bool(o)
-  }), optional: true},
+  }),
+  optional: true},
   _responseBlackBox: {
     type: Object,
     blackbox: true,
     optional: true
   }
-});
+})
 
 BrandedUserProfiles = new Mongo.Collection('brandedUserProfiles')
 BrandedUserProfiles.attachSchema(BrandedUserSchema)
@@ -341,11 +372,11 @@ BrandedUserProfiles.before.update((userId, doc, fieldNames, modifier) => {
   if (modifier.$set && modifier.$set['_contactSettings.canText'] !== undefined) {
     modifier.$set['_contactSettings.canTextLastModified'] = new Date()
   }
-});
+})
 
 BrandedUserProfiles.after.update((userId, newDoc) => {
-  const oldDoc = this.previous;
-  if ((dotGet(oldDoc, '_dialog._id') !== 'defaultSoftStop') && (dotGet(newDoc, '_dialog._id') === 'defaultSoftStop')) {
+  const oldDoc = this.previous
+  if ((_.get(oldDoc, '_dialog._id') !== 'defaultSoftStop') && (_.get(newDoc, '_dialog._id') === 'defaultSoftStop')) {
     BrandedUserProfiles.direct.update({_id: newDoc._id}, {$set: {'_contactSettings.softStopLastEntered': new Date()}})
   }
-});
+})
