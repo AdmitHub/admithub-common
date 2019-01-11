@@ -345,7 +345,7 @@ BrandedUserProfiles.before.update((userId, doc, fieldNames, modifier) => {
 
 BrandedUserProfiles.after.update((userId, newDoc) => {
   const oldDoc = this.previous;
-  if ((dotGet(oldDoc, '_dialog._id') !== 'defaultSoftStop') && (dotGet(newDoc, '_dialog._id') === 'defaultSoftStop')) {
-    BrandedUserProfiles.direct.update({_id: newDoc._id}, {$set: {'_contactSettings.softStopLastEntered': new Date()}})
+  if ((_.get(oldDoc, '_dialog._id') !== 'defaultSoftStop') && (_.get(newDoc, '_dialog._id') === 'defaultSoftStop')) {
+    BrandedUserProfiles.directUpdate({_id: newDoc._id}, {$set: {'_contactSettings.softStopLastEntered': new Date()}})
   }
 });
