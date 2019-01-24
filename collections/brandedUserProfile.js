@@ -338,6 +338,8 @@ BrandedUserProfiles.attachSchema(BrandedUserSchema)
 
 BrandedUserProfiles.before.update((userId, doc, fieldNames, modifier) => {
   if (modifier.$set && modifier.$set['_contactSettings.canText'] !== undefined) {
-    modifier.$set['_contactSettings.canTextLastModified'] = new Date()
+    const now = new Date();
+    modifier.$set['_contactSettings.canTextLastModified'] = now;
+    OptOutEvents.insert({type: 'hardStop', date: now, student: doc})
   }
 });
