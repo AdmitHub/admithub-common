@@ -51,6 +51,7 @@ Package.onUse(function (api) {
   api.addFiles('collections/smslogs.js');
   api.addFiles('collections/snapshots.js');
   api.addFiles('collections/sponsors.js');
+  api.addFiles('collections/optOutEvents.js');
   api.addFiles('collections/testimonials.js');
   api.addFiles('collections/users.js');
   api.addFiles('collections/highschoolConversations.js');
