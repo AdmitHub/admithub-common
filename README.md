@@ -469,6 +469,13 @@ Used in the old workflow editor, on the front end, to allow users to choose vari
   - `label` Type: String. Required. Human friendly name for the variable, used in display (I think).
   - `value` Type: String. Required. String value of the variable as used in the template.
 
+### OptOutEvents
+Records information about our texting load, created daily, optionally by messaging service. Fields:
+  - `type` Type: String. The type of stop, either 'hardStop' or 'softStop'
+  - `student` Type: Object. The brandedUserProfile
+  - `date` Type: Date. The datetime of the event
+  - `collegeId` Type: String. The id of the college
+
 ### OverallReachAnalytics
 Records information about the number of users reached by our messages, by week. Fields:
   - `createdAt` Type: Date. Required. Date the document was created.
