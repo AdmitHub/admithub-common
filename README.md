@@ -150,6 +150,9 @@ Fields:
     - `depositPaid` Type: Boolean. Optional. Indicates whether or not a student has paid a deposit for their housing.
     - `onCampus` Type: Boolean. Optional. Indicates student lives on campus.
     - `preferenceType` Type: String. Optional. Allowed values: 'Residence hall', 'Off-campus', 'Parents', 'Married housing', 'Fraternity/Sorority'. Indicates the preffered living arrangment of the student.
+  - `holoceneContext` Type: Object. Optional. Used to store context values returned by Holocene, which we send back to Holocene in the event the contact asks another question, within a certain time limit. Subfields:
+    - `currentContext` Type: \[String\]. Required. The contexts returned by Holocene.
+    - `lastMessageDate` Type: Date. Required. The data at which the `currentContext` was last set. This is automatically set by the `before.update` hook.
   - `importData` Type: Object. Optional. Default value: empty object. Black-box. Used by astronomer and the brookline user creation endpoint for any unmapped data. (To do: determine if there is any need for this default value.)
   - `importSegmentLabels` Type: \[String\]. Optional. Default value: empty array. List of labels used to identify a batch of students imported on a single occasion. For each time the student is imported, there is a string in the `importSegmentLabels` array, and vice-versa.
   - `inStateStudent` Type: Boolean. Optional. Indicates if the student counts as "in-state" for the purposes of enrollment and tuition.
@@ -397,6 +400,7 @@ Contains information concerning points of contact at client institutions. Fields
 ### Dialogs
 A document defining the general properties of a specific, scripted interaction with users. Fields:
   - `initialState` Type: String. Required. The `_id` of the `DialogState` document corresponding to the first state of this dialog. (To do: enforce simple-schema id syntax of value.)
+  - `contexts` Type: \[String\]. Required. Default value: `[]`. Values to be sent to Holocene as part of the context input, when a contact makes a query and is in a state that belongs to this dialog.
   - `converted` Type: Boolean. Optional. Indictes that the dialog was converted from an old workflow by script. (To do: establish that there is no sepcial problem with these workflows, then get rid of this field, if there is no reason to keep it.)
   - `createdAt` Type: Date. Optional. Date at which the dialog was created. (To do: make this required.)
   - `description` Type: String. Optional. Description of the dialog. Used for display on the front end, and for humans to comprehend what is going on. (To do: make this required.)
@@ -415,6 +419,7 @@ A document defining the general properties of a specific, scripted interaction w
 
 ### DialogStates
 Contains information about specific states in the associated dialogs state-graph. A user moves through the dialog by traersing a path through the graph. These graphs will usually be trees, but need not be. Fields:
+  - `contexts` Type: \[String\]. Required. Default value: `[]`. Values to be sent to Holocene as part of the context input, when a contact makes a query and is in this state.
   - `nextStates` Type: Object. Required. Black box. Indicates the successor states to the current state, and provides information about which state to go to next. (To do: un-black-box this.)
   - `parentDialog` Type: String. Required. The `_id` of the `Dialog` document associated with this state. (To do: enforce simple-schema id syntax.)
   - `promptType` Type: String. Required. The type of reponse, if any, the state expects from the user. (To do: enforce allowed values: `Number`, `Open`, `Auto` and `Boolean`. Change name to `type`.)
