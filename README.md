@@ -400,6 +400,7 @@ Contains information concerning points of contact at client institutions. Fields
 ### Dialogs
 A document defining the general properties of a specific, scripted interaction with users. Fields:
   - `initialState` Type: String. Required. The `_id` of the `DialogState` document corresponding to the first state of this dialog. (To do: enforce simple-schema id syntax of value.)
+  - `contexts` Type: \[String\]. Required. Default value: `[]`. Values to be sent to Holocene as part of the context input, when a contact makes a query and is in a state that belongs to this dialog.
   - `converted` Type: Boolean. Optional. Indictes that the dialog was converted from an old workflow by script. (To do: establish that there is no sepcial problem with these workflows, then get rid of this field, if there is no reason to keep it.)
   - `createdAt` Type: Date. Optional. Date at which the dialog was created. (To do: make this required.)
   - `description` Type: String. Optional. Description of the dialog. Used for display on the front end, and for humans to comprehend what is going on. (To do: make this required.)
@@ -418,6 +419,7 @@ A document defining the general properties of a specific, scripted interaction w
 
 ### DialogStates
 Contains information about specific states in the associated dialogs state-graph. A user moves through the dialog by traersing a path through the graph. These graphs will usually be trees, but need not be. Fields:
+  - `contexts` Type: \[String\]. Required. Default value: `[]`. Values to be sent to Holocene as part of the context input, when a contact makes a query and is in this state.
   - `nextStates` Type: Object. Required. Black box. Indicates the successor states to the current state, and provides information about which state to go to next. (To do: un-black-box this.)
   - `parentDialog` Type: String. Required. The `_id` of the `Dialog` document associated with this state. (To do: enforce simple-schema id syntax.)
   - `promptType` Type: String. Required. The type of reponse, if any, the state expects from the user. (To do: enforce allowed values: `Number`, `Open`, `Auto` and `Boolean`. Change name to `type`.)
