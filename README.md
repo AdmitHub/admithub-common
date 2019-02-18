@@ -150,6 +150,9 @@ Fields:
     - `depositPaid` Type: Boolean. Optional. Indicates whether or not a student has paid a deposit for their housing.
     - `onCampus` Type: Boolean. Optional. Indicates student lives on campus.
     - `preferenceType` Type: String. Optional. Allowed values: 'Residence hall', 'Off-campus', 'Parents', 'Married housing', 'Fraternity/Sorority'. Indicates the preffered living arrangment of the student.
+  - `holoceneContext` Type: Object. Optional. Used to store context values returned by Holocene, which we send back to Holocene in the event the contact asks another question, within a certain time limit. Subfields:
+    - `currentContext` Type: \[String\]. Required. The contexts returned by Holocene.
+    - `lastMessageDate` Type: Date. Required. The data at which the `currentContext` was last set. This is automatically set by the `before.update` hook.
   - `importData` Type: Object. Optional. Default value: empty object. Black-box. Used by astronomer and the brookline user creation endpoint for any unmapped data. (To do: determine if there is any need for this default value.)
   - `importSegmentLabels` Type: \[String\]. Optional. Default value: empty array. List of labels used to identify a batch of students imported on a single occasion. For each time the student is imported, there is a string in the `importSegmentLabels` array, and vice-versa.
   - `inStateStudent` Type: Boolean. Optional. Indicates if the student counts as "in-state" for the purposes of enrollment and tuition.

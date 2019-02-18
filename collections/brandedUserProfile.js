@@ -374,13 +374,15 @@ BrandedUserSchema = new SimpleSchema({
 BrandedUserProfiles = new Mongo.Collection('brandedUserProfiles')
 BrandedUserProfiles.attachSchema(BrandedUserSchema)
 
-const DATED_FIELDS = {
+const AUTO_DATED_FIELDS = {
+  // Fields for which we record the date they were last set.
+  // Key is the field we're recording information about, value is the field where the information is recorded.
   '_contactSettings.canText': '_contactSettings.canTextLastModified',
   'holoceneContext.currentContext': 'holoceneContext.lastMessageDate'
 }
 
 BrandedUserProfiles.before.update((userId, doc, fieldNames, modifier) => {
-  Object.entries(DATED_FIELDS).forEach(([key, value]) => {
+  Object.entries(AUTO_DATED_FIELDS).forEach(([key, value]) => {
     if (modifier.$set && modifier.$set[key] !== undefined) { modifier.$set[value] = new Date() }
   })
 })
