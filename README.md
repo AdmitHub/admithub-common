@@ -260,7 +260,7 @@ Fields:
     - `generalOptIn` Type: Boolean. Optional. I don't know what this is. (To do: figure it out.)
     - `nonWorkingFacebookId` Type: Boolean. Optional. Indicates the facebook id we have for the user doesn't work.
     - `nonWorkingNumber` Type: Boolean. Optional. Indicates the phone number we have for the user doesn't work.
-    - `nonWorkingNumberCode` Type: Number. Optional. Don't know what this is about.
+    - `nonWorkingNumberCode` Type: Number. Optional. Codes that result in `nonWorkingNumber` being set to true are 21211, 21614, 30005, 30006 and 21610. Those are, respectively, "Invalid 'To' Phone Number", "To' number is not a valid mobile number", "Message Delivery - Unknown destination handset", "Message Delivery - Landline or unreachable carrier" and "Message cannot be sent to the 'To' number because the customer has replied with STOP".
     - `twilioCode` Type: Number. Optional. Perhaps overlaps with nonWorkingNumberCode?
     - `passiveOptOut` Type: Boolean. Optional. Indicates that user has failed to opt in when an opt in was required, and should be treated as having opted out.
     - `permittedUser`Type: Boolean. Optional. Indicates if the user is permitted to interact with the bot. (To do: make this required.)
