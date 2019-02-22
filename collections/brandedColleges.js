@@ -13,6 +13,7 @@ BrandedColleges.attachSchema(new SimpleSchema({
   collegeId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   counselors: {type: [Object], blackbox: true, optional: true, defaultValue: []},
   csvTransformPipeline: {type: [String], optional: true, defaultValue: []},
+  customInReports: {type: Boolean, defaultValue: false},
   customQueryFields: {type: [String], optional: true, defaultValue: []},
   dateAccepted: {type: String, optional: true},
   dateScholarship: {type: String, optional: true},
