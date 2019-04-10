@@ -511,6 +511,8 @@ A message recording information about campaigns scheduled to be initiated to stu
   - `collection` Type: String. Required. The relevant collection of the users sent the message. We're using only one collection these days, so this isn't needed, but I think we should consider seperating users by messaging service again.
   - `completed` Type: Boolean. Required. Default value: `false`. Set to `true` when the message has been sent to all intended users.
   - `createdAt` Type: Date. Required. The date the document was created.
+  - `name` Type: String. Required. The name of the campaign.
+  - `description` Type: String. Required. A description of the campaign.
   - `deliveryFailureUsers` Type: \[String\]. Required. Default value: `[]`. Elements of the array are ids of `brandedUserProfile` documents. If an id is in there, it means that Twilio has reported that at least one message failed to get delivered to the corresponding contact. An id can be in only one of `deliveryFailureUsers`, `messagedUsers` and `optOutUsers` at a time.
   - `messagedUsers` Type: \[String\]. Required. Default value: `[]`. Elements of the array are ids of `brandedUserProfile` documents. If an id is in there, the corresponding contact has received at least one message in the scheduled campaign, and thus far Twilio has not indicated any messages failed to get delivered.  An id can be in only one of `deliveryFailureUsers`, `messagedUsers` and `optOutUsers` at a time.
   - `messagingService` Type: String. Required. The messaging service over which the message was sent.
@@ -518,7 +520,6 @@ A message recording information about campaigns scheduled to be initiated to stu
     1. The contact was soft-stopped (i.e., their `_dialog._id` value is `defaultSoftStop`).
     2. The contact's `_contactSettings.canText` value was `false` (which can happen for lots of reasons).
     3. The relevant bot is closed, and the contact was not `_contactSettings.permittedUser: true` OR the bot is open, and the contact was `_contactSettings.permittedUser: false`.
-    
     An id can be in only one of `deliveryFailureUsers`, `messagedUsers` and `optOutUsers` at a time.
   - `scheduledAt` Type: Date. Required. The date the message is scheduled to be sent to users.
   - `allowCanTextFalse` Type: Boolean. Optional. If `true`, the outgoing message will override `canText: false` settings for users.
