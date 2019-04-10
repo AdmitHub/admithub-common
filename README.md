@@ -520,7 +520,6 @@ A message recording information about campaigns scheduled to be initiated to stu
     1. The contact was soft-stopped (i.e., their `_dialog._id` value is `defaultSoftStop`).
     2. The contact's `_contactSettings.canText` value was `false` (which can happen for lots of reasons).
     3. The relevant bot is closed, and the contact was not `_contactSettings.permittedUser: true` OR the bot is open, and the contact was `_contactSettings.permittedUser: false`.
-
     An id can be in only one of `deliveryFailureUsers`, `messagedUsers` and `optOutUsers` at a time.
   - `scheduledAt` Type: Date. Required. The date the message is scheduled to be sent to users.
   - `allowCanTextFalse` Type: Boolean. Optional. If `true`, the outgoing message will override `canText: false` settings for users.
