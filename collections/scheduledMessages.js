@@ -25,6 +25,7 @@ ScheduledMessages.attachSchema(new SimpleSchema({
   query: {type: String, optional: true},
   recipientLabel: {type: String, optional: true},
   scheduled: {type: Boolean, optional: true},
+  sendingUser: {type: String, optional: true},
   sent: {type: Boolean, optional: true},
   sentDate: {type: Date, optional: true},
   startDate: {type: Date, optional: true},
