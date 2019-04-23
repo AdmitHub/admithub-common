@@ -535,6 +535,7 @@ A message recording information about campaigns scheduled to be initiated to stu
   - `query` Type: String. Optional. A stringified version of the mongo query used to choose the users that get sent the dialog. (To do: make this required.)
   - `recipientLabel` Type: String. Optional. The label used for the import corresponding to the target users, if there is one.
   - `scheduled` Type: Boolean. Optional. I think this is supposed to indicate that the campaign has, indeed, been scheduled, which does not make a lot of sense since the existence of the document indicates that. It is non-functional in the code. (To do: get rid of this.)
+  - `sendingUser` Type: String. Required. User that is sending the campaign.
   - `sent` Type: Boolean. Optional. Indicates the campaign corresponding to the document has been sent.
   - `sentDate` Type: Boolean. Optional. The date at which the campaign was in fact sent. Should be very son after `scheduledAt`, unless something strange has happened.
   - `startDate` **Deprecated** Type: Date. Optional. Hard to think of a use for this not already covered in other fields. No existing document has this field. (To do: get rid of it.)
