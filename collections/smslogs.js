@@ -10,6 +10,7 @@ SmsLogs.attachSchema(new SimpleSchema({
   dialogId: {type: String, optional: true},
   dialogStateId: {type: String, optional: true},
   error: {type: Boolean, defaultValue: false},
+  errorSubcode: {type: Number, optional: true},
   facebookId: {type: String, optional: true},
   failed: {type: Boolean, optional: true},
   from: {type: String, optional: true},
