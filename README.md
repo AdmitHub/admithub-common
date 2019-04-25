@@ -256,7 +256,7 @@ Fields:
     - `canText` Type: Boolean. Optional. Currently playing the role envisioned for `canMessageGeneral`. Should, eventuall, be confined to the sms transport. (To do: make it so.)
     - `carrier` Type: String. Optional. Indicates which carrier the user's phone uses. (To do: restrict possible values.)
     - `contacted` Type: Boolean. Optional. Indicates if the bot has sent the user a message before. (To do: make this required.)
-    - `errorSubcode` Type: Number. Optional. Facebook provides not only an error code, but an error "subcode", as they call it; if such an error indicates we cannot communicate with this contact, then that subccode is recorded here.
+    - `errorSubcode` Type: Number. Optional. Facebook provides not only an error code, but an error "subcode", as they call it; if such an error indicates we cannot communicate with this contact, then that subcode is recorded here.
     - `finished` Type: Boolean. Optional. Indicates we are finished with out dealings with this user. (To do: determine if this is necessary, given the other fields. If not, get rid of it, and change the name to make the user case more obvious.)
     - `generalOptIn` Type: Boolean. Optional. I don't know what this is. (To do: figure it out.)
     - `nonWorkingFacebookId` Type: Boolean. Optional. Indicates the facebook id we have for the user doesn't work.
