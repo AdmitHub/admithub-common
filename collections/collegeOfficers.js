@@ -35,6 +35,7 @@ CollegeOfficers.attachSchema(new SimpleSchema({
   "associatedEmails.$.counties.$.state": fields.state({optional: true}),
   "associatedEmails.$.counties.$.county": {type: String, optional: true},
   "associatedEmails.$.mainFinAidContact": {type: Boolean, optional: true},
+  "associatedEmails.$.region": {type: String, optional: true},
   "associatedEmails.$.states": fields.state({optional: true, type: [String]}),
   blacklistedEmails: {
     type: [String],
