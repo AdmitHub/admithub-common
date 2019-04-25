@@ -221,7 +221,7 @@ BrandedUserSchema = new SimpleSchema({
     canText: fields.bool(o),
     canTextLastModified: fields.date(o),
     contacted: fields.bool(o),
-    errorSubcode: fields.int(o),
+    errorSubcode: fields.number(o),
     finished: fields.bool(o),
     generalOptIn: fields.bool(o),
     nonWorkingFacebookId: fields.bool(o),
