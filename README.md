@@ -256,19 +256,20 @@ Fields:
     - `canText` Type: Boolean. Optional. Currently playing the role envisioned for `canMessageGeneral`. Should, eventuall, be confined to the sms transport. (To do: make it so.)
     - `carrier` Type: String. Optional. Indicates which carrier the user's phone uses. (To do: restrict possible values.)
     - `contacted` Type: Boolean. Optional. Indicates if the bot has sent the user a message before. (To do: make this required.)
+    - `errorSubcode` Type: Number. Optional. Facebook provides not only an error code, but an error "subcode", as they call it; if such an error indicates we cannot communicate with this contact, then that subcode is recorded here.
     - `finished` Type: Boolean. Optional. Indicates we are finished with out dealings with this user. (To do: determine if this is necessary, given the other fields. If not, get rid of it, and change the name to make the user case more obvious.)
     - `generalOptIn` Type: Boolean. Optional. I don't know what this is. (To do: figure it out.)
     - `nonWorkingFacebookId` Type: Boolean. Optional. Indicates the facebook id we have for the user doesn't work.
     - `nonWorkingNumber` Type: Boolean. Optional. Indicates the phone number we have for the user doesn't work.
-    - `nonWorkingNumberCode` Type: Number. Optional. Codes that result in `nonWorkingNumber` being set to true are 21211, 21614, 30005, 30006 and 21610. Those are, respectively, "Invalid 'To' Phone Number", "To' number is not a valid mobile number", "Message Delivery - Unknown destination handset", "Message Delivery - Landline or unreachable carrier" and "Message cannot be sent to the 'To' number because the customer has replied with STOP".
-    - `twilioCode` Type: Number. Optional. Perhaps overlaps with nonWorkingNumberCode?
+    - `nonWorkingNumberCode` Type: Number. Optional. **deprecated**. Used to do most of the job that `twilioCode` now does.
+    - `twilioCode` Type: Number. Optional. When a channel returns an error code that shows that we cannot communicate with this contact, that error code is recorded here. Not that, despite this field's name, not only twilio error codes are stored here; as of writing (2019-04-24), facebook codes are about to be stored here too.
     - `passiveOptOut` Type: Boolean. Optional. Indicates that user has failed to opt in when an opt in was required, and should be treated as having opted out.
     - `permittedUser`Type: Boolean. Optional. Indicates if the user is permitted to interact with the bot. (To do: make this required.)
     - `twilioLookUpValid`. Type: Boolean. Optional. Don't know. No existing document has this subfield. (To do: see about getting rid of this.)
     - `wrongNumber` Type: Boolean. Optional. Indicates if the number we have for the user is not in fact theirs.
  - `_custom`: Type: Object. Optional. Blackbox. Unclear intended usage; examples in the data seem to hold things that are best stored elsewhere. (To do: see about eliminating this.)
  - `_dialog` Type: Object. Optional. Blackbox. Stores information about the user's current position within a dialog. (To do: un-black-box this. Make it required.)
- - `_dialogStack` Type: \[Object\. Optional. Blackbox. When a dialog is interrupted by a second dialog, the first goes onto this stack, so the system can return to it, in the correct state, after the second is finished. (To do: un-black-box this. Make it required.)
+ - `_dialogStack` Type: \[Object\]. Optional. Blackbox. When a dialog is interrupted by a second dialog, the first goes onto this stack, so the system can return to it, in the correct state, after the second is finished. (To do: un-black-box this. Make it required.)
  - `_facebookId` Type: String. Optional. User's facebook id.
  - `_finAid` Type: Object. Optional. A less interesting duplicate of `finAid`; presumably this exists to distinguish fields Astronomer writes to from something we use. (To do: find a better solution to astronomer writes; de-duplicate fields. In any case, consolidate this and `finAid`.) Subfields:
    - `finAidInterest` Type: Boolean. Optional. See `finAid.finAidInterest`
