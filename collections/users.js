@@ -184,7 +184,10 @@ UserSchema = new SimpleSchema({
   'importSegmentLabels': {type: [String], optional: true, defaultValue: []},
   'lastContacted': { type: Date, optional: true },
   'lastMessageId': { type: String, optional: true },
-  'lastLoginAt': { type: Date, optional: true }
+  'lastLoginAt': { type: Date, optional: true },
+  
+  // region work
+  'region': {type: String, optional: true }
 });
 
 Meteor.users.before.insert(function (userId, doc) {
