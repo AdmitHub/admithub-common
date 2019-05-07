@@ -8,7 +8,7 @@ BrandedColleges.attachSchema(new SimpleSchema({
   aiSubject: {type: String},
   animal: {type: String, optional: true}, // Panther
   askInternet: {type: Boolean, optional: true}, // AH-352
-  availableRegions: {type: [String], optional: true},
+  availableRegions: {type: [String], optional: true, defaultValue: []},
   botType: {type: [String], optional: true}, // for analysis; see AH-264
   collection: {type: String, optional: true},
   collegeId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
