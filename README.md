@@ -41,6 +41,7 @@ Fields:
  - `oliName` Type: String. Required. Name of the bot personality. (To do: consider changing name. Though maybe we want to keep it for nostalgia resons.)
  - `abbr` Type: String. Optional. Abbreviated form of the institution's name.
  - `animal` Type: String. Optional. The species (or whatever) of the institution's mascot.
+ - `availableRegions` Type: \[String\]. Optional. List of regions to prepopulate into the region picker.
  - `botType` Type: \[String\]. Optional. The type of bot: enrollment, retention, grad, alumni, etc.
  - `collection` **Deprecated** Type: String. Optional. The collection of user documents associated with the institution. (To do: get rid of this, unless we decide we do want to use seperate collections after all.)
  - `collegeId` **Deprecated** Type: String. Optional. Regex: Simple-schema style id. What used to be the id of the institution in the `college` documents. (To do: get rid of this.)
