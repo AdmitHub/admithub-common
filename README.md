@@ -266,6 +266,7 @@ Fields:
     - `twilioCode` Type: Number. Optional. When a channel returns an error code that shows that we cannot communicate with this contact, that error code is recorded here. Not that, despite this field's name, not only twilio error codes are stored here; as of writing (2019-04-24), facebook codes are about to be stored here too.
     - `passiveOptOut` Type: Boolean. Optional. Indicates that user has failed to opt in when an opt in was required, and should be treated as having opted out.
     - `permittedUser`Type: Boolean. Optional. Indicates if the user is permitted to interact with the bot. (To do: make this required.)
+    - `permittedUserMutable` Type: Boolean. If `true`, `permittedUser` will be set to `true` the next time this contact is ingested into the system. Otherwise, if a contact is `permittedUser: false`, they will stay that way.
     - `twilioLookUpValid`. Type: Boolean. Optional. Don't know. No existing document has this subfield. (To do: see about getting rid of this.)
     - `wrongNumber` Type: Boolean. Optional. Indicates if the number we have for the user is not in fact theirs.
  - `_custom`: Type: Object. Optional. Blackbox. Unclear intended usage; examples in the data seem to hold things that are best stored elsewhere. (To do: see about eliminating this.)
