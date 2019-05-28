@@ -225,6 +225,7 @@ BrandedUserSchema = new SimpleSchema({
     errorSubcode: fields.number(o),
     finished: fields.bool(o),
     generalOptIn: fields.bool(o),
+    lastFrozen: fields.date(o),
     nonWorkingFacebookId: fields.bool(o),
     nonWorkingNumber: fields.bool(o),
     passiveOptOut: fields.bool(o),

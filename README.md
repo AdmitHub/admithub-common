@@ -62,6 +62,9 @@ Fields:
  - `enabledFeatures`. Type: \[String\]. Optional. Default value: empty array. Used on the front end to determine which opt-in features the institution has access to. (Either make this required, or make `disabledFeatues` optional. If this field is left optional, remove default value.)
  - `facebookId`: Type: String. Optional. The id of the facebook page using our facebook app that is associated with the institution.
  - `filterOn` Type: Boolean. Optional. The field that distinguished open bots (value `false`) from closed bots (value `true`). (To do: move this to `dialogSettings`. Make required.)
+ - `freeze` Type: Object. Optional. Enable and control "freezing" the bot when an admin sends a message.  See AH-1054
+   - `enable` Type: Boolean.  If true, enable freezing.
+   - `seconds` Type: Integer.  Number of seconds to freeze the bot for.
  - `hashtag` Type: String. Optional. The hashtag used for social media campaigns. (To do: see `dateAccepted`.)
  - `infoGatheringBot` Type: String. Optional. Dialog scheduled after the initial dialog in an open bot. (To do: move this to `dialogSettings`.
  - `institutionType` Type: String. Optional. Type of institution: Regional public, small private, community college, partnership, etc.
@@ -260,6 +263,7 @@ Fields:
     - `errorSubcode` Type: Number. Optional. Facebook provides not only an error code, but an error "subcode", as they call it; if such an error indicates we cannot communicate with this contact, then that subcode is recorded here.
     - `finished` Type: Boolean. Optional. Indicates we are finished with out dealings with this user. (To do: determine if this is necessary, given the other fields. If not, get rid of it, and change the name to make the user case more obvious.)
     - `generalOptIn` Type: Boolean. Optional. I don't know what this is. (To do: figure it out.)
+    - `lastFrozen` Type: Date.  Optional.  The last time at which the bot was "frozen" for the student (i.e., an administrator sent a message, and we paused the bot temporarily to allow them to converse).  See AH-1054.
     - `nonWorkingFacebookId` Type: Boolean. Optional. Indicates the facebook id we have for the user doesn't work.
     - `nonWorkingNumber` Type: Boolean. Optional. Indicates the phone number we have for the user doesn't work.
     - `nonWorkingNumberCode` Type: Number. Optional. **deprecated**. Used to do most of the job that `twilioCode` now does.
