@@ -62,9 +62,10 @@ Fields:
  - `enabledFeatures`. Type: \[String\]. Optional. Default value: empty array. Used on the front end to determine which opt-in features the institution has access to. (Either make this required, or make `disabledFeatues` optional. If this field is left optional, remove default value.)
  - `facebookId`: Type: String. Optional. The id of the facebook page using our facebook app that is associated with the institution.
  - `filterOn` Type: Boolean. Optional. The field that distinguished open bots (value `false`) from closed bots (value `true`). (To do: move this to `dialogSettings`. Make required.)
- - `freeze` Type: Object. Optional. Enable and control "freezing" the bot when an admin sends a message.  See AH-1054
-   - `enable` Type: Boolean.  If true, enable freezing.
-   - `seconds` Type: Integer.  Number of seconds to freeze the bot for.
+ - `freezeOnAdminResponse` Type: Object. Optional. Enable and control "freezing" the bot when an admin sends a message.  See AH-1054
+   - `enable` Type: Boolean.  If true, enable freezing for students at the institution.
+   - `freezeWindow` Type: Integer.  Number of seconds the user should remain frozen after an admin's message.
+   - `messageDelay` Type: Integer.  Number of seconds to wait before sending a message during the freeze window.  (This gives the admin time to respond, but avoids delaying individual responses for too long.)  Note that any outstanding messages when the freeze window ends will get responses, regardless of the messageDelay.
  - `hashtag` Type: String. Optional. The hashtag used for social media campaigns. (To do: see `dateAccepted`.)
  - `infoGatheringBot` Type: String. Optional. Dialog scheduled after the initial dialog in an open bot. (To do: move this to `dialogSettings`.
  - `institutionType` Type: String. Optional. Type of institution: Regional public, small private, community college, partnership, etc.
