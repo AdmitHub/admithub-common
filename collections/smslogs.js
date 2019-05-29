@@ -27,6 +27,9 @@ SmsLogs.attachSchema(new SimpleSchema({
   smsSid: {type: String, optional: true},
   source: {type: String, optional: true},
   sqsId: {type: String, optional: true}, // The AWS-SQS id associated with the message.
+  // For transports (i.e., channels) that have different points of ingress.
+  // Example: facebook messenger and the facebook web widgit.
+  subTransport: {type: String, defaultValue: ''},
   testUser: {type: Boolean, optional: true, defaultValue: false},
   to: {type: String, optional: true},
   twilioErrorCode: {type: Number, optional: true},
