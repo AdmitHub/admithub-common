@@ -34,7 +34,12 @@ BrandedColleges.attachSchema(new SimpleSchema({
   disabledFeatures: {type: [String], defaultValue: []},
   emailPrefix: {type: String, optional: true},
   enabledFeatures: {type: [String], defaultValue: [], optional: true},
-  facebookId: {type: String, optional: true},
+  facebook: {type: new SimpleSchema({
+    pageId: {type: String},
+    pageAccessToken: {type: String}
+  }),
+  optional: true},
+  facebookId: {type: String, optional: true}, // deprecated
   filterOn: {type: Boolean, optional: true},
   hashtag: {type: String, optional: true}, // include the hash
   infoGatheringBot: {type: String, optional: true}, // dialog scheduled after the initial dialog in an open bot
