@@ -36,7 +36,8 @@ BrandedColleges.attachSchema(new SimpleSchema({
   enabledFeatures: {type: [String], defaultValue: [], optional: true},
   facebook: {type: new SimpleSchema({
     pageId: {type: String},
-    pageAccessToken: {type: String}
+    pageAccessToken: {type: String},
+    subscriptionMessagingStatus: {type: String, defaultValue: 'not_yet_requested'}
   }),
   optional: true},
   facebookId: {type: String, optional: true}, // deprecated
