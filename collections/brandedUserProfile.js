@@ -232,7 +232,8 @@ BrandedUserSchema = new SimpleSchema({
     permittedUserMutable: fields.bool(o),
     twilioCode: fields.number(o),
     twilioLookUpValid: fields.bool(o),
-    wrongNumber: fields.bool(o)
+    wrongNumber: fields.bool(o),
+    permanentlySoftStopped: {type: Boolean, optional: true, defaultValue: false}
   }),
   optional: true},
   _custom: {

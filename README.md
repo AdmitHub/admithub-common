@@ -373,6 +373,7 @@ Fields:
    - `parent` Type: Boolean. Indicates the user is a parent of a student. Not a single document has this field.
    - `plannedApplication` Type: String. Allowed values: 'now', 'this year', 'not applying'.
    - `setCanTextFalse`. Type: Boolean. Optional. Unclear usage.
+ - `permanentlySoftStopped` Type: Boolean. Optional. Default Value: false. Indicates that the student is in an indefinite soft stop state.
  - `_responseBlackBox` Type: Object. Optional. Black box. **Deprecated**. We now keep this information in the `meta` field (though, should we?)
 
 ### CeebCodes
