@@ -100,7 +100,7 @@ BrandedUserSchema = new SimpleSchema({
   }),
   optional: true},
   knownUser: {type: Boolean, optional: true},
-  _testUser: {type: Boolean, optional: true},
+  _testUser: {type: Boolean, optional: true, defaultValue: false},
   lastIntegrationDate: fields.date(o),
   location: {type: new SimpleSchema({
     address1: fields.address(o),
