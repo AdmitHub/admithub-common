@@ -41,7 +41,6 @@ FrozenSmsLogs.attachSchema(new SimpleSchema({
   smsSid: {type: String, optional: true},
   source: {type: String, optional: true},
   sqsId: {type: String, optional: true}, // The AWS-SQS id associated with the message.
-  subTransport: {type: String, defaultValue: ''},
   testUser: {type: Boolean, optional: true, defaultValue: false},
   to: {type: String, optional: true},
   twilioErrorCode: {type: Number, optional: true},
