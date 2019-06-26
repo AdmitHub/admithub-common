@@ -66,6 +66,10 @@ Fields:
    - `subscriptionMessagingStatus` Type: String. Optional. Default value: `'not_yet_requested'`. Indicates the status of the messaging service's request to facebook to send "subscription messaging" -- i.e., messages that are initiated more than 24 hours after the contact last messaged the bot. We check and update this value every time we send a campaign on a facebook messaging service. A value of `approved` indicates that the messaging service indeed has permission to send subscription messaging, last time we checked.
  - `facebookId`: Type: String. Optional. **Deprecated**. This has been replaced with `facebook.pageId`.
  - `filterOn` Type: Boolean. Optional. The field that distinguished open bots (value `false`) from closed bots (value `true`). (To do: move this to `dialogSettings`. Make required.)
+ - `freezeOnAdminResponse` Type: Object. Optional. Enable and control "freezing" the bot when an admin sends a message.  See AH-1054
+   - `enable` Type: Boolean.  If true, enable freezing for students at the institution.
+   - `freezeWindow` Type: Integer.  Number of seconds the user should remain frozen after an admin's message.
+   - `messageDelay` Type: Integer.  Number of seconds to wait before sending a message during the freeze window.  (This gives the admin time to respond, but avoids delaying individual responses for too long.)  Note that any outstanding messages when the freeze window ends will get responses, regardless of the messageDelay.
  - `hashtag` Type: String. Optional. The hashtag used for social media campaigns. (To do: see `dateAccepted`.)
  - `infoGatheringBot` Type: String. Optional. Dialog scheduled after the initial dialog in an open bot. (To do: move this to `dialogSettings`.
  - `institutionType` Type: String. Optional. Type of institution: Regional public, small private, community college, partnership, etc.
@@ -264,6 +268,7 @@ Fields:
     - `errorSubcode` Type: Number. Optional. Facebook provides not only an error code, but an error "subcode", as they call it; if such an error indicates we cannot communicate with this contact, then that subcode is recorded here.
     - `finished` Type: Boolean. Optional. Indicates we are finished with out dealings with this user. (To do: determine if this is necessary, given the other fields. If not, get rid of it, and change the name to make the user case more obvious.)
     - `generalOptIn` Type: Boolean. Optional. I don't know what this is. (To do: figure it out.)
+    - `lastFrozen` Type: Date.  Optional.  The last time at which the bot was "frozen" for the student (i.e., an administrator sent a message, and we paused the bot temporarily to allow them to converse).  See AH-1054.
     - `nonWorkingFacebookId` Type: Boolean. Optional. Indicates the facebook id we have for the user doesn't work.
     - `nonWorkingNumber` Type: Boolean. Optional. Indicates the phone number we have for the user doesn't work.
     - `nonWorkingNumberCode` Type: Number. Optional. **deprecated**. Used to do most of the job that `twilioCode` now does.

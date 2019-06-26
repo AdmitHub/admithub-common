@@ -42,6 +42,11 @@ BrandedColleges.attachSchema(new SimpleSchema({
   optional: true},
   facebookId: {type: String, optional: true}, // deprecated
   filterOn: {type: Boolean, optional: true},
+  freezeOnAdminResponse: {type: new SimpleSchema({
+    enabled: {type: Boolean},
+    freezeWindow: {type: SimpleSchema.Integer},
+    messageDelay: {type: SimpleSchema.Integer}
+  }), optional: true},
   hashtag: {type: String, optional: true}, // include the hash
   infoGatheringBot: {type: String, optional: true}, // dialog scheduled after the initial dialog in an open bot
   institutionType: {type: String, optional: true}, // for analysis; see AH-264

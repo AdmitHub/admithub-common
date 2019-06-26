@@ -1,5 +1,19 @@
-SmsLogs = new Mongo.Collection('smslogs')
-SmsLogs.attachSchema(new SimpleSchema({
+// This is a copy of SMSlogs used to track frozen messages.
+//
+// It could also be an SMSlog with a "frozen: true" flag, but that seems more
+// likely to cause confusion.
+//
+// Each message should have an agenda job associated with it to cause it to be
+// eventually sent, so the data could also be stored directly in that job.
+// However, storing the data here rather than directly in the agenda job makes
+// it easier to look for frozen messages (e.g., when they should be flushed
+// when a dialog goes out, or deleted when an admin responds.)
+//
+// Generally, having a separate table seems to make things cleaner.
+
+
+FrozenSmsLogs = new Mongo.Collection('frozenSmslogs')
+FrozenSmsLogs.attachSchema(new SimpleSchema({
   _id: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   createdAt: {type: Date},
   transport: {type: String, allowedValues: ['web', 'twilio', 'facebook', 'email'], optional: false},
@@ -34,7 +48,7 @@ SmsLogs.attachSchema(new SimpleSchema({
   userId: {type: String, optional: true}
 }))
 if (Meteor.isServer) {
-  SmsLogs.allow({
+  FrozenSmsLogs.allow({
     insert: function (userId, doc) {
       return (
         doc.userId === userId &&
@@ -50,13 +64,13 @@ if (Meteor.isServer) {
   })
 }
 
-SmsLogs.after.insert((insertingUserId, doc) => {
+FrozenSmsLogs.after.insert((insertingUserId, doc) => {
   const smsLogId = doc._id
 
   // If the user is a test user, set the smslog as a test sms log
   BrandedUserProfiles.findOne(doc.userId).then(user => {
     if (user && user.testUser) {
-      SmsLogs.update({_id: smsLogId}, {$set: {testUser: true}})
+      FrozenSmsLogs.update({_id: smsLogId}, {$set: {testUser: true}})
     }
   })
 
