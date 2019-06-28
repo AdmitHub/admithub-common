@@ -301,7 +301,7 @@ Colleges.findByName = function (name) {
   return Colleges.findOne({
     $text: {$search: name}
   }, {
-    fields: {score: {$meta: 'textScore'}},
+    projection: {score: {$meta: 'textScore'}},
     sort: {score: {$meta: 'textScore'}}
   })
 }

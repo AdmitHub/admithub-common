@@ -21,7 +21,7 @@ CeebCodes.findCeebCode = function (city, state, highschool) {
       $search: [state, city, highschool].join(' ')
     }
   }, {
-    fields: {
+    projection: {
       score: {$meta: 'textScore'}
     },
     sort: {
