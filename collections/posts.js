@@ -21,7 +21,7 @@ TelescopePosts.findMostSimilarPost = function (question) {
     },
     status: TelescopePosts.STATUS_APPROVED
   }, {
-    fields: {
+    projection: {
       score: {$meta: 'textScore'}
     },
     sort: {
