@@ -359,7 +359,10 @@ BrandedUserSchema = new SimpleSchema({
     bringCar: fields.bool(o) // _internal.needsParking
   }),
   optional: true},
-  _phone: fields.string(o),
+  _phone: {
+    type: String,
+    regEx: /^\d{10}$/
+  },
   _previousPhone: fields.string(o),
   _profile: {type: new SimpleSchema({
     description: fields.profile_description(o),
