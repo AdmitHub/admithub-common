@@ -361,7 +361,8 @@ BrandedUserSchema = new SimpleSchema({
   optional: true},
   _phone: {
     type: String,
-    regEx: /^\d{10}$/
+    regEx: /^\d{10}$/,
+    optional: true
   },
   _previousPhone: fields.string(o),
   _profile: {type: new SimpleSchema({
